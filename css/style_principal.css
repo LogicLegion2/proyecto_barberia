@@ -1,0 +1,412 @@
+* {
+    font-family: "Aleo", serif;
+}
+
+body {
+    background-color: #0D0B22;
+}
+
+.menu-top {
+    background-color: #100d2b;
+}
+
+.icon-menu {
+    width: 30px;
+}
+
+.btn-menu {
+    height: 40px;
+}
+
+.accordion-button:focus {
+    background-color: #0D0B22;
+    outline: none;
+}
+
+.list {
+    gap: 30px;
+}
+
+.lista {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+.list,
+.lista,
+.listas {
+    list-style: none;
+}
+
+.opc {
+    width: 210px;
+}
+
+.tarjeta {
+    background-color: #64627733;
+    width: 210px;
+}
+
+.icon-fav {
+    width: 20px;
+}
+
+.foto {
+    width: 130px;
+    height: 160px;
+}
+
+.desc {
+    font-size: 13px;
+}
+
+.btn-bus {
+    height: 35px;
+}
+
+.inp-bus {
+    background-color: #00000000;
+    width: 200px;
+    height: 35px;
+}
+
+.inp-bus::placeholder {
+    color: #ffffffa1;
+}
+
+.inp-bus:focus {
+    background-color: #00000000;
+}
+
+.btn-outline-primary:hover {
+    background-color: #261E71;
+}
+
+.lupa {
+    width: 20px;
+}
+
+.btns-edicion {
+    margin-top: -200px;
+}
+
+.btn-edicion,
+.img-edicion {
+    width: 35px;
+}
+
+::placeholder {
+    color: #ffffffa1;
+}
+
+.txt-resp {
+    background-color: #64627733;
+}
+
+.txt-preg {
+    font-size: 18px;
+}
+
+.imagen {
+    background-color: #222035;
+    width: 150px;
+    height: 180px;
+}
+
+.perfil {
+    width: 80%;
+}
+
+.comentar,
+.btn-send,
+.comentarios {
+    background-color: #222035;
+}
+
+.img-eliminar {
+    width: 10px;
+}
+
+.icon-send {
+    width: 20px;
+}
+
+.icon-chat {
+    width: 35px;
+    height: 35px;
+}
+
+.comentar {
+    width: 70%;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn-left-ofe,
+.btn-right-ofe,
+.btn-left-pro,
+.btn-right-pro,
+.btn-left,
+.btn-right {
+    padding-top: 130px;
+    width: 45px;
+    background-color: #222035;
+    height: 330px;
+}
+
+.btn-left-pro,
+.btn-right-pro {
+    padding-top: 150px;
+    height: 370px;
+}
+
+.btn-left-ofe,
+.btn-right-ofe {
+    padding-top: 180px;
+    height: 400px;
+}
+
+.servicios-c,
+.ofertas-c,
+.preguntas-c {
+    background-color: #0a081f;
+}
+
+.icon-car,
+.icon-favorito {
+    width: 20px;
+}
+
+.cont-opc-menu {
+    display: none;
+    width: 170px;
+    position: absolute;
+}
+
+.menu-bar {
+    margin-top: -2.3vh;
+}
+
+.menu-ser {
+    margin-top: -84.5vh;
+}
+
+.menu-pro {
+    margin-top: -166.8vh;
+}
+
+.menu-ofe {
+    margin-top: -256.5vh;
+}
+
+.menu-ubi {
+    margin-top: -351vh;
+}
+
+.menu-pre {
+    margin-top: -435.3vh;
+}
+
+.btn-home,
+.nav-link,
+.text-cont,
+.btn-car,
+.btn-chat,
+.btn-edicion,
+.btn-buscar,
+.btn-fav,
+.btn-eliminar {
+    transition: all 0.5s ease;
+}
+
+.btn-home:hover,
+.btn-car:hover,
+.btn-chat:hover,
+.btn-edicion:hover,
+.btn-buscar:hover,
+.btn-fav:hover,
+.btn-eliminar:hover {
+    transform: scale(1.15);
+}
+
+.text-cont:hover {
+    transform: scale(1.05);
+}
+
+.nav-link:hover {
+    font-size: 18px;
+}
+
+.cont-menu:hover .cont-opc-menu {
+    display: block;
+    position: fixed;
+}
+
+.btn-form {
+    height: 45px;
+}
+
+.main-title {
+    font-size: 90px;
+    text-shadow: -7px 6px 0px #261E71;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    height: 331px;
+    width: 90px;
+    background-color: #151231;
+    transition: all 0.5s ease;
+}
+
+.height-max {
+    height: 375px;
+}
+
+.height-max-ofe {
+    height: 405px;
+}
+
+.height-max-ser {
+    height: 385px;
+}
+
+.bottom-max {
+    padding-bottom: 100px;
+}
+
+/* algunas configuraciones para los botones del menu de la cuenta */
+
+.btn-custom {
+    background-color: #120f2f;
+    height: 150px;
+    font-size: 1.35rem;
+}
+
+.btn-custom:hover {
+    background-color: #261E71;
+}
+
+/* Configuraciones del login, registro y reinstaurar*/
+.org-body,
+.body-login,
+.body-registrarse {
+    background: url(../img/fondo.png) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.card-reinstaurar,
+.card-registrarse {
+    width: 500px;
+}
+
+.card-login {
+    width: 400px;
+}
+
+
+/* Estilo calendario */
+.calendar {
+    width: 700px;
+}
+
+
+/* Estilo a la cabecera del calendario */
+.fc-button-group .fc-state-default {
+    transition: all 0.5s ease;
+}
+
+.fc-button-group .fc-state-default:hover {
+    background-color: #2E22BB;
+}
+
+.fc-icon {
+    color: #0D0B22;
+}
+
+.fc-button-group .fc-state-default:hover .fc-icon {
+    color: white;
+}
+
+.fc-today-button {
+    background-color: #261E71;
+    color: white;
+    text-shadow: none;
+}
+
+.fc-center h2 {
+    color: white;
+    font-weight: bold;
+}
+
+.fc-agendaDay-button,
+.fc-agendaWeek-button,
+.fc-month-button {
+    text-shadow: none;
+    color: #0D0B22;
+    transition: all 0.5s ease;
+}
+
+.fc-agendaDay-button:hover,
+.fc-agendaWeek-button:hover,
+.fc-month-button:hover {
+    background-color: #2E22BB;
+    color: white;
+}
+
+.fc-state-active,
+.fc-state-down {
+    background-color: #2E22BB;
+    color: white;
+}
+
+.fc-state-default {
+    background-image: none;
+}
+
+.fc-state-default.fc-corner-left{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.fc-state-default.fc-corner-right{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+/* Estilo al cuerpo del calendario */
+.fc-view-container {
+    border-radius: 15px;
+}
+
+.fc-unthemed td,
+.fc-unthemed th {
+    border: 1.5px solid #0D0B22;
+}
+
+.fc-day-header {
+    color: #0a081f;
+}
+
+.fc-view-container {
+    background-color: #ffffffa1;
+}
+
+.fc-day-number {
+    color: #0a081f;
+}
+
+.fc-day-top {
+    background-color: #100d2b;
+}
+
+.fc-event,
+.fc-event-dot {
+    background-color: #2E22BB;
+}
+
+.fc-more {
+    font-weight: bold;
+    color: #261E71;
+}
