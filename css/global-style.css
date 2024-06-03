@@ -1,0 +1,156 @@
+.custom-bg-color {
+  background-color: #0D0B22;
+}
+
+.custom-bg-secondary {
+  background-color: #151231;
+}
+
+.custom-bg-dark {
+  background-color: #161428;
+}
+
+.cont-car{
+  height: 100px;
+}
+
+.cont-perf{
+  margin-top: -25px;
+}
+
+.btn-primary:hover{
+  background-color: #2E22BB;
+}
+
+.btn-min-h{
+  height: 30px;
+}
+
+.footer-h{
+  height: 60px;
+}
+
+.img-perfil{
+  height: 230px;
+  box-shadow: 0px 0px 0px 8px #161428;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  color: #fff;
+}
+
+.bg-input{
+  background-color: #0D0B22;
+}
+
+.form-car::placeholder{
+  color: white;
+}
+
+.form-car{
+  background-color: #00000000;
+}
+
+.mg-thumbnail{
+  width: 115px;
+}
+
+.custom-text-color {
+  color: #fff;
+}
+
+.form-select option {
+  background-color: #0D0B22;
+}
+
+.form-select option:hover {
+  background-color: #2E22BB;
+}
+
+.form-control:focus,
+.form-select:focus,
+option:focus {
+  outline: none;
+  background-color: #00000000;
+  color: #fff;
+}
+
+.form-select,
+option,
+.form-control::placeholder {
+  color: rgb(126, 125, 134);
+}
+
+.container-fluid {
+  font-family: 'Aleo', sans-serif;
+
+}
+
+.title-container {
+  margin-bottom: -50px;
+}
+
+.btn-color {
+  background-color: #2E22BB;
+  transition: all 0.5s ease;
+}
+
+.lbl-menu {
+  width: 50px;
+  height: 30px;
+  margin: 30px;
+  position: absolute;
+  cursor: pointer;
+  left: 0;
+  top: 0;
+}
+
+.lbl-menu #spn1,
+#spn2,
+#spn3 {
+  position: absolute;
+  content: '';
+  background: #ffff;
+  width: 50px;
+  height: 5px;
+  border-radius: 5px;
+  transition: all 400ms ease;
+}
+
+#spn2 {
+  top: 11px;
+}
+
+#spn3 {
+  top: 22px;
+}
+
+#btn-menu {
+  display: none;
+}
+
+#btn-menu:checked~.lbl-menu #spn1 {
+  transform: rotate(140deg);
+  top: 10px;
+}
+
+#btn-menu:checked~.lbl-menu #spn2 {
+  opacity: 0;
+}
+
+#btn-menu:checked~.lbl-menu #spn3 {
+  transform: rotate(-140deg);
+  top: 10px;
+}
+
+.form-select,
+.form-control {
+  background-color: #161428;
+  height: 45px;
+}

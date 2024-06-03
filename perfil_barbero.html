@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Barber's Brothers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style_principal.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="fondo container-fluid">
+        <div class="cabecera row">
+            <div class="col-sm-1">
+                <nav class="navbar navbar-dark">
+                    <div class="container-fluid d-flex flex-row">
+                        <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                            aria-labelledby="offcanvasDarkNavbarLabel">
+                            <div class="offcanvas-header menu-top">
+                                <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu Cuenta</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body menu-top">
+                                <div class="d-grid gap-3">
+                                    <li
+                                        class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                                        <a class="nav-link " href="reservar.html">Reservar</a><i
+                                            class="bi bi-chevron-right"></i>
+                                    </li>
+                                    <li
+                                        class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                                        <a class="nav-link " href="lista_fav.html">Lista Favoritos</a><i
+                                            class="bi bi-chevron-right"></i>
+                                    </li>
+                                    <li
+                                        class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                                        <a class="nav-link " href="barberos.html">Página Principal</a><i
+                                            class="bi bi-chevron-right"></i>
+                                    </li>
+                                    <li
+                                        class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                                        <a class="nav-link " href="reservas_cliente.html">Reservas</a><i
+                                            class="bi bi-chevron-right"></i>
+                                    </li>
+                                    <li
+                                        class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                                        <a class="nav-link " href="entrega_productos_cliente.html">Entregas</a><i
+                                            class="bi bi-chevron-right"></i>
+                                    </li>
+                                    <li
+                                        class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                                        <a class="nav-link " href="reembolso.html">Reembolsos</a><i
+                                            class="bi bi-chevron-right"></i>
+                                    </li>
+                                    <li
+                                        class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                                        <a class="nav-link " href="historial_citas.html">Historial de Reseras</a><i
+                                            class="bi bi-chevron-right"></i>
+                                    </li>
+                                    <li
+                                        class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                                        <a class="nav-link " href="historial_compras.html">Historial de Compras</a><i
+                                            class="bi bi-chevron-right"></i>
+                                    </li>
+                                    <li
+                                        class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                                        <a class="nav-link " href="carrito.html">Carrito de Compras</a><i
+                                            class="bi bi-chevron-right"></i>
+                                    </li>
+                                    <li
+                                        class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                                        <a class="nav-link " href="perfil_cliente.html">Mi cuenta</a><i
+                                            class="bi bi-chevron-right"></i>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <!-- seccion con la informacion, nombre e imagen del barbero -->
+            <section
+                class="perfil col-11 d-flex flex-column align-items-center text-center text-md-start flex-md-row pt-4 ps-5">
+                <div class="imagen mb-3 mb-md-0 col-3 ms-4 rounded-4 d-flex justify-content-center align-items-center">
+                    <img class="foto rounded-4" src="img/persona.jpg" alt="">
+                </div>
+                <div class="info d-flex flex-column justify-content-center col-9 ms-3">
+                    <h2 class="nombre fw-bold text-light">Mateo Gaviria</h2>
+                    <p class="desc fw-light fs-6 text-light">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                        Exercitationem modi quisquam expedita porro aliquid in assumenda quam sapiente, nihil, impedit
+                        hic illo velit quia similique officiis delectus magni obcaecati suscipit?.</p>
+                </div>
+            </section>
+        </div>
+        <!-- sección con los comentarios del barbero -->
+        <section class="cont-comentarios pt-4 pb-4 w-100 d-flex flex-column align-items-center">
+            <h2 class="titulo-comentario text-center mb-4 w-75 text-light fw-bold">Comentarios</h2>
+            <div class="comentarios w-75 rounded-4 p-2 ps-3 mb-3">
+                <p class="user mb-0 text-light">User_1</p>
+                <p class="coment mb-0 fw-light text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Deleniti officiis dolor eos, delectus temporibus dicta inventore facere tenetur voluptatibus rem
+                    nostrum ipsam modi mollitia dolorum eligendi? Voluptate accusamus harum sunt!</p>
+            </div>
+            <div class="comentarios w-75 rounded-4 p-2 ps-3 mb-3">
+                <p class="user mb-0 text-light">User_2</p>
+                <p class="coment mb-0 fw-light text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Deleniti officiis dolor eos, delectus temporibus dicta inventore facere tenetur voluptatibus rem
+                    nostrum ipsam modi mollitia dolorum eligendi? Voluptate accusamus harum sunt!</p>
+            </div>
+            <div class="comentarios w-75 rounded-4 p-2 ps-3 mb-3">
+                <p class="user mb-0 text-light">User_3</p>
+                <p class="coment mb-0 fw-light text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Deleniti officiis dolor eos, delectus temporibus dicta inventore facere tenetur voluptatibus rem
+                    nostrum ipsam modi mollitia dolorum eligendi? Voluptate accusamus harum sunt!</p>
+            </div>
+        </section>
+        <!-- sección para realizar comentarios -->
+        <div class="cont-coment row">
+            <section class="r-comentario d-flex align-items-center justify-content-center col-12 p-2 mb-3">
+                <input type="text" class="comentar ms-5 h-100 ps-2 me-2 text-light border-0 rounded-2"
+                    placeholder="Ingresar comentario...">
+                <button class="btn-send h-100 me-3 btn" type="submit"><img src="img/flecha.png" class="icon-send"
+                        alt=""></button>
+                <button class="btn-chat btn"><img src="img/chat.png" alt="" class="icon-chat"></button>
+            </section>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
