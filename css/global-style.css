@@ -49,7 +49,7 @@ input[type="number"] {
   width: 35px;
 }
 
-.w-input-group{
+.w-input-group {
   width: 100px;
 }
 
@@ -161,4 +161,46 @@ option,
 .form-control {
   background-color: #161428;
   height: 45px;
+}
+
+.img-car {
+  max-width: 150px;
+}
+
+.txt-car{
+  font-size: 20px;
+}
+
+.cont-controles{
+  width: 100%;
+}
+
+@media screen and (max-width: 610px) {
+  .txt-car{
+    font-size: 15px;
+  }
+  .txt-car-inp{
+    width: 80px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .w-input-group{
+    width: 91px;
+  }
+  .w-car-btn,
+  .w-input-btn{
+    width: 30px;
+    font-size: 11px;
+  }
+
+  .form-car{
+    width: 80px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .cont-controles{
+    width: min-content;
+  }
 }
