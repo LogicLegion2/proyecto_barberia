@@ -10,27 +10,27 @@
   background-color: #161428;
 }
 
-.cont-car{
+.cont-car {
   height: 100px;
 }
 
-.cont-perf{
+.cont-perf {
   margin-top: -25px;
 }
 
-.btn-primary:hover{
+.btn-primary:hover {
   background-color: #2E22BB;
 }
 
-.btn-min-h{
+.btn-min-h {
   height: 30px;
 }
 
-.footer-h{
+.footer-h {
   height: 60px;
 }
 
-.img-perfil{
+.img-perfil {
   height: 230px;
   box-shadow: 0px 0px 0px 8px #161428;
 }
@@ -45,19 +45,27 @@ input[type="number"] {
   color: #fff;
 }
 
-.bg-input{
+.w-input-btn {
+  width: 35px;
+}
+
+.w-input-group{
+  width: 100px;
+}
+
+.bg-input {
   background-color: #0D0B22;
 }
 
-.form-car::placeholder{
+.form-car::placeholder {
   color: white;
 }
 
-.form-car{
+.form-car {
   background-color: #00000000;
 }
 
-.mg-thumbnail{
+.mg-thumbnail {
   width: 115px;
 }
 
