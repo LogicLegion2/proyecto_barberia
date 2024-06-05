@@ -81,6 +81,10 @@ input[type="number"] {
   background-color: #2E22BB;
 }
 
+input[type=file]{
+  padding-top: 10px;
+}
+
 .form-control:focus,
 .form-select:focus,
 option:focus {
@@ -89,6 +93,7 @@ option:focus {
   color: #fff;
 }
 
+.custom-text-secondary,
 .form-select,
 option,
 .form-control::placeholder {

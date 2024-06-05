@@ -19,12 +19,12 @@
 <body>
     <div class="container-fluid vh-100">
         <div class="row">
-            <div class="row d-flex pt-5 ps-5 cont-perf">
+            <div class="row d-flex p-0 ps-sm-5 ps-2 mt-4 cont-perf">
                 <div class="col-md-4 col-sm-12 mb-4 d-flex justify-content-center">
                     <img src="../public/img/image.png" class="border-0 rounded-4 img-perfil" alt="...">
                 </div>
  
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-6 col-sm-12 mt-3 mt-sm-0">
                     <div class="grid">
                         <div class="p-2 rounded-4 ps-3 pe-3 d-flex align-items-center justify-content-between custom-bg-dark mb-3">
                             <b class="text-secondary">Nombre: <i class="text-light"> Julian Cifuentes </i></b>
@@ -38,10 +38,12 @@
                             <b class="text-secondary">Correo: <i class="text-light"> JCifuentes@gmil.com </i></b>
                             <button type="button" class="btn align-items-center d-flex btn-min-h btn-color text-white rounded-4">Editar</button>
                         </div>
-                        <div class="p-2 rounded-4 ps-3 pe-3 d-flex align-items-center justify-content-between custom-bg-dark mb-3">
+                        <div class="p-2 rounded-4 ps-3 pe-3 d-flex align-items-center justify-content-between custom-bg-dark mb-2">
                             <b class="text-secondary">Descripción: <i class="text-light"> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos, vel veniam magnam quidem architecto tempore fugiat placeat maiores debitis temporibus ut, excepturi explicabo at expedita voluptatum nisi modi maxime odio. </i></b>
                             <button type="button" class="btn align-items-center d-flex btn-min-h btn-color text-white rounded-4">Editar</button>
                         </div>
+                        <label for="formFile" class="form-label custom-text-secondary">Seleccionar foto de perfil:</label>
+                        <input type="file" class="custom-text-secondary mb-3 text-center rounded-4 border-0 form-control" id="formFile">
                         <div class="d-flex justify-content-center">
                             <button type="button" class="btn btn-color rounded-4 p-2 text-white w-100 h-100" data-bs-toggle="collapse"
                                 data-bs-target="#collapseWidthExample" aria-expanded="false"
@@ -49,7 +51,7 @@
                         </div>
                         <div class="d-flex justify-content-center mt-3" style="min-height: 220px;">
                             <div class="collapse collapse-horizontal" id="collapseWidthExample">
-                                <div class="card card-body custom-bg-dark rounded-4" style="width: 400px;">
+                                <div class="card card-body custom-bg-dark rounded-4" style="width: 100%;">
                                     <input type="password" class="form-control rounded-4" id="exampleFormControlInput1"
                                         placeholder="Ingrese su contraseña"><br>
                                     <input type="password" class="form-control rounded-4" id="exampleFormControlInput1"
