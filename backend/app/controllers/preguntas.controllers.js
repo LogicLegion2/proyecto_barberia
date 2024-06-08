@@ -3,7 +3,7 @@ import { config } from "dotenv";
 import mysql from "mysql2/promise";
 config();
 
-export const listarpregunta = async (req, res) => {
+export const listarPregunta = async (req, res) => {
     try {
         const [respuesta] = await pool.query("CALL LL_VER_PREGUNTAS()");
         res.json(respuesta);

@@ -1,6 +1,6 @@
 
 import { Router } from "express";
-import { listarReservasAdmin } from "../controllers/ReservasAdmin.controllers.js";
+import { listarReservasAdmin } from "../controllers/reservas.controllers.js";
 
 const rutaReservaAdmin = Router();
 

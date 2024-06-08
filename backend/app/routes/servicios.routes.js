@@ -1,10 +1,10 @@
 
 import { Router } from "express";
-import { listarservicio } from "../controllers/servicios.controllers.js";
+import { listarServicio } from "../controllers/servicios.controllers.js";
 
 const rutaservicios = Router();
 
-rutaservicios.get("/", listarservicio);
+rutaservicios.get("/", listarServicio);
 
 
 export default rutaservicios;

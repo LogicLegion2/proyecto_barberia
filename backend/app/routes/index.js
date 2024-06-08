@@ -7,8 +7,7 @@ import rutabarberos from "./barbero.routes.js";
 import rutacomentarios from "./comentarios.routes.js";
 import rutaofertas from "./ofertas.routes.js";
 import rutapreguntas from "./preguntas.routes.js";
-import rutaproductosVendidos from "./productosVendidos.routes.js";
-import rutaReservaAdmin from "./ReservasAdmin.routes.js";
+import rutaReservaAdmin from "./reservas.routes.js";
 
 
 const ruta = Router();
@@ -22,7 +21,6 @@ ruta.use("/barberos", rutabarberos)
 ruta.use("/comentarios", rutacomentarios)
 ruta.use("/ofertas", rutaofertas)
 ruta.use("/preguntas", rutapreguntas)
-ruta.use("/productosVendidos", rutaproductosVendidos)
-ruta.use("/ReservaAdmin", rutaReservaAdmin)
+ruta.use("/reservas", rutaReservaAdmin)
 
 export default ruta;

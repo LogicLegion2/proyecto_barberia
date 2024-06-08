@@ -1,10 +1,10 @@
 
 import { Router } from "express";
-import { listarpregunta } from "../controllers/preguntas.controllers.js";
+import { listarPregunta } from "../controllers/preguntas.controllers.js";
 
 const rutapreguntas = Router();
 
-rutapreguntas.get("/", listarpregunta);
+rutapreguntas.get("/", listarPregunta);
 
 
 export default rutapreguntas;
