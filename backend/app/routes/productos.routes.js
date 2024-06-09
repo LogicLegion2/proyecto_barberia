@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { listarProducto, listarProductosVendidos } from "../controllers/productos.controllers.js";
+import { editarProducto, listarProducto, listarProductosVendidos } from "../controllers/productos.controllers.js";
 
 
 const rutaProductos = Router();
 
 rutaProductos.get("/listar", listarProducto);
 rutaProductos.get("/vendidos", listarProductosVendidos);
+rutaProductos.put("/editar", editarProducto);
 
 
 

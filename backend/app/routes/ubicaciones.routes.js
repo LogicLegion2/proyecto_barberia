@@ -1,11 +1,12 @@
 
 import { Router } from "express";
-import { listarUbicacion } from "../controllers/ubicaciones.controllers.js";
+import { editarUbicacion, listarUbicacion } from "../controllers/ubicaciones.controllers.js";
 
 
 const rutaUbicaciones = Router();
 
-rutaUbicaciones.get("/", listarUbicacion);
+rutaUbicaciones.get("/listar", listarUbicacion);
+rutaUbicaciones.put("/editar", editarUbicacion);
 
 
 export default rutaUbicaciones;
