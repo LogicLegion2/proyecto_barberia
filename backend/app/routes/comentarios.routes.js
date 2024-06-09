@@ -2,9 +2,9 @@
 import { Router } from "express";
 import { listarComentario } from "../controllers/comentarios.controllers.js";
 
-const rutacomentarios = Router();
+const rutaComentarios = Router();
 
-rutacomentarios.get("/", listarComentario);
+rutaComentarios.get("/", listarComentario);
 
 
-export default rutacomentarios;
+export default rutaComentarios;

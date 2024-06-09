@@ -3,9 +3,9 @@ import { Router } from "express";
 import { listarUbicacion } from "../controllers/ubicaciones.controllers.js";
 
 
-const rutaubicaciones = Router();
+const rutaUbicaciones = Router();
 
-rutaubicaciones.get("/", listarUbicacion);
+rutaUbicaciones.get("/", listarUbicacion);
 
 
-export default rutaubicaciones;
+export default rutaUbicaciones;

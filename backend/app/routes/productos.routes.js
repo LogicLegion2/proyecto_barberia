@@ -2,11 +2,11 @@ import { Router } from "express";
 import { listarProducto, listarProductosVendidos } from "../controllers/productos.controllers.js";
 
 
-const rutaproductos = Router();
+const rutaProductos = Router();
 
-rutaproductos.get("/listar", listarProducto);
-rutaproductos.get("/vendidos", listarProductosVendidos);
+rutaProductos.get("/listar", listarProducto);
+rutaProductos.get("/vendidos", listarProductosVendidos);
 
 
 
-export default rutaproductos;
+export default rutaProductos;

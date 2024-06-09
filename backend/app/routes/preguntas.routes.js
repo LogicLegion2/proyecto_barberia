@@ -2,9 +2,9 @@
 import { Router } from "express";
 import { listarPregunta } from "../controllers/preguntas.controllers.js";
 
-const rutapreguntas = Router();
+const rutaPreguntas = Router();
 
-rutapreguntas.get("/", listarPregunta);
+rutaPreguntas.get("/", listarPregunta);
 
 
-export default rutapreguntas;
+export default rutaPreguntas;
