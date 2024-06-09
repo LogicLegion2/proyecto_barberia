@@ -1,7 +1,8 @@
 import { pool } from "../config/mysql.db.js";
 import mysql from "mysql2/promise.js"; 
-import {config} from "dotenv"
-config();
+import {config} from "dotenv";
+import jwt from "jsonwebtoken";
+config(); 
 
 export const listarProducto = async (req, res) => {
     try {
