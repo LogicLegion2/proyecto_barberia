@@ -2,9 +2,9 @@
 import { Router } from "express";
 import { listarBarbero } from "../controllers/barbero.controllers.js";
 
-const rutabarberos = Router();
+const rutaBarberos = Router();
 
-rutabarberos.get("/", listarBarbero);
+rutaBarberos.get("/", listarBarbero);
 
 
-export default rutabarberos;
+export default rutaBarberos;

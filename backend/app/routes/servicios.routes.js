@@ -2,9 +2,9 @@
 import { Router } from "express";
 import { listarServicio } from "../controllers/servicios.controllers.js";
 
-const rutaservicios = Router();
+const rutaServicios = Router();
 
-rutaservicios.get("/", listarServicio);
+rutaServicios.get("/", listarServicio);
 
 
-export default rutaservicios;
+export default rutaServicios;
