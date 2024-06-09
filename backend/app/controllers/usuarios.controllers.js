@@ -21,7 +21,6 @@ export const listarUsuario = async (req, res) => {
         const [respuesta] = await pool.query("CALL LL_VER_USUARIOS()");
         res.json(respuesta);
     } catch (error) {
-        console.error(error); // Registro del error
         res.status(500).json(error);
     }
 };
@@ -85,3 +84,61 @@ export const login = async (req, res) => {
         error(req, res, 500, "Error en el servidor, por favor inténtalo de nuevo más tarde");
     }
 };
+
+export const cambiarContrasena = async (req, res) => {
+    const id = req.body.id;
+    const contrasena = req.body.contrasena;
+    const contrasenaNueva = req.body.contrasenaNueva;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_VERIFICAR_CONTRASENA('${id}','${contrasena}');`);
+
+        const usuario = respuesta[0][0];
+        console.log("Datos del usuario:", usuario);
+        try {
+            const respuesta2 = await pool.query(`CALL LL_EDITAR_CONTRASENA_USUARIO('${id}','${contrasenaNueva}');`);
+            res.json(respuesta2);
+        } catch (e) {
+            res.status(500).json(e);
+        }
+
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+export const cambiarNombre = async (req, res) => {
+    const id = req.body.id;
+    const nombre = req.body.nombre;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_EDITAR_NOMBRE_USUARIO('${id}','${nombre}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+export const cambiarTelefono = async (req, res) => {
+    const id = req.body.id;
+    const telefono = req.body.telefono;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_EDITAR_TELEFONO_USUARIO('${id}','${telefono}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+export const cambiarCorreo = async (req, res) => {
+    const id = req.body.id;
+    const correo = req.body.correo;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_EDITAR_CORREO_USUARIO('${id}','${correo}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}

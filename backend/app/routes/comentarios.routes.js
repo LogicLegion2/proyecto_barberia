@@ -1,10 +1,10 @@
 
 import { Router } from "express";
-import { listarComentario } from "../controllers/comentarios.controllers.js";
+import { eliminarComentario, listarComentario } from "../controllers/comentarios.controllers.js";
 
 const rutaComentarios = Router();
 
-rutaComentarios.get("/", listarComentario);
-
+rutaComentarios.get("/listar", listarComentario);
+rutaComentarios.put("/eliminar", eliminarComentario);
 
 export default rutaComentarios;

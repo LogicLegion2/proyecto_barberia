@@ -22,3 +22,17 @@ export const listarProductosVendidos = async (req, res) => {
     }
 };
 
+export const editarProducto = async (req, res) => {
+    const nombre = req.body.nombre;
+    const descripcion = req.body.descripcion;
+    const precio = req.body.precio;
+    const cantidad = req.body.cantidad;
+    const id = req.body.id;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_EDITAR_PRODUCTO('${nombre}','${descripcion}','${precio}','${cantidad}','${id}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
