@@ -11,3 +11,16 @@ export const listarOferta = async (req, res) => {
         res.status(500).json(error);
     }
 };
+
+export const editarOferta = async (req, res) => {
+    const descripcion = req.body.descripcion;
+    const precio = req.body.precio;
+    const id = req.body.id;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_EDITAR_OFERTA('${descripcion}','${precio}','${id}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}

@@ -15,7 +15,7 @@ const ruta = Router();
 
 
 ruta.use("/productos", rutaProductos)
-ruta.use("/servicio", rutaServicios)
+ruta.use("/servicios", rutaServicios)
 ruta.use("/usuarios", rutaUsuarios)
 ruta.use("/ubicaciones", rutaUbicaciones)
 ruta.use("/barberos", rutaBarberos)
