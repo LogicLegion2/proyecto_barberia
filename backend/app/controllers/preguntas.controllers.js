@@ -12,6 +12,18 @@ export const listarPregunta = async (req, res) => {
     }
 };
 
+export const crearPregunta = async (req, res) => {
+    const pregunta = req.body.pregunta;
+    const resp = req.body.resp;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_INSERTAR_PREGUNTA('${pregunta}','${resp}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
 export const editarPregunta = async (req, res) => {
     const pregunta = req.body.pregunta;
     const resp = req.body.respuesta;

@@ -1,10 +1,11 @@
 
 import { Router } from "express";
-import { editarPregunta, listarPregunta } from "../controllers/preguntas.controllers.js";
+import { crearPregunta, editarPregunta, listarPregunta } from "../controllers/preguntas.controllers.js";
 
 const rutaPreguntas = Router();
 
 rutaPreguntas.get("/listar", listarPregunta);
+rutaPreguntas.post("/crear", crearPregunta);
 rutaPreguntas.put("/editar", editarPregunta);
 
 
