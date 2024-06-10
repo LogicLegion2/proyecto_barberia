@@ -12,6 +12,20 @@ export const listarOferta = async (req, res) => {
     }
 };
 
+export const crearOferta = async (req, res) => {
+    const producto1 = req.body.producto1;
+    const producto2 = req.body.producto2;
+    const descripcion = req.body.descripcion;
+    const precio = req.body.precio;
+    const foto = req.body.foto;
+    try {
+        const [respuesta] = await pool.query(`CALL LL_INSERTAR_OFERTA('${producto1}','${producto2}','${descripcion}','${precio}','${foto}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
 export const editarOferta = async (req, res) => {
     const descripcion = req.body.descripcion;
     const precio = req.body.precio;

@@ -12,6 +12,20 @@ export const listarUbicacion = async (req, res) => {
     }
 };
 
+
+export const crearUbicacion = async (req, res) => {
+    const ubicacion = req.body.ubicacion;
+    const descripcion = req.body.descripcion;
+    const foto = req.body.foto;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_INSERTAR_UBICACION('${ubicacion}','${descripcion}','${foto}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
 export const editarUbicacion = async (req, res) => {
     const ubicacion = req.body.ubicacion;
     const descripcion = req.body.descripcion;

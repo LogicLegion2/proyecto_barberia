@@ -22,6 +22,21 @@ export const listarProductosVendidos = async (req, res) => {
     }
 };
 
+export const crearProducto = async (req, res) => {
+    const nombre = req.body.nombre;
+    const descripcion = req.body.descripcion;
+    const precio = req.body.precio;
+    const cantidad = req.body.cantidad;
+    const foto = req.body.foto;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_INSERTAR_PRODUCTO('${nombre}','${descripcion}','${precio}','${cantidad}','${foto}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
 export const editarProducto = async (req, res) => {
     const nombre = req.body.nombre;
     const descripcion = req.body.descripcion;
