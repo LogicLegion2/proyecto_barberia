@@ -26,11 +26,11 @@ export const listarUsuario = async (req, res) => {
 };
 
 export const crearUsuario = async (req, res) => {
-    const { nombre, correo, contrasena, telefono, rol } = req.body;
+    const { nombre, correo, contrasena, telefono, rol, foto } = req.body;
     try {
         const hashedPassword = await bcrypt.hash(contrasena, saltRounds);
 
-        const resultado = await pool.query(`CALL LL_INSERTAR_USUARIO('${nombre}','${correo}','${hashedPassword}','${telefono}','${contrasena}','${rol}')`);
+        const resultado = await pool.query(`CALL LL_INSERTAR_USUARIO('${nombre}','${correo}','${hashedPassword}','${telefono}','${rol}','${foto}')`);
 
         success(req, res, 201, { message: "Usuario creado con éxito", id: resultado.insertId });
     } catch (error) {
