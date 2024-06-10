@@ -10,6 +10,7 @@ import rutaPreguntas from "./preguntas.routes.js";
 import rutaReservaAdmin from "./reservas.routes.js";
 import rutaCitas from "./citas.routes.js";
 import rutaVentas from "./ventas.routes.js";
+import rutaFavoritos from "./favoritos.routes.js";
 
 
 const ruta = Router();
@@ -26,5 +27,6 @@ ruta.use("/preguntas", rutaPreguntas)
 ruta.use("/reservas", rutaReservaAdmin)
 ruta.use("/citas", rutaCitas);
 ruta.use("/ventas", rutaVentas);
+ruta.use("/favoritos", rutaFavoritos)
 
 export default ruta;
