@@ -12,6 +12,19 @@ export const listarServicio = async (req, res) => {
     }
 };
 
+export const crearServicio = async (req, res) => {
+    const nombre = req.body.nombre;
+    const descripcion = req.body.descripcion;
+    const precio = req.body.precio;
+    const foto = req.body.foto;
+    try {
+        const [respuesta] = await pool.query(`CALL LL_INSERTAR_SERVICIO('${nombre}','${descripcion}','${precio}','${foto}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error, "La reserva con estos valores ya fue tomada");
+    }
+};
+
 export const editarServicio = async (req, res) => {
     const nombre = req.body.nombre;
     const descripcion = req.body.descripcion;

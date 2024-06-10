@@ -26,11 +26,25 @@ export const listarUsuario = async (req, res) => {
 };
 
 export const crearUsuario = async (req, res) => {
-    const { nombre, correo, contrasena, usuario, telefono, rol } = req.body;
+    const { nombre, correo, contrasena, telefono, rol } = req.body;
     try {
         const hashedPassword = await bcrypt.hash(contrasena, saltRounds);
 
-        const resultado = await pool.query(`CALL LL_INSERTAR_USUARIO('${nombre}','${correo}','${hashedPassword}','${usuario}','${telefono}','${contrasena}','${rol}')`);
+        const resultado = await pool.query(`CALL LL_INSERTAR_USUARIO('${nombre}','${correo}','${hashedPassword}','${telefono}','${contrasena}','${rol}')`);
+
+        success(req, res, 201, { message: "Usuario creado con éxito", id: resultado.insertId });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Error en el servidor, por favor inténtalo de nuevo más tarde" });
+    }
+};
+
+export const crearBarbero = async (req, res) => {
+    const { nombre, correo, contrasena, telefono, descripcion, rol } = req.body;
+    try {
+        const hashedPassword = await bcrypt.hash(contrasena, saltRounds);
+
+        const resultado = await pool.query(`CALL LL_INSERTAR_BARBERO('${nombre}','${correo}','${hashedPassword}','${telefono}','${descripcion}','${rol}')`);
 
         success(req, res, 201, { message: "Usuario creado con éxito", id: resultado.insertId });
     } catch (error) {
