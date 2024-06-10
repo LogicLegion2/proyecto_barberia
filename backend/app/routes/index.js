@@ -11,6 +11,7 @@ import rutaproductosVendidos from "./productosVendidos.routes.js";
 import rutaReservaAdmin from "./ReservasAdmin.routes.js";
 
 
+
 const ruta = Router();
 
 
@@ -24,5 +25,7 @@ ruta.use("/ofertas", rutaofertas)
 ruta.use("/preguntas", rutapreguntas)
 ruta.use("/productosVendidos", rutaproductosVendidos)
 ruta.use("/ReservaAdmin", rutaReservaAdmin)
+
+
 
 export default ruta;
