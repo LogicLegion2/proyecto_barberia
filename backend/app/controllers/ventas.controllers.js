@@ -32,3 +32,44 @@ export const crearReembolso = async (req, res) => {
         res.status(500).json(error);
     }
 };
+
+export const historialCompra= async (req, res) => {
+    const id = req.body.id;
+    try {
+        const [respuesta] = await pool.query(`CALL LL_VER_HISTORIAL_COMPRAS('${id}')`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
+
+export const verCarroCompras = async (req, res) => {
+    const id = req.body.id;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_VER_CARRITO_COMPRAS('${id}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+     }
+}
+
+export const verEntregasAdmin = async (req, res) => {
+    try {
+        const [respuesta] = await pool.query("CALL LL_VER_ENTREGAS_ADMIN()");
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
+export const verEntregas = async (req, res) => {
+    const id = req.body.id;
+    try {
+        const [respuesta] = await pool.query(`CALL LL_VER_ENTREGAS('${id}')`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};

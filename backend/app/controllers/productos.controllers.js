@@ -69,3 +69,27 @@ export const editarProducto = async (req, res) => {
         res.status(500).json(error);
     }
 }
+
+export const desactivarProducto = async (req, res) => {
+    const id = req.body.id;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_DESACTIVAR_PRODUCTO('${id}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+export const insertarProductoVenta = async (req, res) => {
+    const idProducto = req.body.idProducto;
+    const idVenta = req.body.idVenta;
+    const cantidad = req.body.cantidad;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_INSERTAR_PRODUCTO_VENTA('${idProducto}','${idVenta}','${cantidad}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
