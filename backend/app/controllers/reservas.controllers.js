@@ -22,6 +22,17 @@ export const listarReservasAdmin= async (req, res) => {
     }
 };
 
+export const listarReservas= async (req, res) => {
+    const id = req.body.id;
+
+    try {
+        const [respuesta] = await pool.query(`CALL LL_VER_RESERVAS('${id}')`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
 export const crearReserva = async (req, res) => {
     const id = req.body.id;
     const barbero = req.body.barbero;

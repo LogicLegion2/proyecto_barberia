@@ -53,6 +53,21 @@ export const crearBarbero = async (req, res) => {
     }
 };
 
+export const registroUsuario = async (req, res) => {
+    const { nombre, correo, contrasena, telefono } = req.body;
+    try {
+        const hashedPassword = await bcrypt.hash(contrasena, saltRounds);
+
+        const resultado = await pool.query(`CALL LL_REGISTRO_CLIENTE('${nombre}','${correo}','${hashedPassword}','${telefono}')`);
+
+        success(req, res, 201, { message: "Usuario creado con éxito", id: resultado.insertId });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Error en el servidor, por favor inténtalo de nuevo más tarde" });
+    }
+};
+
+
 export const login = async (req, res) => {
     const { correo, contrasena } = req.body;
     try {
@@ -151,6 +166,17 @@ export const cambiarCorreo = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_CORREO_USUARIO('${id}','${correo}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+export const verPerfil = async (req, res) => {
+    const id = req.body.id;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_VER_PERFIL_CLIENTE('${id}');`);
         res.json(respuesta);
     } catch (error) {
         res.status(500).json(error);
