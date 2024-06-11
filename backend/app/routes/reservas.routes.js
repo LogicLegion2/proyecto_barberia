@@ -7,5 +7,4 @@ rutaReservaAdmin.get("/listar/admin", listarReservasAdmin);
 rutaReservaAdmin.get("/listar", listarReservas);
 rutaReservaAdmin.post("/crear", crearReserva);
 
-
 export default rutaReservaAdmin;
