@@ -54,4 +54,16 @@ export const editarOferta = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
+};
+
+export const desactivarOferta = async (req, res) => {
+    const id = req.body.id;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_DESACTIVAR_OFERTA('${id}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
 }
+

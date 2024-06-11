@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { buscarProducto, crearProducto, editarProducto, listarProducto, listarProductosVendidos } from "../controllers/productos.controllers.js";
+import { buscarProducto, crearProducto, desactivarProducto, editarProducto, listarProducto, listarProductosVendidos } from "../controllers/productos.controllers.js";
 
 
 const rutaProductos = Router();
@@ -9,6 +9,8 @@ rutaProductos.get("/vendidos", listarProductosVendidos);
 rutaProductos.get("/buscar", buscarProducto);
 rutaProductos.post("/crear", crearProducto);
 rutaProductos.put("/editar", editarProducto);
+rutaProductos.put("/desactivar", desactivarProducto);
+
 
 
 

@@ -35,4 +35,15 @@ export const editarPregunta = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
+};
+
+export const desactivarPregunta = async (req, res) => {
+    const id = req.body.id;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_DESACTIVAR_PREGUNTAS('${id}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
 }
