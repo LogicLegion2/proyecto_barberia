@@ -53,3 +53,14 @@ export const editarUbicacion = async (req, res) => {
         res.status(500).json(error);
     }
 }
+
+export const desactivarUbicacion = async (req, res) => {
+    const id = req.body.id;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_DESACTIVAR_UBICACION('${id}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}

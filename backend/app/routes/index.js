@@ -8,7 +8,6 @@ import rutaComentarios from "./comentarios.routes.js";
 import rutaOfertas from "./ofertas.routes.js";
 import rutaPreguntas from "./preguntas.routes.js";
 import rutaReservaAdmin from "./reservas.routes.js";
-import rutaCitas from "./citas.routes.js";
 import rutaVentas from "./ventas.routes.js";
 import rutaFavoritos from "./favoritos.routes.js";
 
@@ -25,8 +24,7 @@ ruta.use("/comentarios", rutaComentarios)
 ruta.use("/ofertas", rutaOfertas)
 ruta.use("/preguntas", rutaPreguntas)
 ruta.use("/reservas", rutaReservaAdmin)
-ruta.use("/citas", rutaCitas);
-ruta.use("/ventas", rutaVentas);
+ruta.use("/ventas", rutaVentas)
 ruta.use("/favoritos", rutaFavoritos)
 
 export default ruta;
