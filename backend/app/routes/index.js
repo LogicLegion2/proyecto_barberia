@@ -11,9 +11,7 @@ import rutaReservaAdmin from "./reservas.routes.js";
 import rutaVentas from "./ventas.routes.js";
 import rutaFavoritos from "./favoritos.routes.js";
 
-
 const ruta = Router();
-
 
 ruta.use("/productos", rutaProductos)
 ruta.use("/servicios", rutaServicios)

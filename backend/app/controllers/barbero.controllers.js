@@ -5,11 +5,12 @@ config();
 
 export const listarBarbero = async (req, res) => {
     try {
-        const [respuesta] = await pool.query("CALL LL_VER_BARBERO()");
-        res.json(respuesta);
+        // const [respuesta] = await pool.query("CALL LL_VER_BARBERO()");
+        // res.json(respuesta);
+        res.render("views.barbero.ejs")
     } catch (error) {
         res.status(500).json(error);
-    }
+    }
 };
 
 export const buscarBarbero = async (req, res) => {
