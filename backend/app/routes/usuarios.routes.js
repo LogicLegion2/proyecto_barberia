@@ -1,19 +1,19 @@
-
 import { Router } from "express";
-import { cambiarContrasena, cambiarCorreo, cambiarNombre, cambiarTelefono, crearBarbero, crearUsuario, listarUsuario, login, registroUsuario, verPerfil } from "../controllers/usuarios.controllers.js";
+import { cambiarContrasena, cambiarCorreo, cambiarNombre, cambiarTelefono, crearBarbero, crearUsuario, listarUsuario, login, logout, registroUsuario, verPerfil } from "../controllers/usuarios.controllers.js";
+import { verificarToken } from "../middlewares/oauth.js";
 
 const rutaUsuarios = Router();
 
-rutaUsuarios.get("/listar", listarUsuario);
-rutaUsuarios.get("/ver/perfil", verPerfil);
+rutaUsuarios.get("/listar", verificarToken, listarUsuario);
+rutaUsuarios.get("/ver/perfil", verificarToken, verPerfil);
 rutaUsuarios.post("/login", login);
 rutaUsuarios.post("/registro", registroUsuario);
-rutaUsuarios.post("/registrar", crearUsuario);
-rutaUsuarios.post("/registrar/barbero", crearBarbero);
-rutaUsuarios.put("/cambiar/contrasena", cambiarContrasena);
-rutaUsuarios.put("/cambiar/nombre", cambiarNombre);
-rutaUsuarios.put("/cambiar/telefono", cambiarTelefono);
-rutaUsuarios.put("/cambiar/correo", cambiarCorreo);
-
+rutaUsuarios.post("/registrar", verificarToken, crearUsuario);
+rutaUsuarios.post("/registrar/barbero", verificarToken, crearBarbero);
+rutaUsuarios.put("/cambiar/contrasena", verificarToken, cambiarContrasena);
+rutaUsuarios.put("/cambiar/nombre", verificarToken, cambiarNombre);
+rutaUsuarios.put("/cambiar/telefono", verificarToken, cambiarTelefono);
+rutaUsuarios.put("/cambiar/correo", verificarToken, cambiarCorreo);
+rutaUsuarios.post("/logout", verificarToken, logout);
 
 export default rutaUsuarios;

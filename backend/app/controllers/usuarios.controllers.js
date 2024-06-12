@@ -67,7 +67,6 @@ export const registroUsuario = async (req, res) => {
     }
 };
 
-
 export const login = async (req, res) => {
     const { correo, contrasena } = req.body;
     try {
@@ -77,11 +76,7 @@ export const login = async (req, res) => {
             return;
         }
 
-        const usuario = respuesta[0][0];
-
-        console.log("Datos del usuario:", usuario);
-        console.log("contrasena:", contrasena);
-        console.log("usuario.contrasena:", usuario.contrasena);
+        const usuario = respuesta[0][0][0];
 
         const password = usuario.contrasena;
 
@@ -182,3 +177,21 @@ export const verPerfil = async (req, res) => {
         res.status(500).json(error);
     }
 }
+
+export const logout = async (req, res) => {
+    const token = req.headers["x-access-token"];
+
+    if (!token) {
+        return error(req, res, 401, "El token no ha sido porporcionado");
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.TOKEN_PRIVATEKEY);
+        // Almacenar el token inválido en la base de datos
+        await pool.query('INSERT INTO tokensinvalidos (token, expiracion) VALUES (?, ?)', [token, new Date()]);
+
+        success(req, res, 200, { message: "Finalizó sesión exitosamente" });
+    } catch (err) {
+        error(req, res, 500, "Fallo el cerrar sesión");
+    }
+};
