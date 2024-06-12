@@ -5,10 +5,11 @@ config();
 
 export const listarBarbero = async (req, res) => {
     try {
-        const [rows] = await pool.query("CALL LL_VER_BARBERO()");
+        const [rowsb] = await pool.query("CALL LL_VER_BARBERO()");
         // res.json(rows);
-        console.log({barberos:rows});
-        res.render("views.barbero.ejs", { barberos: rows });
+        const [rowss] = await pool.query("CALL LL_VER_SERVICIOS()");
+        // res.json(respuesta);
+        res.render("views.barbero.ejs", { barberos: rowsb, servicios: rowss });
         // res.render("views.barbero.ejs")
     } catch (error) {
         res.status(500).json(error);
