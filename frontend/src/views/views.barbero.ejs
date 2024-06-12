@@ -66,17 +66,17 @@
             <div id="carousel1" class="carousel slide">
                 <div class="carousel-inner pt-5 pb-5">
                     <% if (barberos[0] && barberos[0].length > 0) { %>
-                    <% barberos[0].forEach(barbero=> { %>
                         <!-- Primer slide barberos -->
                         <div class="carousel-item active">
                             <div class="cards-wrapper w-100 d-flex">
+                                <% barberos[0].forEach(barbero=> { %>
                                 <div class="opc ms-3 me-4">
                                     <a href="perfil_barbero.html?id=<%= barbero.id %>" class="btn-barb">
                                         <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
                                             <button class="btn-fav btn align-self-start position-absolute p-0">
                                                 <img src="/img/amor.png" alt="" class="icon-fav">
                                             </button>
-                                            <img src="<%= barbero.foto %>" alt="" class="foto rounded-4 mb-2">
+                                            <img src="<%= barbero.fotoPerfil %>" alt="" class="foto rounded-4 mb-2">
                                             <p
                                                 class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
                                                 <%= barbero.nombre %>
@@ -87,10 +87,9 @@
                                         </div>
                                     </a>
                                 </div>
-
+                                <% }); %>
                             </div>
                         </div>
-                        <% }); %>
                         <% } %>
                         <!-- Segundo slide barberos -->
                         <div class="carousel-item">
@@ -287,104 +286,31 @@
             <!-- Carrusel servicios -->
             <div id="carousel2" class="carousel slide">
                 <div class="carousel-inner pt-5 pb-5">
+                    <% if (servicios[0] && servicios[0].length > 0) { %>
                     <!-- Primer slide servicios -->
                     <div class="carousel-item active">
                         <div class="cards-wrapper w-100 d-flex">
+                            <% servicios[0].forEach(servicio=> { %>
                             <div class="opc d-block ms-3 me-4">
                                 <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
                                     <button class="btn-fav btn align-self-start position-absolute p-0">
                                         <img src="/img/amor.png" alt="" class="icon-fav">
                                     </button>
-                                    <img src="/img/afeitado.jpg" alt="" class="foto rounded-4 mb-2">
+                                    <img src="<%= servicio.fotoServicio %>" alt="" class="foto rounded-4 mb-2">
                                     <p
                                         class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Afeitado</p>
-                                    <p class="desc fw-light z-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo</p>
+                                        <%= servicio.tipoServicio %></p>
+                                    <p class="desc fw-light z-1 card-text text-break text-light text-center"><%= servicio.descripcion %></p>
                                     <div
                                         class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
+                                        <p class="precio m-1 w-100 text-center">$ <%= servicio.precio %></p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <button class="btn-fav btn align-self-start position-absolute p-0">
-                                        <img src="/img/amor.png" alt="" class="icon-fav">
-                                    </button>
-                                    <img src="/img/corte.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Corte de pelo</p>
-                                    <p class="desc fw-light z-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <button class="btn-fav btn align-self-start position-absolute p-0">
-                                        <img src="/img/amor.png" alt="" class="icon-fav">
-                                    </button>
-                                    <img src="/img/barba.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Arreglo de barba</p>
-                                    <p class="desc fw-light z-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <button class="btn-fav btn align-self-start position-absolute p-0">
-                                        <img src="/img/amor.png" alt="" class="icon-fav">
-                                    </button>
-                                    <img src="/img/afeitado.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Afeitado</p>
-                                    <p class="desc fw-light z-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <button class="btn-fav btn align-self-start position-absolute p-0">
-                                        <img src="/img/amor.png" alt="" class="icon-fav">
-                                    </button>
-                                    <img src="/img/corte.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Corte de pelo</p>
-                                    <p class="desc fw-light z-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                    </div>
-                                </div>
-                            </div>
+                            <% }); %>
                         </div>
                     </div>
+                    <% } %>
                     <!-- Segundo slide servicios -->
                     <div class="carousel-item">
                         <div class="cards-wrapper w-100 d-flex">
