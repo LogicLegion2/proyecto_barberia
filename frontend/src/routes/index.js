@@ -1,12 +1,8 @@
 import { Router } from "express";
-import rutaCliente from "./routes.clientes.js";
-import rutaBarbero from "./routes.barberos.js";
-import rutaAdmin from "./routes.admins.js";
+import rutaHome from "./routes.home.js";
 
 const ruta = Router();
 
-ruta.use("/clientes", rutaCliente);
-ruta.use("/barberos", rutaBarbero);
-ruta.use("/admins", rutaAdmin);
+ruta.use("/", rutaHome);
 
 export default ruta;
