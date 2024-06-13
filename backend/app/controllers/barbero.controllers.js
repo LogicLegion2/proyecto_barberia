@@ -5,15 +5,17 @@ config();
 
 export const listarBarbero = async (req, res) => {
     try {
-        const [rowsb] = await pool.query("CALL LL_VER_BARBERO()");
-        // res.json(rows);
-        const [rowss] = await pool.query("CALL LL_VER_SERVICIOS()");
-        // res.json(respuesta);
-        res.render("views.barbero.ejs", { barberos: rowsb, servicios: rowss });
+        const [rowsBra] = await pool.query("CALL LL_VER_BARBERO()");
+        const [rowsSer] = await pool.query("CALL LL_VER_SERVICIOS()");
+        const [rowsPro] = await pool.query("CALL LL_VER_PRODUCTOS()"); 
+        const [rowsOfe] = await pool.query("CALL LL_VER_OFERTAS()");
+        const [rowsUbi] = await pool.query("CALL LL_VER_UBICACIONES()");
+        const [rowsPre] = await pool.query("CALL LL_VER_PREGUNTAS()");
+        res.render("views.barbero.ejs", { barberos: rowsBra, servicios: rowsSer, productos: rowsPro, ofertas: rowsOfe, ubicaciones: rowsUbi, preguntas: rowsPre });
         // res.render("views.barbero.ejs")
     } catch (error) {
         res.status(500).json(error);
-    }
+    }
 };
 
 export const buscarBarbero = async (req, res) => {

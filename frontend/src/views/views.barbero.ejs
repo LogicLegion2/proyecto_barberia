@@ -65,21 +65,27 @@
             <!-- Carrusel barberos -->
             <div id="carousel1" class="carousel slide">
                 <div class="carousel-inner pt-5 pb-5">
-                    <% if (barberos[0] && barberos[0].length > 0) { %>
+                    <% if (barberos[0] && barberos[0].length > 0) { 
+                        let barberoChunks = [];
+                        for (let i = 0; i < barberos[0].length; i += 5) {
+                            barberoChunks.push(barberos[0].slice(i, i + 5));
+                        }
+                    %>
+                    <% barberoChunks.forEach((chunk, chunkIndex) => { %>
                         <!-- Primer slide barberos -->
                         <div class="carousel-item active">
                             <div class="cards-wrapper w-100 d-flex">
-                                <% barberos[0].forEach(barbero=> { %>
+                                <% chunk.forEach(barbero => { %>
                                 <div class="opc ms-3 me-4">
                                     <a href="perfil_barbero.html?id=<%= barbero.id %>" class="btn-barb">
-                                        <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
+                                        <div class="tarjeta tarjeta-sma card d-flex align-items-center justify-content-around p-2 rounded-4 z-0">
                                             <button class="btn-fav btn align-self-start position-absolute p-0">
                                                 <img src="/img/amor.png" alt="" class="icon-fav">
                                             </button>
-                                            <img src="<%= barbero.fotoPerfil %>" alt="" class="foto rounded-4 mb-2">
+                                            <img src="<%= barbero.foto %>" alt="" class="foto rounded-4 mb-2">
                                             <p
                                                 class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                                <%= barbero.nombre %>
+                                                <%= barbero.barbero %>
                                             </p>
                                             <p class="desc fw-light z-1 card-text text-break text-light text-center">
                                                 <%= barbero.descripcion %>
@@ -90,171 +96,8 @@
                                 <% }); %>
                             </div>
                         </div>
-                        <% } %>
-                        <!-- Segundo slide barberos -->
-                        <div class="carousel-item">
-                            <div class="cards-wrapper w-100 d-flex">
-                                <div class="opc d-block ms-3 me-4">
-                                    <a href="perfil_barbero.html" class="btn-barb">
-                                        <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                            <button class="btn-fav btn align-self-start position-absolute p-0">
-                                                <img src="/img/amor.png" alt="" class="icon-fav">
-                                            </button>
-                                            <img src="/img/persona.jpg" alt="" class="foto rounded-4 mb-2">
-                                            <p
-                                                class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                                Alejandro Perez</p>
-                                            <p class="desc fw-light z-1 card-text text-break text-light text-center">
-                                                Nesciunt non, error possimus odio harum tenetur commodi minima et
-                                                laborum
-                                                facilis illum ratione, fugiat unde ab enim maiores, ex inventore quo</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="opc d-block ms-3 me-4">
-                                    <a href="perfil_barbero.html" class="btn-barb">
-                                        <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                            <button class="btn-fav btn align-self-start position-absolute p-0">
-                                                <img src="/img/amor.png" alt="" class="icon-fav">
-                                            </button>
-                                            <img src="/img/persona.jpg" alt="" class="foto rounded-4 mb-2">
-                                            <p
-                                                class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                                Samuel Ortega</p>
-                                            <p class="desc fw-light z-1 card-text text-break text-light text-center">
-                                                Nesciunt non, error possimus odio harum tenetur commodi minima et
-                                                laborum
-                                                facilis illum ratione, fugiat unde ab enim maiores, ex inventore quo</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="opc d-block ms-3 me-4">
-                                    <a href="perfil_barbero.html" class="btn-barb">
-                                        <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                            <button class="btn-fav btn align-self-start position-absolute p-0">
-                                                <img src="/img/amor.png" alt="" class="icon-fav">
-                                            </button>
-                                            <img src="/img/persona.jpg" alt="" class="foto rounded-4 mb-2">
-                                            <p
-                                                class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                                Alejandro Perez</p>
-                                            <p class="desc fw-light z-1 card-text text-break text-light text-center">
-                                                Nesciunt non, error possimus odio harum tenetur commodi minima et
-                                                laborum
-                                                facilis illum ratione, fugiat unde ab enim maiores, ex inventore quo</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="opc d-block ms-3 me-4">
-                                    <a href="perfil_barbero.html" class="btn-barb">
-                                        <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                            <button class="btn-fav btn align-self-start position-absolute p-0">
-                                                <img src="/img/amor.png" alt="" class="icon-fav">
-                                            </button>
-                                            <img src="/img/persona.jpg" alt="" class="foto rounded-4 mb-2">
-                                            <p
-                                                class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                                Samuel Ortega</p>
-                                            <p class="desc fw-light z-1 card-text text-break text-light text-center">
-                                                Nesciunt non, error possimus odio harum tenetur commodi minima et
-                                                laborum
-                                                facilis illum ratione, fugiat unde ab enim maiores, ex inventore quo.
-                                            </p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="opc d-block ms-3 me-4">
-                                    <a href="perfil_barbero.html" class="btn-barb">
-                                        <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                            <button class="btn-fav btn align-self-start position-absolute p-0">
-                                                <img src="/img/amor.png" alt="" class="icon-fav">
-                                            </button>
-                                            <img src="/img/persona.jpg" alt="" class="foto rounded-4 mb-2">
-                                            <p
-                                                class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                                Alejandro Perez</p>
-                                            <p class="desc fw-light z-1 card-text text-break text-light text-center">
-                                                Nesciunt non, error possimus odio harum tenetur commodi minima et
-                                                laborum
-                                                facilis illum ratione, fugiat unde ab enim maiores, ex inventore quo</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Tercer slide barberos -->
-                        <div class="carousel-item">
-                            <div class="cards-wrapper w-100 d-flex">
-                                <div class="opc d-block ms-3 me-4">
-                                    <a href="perfil_barbero.html" class="btn-barb">
-                                        <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                            <button class="btn-fav btn align-self-start position-absolute p-0">
-                                                <img src="/img/amor.png" alt="" class="icon-fav">
-                                            </button>
-                                            <img src="/img/persona.jpg" alt="" class="foto rounded-4 mb-2">
-                                            <p
-                                                class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                                Alejandro Perez</p>
-                                            <p class="desc fw-light z-1 card-text text-break text-light text-center">
-                                                Nesciunt non, error possimus odio harum tenetur commodi minima et
-                                                laborum
-                                                facilis illum ratione, fugiat unde ab enim maiores, ex inventore quo</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="opc d-block ms-3 me-4">
-                                    <a href="perfil_barbero.html" class="btn-barb">
-                                        <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                            <button class="btn-fav btn align-self-start position-absolute p-0">
-                                                <img src="/img/amor.png" alt="" class="icon-fav">
-                                            </button>
-                                            <img src="/img/persona.jpg" alt="" class="foto rounded-4 mb-2">
-                                            <p
-                                                class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                                Samuel Ortega</p>
-                                            <p class="desc fw-light z-1 card-text text-break text-light text-center">
-                                                Nesciunt non, error possimus odio harum tenetur commodi minima et
-                                                laborum
-                                                facilis illum ratione, fugiat unde ab enim maiores, ex inventore quo</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="opc d-block ms-3 me-4">
-                                    <a href="perfil_barbero.html" class="btn-barb">
-                                        <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                            <button class="btn-fav btn align-self-start position-absolute p-0">
-                                                <img src="/img/amor.png" alt="" class="icon-fav">
-                                            </button>
-                                            <img src="/img/persona.jpg" alt="" class="foto rounded-4 mb-2">
-                                            <p
-                                                class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                                Alejandro Perez</p>
-                                            <p class="desc fw-light z-1 card-text text-break text-light text-center">
-                                                Nesciunt non, error possimus odio harum tenetur commodi minima et
-                                                laborum
-                                                facilis illum ratione, fugiat unde ab enim maiores, ex inventore quo</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="opc d-block ms-3 me-4">
-                                    <a href="perfil_barbero.html" class="btn-barb">
-                                        <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                            <button class="btn-fav btn align-self-start position-absolute p-0">
-                                                <img src="/img/amor.png" alt="" class="icon-fav">
-                                            </button>
-                                            <img src="/img/persona.jpg" alt="" class="foto rounded-4 mb-2">
-                                            <p
-                                                class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                                Alejandro Perez</p>
-                                            <p class="desc fw-light z-1 card-text text-break text-light text-center">
-                                                Nesciunt non, error possimus odio harum tenetur commodi minima et
-                                                laborum
-                                                facilis illum ratione, fugiat unde ab enim maiores, ex inventore quo</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                        <% }); %>
+                    <% } %>
                 </div>
                 <!-- Botones carrusel -->
                 <button class="carousel-control-prev mt-5 rounded-end-4" type="button" data-bs-target="#carousel1"
@@ -286,13 +129,18 @@
             <!-- Carrusel servicios -->
             <div id="carousel2" class="carousel slide">
                 <div class="carousel-inner pt-5 pb-5">
-                    <% if (servicios[0] && servicios[0].length > 0) { %>
-                    <!-- Primer slide servicios -->
+                    <% if (servicios[0] && servicios[0].length > 0) { 
+                        let servicioChunks = [];
+                        for (let i = 0; i < servicios[0].length; i += 5) {
+                            servicioChunks.push(servicios[0].slice(i, i + 5));
+                        }
+                    %>
+                    <% servicioChunks.forEach((chunk, chunkIndex) => { %>
                     <div class="carousel-item active">
                         <div class="cards-wrapper w-100 d-flex">
-                            <% servicios[0].forEach(servicio=> { %>
+                            <% chunk.forEach(servicio => { %>
                             <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
+                                <div class="tarjeta tarjeta-med card d-flex align-items-center justify-content-around p-2 rounded-4 z-0">
                                     <button class="btn-fav btn align-self-start position-absolute p-0">
                                         <img src="/img/amor.png" alt="" class="icon-fav">
                                     </button>
@@ -310,161 +158,8 @@
                             <% }); %>
                         </div>
                     </div>
+                    <% }); %>
                     <% } %>
-                    <!-- Segundo slide servicios -->
-                    <div class="carousel-item">
-                        <div class="cards-wrapper w-100 d-flex">
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <button class="btn-fav btn align-self-start position-absolute p-0">
-                                        <img src="/img/amor.png" alt="" class="icon-fav">
-                                    </button>
-                                    <img src="/img/afeitado.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Afeitado</p>
-                                    <p class="desc fw-light z-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <button class="btn-fav btn align-self-start position-absolute p-0">
-                                        <img src="/img/amor.png" alt="" class="icon-fav">
-                                    </button>
-                                    <img src="/img/corte.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Corte de pelo</p>
-                                    <p class="desc fw-light z-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <button class="btn-fav btn align-self-start position-absolute p-0">
-                                        <img src="/img/amor.png" alt="" class="icon-fav">
-                                    </button>
-                                    <img src="/img/barba.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Arreglo de barba</p>
-                                    <p class="desc fw-light z-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <button class="btn-fav btn align-self-start position-absolute p-0">
-                                        <img src="/img/amor.png" alt="" class="icon-fav">
-                                    </button>
-                                    <img src="/img/afeitado.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Afeitado</p>
-                                    <p class="desc fw-light z-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <button class="btn-fav btn align-self-start position-absolute p-0">
-                                        <img src="/img/amor.png" alt="" class="icon-fav">
-                                    </button>
-                                    <img src="/img/corte.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Corte de pelo</p>
-                                    <p class="desc fw-light z-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Tercer slide serivicios -->
-                    <div class="carousel-item">
-                        <div class="cards-wrapper w-100 d-flex">
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <button class="btn-fav btn align-self-start position-absolute p-0">
-                                        <img src="/img/amor.png" alt="" class="icon-fav">
-                                    </button>
-                                    <img src="/img/afeitado.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Afeitado</p>
-                                    <p class="desc fw-light z-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <button class="btn-fav btn align-self-start position-absolute p-0">
-                                        <img src="/img/amor.png" alt="" class="icon-fav">
-                                    </button>
-                                    <img src="/img/corte.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Corte de pelo</p>
-                                    <p class="desc fw-light z-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <button class="btn-fav btn align-self-start position-absolute p-0">
-                                        <img src="/img/amor.png" alt="" class="icon-fav">
-                                    </button>
-                                    <img src="/img/barba.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Arreglo de barba</p>
-                                    <p class="desc fw-light z-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <button class="carousel-control-prev height-max-ser mt-5 rounded-end-4" type="button"
                     data-bs-target="#carousel2" data-bs-slide="prev">
@@ -495,315 +190,40 @@
             <!-- Carrusel productos -->
             <div id="carousel3" class="carousel slide">
                 <div class="carousel-inner pt-5 pb-5">
-                    <!-- Primer slide productos -->
+                    <% if (productos[0] && productos[0].length > 0) { 
+                        let productoChunks = [];
+                        for (let i = 0; i < productos[0].length; i += 5) {
+                            productoChunks.push(productos[0].slice(i, i + 5));
+                        }
+                    %>
+                    <% productoChunks.forEach((chunk, chunkIndex) => { %>
                     <div class="carousel-item active">
                         <div class="cards-wrapper w-100 d-flex">
+                            <% chunk.forEach(producto => { %>
                             <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/serum.jpg" alt="" class="foto rounded-4 mb-2">
+                                <div class="tarjeta tarjeta-med card d-flex align-items-center  justify-content-around p-2 rounded-4 z-0">
+                                    <img src="<%= producto.fotoProducto %>" alt="" class="foto rounded-4 mb-2">
                                     <p
                                         class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Regrowe Serum</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
+                                        <%= producto.nombre %></p>
+                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center"><%= producto.descripcion %></p>
                                     <div
                                         class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
                                         <button class="btn-fav btn">
                                             <img src="/img/amor.png" alt="" class="icon-favorito">
                                         </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
+                                        <p class="precio m-1 w-100 text-center">$<%= producto.precio %></p>
                                         <button class="btn-car btn">
                                             <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/gel.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Cera para peinar</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/shampoo.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Shampoo</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/talco.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Talco para pelo</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Lorem
-                                        ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae tempora
-                                        voluptates perspiciatis Cupiditate!</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/cera.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Cera</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                            <% }); %>
                         </div>
                     </div>
-                    <!-- Segundo slide productos -->
-                    <div class="carousel-item">
-                        <div class="cards-wrapper w-100 d-flex">
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/serum.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Regrowe Serum</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/gel.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Cera para peinar</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/shampoo.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Shampoo</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/talco.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Talco para pelo</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Lorem
-                                        ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae tempora
-                                        voluptates perspiciatis Cupiditate!</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/cera.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Cera</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Tercer slide productos -->
-                    <div class="carousel-item">
-                        <div class="cards-wrapper w-100 d-flex">
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/serum.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Regrowe Serum</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/gel.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Cera para peinar</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/shampoo.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Shampoo</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/talco.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Talco para pelo</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Lorem
-                                        ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae tempora
-                                        voluptates perspiciatis Cupiditate!</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <% }); %>
+                    <% } %>
                 </div>
                 <button class="carousel-control-prev height-max mt-5 rounded-end-4" type="button"
                     data-bs-target="#carousel3" data-bs-slide="prev">
@@ -834,315 +254,40 @@
             <!-- Carrusel ofertas -->
             <div id="carousel5" class="carousel slide">
                 <div class="carousel-inner pt-5 pb-5">
-                    <!-- Primer slide ofertas -->
+                    <% if (ofertas[0] && ofertas[0].length > 0) { 
+                        let ofertaChunks = [];
+                        for (let i = 0; i < ofertas[0].length; i += 5) {
+                            ofertaChunks.push(ofertas[0].slice(i, i + 5));
+                        }
+                    %>
+                    <% ofertaChunks.forEach((chunk, chunkIndex) => { %>
                     <div class="carousel-item active">
                         <div class="cards-wrapper w-100 d-flex">
+                            <% chunk.forEach(oferta => { %>
                             <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/gel.jpg" alt="" class="foto rounded-4 mb-2">
+                                <div class="tarjeta tarjeta-big card d-flex align-items-center justify-content-around p-2 rounded-4 z-0">
+                                    <img src="<%= oferta.fotoOferta %>" alt="" class="foto rounded-4 mb-2">
                                     <p
                                         class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Cera para peinar X Shampoo</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
+                                        <%= oferta.productos %></p>
+                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center"><%= oferta.descripcion %></p>
                                     <div
                                         class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
                                         <button class="btn-fav btn">
                                             <img src="/img/amor.png" alt="" class="icon-favorito">
                                         </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
+                                        <p class="precio m-1 w-100 text-center">$<%= oferta.precio %></p>
                                         <button class="btn-car btn">
                                             <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100  card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/talco.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Talco para pelo X Cera para peinar</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/shampoo.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Shampoo X Talco para pelo</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/serum.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Regrowe Serum X Talco para pelo</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Lorem
-                                        ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae tempora
-                                        voluptates perspiciatis Cupiditate!</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/gel.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Cera para peinar X Shampoo</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                            <% }); %>
                         </div>
                     </div>
-                    <!-- Segundo slide ofertas -->
-                    <div class="carousel-item">
-                        <div class="cards-wrapper w-100 d-flex">
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/gel.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Cera para peinar X Shampoo</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/talco.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Talco para pelo X Cera para peinar</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/shampoo.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Shampoo X Talco para pelo</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/serum.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Regrowe Serum X Talco para pelo</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Lorem
-                                        ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae tempora
-                                        voluptates perspiciatis Cupiditate!</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/gel.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Cera para peinar X Shampoo</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Tercer slide ofertas -->
-                    <div class="carousel-item">
-                        <div class="cards-wrapper w-100 d-flex">
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/gel.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Cera para peinar X Shampoo</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/talco.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Talco para pelo X Cera para peinar</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/shampoo.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Shampoo X Talco para pelo</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Nesciunt
-                                        non, error possimus odio harum tenetur commodi minima et laborum facilis illum
-                                        ratione, fugiat unde ab enim maiores, ex inventore quo.</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/serum.jpg" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Regrowe Serum X Talco para pelo</p>
-                                    <p class="desc fw-light mb-1 card-text text-break text-light text-center">Lorem
-                                        ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae tempora
-                                        voluptates perspiciatis Cupiditate!</p>
-                                    <div
-                                        class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <button class="btn-fav btn">
-                                            <img src="/img/amor.png" alt="" class="icon-favorito">
-                                        </button>
-                                        <p class="precio m-1 w-100 text-center">$38.200</p>
-                                        <button class="btn-car btn">
-                                            <img src="/img/carrito-de-compras.png" alt="" class="icon-car">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <% }); %>
+                    <% } %>
                 </div>
                 <button class="carousel-control-prev height-max-ofe mt-5 rounded-end-4" type="button"
                     data-bs-target="#carousel5" data-bs-slide="prev">
@@ -1173,246 +318,34 @@
             <!-- Carrusel ubicaciones -->
             <div id="carousel4" class="carousel slide">
                 <div class="carousel-inner pt-5 pb-5">
-                    <!-- Primer slide ubicaciones -->
+                    <% if (ubicaciones[0] && ubicaciones[0].length > 0) { 
+                        let ubicacionChunks = [];
+                        for (let i = 0; i < ubicaciones[0].length; i += 5) {
+                            ubicacionChunks.push(ubicaciones[0].slice(i, i + 5));
+                        }
+                    %>
+                    <% ubicacionChunks.forEach((chunk, chunkIndex) => { %>
                     <div class="carousel-item active">
                         <div class="cards-wrapper w-100 d-flex">
+                            <% chunk.forEach(ubicacion => { %>
                             <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/mapa.png" alt="" class="foto rounded-4 mb-2">
+                                <div class="tarjeta tarjeta-sma card d-flex align-items-center justify-content-around p-2 rounded-4 z-0">
+                                    <img src="<%= ubicacion.fotoUbicacion %>" alt="" class="foto rounded-4 mb-2">
                                     <p
                                         class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Itagüí</p>
-                                    <p class="desc-ubi mb-1 card-text text-break text-light text-center">Cra 23 #23-45
-                                    </p>
+                                        <%= ubicacion.titulo %></p>
+                                    <p class="desc-ubi mb-1 card-text text-break text-light text-center"><%= ubicacion.ubicacion %></p>
                                     <div
                                         class="cont-desc border-top border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="desc fw-light m-1 w-100 text-center">Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit. Doloribus sapiente vel.</p>
+                                        <p class="desc fw-light m-1 w-100 text-center"><%= ubicacion.descripcion %></p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/mapa.png" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Poblado</p>
-                                    <p class="desc-ubi mb-1 card-text text-break text-light text-center">Cll 58 #67-90
-                                    </p>
-                                    <div
-                                        class="cont-desc border-top border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="desc fw-light m-1 w-100 text-center">Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit. Doloribus sapiente vel.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/mapa.png" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Manrique</p>
-                                    <p class="desc-ubi mb-1 card-text text-break text-light text-center">Cra 47 #65-78
-                                    </p>
-                                    <div
-                                        class="cont-desc border-top border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="desc fw-light m-1 w-100 text-center">Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit. Doloribus sapiente vel.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/mapa.png" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Bello</p>
-                                    <p class="desc-ubi mb-1 card-text text-break text-light text-center">Cll 34 #32-65
-                                    </p>
-                                    <div
-                                        class="cont-desc border-top border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="desc fw-light m-1 w-100 text-center">Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit. Doloribus sapiente vel.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/mapa.png" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Urrao</p>
-                                    <p class="desc-ubi mb-1 card-text text-break text-light text-center">Cra 45 #58-12
-                                    </p>
-                                    <div
-                                        class="cont-desc border-top border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="desc fw-light m-1 w-100 text-center">Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit. Doloribus sapiente vel.</p>
-                                    </div>
-                                </div>
-                            </div>
+                            <% }); %>
                         </div>
                     </div>
-                    <!-- Segundo slide ubicaciones -->
-                    <div class="carousel-item">
-                        <div class="cards-wrapper w-100 d-flex">
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/mapa.png" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Itagüí</p>
-                                    <p class="desc-ubi mb-1 card-text text-break text-light text-center">Cra 23 #23-45
-                                    </p>
-                                    <div
-                                        class="cont-desc border-top border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="desc fw-light m-1 w-100 text-center">Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit. Doloribus sapiente vel.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/mapa.png" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Poblado</p>
-                                    <p class="desc-ubi mb-1 card-text text-break text-light text-center">Cll 58 #67-90
-                                    </p>
-                                    <div
-                                        class="cont-desc border-top border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="desc fw-light m-1 w-100 text-center">Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit. Doloribus sapiente vel.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/mapa.png" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Manrique</p>
-                                    <p class="desc-ubi mb-1 card-text text-break text-light text-center">Cra 47 #65-78
-                                    </p>
-                                    <div
-                                        class="cont-desc border-top border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="desc fw-light m-1 w-100 text-center">Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit. Doloribus sapiente vel.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/mapa.png" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Bello</p>
-                                    <p class="desc-ubi mb-1 card-text text-break text-light text-center">Cll 34 #32-65
-                                    </p>
-                                    <div
-                                        class="cont-desc border-top border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="desc fw-light m-1 w-100 text-center">Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit. Doloribus sapiente vel.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/mapa.png" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Urrao</p>
-                                    <p class="desc-ubi mb-1 card-text text-break text-light text-center">Cra 45 #58-12
-                                    </p>
-                                    <div
-                                        class="cont-desc border-top border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="desc fw-light m-1 w-100 text-center">Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit. Doloribus sapiente vel.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Tercer slide ubicaciones -->
-                    <div class="carousel-item">
-                        <div class="cards-wrapper w-100 d-flex">
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta card d-flex h-100 align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/mapa.png" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Itagüí</p>
-                                    <p class="desc-ubi mb-1 card-text text-break text-light text-center">Cra 23 #23-45
-                                    </p>
-                                    <div
-                                        class="cont-desc border-top border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="desc fw-light m-1 w-100 text-center">Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit. Doloribus sapiente vel.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/mapa.png" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Poblado</p>
-                                    <p class="desc-ubi mb-1 card-text text-break text-light text-center">Cll 58 #67-90
-                                    </p>
-                                    <div
-                                        class="cont-desc border-top border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="desc fw-light m-1 w-100 text-center">Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit. Doloribus sapiente vel.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/mapa.png" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Manrique</p>
-                                    <p class="desc-ubi mb-1 card-text text-break text-light text-center">Cra 47 #65-78
-                                    </p>
-                                    <div
-                                        class="cont-desc border-top border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="desc fw-light m-1 w-100 text-center">Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit. Doloribus sapiente vel.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/mapa.png" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Bello</p>
-                                    <p class="desc-ubi mb-1 card-text text-break text-light text-center">Cll 34 #32-65
-                                    </p>
-                                    <div
-                                        class="cont-desc border-top border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="desc fw-light m-1 w-100 text-center">Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit. Doloribus sapiente vel.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="opc d-block ms-3 me-4">
-                                <div class="tarjeta h-100 card d-flex align-items-center p-2 rounded-4 z-0">
-                                    <img src="/img/mapa.png" alt="" class="foto rounded-4 mb-2">
-                                    <p
-                                        class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        Urrao</p>
-                                    <p class="desc-ubi mb-1 card-text text-break text-light text-center">Cra 45 #58-12
-                                    </p>
-                                    <div
-                                        class="cont-desc border-top border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                                        <p class="desc fw-light m-1 w-100 text-center">Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit. Doloribus sapiente vel.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <% }); %>
+                    <% } %>
                 </div>
                 <button class="carousel-control-prev mt-5 rounded-end-4" type="button" data-bs-target="#carousel4"
                     data-bs-slide="prev">
@@ -1432,81 +365,17 @@
             <div class="cabecera align-items-center pt-3 flex-column flex-sm-row justify-content-center row me-0">
                 <h1 class="col-12 text-center titulo pt-5 fs-1 text-light fw-bold">Preguntas Frecuentes</h1>
             </div>
+            <% if (preguntas[0] && preguntas[0].length > 0) { %>
             <!-- Contenedor de preguntas -->
             <div class="cont-preg mt-4 mb-4 w-100 d-flex flex-column align-items-center">
+                <% preguntas[0].forEach(pregunta=> { %>
                 <div class="preg w-75">
-                    <p class="txt-preg mt-4 m-0 ps-2 text-light">1. ¿Lorem ipsum dolor sit amet consectetur ipsum dolor
-                        sit amet
-                        consectetur
-                        adipisicing elit. Consequatur molestiae explicabo minus cupiditate voluptas commodi?</p>
-                    <p class="txt-resp text-light p-2 rounded-3 mb-4">Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit. Error culpa ullam
-                        explicabo harum possimus debitis omnis iste perspiciatis pariatur magnam nisi doloremque, optio
-                        voluptas doloribus, qui distinctio est tempora soluta?Lorem, ipsum dolor sit amet consectetur
-                        adipisicing elit. Voluptate dolorum ipsum suscipit excepturi est repellat quibusdam consequuntur
-                        nobis accusantium commodi pariatur quis veritatis error adipisci similique iure, quidem nisi.
-                    </p>
+                    <p class="txt-preg mt-4 m-0 ps-2 text-light"><%= pregunta.pregunta %></p>
+                    <p class="txt-resp text-light p-2 rounded-3 mb-4"><%= pregunta.respuesta %></p>
                 </div>
-                <div class="preg w-75">
-                    <p class="txt-preg mt-3 m-0 ps-2 text-light">2. ¿Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit.
-                        Consequatur molestiae
-                        explicabo minus cupiditate voluptas commodi?</p>
-                    <p class="txt-resp text-light p-2 rounded-3 mb-4">Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit. Error culpa ullam
-                        explicabo harum possimus debitis omnis iste perspiciatis pariatur magnam nisi doloremque, optio
-                        voluptas doloribus, qui distinctio est tempora soluta?</p>
-                </div>
-                <div class="preg w-75">
-                    <p class="txt-preg mt-3 m-0 ps-2 text-light">3. ¿Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit.
-                        Consequatur molestiae
-                        explicabo minus cupiditate voluptas commodi?</p>
-                    <p class="txt-resp text-light p-2 rounded-3 mb-4">Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit. Error culpa ullam
-                        explicabo harum possimus debitis omnis iste perspiciatis pariatur magnam nisi doloremque, optio
-                        voluptas doloribus, qui distinctio est tempora soluta?Lorem ipsum dolor sit amet consectetur,
-                        adipisicing elit. Quam, magni! Cupiditate assumenda eius ducimus magnam eos animi fugit dolorem?
-                        Odio, maxime ipsum quam obcaecati soluta et vel facere pariatur dicta?Lorem ipsum dolor sit amet
-                        consectetur, adipisicing elit. Asperiores quaerat dicta, quibusdam.</p>
-                </div>
-                <div class="preg w-75">
-                    <p class="txt-preg mt-3 m-0 ps-2 text-light">4. ¿Lorem ipsum dolor sit amet consectetur ipsum dolor
-                        sit amet
-                        consectetur
-                        adipisicing elit. Consequatur molestiae explicabo minus cupiditate voluptas commodi?</p>
-                    <p class="txt-resp text-light p-2 rounded-3 mb-4">Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit. Error culpa ullam
-                        explicabo harum possimus debitis omnis iste perspiciatis pariatur magnam nisi doloremque, optio
-                        voluptas doloribus, qui distinctio est tempora soluta?Lorem, ipsum dolor sit amet consectetur
-                        adipisicing elit. Voluptate dolorum ipsum suscipit excepturi est repellat quibusdam consequuntur
-                        nobis accusantium commodi pariatur quis veritatis error adipisci similique iure, quidem nisi.
-                    </p>
-                </div>
-                <div class="preg w-75">
-                    <p class="txt-preg mt-3 m-0 ps-2 text-light">5. ¿Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit.
-                        Consequatur molestiae
-                        explicabo minus cupiditate voluptas commodi?</p>
-                    <p class="txt-resp text-light p-2 rounded-3 mb-4">Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit. Error culpa ullam
-                        explicabo harum possimus debitis omnis iste perspiciatis pariatur magnam nisi doloremque, optio
-                        voluptas doloribus, qui distinctio est tempora soluta?Lorem ipsum dolor sit amet consectetur,
-                        adipisicing elit. Quam, magni! Cupiditate assumenda eius ducimus magnam eos animi fugit dolorem?
-                        Odio, maxime ipsum quam obcaecati soluta et vel facere pariatur dicta?Lorem ipsum dolor sit amet
-                        consectetur, adipisicing elit. Asperiores quaerat dicta, quibusdam.</p>
-                </div>
-                <div class="preg w-75">
-                    <p class="txt-preg mt-3 m-0 ps-2 text-light">6. ¿Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit.
-                        Consequatur molestiae
-                        explicabo minus cupiditate voluptas commodi?</p>
-                    <p class="txt-resp text-light p-2 rounded-3 mb-4">Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit. Error culpa ullam
-                        explicabo harum possimus debitis omnis iste perspiciatis pariatur magnam nisi doloremque, optio
-                        voluptas doloribus, qui distinctio est tempora soluta?</p>
-                </div>
+                <% }); %>
             </div>
+            <% } %>
         </section>
         <!-- Sección de contacto -->
         <section id="con" class="contacto w-100 p-5 d-flex flex-column col-12">
