@@ -4,21 +4,21 @@ import mysql from "mysql2/promise";
 config();
 
 export const listarFavoritos = async (req, res) => {
-    const id = req.body.id;
+    const id = req.params['id']
 
     try {
-        const [respuestaBar] = await pool.query(`CALL LL_VER_BARBERO_FAVORITO('${id}')`);
-        const [respuestaPro] = await pool.query(`CALL LL_VER_PRODUCTO_FAVORITO('${id}')`);
-        const [respuestaOfe] = await pool.query(`CALL LL_VER_OFERTA_FAVORITO('${id}')`);
-        const [respuestaSer] = await pool.query(`CALL LL_VER_SERVICIO_FAVORITO('${id}')`);
-        const respuestas = {
-            barbero: respuestaBar || null,
-            producto: respuestaPro || null,
-            oferta: respuestaOfe || null,
-            servicio: respuestaSer || null
+        const [rowsBar] = await pool.query(`CALL LL_VER_BARBERO_FAVORITO('${id}')`);
+        const [rowsPro] = await pool.query(`CALL LL_VER_PRODUCTO_FAVORITO('${id}')`);
+        const [rowsOfe] = await pool.query(`CALL LL_VER_OFERTA_FAVORITO('${id}')`);
+        const [rowsSer] = await pool.query(`CALL LL_VER_SERVICIO_FAVORITO('${id}')`);
+        const favoritos = {
+            barbero: rowsBar[0] || [],
+            producto: rowsPro[0] || [],
+            oferta: rowsOfe[0] || [],
+            servicio: rowsSer[0] || []
         };
-
-        res.json(respuestas);
+        console.log(favoritos);
+        res.render("views.lista_fav.ejs", { favoritos });
     } catch (error) {
         res.status(500).json(error);
     }

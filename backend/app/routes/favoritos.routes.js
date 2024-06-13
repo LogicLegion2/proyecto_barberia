@@ -4,7 +4,7 @@ import { verificarToken } from "../middlewares/oauth.js";
 
 const rutaFavoritos = Router();
 
-rutaFavoritos.get("/listar", verificarToken, listarFavoritos);
+rutaFavoritos.get("/listar/:id", listarFavoritos);
 rutaFavoritos.post("/crear/barbero", verificarToken, crearBarberoFavorito);
 rutaFavoritos.post("/crear/servicio", verificarToken, crearServicioFavorito);
 rutaFavoritos.post("/crear/oferta", verificarToken, crearOfertaFavorito);
