@@ -29,12 +29,13 @@ export const buscarUbicacion = async (req, res) => {
 
 
 export const crearUbicacion = async (req, res) => {
+    const titulo = req.body.titulo;
     const ubicacion = req.body.ubicacion;
     const descripcion = req.body.descripcion;
     const foto = req.body.foto;
 
     try {
-        const respuesta = await pool.query(`CALL LL_INSERTAR_UBICACION('${ubicacion}','${descripcion}','${foto}');`);
+        const respuesta = await pool.query(`CALL LL_INSERTAR_UBICACION('${titulo}','${ubicacion}','${descripcion}','${foto}');`);
         res.json(respuesta);
     } catch (error) {
         res.status(500).json(error);
@@ -42,12 +43,13 @@ export const crearUbicacion = async (req, res) => {
 }
 
 export const editarUbicacion = async (req, res) => {
+    const titulo = req.body.titulo;
     const ubicacion = req.body.ubicacion;
     const descripcion = req.body.descripcion;
     const id = req.body.id;
 
     try {
-        const respuesta = await pool.query(`CALL LL_EDITAR_UBICACION('${ubicacion}','${descripcion}','${id}');`);
+        const respuesta = await pool.query(`CALL LL_EDITAR_UBICACION('${titulo}','${ubicacion}','${descripcion}','${id}');`);
         res.json(respuesta);
     } catch (error) {
         res.status(500).json(error);
