@@ -5,13 +5,23 @@ config();
 
 export const listarBarbero = async (req, res) => {
     try {
-        const [rowsBra] = await pool.query("CALL LL_VER_BARBERO()");
+        const [rowsBar] = await pool.query("CALL LL_VER_BARBERO()");
         const [rowsSer] = await pool.query("CALL LL_VER_SERVICIOS()");
         const [rowsPro] = await pool.query("CALL LL_VER_PRODUCTOS()"); 
         const [rowsOfe] = await pool.query("CALL LL_VER_OFERTAS()");
         const [rowsUbi] = await pool.query("CALL LL_VER_UBICACIONES()");
         const [rowsPre] = await pool.query("CALL LL_VER_PREGUNTAS()");
-        res.render("views.barbero.ejs", { barberos: rowsBra, servicios: rowsSer, productos: rowsPro, ofertas: rowsOfe, ubicaciones: rowsUbi, preguntas: rowsPre });
+        rowsBar.forEach(barbero => {
+            if (barbero.foto) {
+                barbero.foto = Buffer.from(barbero.foto).toString('base64');
+            }
+        });
+        rowsSer.forEach(servicio => {
+            if (servicio.fotoServicio) {
+                servicio.fotoServicio = Buffer.from(servicio.fotoServicio).toString('base64');
+            }
+        });
+        res.render("views.barbero.ejs", { barberos: rowsBar, servicios: rowsSer, productos: rowsPro, ofertas: rowsOfe, ubicaciones: rowsUbi, preguntas: rowsPre });
         // res.render("views.barbero.ejs")
     } catch (error) {
         res.status(500).json(error);

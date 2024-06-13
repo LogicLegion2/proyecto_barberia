@@ -195,3 +195,7 @@ export const logout = async (req, res) => {
         error(req, res, 500, "Fallo el cerrar sesión");
     }
 };
+
+export const validarToken = async (req, res) => {
+    success(req, res, 200, {"token":"El token es valido"}); 
+}
