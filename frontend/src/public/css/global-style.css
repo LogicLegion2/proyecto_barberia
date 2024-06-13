@@ -187,7 +187,7 @@ option,
   .txt-car-inp{
     width: 80px;
   }
-}
+}  
 
 @media screen and (max-width: 575px) {
   .w-input-group{

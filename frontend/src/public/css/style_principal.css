@@ -47,6 +47,16 @@ body {
     width: 210px;
 }
 
+.tarjeta-sma{
+    height: 330px;
+}
+.tarjeta-med{
+    height: 375px;
+}
+.tarjeta-big{
+    height: 405px;
+}
+
 .icon-fav {
     width: 20px;
 }
@@ -159,7 +169,7 @@ a {
 .btn-left-pro,
 .btn-right-pro {
     padding-top: 150px;
-    height: 370px;
+    height: 350px;
 }
 
 .btn-left-ofe,
@@ -270,7 +280,7 @@ a {
 }
 
 .height-max-ser {
-    height: 385px;
+    height: 375px;
 }
 
 .bottom-max {
