@@ -287,6 +287,13 @@ a {
     padding-bottom: 100px;
 }
 
+.mt-menor{
+    margin-top: -280px;
+}
+
+.mt-menor-max{
+    margin-top: -330px;
+}
 /* algunas configuraciones para los botones del menu de la cuenta */
 
 .btn-custom {

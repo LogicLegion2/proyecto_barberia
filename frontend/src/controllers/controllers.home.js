@@ -16,3 +16,7 @@ export const paginaPrincipalBarbero = (req, res) => {
 export const paginaPrincipalAdmin = (req, res) => {
     res.render("views.pag_admin.ejs")
 };
+
+export const paginaEntregasAdmin = (req, res) => {
+    res.render("views.entrega_producto.ejs")
+}

@@ -73,16 +73,16 @@
                     %>
                     <% barberoChunks.forEach((chunk, chunkIndex) => { %>
                         <!-- Primer slide barberos -->
-                        <div class="carousel-item active">
+                        <div class="carousel-item <%= chunkIndex === 0 ? 'active' : '' %>">
                             <div class="cards-wrapper w-100 d-flex">
                                 <% chunk.forEach(barbero => { %>
                                 <div class="opc ms-3 me-4">
                                     <a href="perfil_barbero.html?id=<%= barbero.id %>" class="btn-barb">
                                         <div class="tarjeta tarjeta-sma card d-flex align-items-center justify-content-around p-2 rounded-4 z-0">
                                             <button class="btn-fav btn align-self-start position-absolute p-0">
-                                                <img src="/img/amor.png" alt="" class="icon-fav">
+                                                <img src="/img/amor.png" alt="" class="icon-fav mt-menor">
                                             </button>
-                                            <img src="<%= barbero.foto %>" alt="" class="foto rounded-4 mb-2">
+                                            <img src="data:image/jpeg;base64,<%= barbero.foto %>" alt="" class="foto rounded-4 mb-2">
                                             <p
                                                 class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
                                                 <%= barbero.barbero %>
@@ -136,15 +136,15 @@
                         }
                     %>
                     <% servicioChunks.forEach((chunk, chunkIndex) => { %>
-                    <div class="carousel-item active">
+                    <div class="carousel-item <%= chunkIndex === 0 ? 'active' : '' %>">
                         <div class="cards-wrapper w-100 d-flex">
                             <% chunk.forEach(servicio => { %>
                             <div class="opc d-block ms-3 me-4">
                                 <div class="tarjeta tarjeta-med card d-flex align-items-center justify-content-around p-2 rounded-4 z-0">
                                     <button class="btn-fav btn align-self-start position-absolute p-0">
-                                        <img src="/img/amor.png" alt="" class="icon-fav">
+                                        <img src="/img/amor.png" alt="" class="icon-fav mt-menor-max">
                                     </button>
-                                    <img src="<%= servicio.fotoServicio %>" alt="" class="foto rounded-4 mb-2">
+                                    <img src="data:image/jpeg;base64,<%= servicio.fotoServicio %>" alt="" class="foto rounded-4 mb-2">
                                     <p
                                         class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
                                         <%= servicio.tipoServicio %></p>
@@ -197,7 +197,7 @@
                         }
                     %>
                     <% productoChunks.forEach((chunk, chunkIndex) => { %>
-                    <div class="carousel-item active">
+                    <div class="carousel-item <%= chunkIndex === 0 ? 'active' : '' %>">
                         <div class="cards-wrapper w-100 d-flex">
                             <% chunk.forEach(producto => { %>
                             <div class="opc d-block ms-3 me-4">
@@ -205,7 +205,7 @@
                                     <img src="<%= producto.fotoProducto %>" alt="" class="foto rounded-4 mb-2">
                                     <p
                                         class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                                        <%= producto.nombre %></p>
+                                        <%= producto.producto %></p>
                                     <p class="desc fw-light mb-1 card-text text-break text-light text-center"><%= producto.descripcion %></p>
                                     <div
                                         class="cont-precio border-top align-items-center border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
@@ -261,7 +261,7 @@
                         }
                     %>
                     <% ofertaChunks.forEach((chunk, chunkIndex) => { %>
-                    <div class="carousel-item active">
+                    <div class="carousel-item <%= chunkIndex === 0 ? 'active' : '' %>">
                         <div class="cards-wrapper w-100 d-flex">
                             <% chunk.forEach(oferta => { %>
                             <div class="opc d-block ms-3 me-4">
@@ -325,7 +325,7 @@
                         }
                     %>
                     <% ubicacionChunks.forEach((chunk, chunkIndex) => { %>
-                    <div class="carousel-item active">
+                    <div class="carousel-item <%= chunkIndex === 0 ? 'active' : '' %>">
                         <div class="cards-wrapper w-100 d-flex">
                             <% chunk.forEach(ubicacion => { %>
                             <div class="opc d-block ms-3 me-4">
