@@ -1,9 +1,13 @@
 import { pool } from "../config/mysql.db.js";
 import { config } from "dotenv";
+import dayjs from 'dayjs';
+import 'dayjs/locale/es.js';
 import mysql from "mysql2/promise";
 config();
 
-export const listarReservasAdmin= async (req, res) => {
+dayjs.locale('es');
+
+export const listarReservasAdmin = async (req, res) => {
     try {
         const [respuesta] = await pool.query("CALL LL_VER_RESERVA_ADMIN()");
         res.json(respuesta);
@@ -12,12 +16,11 @@ export const listarReservasAdmin= async (req, res) => {
     }
 };
 
-export const listarReservas= async (req, res) => {
-    const id = req.body.id;
-
+export const listarReservas = async (req, res) => {
+    const id = req.params['id'];
     try {
-        const [respuesta] = await pool.query(`CALL LL_VER_RESERVAS('${id}')`);
-        res.json(respuesta);
+        const [rows] = await pool.query(`CALL LL_VER_RESERVAS(${id})`);
+        // res.render("views.historial_citas.ejs", { reservas: rows[0] });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -39,17 +42,31 @@ export const crearReserva = async (req, res) => {
     }
 };
 
-export const historialCita= async (req, res) => {
-    const id = req.body.id;
+export const historialCita = async (req, res) => {
+    const id = req.params['id']
     try {
-        const [respuesta] = await pool.query(`CALL LL_VER_HISTORIAL_CITAS('${id}')`);
-        res.json(respuesta);
+        const [rows] = await pool.query(`CALL LL_VER_HISTORIAL_CITAS(${id})`);
+        // Dar formato sencillo de fecha
+        const reservas = rows[0].map(reserva => {
+            const fecha = new Date(reserva.fecha).toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+            const hora = reserva.hora ? reserva.hora.substring(0, 8) : '';
+            return {
+                ...reserva,
+                fecha,
+                hora
+            };
+        });
+        res.render("views.historial_citas.ejs", { reservas });
     } catch (error) {
         res.status(500).json(error);
     }
 };
 
-export const cancelarReserva = async (req,res) =>{
+export const cancelarReserva = async (req, res) => {
     const id = req.body.id;
     try {
         const respuesta = await pool.query(`CALL LL_CANCELAR_CITA('${id}');`);
@@ -61,8 +78,21 @@ export const cancelarReserva = async (req,res) =>{
 
 export const historialReserva = async (req, res) => {
     try {
-        const [respuesta] = await pool.query("CALL LL_VER_HISTORIAL_RESERVAS()");
-        res.json(respuesta);
+        const [rows] = await pool.query("CALL LL_VER_HISTORIAL_RESERVAS()");
+        const reservas = rows[0].map(reserva => {
+            const fecha = new Date(reserva.fecha).toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+            const hora = reserva.hora ? reserva.hora.substring(0, 8) : '';
+            return {
+                ...reserva,
+                fecha,
+                hora
+            };
+        });
+        res.render("views.historial_reservas.ejs", { reservas });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -76,5 +106,5 @@ export const verCalendario = async (req, res) => {
         res.json(respuesta);
     } catch (error) {
         res.status(500).json(error);
-     }
+    }
 }

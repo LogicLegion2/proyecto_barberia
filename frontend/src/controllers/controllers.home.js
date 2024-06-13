@@ -20,3 +20,19 @@ export const paginaPrincipalAdmin = (req, res) => {
 export const paginaEntregasAdmin = (req, res) => {
     res.render("views.entrega_producto.ejs")
 }
+
+export const paginaHistorialCitas = (req, res) => {
+    res.render("views.historial_citas.ejs")
+}
+
+export const paginaHistorialCompras = (req, res) => {
+    res.render("views.historial_compras.ejs")
+}
+
+export const paginaHistorialReservas = (req, res) => {
+    res.render("views.historial_reservas.ejs")
+}
+
+export const paginaListaFav = (req, res) => {
+    res.render("views.lista_fav.ejs")
+}

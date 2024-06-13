@@ -1,7 +1,11 @@
 import { pool } from "../config/mysql.db.js";
 import { config } from "dotenv";
+import dayjs from 'dayjs';
+import 'dayjs/locale/es.js';
 import mysql from "mysql2/promise";
 config();
+
+dayjs.locale('es');
 
 export const crearPago = async (req, res) => {
     const id = req.body.id;
@@ -34,10 +38,21 @@ export const crearReembolso = async (req, res) => {
 };
 
 export const historialCompra= async (req, res) => {
-    const id = req.body.id;
+    const id = req.params['id']
     try {
-        const [respuesta] = await pool.query(`CALL LL_VER_HISTORIAL_COMPRAS('${id}')`);
-        res.json(respuesta);
+        const [rows] = await pool.query(`CALL LL_VER_HISTORIAL_COMPRAS('${id}')`);
+        const compras = rows[0].map(compra => {
+            const fecha = new Date(compra.fecha).toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+            return {
+                ...compra,
+                fecha
+            };
+        });
+        res.render("views.historial_compras.ejs", { compras });
     } catch (error) {
         res.status(500).json(error);
     }
