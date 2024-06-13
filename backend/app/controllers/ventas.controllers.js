@@ -57,8 +57,9 @@ export const verCarroCompras = async (req, res) => {
 
 export const verEntregasAdmin = async (req, res) => {
     try {
-        const [respuesta] = await pool.query("CALL LL_VER_ENTREGAS_ADMIN()");
-        res.json(respuesta);
+        const rows = await pool.query(`CALL LL_VER_ENTREGAS_ADMIN()`);
+        res.render("views.entrega_producto.ejs", { entregas: rows[0] });
+        // res.json(respuesta);
     } catch (error) {
         res.status(500).json(error);
     }

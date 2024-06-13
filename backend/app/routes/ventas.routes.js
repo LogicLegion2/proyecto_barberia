@@ -7,7 +7,7 @@ const rutaVentas = Router();
 rutaVentas.post("/crear", verificarToken, crearPago);
 rutaVentas.post("/crear/reembolso", verificarToken, crearReembolso);
 rutaVentas.get("/historial/compra", verificarToken, historialCompra);
-rutaVentas.get("/ver/entregas/admin", verificarToken, verEntregasAdmin);
+rutaVentas.get("/ver/entregas/admin", verEntregasAdmin);
 rutaVentas.get("/ver/entregas", verificarToken, verEntregas);
 rutaVentas.post("/ver/carroCompras", verificarToken, verCarroCompras);
 
