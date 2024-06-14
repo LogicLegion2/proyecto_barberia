@@ -5,8 +5,9 @@ config();
 
 export const listarOferta = async (req, res) => {
     try {
-        const [respuesta] = await pool.query("CALL LL_VER_OFERTAS()");
-        res.json(respuesta);
+        const [rows] = await pool.query("CALL LL_VER_OFERTAS()");
+        console.log(rows[0]);
+        res.render("views.oferta.ejs", { ofertas: rows[0]});
     } catch (error) {
         res.status(500).json(error);
     }
