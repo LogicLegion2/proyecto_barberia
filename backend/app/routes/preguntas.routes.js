@@ -5,7 +5,7 @@ import { verificarToken } from "../middlewares/oauth.js";
 
 const rutaPreguntas = Router();
 
-rutaPreguntas.get("/listar", verificarToken, listarPregunta);
+rutaPreguntas.get("/listar", listarPregunta);
 rutaPreguntas.post("/crear", verificarToken, crearPregunta);
 rutaPreguntas.put("/editar", verificarToken, editarPregunta);
 rutaPreguntas.put("/desactivar", verificarToken, desactivarPregunta);

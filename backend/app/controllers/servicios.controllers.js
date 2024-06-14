@@ -6,8 +6,7 @@ config();
 export const listarServicio = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_SERVICIOS()");
-        // res.json(respuesta);
-        // res.render("views.barbero.ejs", { servicios: rows });
+        res.render("views.servicio.ejs", { servicios: rows[0] });
     } catch (error) {
         res.status(500).json(error);
     }

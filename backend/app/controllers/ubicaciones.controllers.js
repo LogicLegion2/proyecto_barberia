@@ -5,8 +5,8 @@ config();
 
 export const listarUbicacion = async (req, res) => {
     try {
-        const [respuesta] = await pool.query("CALL LL_VER_UBICACIONES()");
-        res.json(respuesta);
+        const [rows] = await pool.query("CALL LL_VER_UBICACIONES()");
+        res.render("views.ubicacion.ejs", { ubicaciones: rows[0] });
     } catch (error) {
         res.status(500).json(error);
     }

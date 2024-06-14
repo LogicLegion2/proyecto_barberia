@@ -6,8 +6,8 @@ config();
 
 export const listarProducto = async (req, res) => {
     try {
-        const [respuesta] = await pool.query("CALL LL_VER_PRODUCTOS()"); 
-        res.json(respuesta);
+        const [rows] = await pool.query("CALL LL_VER_PRODUCTOS()"); 
+        res.render("views.productos.ejs", { productos: rows[0]});
     } catch (error) {
         res.status(500).json(error);
     }

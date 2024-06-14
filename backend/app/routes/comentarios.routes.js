@@ -7,6 +7,6 @@ const rutaComentarios = Router();
 rutaComentarios.get("/listar", verificarToken, listarComentario);
 rutaComentarios.post("/crear", verificarToken, crearComentario);
 rutaComentarios.put("/eliminar", verificarToken, eliminarComentario);
-rutaComentarios.put("/ver/comentario", verificarToken, verComentariosBarbero);
+rutaComentarios.put("/ver/comentario", verComentariosBarbero);
 
 export default rutaComentarios;
