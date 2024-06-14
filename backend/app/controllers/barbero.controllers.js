@@ -22,7 +22,21 @@ export const listarBarbero = async (req, res) => {
             }
         });
         res.render("views.barbero.ejs", { barberos: rowsBar, servicios: rowsSer, productos: rowsPro, ofertas: rowsOfe, ubicaciones: rowsUbi, preguntas: rowsPre });
-        // res.render("views.barbero.ejs")
+        res.render("views.pag_admin.ejs", { barberos: rowsBar})
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
+export const listarBarberoAdmin = async (req, res) => {
+    try {
+        const [rows] = await pool.query("CALL LL_VER_BARBERO()");
+        rows.forEach(barbero => {
+            if (barbero.foto) {
+                barbero.foto = Buffer.from(barbero.foto).toString('base64');
+            }
+        });
+        res.render("views.pag_admin.ejs", { barberos: rows[0]})
     } catch (error) {
         res.status(500).json(error);
     }
@@ -45,11 +59,22 @@ export const buscarBarbero = async (req, res) => {
 };
 
 export const verPerfil = async (req, res) => {
-    const id = req.body.id;
+    const id = req.params['id']
 
     try {
-        const respuesta = await pool.query(`CALL LL_VER_PERFIL_BARBERO('${id}');`);
-        res.json(respuesta);
+        const rows = await pool.query(`CALL LL_VER_PERFIL_BARBERO('${id}');`);
+        res.render("views.pag_barbero.ejs", { barberos: rows[0]})
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+export const perfilBarbero = async (req, res) => {
+    const id = req.params['id']
+
+    try {
+        const rows = await pool.query(`CALL LL_VER_PERFIL_BARBERO('${id}');`);
+        res.render("views.perfil_barbero_editar.ejs", { barberos: rows[0][0]})
     } catch (error) {
         res.status(500).json(error);
     }

@@ -37,6 +37,17 @@ export const paginaListaFav = (req, res) => {
     res.render("views.lista_fav.ejs")
 }
 
+export const paginaOferta = (req, res) => {
+    res.render("views.oferta.ejs")
+}
+
+export const paginaAdmin = (req, res) => {
+    res.render("views.pag_admin.ejs")
+}
+
+export const perfilAdmin = (req, res) => {
+    res.render("views.perfil_admin.ejs")
+}
 
 export const paginaRegistros = (req, res) => {
     res.render("views.visualizar_registro.ejs")

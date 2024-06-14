@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { cambiarContrasena, cambiarCorreo, cambiarNombre, cambiarTelefono, crearBarbero, crearUsuario, listarUsuario, login, logout, registroUsuario, validarToken, verPerfil } from "../controllers/usuarios.controllers.js";
+import { cambiarContrasena, cambiarCorreo, cambiarNombre, cambiarTelefono, crearBarbero, crearUsuario, listarUsuario, login, logout, registroUsuario, validarToken, verPerfil, verPerfilAdmin } from "../controllers/usuarios.controllers.js";
 import { verificarToken } from "../middlewares/oauth.js";
 
 const rutaUsuarios = Router();
 
 rutaUsuarios.get("/listar", verificarToken, listarUsuario);
-rutaUsuarios.get("/ver/perfil", verificarToken, verPerfil);
+rutaUsuarios.get("/ver/perfil", verPerfil);
+rutaUsuarios.get("/ver/perfil/admin/:id", verPerfilAdmin);
 rutaUsuarios.post("/login", login);
 rutaUsuarios.post("/registro", registroUsuario);
 rutaUsuarios.post("/registrar", verificarToken, crearUsuario);

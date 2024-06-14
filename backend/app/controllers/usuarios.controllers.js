@@ -168,11 +168,22 @@ export const cambiarCorreo = async (req, res) => {
 }
 
 export const verPerfil = async (req, res) => {
-    const id = req.body.id;
+    const id = req.params['id']
 
     try {
-        const respuesta = await pool.query(`CALL LL_VER_PERFIL_CLIENTE('${id}');`);
-        res.json(respuesta);
+        const rows = await pool.query(`CALL LL_VER_PERFIL_CLIENTE('${id}');`);
+        // res.render("views.perfil_barbero_editar.ejs", { barberos: rows[0][0]})
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+export const verPerfilAdmin = async (req, res) => {
+    const id = req.params['id']
+
+    try {
+        const rows = await pool.query(`CALL LL_VER_PERFIL_CLIENTE('${id}');`);
+        res.render("views.perfil_admin.ejs", { admins: rows[0][0]})
     } catch (error) {
         res.status(500).json(error);
     }

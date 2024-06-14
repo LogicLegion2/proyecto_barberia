@@ -84,15 +84,15 @@
         <!-- Lista de barberos -->
         <section class="barbero col-md-6 col-lg-3">
             <h2 class="titulo mb-4 text-center titulo text-light fw-bold">Barberos</h2>
-            <% if (favoritos.barbero && barbero.length> 0) { %>
+            <% if (favoritos.barbero && favoritos.barbero.length> 0) { %>
             <ul class="listas ps-0 d-flex flex-column align-items-center lista-barb">
-                <% barbero.forEach(barbero=> { %>
+                <% favoritos.barbero.forEach(barbero=> { %>
                 <li class="opc">
                     <a href="perfil_barbero.html?id=<%= barbero.id %>" class="btn-barb">
-                    <div class="tarjeta card d-flex align-items-center mb-5 p-2 rounded-4">
+                    <div class="tarjeta justify-content-around tarjeta-sma card d-flex align-items-center mb-5 p-2 rounded-4">
                         <button class="btn-fav btn align-self-start position-absolute p-0"><img src="./img/amor.png" alt="" class="icon-fav"></button>
                         <img src="./img/persona.jpg" alt="" class="foto rounded-4 mb-2">
-                        <p class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light"><%= barbero.nombre %></p>
+                        <p class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light"><%= barbero.barbero %></p>
                         <p class="desc fw-light z-1 card-text text-break text-light text-center"><%= barbero.descripcion %></p>
                     </div>
                     </a>
@@ -104,11 +104,11 @@
         <!-- Lista de productos -->
         <section class="producto col-md-6 col-lg-3">
             <h2 class="titulo mb-4 text-center titulo text-light fw-bold">Productos</h2>
-            <% if (favoritos.producto && producto.length> 0) { %>
+            <% if (favoritos.producto && favoritos.producto.length> 0) { %>
             <ul class="listas ps-0 d-flex flex-column align-items-center lista-prod">
-                <% producto.forEach(producto=> { %>
+                <% favoritos.producto.forEach(producto=> { %>
                 <li class="opc">
-                    <div class="tarjeta card d-flex align-items-center mb-5 p-2 rounded-4">
+                    <div class="tarjeta justify-content-around tarjeta-sma card d-flex align-items-center mb-5 p-2 rounded-4">
                         <button class="btn-fav btn align-self-start position-absolute p-0"><img src="./img/amor.png" alt="" class="icon-fav"></button>
                         <img src="<%= producto.foto %>" alt="" class="foto rounded-4 mb-2">
                         <p class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light"><%= producto.producto %></p>
@@ -123,14 +123,14 @@
         <!-- Lista de servicios -->
         <section class="servicio col-md-6 col-lg-3">
             <h2 class="titulo mb-4 text-center titulo text-light fw-bold">Servicios</h2>
-            <% if (favoritos.servicio && servicio.length> 0) { %>
+            <% if (favoritos.servicio && favoritos.servicio.length> 0) { %>
             <ul class="listas ps-0 d-flex flex-column align-items-center lista-ser">
-                <% servicio.forEach(servicio=> { %>
+                <% favoritos.servicio.forEach(servicio=> { %>
                 <li class="opc">
-                    <div class="tarjeta card d-flex align-items-center mb-5 p-2 rounded-4">
+                    <div class="tarjeta justify-content-around tarjeta-sma card d-flex align-items-center mb-5 p-2 rounded-4">
                         <button class="btn-fav btn align-self-start position-absolute p-0"><img src="./img/amor.png" alt="" class="icon-fav"></button>
                         <img src="<%= servicio.fotoServicio %>" alt="" class="foto rounded-4 mb-2">
-                        <p class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light"><%= servicio.tipoServicio %></p>
+                        <p class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light"><%= servicio.servicio %></p>
                         <p class="desc fw-light z-1 card-text text-break text-light text-center"><%= servicio.descripcion %>
                         </p>
                     </div>
@@ -142,11 +142,11 @@
         <!-- Lista de ofertas -->
         <section class="oferta col-md-6 col-lg-3">
             <h2 class="titulo mb-4 text-center titulo text-light fw-bold">Ofertas</h2>
-            <% if (favoritos.oferta && oferta.length> 0) { %>
+            <% if (favoritos.oferta && favoritos.oferta.length> 0) { %>
             <ul class="listas ps-0 d-flex flex-column align-items-center lista-prod">
-                <% oferta.forEach(oferta=> { %>
+                <% favoritos.oferta.forEach(oferta=> { %>
                 <li class="opc">
-                    <div class="tarjeta card d-flex align-items-center mb-5 p-2 rounded-4">
+                    <div class="tarjeta justify-content-around tarjeta-sma card d-flex align-items-center mb-5 p-2 rounded-4">
                         <button class="btn-fav btn align-self-start position-absolute p-0"><img src="./img/amor.png" alt="" class="icon-fav"></button>
                         <img src="<%= oferta.foto %>" alt="" class="foto rounded-4 mb-2">
                         <p class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light"><%= oferta.productos %></p>
