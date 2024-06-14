@@ -11,4 +11,4 @@ rutaVentas.get("/ver/entregas/admin", verEntregasAdmin);
 rutaVentas.get("/ver/entregas", verificarToken, verEntregas);
 rutaVentas.post("/ver/carroCompras", verificarToken, verCarroCompras);
 
-export default rutaVentas;
+export default rutaVentas; 

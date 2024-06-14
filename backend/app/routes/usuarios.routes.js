@@ -7,6 +7,7 @@ const rutaUsuarios = Router();
 rutaUsuarios.get("/listar", verificarToken, listarUsuario);
 rutaUsuarios.get("/ver/perfil", verPerfil);
 rutaUsuarios.get("/ver/perfil/admin/:id", verPerfilAdmin);
+rutaUsuarios.get("/ver/perfil/cliente/:id", verPerfil);
 rutaUsuarios.post("/login", login);
 rutaUsuarios.post("/registro", registroUsuario);
 rutaUsuarios.post("/registrar", verificarToken, crearUsuario);

@@ -5,8 +5,8 @@ config();
 
 export const listarPregunta = async (req, res) => {
     try {
-        const [respuesta] = await pool.query("CALL LL_VER_PREGUNTAS()");
-        res.json(respuesta);
+        const [rows] = await pool.query("CALL LL_VER_PREGUNTAS()");
+        res.render("views.pregunta.ejs", { preguntas: rows[0]})
     } catch (error) {
         res.status(500).json(error);
     }

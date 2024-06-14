@@ -172,7 +172,7 @@ export const verPerfil = async (req, res) => {
 
     try {
         const rows = await pool.query(`CALL LL_VER_PERFIL_CLIENTE('${id}');`);
-        // res.render("views.perfil_barbero_editar.ejs", { barberos: rows[0][0]})
+        res.render("views.perfil_cliente.ejs", { clientes: rows[0][0]})
     } catch (error) {
         res.status(500).json(error);
     }
