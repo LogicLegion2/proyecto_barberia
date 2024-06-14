@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { login, paginaEditarBarbero, paginaEntregasAdmin, paginaHistorialCitas, paginaHistorialCompras, paginaHistorialReservas, paginaListaFav, paginaPerfilBarbero, paginaPerfilCliente, paginaPreguntas, paginaPrincipalAdmin, paginaPrincipalBarbero, paginaPrincipalCliente, paginaProductos, paginaProductosVendidos, paginaReembolso, paginaRegistrarse, paginaRegistros, paginaReinstaurarContraseña, paginaReservar, paginaReservas, paginaReservasClientes, paginaReservasProductos, paginaServicio, paginaUbicacion } from "../controllers/controllers.home.js";
+import { login, paginaEditarBarbero, paginaEntregasAdmin, paginaHistorialCitas, paginaHistorialCompras, paginaHistorialReservas, paginaListaFav, paginaOferta, paginaPerfilBarbero, paginaPerfilCliente, paginaPreguntas, paginaPrincipalAdmin, paginaPrincipalBarbero, paginaPrincipalCliente, paginaProductos, paginaProductosVendidos, paginaReembolso, paginaRegistrarse, paginaRegistros, paginaReinstaurarContraseña, paginaReservar, paginaReservas, paginaReservasClientes, paginaReservasProductos, paginaServicio, paginaUbicacion } from "../controllers/controllers.home.js";
 
 const rutaHome = Router();
 
