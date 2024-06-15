@@ -4,7 +4,7 @@ import { verificarToken } from "../middlewares/oauth.js";
 
 const rutaUsuarios = Router();
 
-rutaUsuarios.get("/listar", verificarToken, listarUsuario);
+rutaUsuarios.get("/listar", listarUsuario);
 rutaUsuarios.get("/ver/perfil", verPerfil);
 rutaUsuarios.get("/ver/perfil/admin/:id", verPerfilAdmin);
 rutaUsuarios.get("/ver/perfil/cliente/:id", verPerfil);
