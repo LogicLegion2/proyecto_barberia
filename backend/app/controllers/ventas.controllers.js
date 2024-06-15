@@ -81,10 +81,30 @@ export const verEntregasAdmin = async (req, res) => {
 };
 
 export const verEntregas = async (req, res) => {
-    const id = req.body.id;
+    const id = req.params['id']
     try {
-        const [respuesta] = await pool.query(`CALL LL_VER_ENTREGAS('${id}')`);
-        res.json(respuesta);
+        const [rows] = await pool.query(`CALL LL_VER_ENTREGAS('${id}')`);
+        const entregas = rows[0].map(entrega => {
+            const fecha = new Date(entrega.fecha).toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+            return {
+                ...entrega,
+                fecha
+            };
+        });
+        res.render("views.reservas_productos.ejs", { entregas });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
+export const verReservasProductos = async (req, res) => {
+    try {
+        const [rows] = await pool.query(`CALL LL_VER_RESERVAS_PRODUCTOS()`);
+        res.render("views.reservas_productos.ejs", { productos:rows[0] });
     } catch (error) {
         res.status(500).json(error);
     }

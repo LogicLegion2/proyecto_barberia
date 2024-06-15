@@ -95,3 +95,17 @@ export const verPerfilBarbero = async (req, res) => {
         res.status(500).json(error);
     }
 }
+
+//Perfil del barbero desde la vista de admins 
+export const verPerfilBarberoAdmin = async (req, res) => {
+    const id = req.params['id']
+
+    try {
+        const rowsBar = await pool.query(`CALL LL_VER_PERFIL_BARBERO('${id}');`);
+        const rowsCom = await pool.query(`CALL LL_VER_COMENTARIO_BARBERO('${id}');`);
+        res.render("views.eliminar_coment.ejs", { barberos: rowsBar[0][0], comentarios:rowsCom[0]})
+        console.log(rowsBar[0][0]);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}

@@ -15,8 +15,8 @@ export const listarProducto = async (req, res) => {
 
 export const listarProductosVendidos = async (req, res) => {
     try {
-        const [respuesta] = await pool.query("CALL LL_VER_PRODUCTOS_VENDIDOS()");
-        res.json(respuesta);
+        const [rows] = await pool.query("CALL LL_VER_PRODUCTOS_VENDIDOS()");
+        res.render("views.prod_vendido.ejs", { productos: rows[0] });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -31,7 +31,7 @@ export const buscarProducto = async (req, res) => {
         if (!desc) {
             return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
         }
-        const [rows] = await pool.query('CALL LL_BUSCAR_PRODUCTO(?)', [desc]);
+        const [rows] = await pool.query(`CALL LL_BUSCAR_PRODUCTO('${id}')`);
         res.json(rows);
     } catch (error) {
         res.status(500).json(error);
