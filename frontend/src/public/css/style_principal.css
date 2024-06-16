@@ -428,6 +428,11 @@ a {
     color: #261E71;
 }
 
+.bg-alert{
+    background-color: #261E71;
+}
+
+
 @media screen and (max-width: 600px) {
     .main-title{
         font-size: 60px;
