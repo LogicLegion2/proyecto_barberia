@@ -41,6 +41,22 @@ export const crearUbicacion = async (req, res) => {
         res.status(500).json(error);
     }
 }
+ 
+export const obtenerUbicacion = async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_OBTENER_UBICACION('${id}');`);
+        if (respuesta.length > 0) {
+            res.json(respuesta[0]);
+        } else {
+            res.status(404).json({ mensaje: "Ubicación no encontrada" });
+        }
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
 
 export const editarUbicacion = async (req, res) => {
     const titulo = req.body.titulo;
