@@ -17,9 +17,5 @@ app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, '../../frontend/src/views'));
 app.use(express.static(path.join(__dirname, '../../frontend/src/public')));
 app.set("port", 3000)
-// app.get("/esneider", (req, res) => {
-//     const data = {message: "esniede"}
-//     res.render("views.barberos.ejs", {data})
-// })
 
 export default app;
