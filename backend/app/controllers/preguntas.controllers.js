@@ -24,6 +24,21 @@ export const crearPregunta = async (req, res) => {
     }
 }
 
+export const obtenerPregunta = async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_OBTENER_PREGUNTA('${id}');`);
+        if (respuesta.length > 0) {
+            res.json(respuesta[0][0][0]);
+        } else {
+            res.status(404).json({ mensaje: "Preguntada no encontrada" });
+        }
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
 export const editarPregunta = async (req, res) => {
     const pregunta = req.body.pregunta;
     const resp = req.body.respuesta;
@@ -31,9 +46,9 @@ export const editarPregunta = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_PREGUNTA('${pregunta}','${resp}','${id}');`);
-        res.json(respuesta);
+        res.redirect(`/preguntas/editar?id=${id}&success=true`);
     } catch (error) {
-        res.status(500).json(error);
+        res.redirect(`/preguntas/editar?id=${id}&error=true`);
     }
 }
 

@@ -1,13 +1,17 @@
 
 import { Router } from "express";
-import { crearPregunta, desactivarPregunta, editarPregunta, listarPregunta } from "../controllers/preguntas.controllers.js";
+import { crearPregunta, desactivarPregunta, editarPregunta, listarPregunta, obtenerPregunta } from "../controllers/preguntas.controllers.js";
 import { verificarToken } from "../middlewares/oauth.js";
 
 const rutaPreguntas = Router();
 
 rutaPreguntas.get("/listar", listarPregunta);
 rutaPreguntas.post("/crear", crearPregunta);
-rutaPreguntas.put("/editar", editarPregunta);
+rutaPreguntas.get("/obtener/:id", obtenerPregunta);
+rutaPreguntas.get("/editar", (req, res) => {
+    res.render("views.editar_pregunta.ejs", { id: req.query.id });
+});
+rutaPreguntas.post("/editar", editarPregunta);
 rutaPreguntas.put("/desactivar", desactivarPregunta);
 
 

@@ -101,8 +101,21 @@ export const login = async (req, res) => {
         );
 
         console.log("Token generado:", token);
-        success(req, res, 200, { token });
 
+        switch (usuario.rol) {
+            case 'barbero':
+                res.redirect('/barberos/ver/perfil');
+                break;
+            case 'administrador':
+                res.redirect('/barberos/listar/admin');
+                break;
+            case 'usuario':
+                res.redirect('/barberos/listar');
+                break;
+            default:
+                res.status(401).send('El rol ingresado no es valido');
+        }
+        res.render('views.iniciar_sesion.ejs', { payload});
     } catch (e) {
         console.error(e); // Registro del error
         error(req, res, 500, "Error en el servidor, por favor inténtalo de nuevo más tarde");
@@ -206,6 +219,10 @@ export const logout = async (req, res) => {
         error(req, res, 500, "Fallo el cerrar sesión");
     }
 };
+
+export const mostrarLogin = async (req,res) => {
+    res.render("views.iniciar_sesion.ejs");
+}
 
 export const menuCliente = async (req,res) => {
     res.render("views.menu_cliente.ejs");

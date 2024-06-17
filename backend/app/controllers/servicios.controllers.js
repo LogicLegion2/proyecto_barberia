@@ -42,22 +42,37 @@ export const crearServicio = async (req, res) => {
     }
 };
 
+export const obtenerServicio = async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_OBTENER_SERVICIO('${id}');`);
+        if (respuesta.length > 0) {
+            res.json(respuesta[0][0][0]);
+        } else {
+            res.status(404).json({ mensaje: "servicio no encontrado" });
+        }
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
 export const editarServicio = async (req, res) => {
-    const nombre = req.body.nombre;
+    const tipoServicio = req.body.tipoServicio;
     const descripcion = req.body.descripcion;
     const precio = req.body.precio;
     const id = req.body.id;
 
     try {
-        const respuesta = await pool.query(`CALL LL_EDITAR_SERVICIO('${nombre}','${descripcion}','${precio}','${id}');`);
-        res.json(respuesta);
+        const respuesta = await pool.query(`CALL LL_EDITAR_SERVICIO('${tipoServicio}','${descripcion}','${precio}','${id}');`);
+        res.redirect(`/servicios/editar?id=${id}&success=true`);
     } catch (error) {
-        res.status(500).json(error);
+        res.redirect(`/servicios/editar?id=${id}&error=true`);
     }
 }
 
 export const desactivarServicio = async (req, res) => {
-    const nombre = req.body.nombre;
+    const tipoServicio = req.body.tipoServicio;
     const descripcion = req.body.descripcion;
     const precio = req.body.precio;
     const id = req.body.id;
