@@ -87,7 +87,7 @@
       <% if (servicios && servicios.length> 0) { %>
         <ul class="lista d-grid m-3">
           <% servicios.forEach(servicio=> { %>
-            <li class="opc">
+            <li class="opc" onclick="seleccionarServicio('<%= servicio.idServicio %>')">
               <div class="tarjeta tarjeta-big card d-flex align-items-center justify-content-around mb-5 p-2 rounded-4">
                 <img src="<%= servicio.fotoServicio %>" alt="" class="foto rounded-4 mb-2">
                 <p
@@ -113,7 +113,7 @@
       <a class="btn-edicion btn p-0 me-4 mb-3">
         <img src="/img/menos.png" alt="" class="img-edicion">
       </a>
-      <a href="editar_servicio.html" class="btn-edicion btn p-0 me-4 mb-3">
+      <a class="btn-edicion btn p-0 me-4 mb-3" onclick="redireccionarEditar()">
         <img src="/img/editar.png" alt="" class="img-edicion">
       </a>
       <a href="nuevo_servicio.html" class="btn-edicion btn p-0 me-4 mb-3">
@@ -127,6 +127,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
     integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
     crossorigin="anonymous"></script>
+  <script src="/js/servicio.js"></script>
 </body>
 
 </html>
