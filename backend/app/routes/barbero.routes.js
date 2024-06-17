@@ -10,6 +10,6 @@ rutaBarberos.get("/ver/perfil/:id", verCalendario);
 rutaBarberos.get("/ver/barbero/:id", verPerfilBarbero);
 rutaBarberos.get("/ver/admin/:id", verPerfilBarberoAdmin);
 rutaBarberos.get("/perfil/:id", perfilBarbero);
-rutaBarberos.get("/buscar", verificarToken, buscarBarbero);
+rutaBarberos.get("/buscar", buscarBarbero);
 
 export default rutaBarberos;

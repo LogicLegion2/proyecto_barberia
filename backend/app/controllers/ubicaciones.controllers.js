@@ -70,7 +70,7 @@ export const editarUbicacion = async (req, res) => {
     } catch (error) {
         res.redirect(`/ubicaciones/editar?id=${id}&error=true`);
     }
-}
+} 
 
 export const desactivarUbicacion = async (req, res) => {
     const id = req.body.id;
