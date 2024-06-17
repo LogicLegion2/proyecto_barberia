@@ -38,55 +38,61 @@
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                             aria-label="Close"></button>
                     </div>
-                    <div class="offcanvas-body pt-2 pb-0 menu-top">
+                    <div class="offcanvas-body pt-0 pb-0 menu-top">
                         <div class="d-grid gap-3">
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="pag_admin.html">Página Principal</a><i
+                                <a class="nav-link " href="/productos/listar">Productos</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="productos.html">Productos</a><i
+                                <a class="nav-link " href="/servicios/listar">Servicios</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="servicio.html">Servicios</a><i
+                                <a class="nav-link " href="/ofertas/listar">Ofertas</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="oferta.html">Ofertas</a><i class="bi bi-chevron-right"></i>
-                            </li>
-                            <li
-                                class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="visualizar_registro.html">Usuarios</a><i
+                                <a class="nav-link " href="/usuarios/listar">Usuarios</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="ubicacion.html">Ubicaciones</a><i
+                                <a class="nav-link " href="/ubicaciones/listar">Ubicaciones</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="pregunta.html">Preguntas</a><i
+                                <a class="nav-link " href="/preguntas/listar">Preguntas</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="entrega_producto.html">Entregas</a><i
+                                <a class="nav-link " href="/ventas/ver/entregas/admin">Entregas</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="prod_vendido.html">Productos Vendidos</a><i
+                                <a class="nav-link " href="/productos/vendidos">Productos Vendidos</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="reservas.html">Reservas</a><i
+                                <a class="nav-link " href="/reservas/listar/admin">Reservas</a><i
+                                    class="bi bi-chevron-right"></i>
+                            </li>
+                            <li
+                                class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                                <a class="nav-link " href="/reservas/historial/reserva">Historial de Reservas</a><i
+                                    class="bi bi-chevron-right"></i>
+                            </li>
+                            <li
+                                class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                                <a class="nav-link " href="/ventas/reservas/productos">Reservas Productos</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
@@ -101,23 +107,28 @@
         </nav>
         <!-- Lista de productos -->
         <section class="producto col-12">
-        <% if (productos && productos.length> 0) { %>
-            <ul class="lista d-grid m-3">
-            <% productos.forEach(producto=> { %>
-                <li class="opc">
-                    <div class="tarjeta card d-flex align-items-center mb-5 p-2 rounded-4">
-                        <img src="<%= producto.foto %>" alt="" class="foto rounded-4 mb-2">
-                        <p
-                            class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light"><%= producto.producto %></p>
-                        <div class="cont-precio d-flex flex-row card-text text-light text-center">
-                            <p class="precio me-3">$<%= producto.precio %></p>
-                            <span class="cant text-secondary">Cant: <span class="text-light"><%= producto.cantidad %></span></span>
-                        </div>
-                    </div>
-                </li>
-            <% }); %>
-            </ul>
-        <% } %>
+            <% if (productos && productos.length> 0) { %>
+                <ul class="lista d-grid m-3">
+                    <% productos.forEach(producto=> { %>
+                        <li class="opc">
+                            <div class="tarjeta card d-flex align-items-center mb-5 p-2 rounded-4">
+                                <img src="<%= producto.foto %>" alt="" class="foto rounded-4 mb-2">
+                                <p
+                                    class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
+                                    <%= producto.producto %>
+                                </p>
+                                <div class="cont-precio d-flex flex-row card-text text-light text-center">
+                                    <p class="precio me-3">$<%= producto.precio %>
+                                    </p>
+                                    <span class="cant text-secondary">Cant: <span class="text-light">
+                                            <%= producto.cantidad %>
+                                        </span></span>
+                                </div>
+                            </div>
+                        </li>
+                        <% }); %>
+                </ul>
+                <% } %>
         </section>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

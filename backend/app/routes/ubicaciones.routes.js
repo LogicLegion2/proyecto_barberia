@@ -6,13 +6,13 @@ import { verificarToken } from "../middlewares/oauth.js";
 const rutaUbicaciones = Router();
 
 rutaUbicaciones.get("/listar", listarUbicacion);
-rutaUbicaciones.get("/buscar", verificarToken, buscarUbicacion);
-rutaUbicaciones.post("/crear", verificarToken, crearUbicacion);
+rutaUbicaciones.get("/buscar", buscarUbicacion);
+rutaUbicaciones.post("/crear", crearUbicacion);
 rutaUbicaciones.get("/obtener/:id", obtenerUbicacion);
 rutaUbicaciones.get("/editar", (req, res) => {
     res.render("views.editar_ubicacion.ejs", { id: req.query.id });
 });
 rutaUbicaciones.post("/editar", editarUbicacion);
-rutaUbicaciones.put("/desactivar", verificarToken, desactivarUbicacion);
+rutaUbicaciones.put("/desactivar", desactivarUbicacion);
 
 export default rutaUbicaciones;

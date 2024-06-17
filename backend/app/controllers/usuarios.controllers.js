@@ -207,6 +207,14 @@ export const logout = async (req, res) => {
     }
 };
 
+export const menuCliente = async (req,res) => {
+    res.render("views.menu_cliente.ejs");
+}
+
+export const menuAdmin = async (req,res) => {
+    res.render("views.menu_admin.ejs");
+}
+
 export const validarToken = async (req, res) => {
     success(req, res, 200, {"token":"El token es valido"}); 
 }

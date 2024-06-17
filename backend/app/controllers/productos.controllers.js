@@ -55,18 +55,34 @@ export const crearProducto = async (req, res) => {
     }
 }
 
+export const obtenerProducto = async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_OBTENER_PRODUCTO('${id}');`);
+        if (respuesta.length > 0) {
+            res.json(respuesta[0][0][0]);
+        } else {
+            res.status(404).json({ mensaje: "Producto no encontrado" });
+        }
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
+
 export const editarProducto = async (req, res) => {
     const nombre = req.body.nombre;
     const descripcion = req.body.descripcion;
     const precio = req.body.precio;
-    const cantidad = req.body.cantidad;
     const id = req.body.id;
 
     try {
-        const respuesta = await pool.query(`CALL LL_EDITAR_PRODUCTO('${nombre}','${descripcion}','${precio}','${cantidad}','${id}');`);
-        res.json(respuesta);
+        const respuesta = await pool.query(`CALL LL_EDITAR_PRODUCTO('${nombre}','${descripcion}','${precio}','${id}');`);
+        console.log(respuesta);
+        res.redirect(`/productos/editar?id=${id}&success=true`);
     } catch (error) {
-        res.status(500).json(error);
+        res.redirect(`/productos/editar?id=${id}&error=true`);
     }
 }
 
