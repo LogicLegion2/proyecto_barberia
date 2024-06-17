@@ -1,6 +1,6 @@
 
 import { Router } from "express";
-import { buscarServicio, crearServicio, desactivarServicio, editarServicio, listarServicio } from "../controllers/servicios.controllers.js";
+import { buscarServicio, crearServicio, desactivarServicio, editarServicio, listarServicio, obtenerServicio } from "../controllers/servicios.controllers.js";
 import { verificarToken } from "../middlewares/oauth.js";
 
 const rutaServicios = Router();
@@ -8,7 +8,11 @@ const rutaServicios = Router();
 rutaServicios.get("/listar", listarServicio);
 rutaServicios.get("/buscar", buscarServicio);
 rutaServicios.post("/crear", crearServicio);
-rutaServicios.put("/editar", editarServicio);
+rutaServicios.get("/obtener/:id", obtenerServicio);
+rutaServicios.get("/editar", (req, res) => {
+    res.render("views.editar_servicio.ejs", { id: req.query.id });
+});
+rutaServicios.post("/editar", editarServicio);
 rutaServicios.put("/desactivar", desactivarServicio);
 
 

@@ -86,7 +86,7 @@
     <% if (preguntas && preguntas.length> 0) { %>
       <section class="preguntas mt-4 mb-4 w-100 d-flex flex-column align-items-center">
         <% preguntas.forEach(pregunta=> { %>
-          <div class="preg w-75">
+          <div class="preg w-75" onclick="seleccionarPregunta('<%= pregunta.idPregunta %>')">
             <p class="txt-preg m-0 ps-2 text-light">
               <%= pregunta.pregunta %>
             </p>
@@ -102,7 +102,7 @@
           <a class="btn-edicion btn p-0 me-4 mb-3">
             <img src="/img/menos.png" alt="" class="img-edicion">
           </a>
-          <a href="editar_pregunta.html" class="btn-edicion btn p-0 me-4 mb-3">
+          <a class="btn-edicion btn p-0 me-4 mb-3" onclick="redireccionarEditar()">
             <img src="/img/editar.png" alt="" class="img-edicion">
           </a>
           <a href="ingresar_pregunta.html" class="btn-edicion btn p-0 me-4 mb-3">
@@ -116,6 +116,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
     integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
     crossorigin="anonymous"></script>
+  <script src="/js/pregunta.js"></script>
 </body>
 
 </html>
