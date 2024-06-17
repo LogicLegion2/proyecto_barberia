@@ -39,52 +39,57 @@
                                 <div class="d-grid gap-3">
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="reservar.html">Reservar</a><i
+                                        <a class="nav-link " href="/ventas/reservas/productos">Reservas Productos</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="lista_fav.html">Lista Favoritos</a><i
+                                        <a class="nav-link " href="/productos/listar">Productos</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="barberos.html">Página Principal</a><i
+                                        <a class="nav-link " href="/servicios/listar">Servicios</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="reservas_cliente.html">Reservas</a><i
+                                        <a class="nav-link " href="/ofertas/listar">Ofertas</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="entrega_productos_cliente.html">Entregas</a><i
+                                        <a class="nav-link " href="/usuarios/listar">Usuarios</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="reembolso.html">Reembolsos</a><i
+                                        <a class="nav-link " href="/ubicaciones/listar">Ubicaciones</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="historial_citas.html">Historial de Reservas</a><i
+                                        <a class="nav-link " href="/preguntas/listar">Preguntas</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="historial_compras.html">Historial de Compras</a><i
+                                        <a class="nav-link " href="/ventas/ver/entregas/admin">Entregas</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="carrito.html">Carrito de Compras</a><i
+                                        <a class="nav-link " href="/productos/vendidos">Productos Vendidos</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="perfil_cliente.html">Mi cuenta</a><i
+                                        <a class="nav-link " href="/reservas/listar/admin">Reservas</a><i
+                                            class="bi bi-chevron-right"></i>
+                                    </li>
+                                    <li
+                                        class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                                        <a class="nav-link " href="perfil_admin.html">Mi cuenta</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                 </div>
@@ -93,21 +98,30 @@
                     </div>
                 </nav>
                 <% if (reservas && reservas.length> 0) { %>
-                <div class="d-grid gap-3 m-3 ">
-                    <% reservas.forEach(reserva=> { %>
-                    <div class="p-2 rounded-4 ps-3 custom-bg-dark d-flex justify-content-between">
-                        <ul class="p-0 m-0 me-4">
-                            <i class="text-light"><%= reserva.titulo %> - <%= reserva.ubicacion %></i><br>
-                            <i class="text-light"><%= reserva.fecha %></i><br>
-                            <i class="text-light"><%= reserva.hora %></i><br>
-                            <i class="text-light"><%= reserva.barbero %></i><br>
-                        </ul>
-                        <button type="button"
-                            class="ps-sm-5 p-2 pb-5 pb-sm-3 pe-sm-5 btn btn-color border-0 text-white h-50 rounded-4 align-self-center me-5 fs-5">Cancelar Cita</button>
+                    <div class="d-grid gap-3 m-3 ">
+                        <% reservas.forEach(reserva=> { %>
+                            <div class="p-2 rounded-4 ps-3 custom-bg-dark d-flex justify-content-between">
+                                <ul class="p-0 m-0 me-4">
+                                    <i class="text-light">
+                                        <%= reserva.titulo %> - <%= reserva.ubicacion %>
+                                    </i><br>
+                                    <i class="text-light">
+                                        <%= reserva.fecha %>
+                                    </i><br>
+                                    <i class="text-light">
+                                        <%= reserva.hora %>
+                                    </i><br>
+                                    <i class="text-light">
+                                        <%= reserva.barbero %>
+                                    </i><br>
+                                </ul>
+                                <button type="button"
+                                    class="ps-sm-5 p-2 pb-5 pb-sm-3 pe-sm-5 btn btn-color border-0 text-white h-50 rounded-4 align-self-center me-5 fs-5">Cancelar
+                                    Cita</button>
+                            </div>
+                            <% }); %>
                     </div>
-                    <% }); %>
-                </div>
-                <% } %>
+                    <% } %>
             </div>
         </div>
     </div>

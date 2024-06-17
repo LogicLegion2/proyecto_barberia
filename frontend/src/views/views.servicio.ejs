@@ -2,130 +2,131 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Barber's Brothers</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style_principal.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Barber's Brothers</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/style_principal.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
-    <div class="fondo container-fluid">
-        <nav class="navbar navbar-dark">
-            <div class="container-fluid d-flex flex-row-reverse">
-                <form class="mt-3 justify-content-end d-flex " role="search">
-                    <input class="form-control inp-bus rounded-4 text-white" type="search"
-                        placeholder="Buscar Servicio..." aria-label="Search">
-                    <button class="btn btn-bus border-white rounded-4 ms-1 btn-outline-primary"
-                        type="submit"><img src="/img/lupa2.png" class="lupa mb-1"></button>
-                </form>
-                <button class="navbar-toggler mt-3 mt-sm-0 border-0" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
-                    aria-labelledby="offcanvasDarkNavbarLabel">
-                    <div class="offcanvas-header menu-top">
-                        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu Cuenta</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body pt-2 pb-0 menu-top">
-                        <div class="d-grid gap-3">
-                          <li
-                            class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                            <a class="nav-link " href="pag_admin.html">Página Principal</a><i class="bi bi-chevron-right"></i>
-                          </li>
-                          <li
-                            class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                            <a class="nav-link " href="productos.html">Productos</a><i class="bi bi-chevron-right"></i>
-                          </li>
-                          <li
-                            class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                            <a class="nav-link " href="servicio.html">Servicios</a><i class="bi bi-chevron-right"></i>
-                          </li>
-                          <li
-                            class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                            <a class="nav-link " href="oferta.html">Ofertas</a><i class="bi bi-chevron-right"></i>
-                          </li>
-                          <li
-                            class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                            <a class="nav-link " href="visualizar_registro.html">Usuarios</a><i class="bi bi-chevron-right"></i>
-                          </li>
-                          <li
-                            class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                            <a class="nav-link " href="ubicacion.html">Ubicaciones</a><i
-                              class="bi bi-chevron-right"></i>
-                          </li>
-                          <li
-                            class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                            <a class="nav-link " href="pregunta.html">Preguntas</a><i class="bi bi-chevron-right"></i>
-                          </li>
-                          <li
-                            class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                            <a class="nav-link " href="entrega_producto.html">Entregas</a><i
-                              class="bi bi-chevron-right"></i>
-                          </li>
-                          <li
-                            class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                            <a class="nav-link " href="prod_vendido.html">Productos Vendidos</a><i
-                              class="bi bi-chevron-right"></i>
-                          </li>
-                          <li
-                            class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                            <a class="nav-link " href="reservas.html">Reservas</a><i class="bi bi-chevron-right"></i>
-                          </li>
-                          <li
-                            class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                            <a class="nav-link " href="perfil_admin.html">Mi cuenta</a><i class="bi bi-chevron-right"></i>
-                          </li>
-                        </div>
-                      </div>
-                </div>
+  <div class="fondo container-fluid">
+    <nav class="navbar navbar-dark">
+      <div class="container-fluid d-flex flex-row-reverse">
+        <form class="mt-3 justify-content-end d-flex " role="search">
+          <input class="form-control inp-bus rounded-4 text-white" type="search" placeholder="Buscar Servicio..."
+            aria-label="Search">
+          <button class="btn btn-bus border-white rounded-4 ms-1 btn-outline-primary" type="submit"><img
+              src="/img/lupa2.png" class="lupa mb-1"></button>
+        </form>
+        <button class="navbar-toggler mt-3 mt-sm-0 border-0" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+          aria-labelledby="offcanvasDarkNavbarLabel">
+          <div class="offcanvas-header menu-top">
+            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu Cuenta</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+              aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body pt-0 pb-0 menu-top">
+            <div class="d-grid gap-3">
+              <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                <a class="nav-link " href="/productos/listar">Productos</a><i class="bi bi-chevron-right"></i>
+              </li>
+              <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                <a class="nav-link " href="/servicios/listar">Servicios</a><i class="bi bi-chevron-right"></i>
+              </li>
+              <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                <a class="nav-link " href="/ofertas/listar">Ofertas</a><i class="bi bi-chevron-right"></i>
+              </li>
+              <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                <a class="nav-link " href="/usuarios/listar">Usuarios</a><i class="bi bi-chevron-right"></i>
+              </li>
+              <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                <a class="nav-link " href="/ubicaciones/listar">Ubicaciones</a><i class="bi bi-chevron-right"></i>
+              </li>
+              <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                <a class="nav-link " href="/preguntas/listar">Preguntas</a><i class="bi bi-chevron-right"></i>
+              </li>
+              <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                <a class="nav-link " href="/ventas/ver/entregas/admin">Entregas</a><i class="bi bi-chevron-right"></i>
+              </li>
+              <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                <a class="nav-link " href="/productos/vendidos">Productos Vendidos</a><i
+                  class="bi bi-chevron-right"></i>
+              </li>
+              <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                <a class="nav-link " href="/reservas/listar/admin">Reservas</a><i class="bi bi-chevron-right"></i>
+              </li>
+              <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                <a class="nav-link " href="/reservas/historial/reserva">Historial de Reservas</a><i
+                  class="bi bi-chevron-right"></i>
+              </li>
+              <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                <a class="nav-link " href="/ventas/reservas/productos">Reservas Productos</a><i
+                  class="bi bi-chevron-right"></i>
+              </li>
+              <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                <a class="nav-link " href="perfil_admin.html">Mi cuenta</a><i class="bi bi-chevron-right"></i>
+              </li>
             </div>
-        </nav>
-        <!-- Lista de servicios -->
-        <section class="servicio col-12">
-        <% if (servicios && servicios.length> 0) { %>
-            <ul class="lista d-grid m-3">
-                <% servicios.forEach(servicio=> { %>
-                <li class="opc">
-                    <div class="tarjeta tarjeta-big card d-flex align-items-center justify-content-around mb-5 p-2 rounded-4">
-                        <img src="<%= servicio.fotoServicio %>" alt="" class="foto rounded-4 mb-2">
-                        <p
-                            class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
-                            <%= servicio.tipoServicio %></p>
-                        <p class="desc fw-light mb-1 card-text text-break text-light text-center"><%= servicio.descripcion %>
-                        </p>
-                        <div
-                            class="cont-precio border-top border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
-                            <p class="precio m-1 w-100 text-center">$ <%= servicio.precio %></p>
-                        </div>
-                    </div>
-                </li>
-                <% }); %>
-            </ul>
-        <% } %>
-        </section>
-        <div
-            class="navbar footer-h custom-bg-color fixed-bottom cont-car d-flex flex-column align-items-end w-100 justify-content-end">
-            <a class="btn-edicion btn p-0 me-4 mb-3">
-                <img src="/img/menos.png" alt="" class="img-edicion">
-            </a>
-            <a href="editar_servicio.html" class="btn-edicion btn p-0 me-4 mb-3">
-                <img src="/img/editar.png" alt="" class="img-edicion">
-            </a>
-            <a href="nuevo_servicio.html" class="btn-edicion btn p-0 me-4 mb-3">
-                <img src="/img/mas.png" alt="" class="img-edicion">
-            </a>
+          </div>
         </div>
+      </div>
+    </nav>
+    <!-- Lista de servicios -->
+    <section class="servicio col-12">
+      <% if (servicios && servicios.length> 0) { %>
+        <ul class="lista d-grid m-3">
+          <% servicios.forEach(servicio=> { %>
+            <li class="opc">
+              <div class="tarjeta tarjeta-big card d-flex align-items-center justify-content-around mb-5 p-2 rounded-4">
+                <img src="<%= servicio.fotoServicio %>" alt="" class="foto rounded-4 mb-2">
+                <p
+                  class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
+                  <%= servicio.tipoServicio %>
+                </p>
+                <p class="desc fw-light mb-1 card-text text-break text-light text-center">
+                  <%= servicio.descripcion %>
+                </p>
+                <div
+                  class="cont-precio border-top border-2 border-light w-100 d-flex flex-row card-text text-light text-center">
+                  <p class="precio m-1 w-100 text-center">$ <%= servicio.precio %>
+                  </p>
+                </div>
+              </div>
+            </li>
+            <% }); %>
+        </ul>
+        <% } %>
+    </section>
+    <div
+      class="navbar footer-h custom-bg-color fixed-bottom cont-car d-flex flex-column align-items-end w-100 justify-content-end">
+      <a class="btn-edicion btn p-0 me-4 mb-3">
+        <img src="/img/menos.png" alt="" class="img-edicion">
+      </a>
+      <a href="editar_servicio.html" class="btn-edicion btn p-0 me-4 mb-3">
+        <img src="/img/editar.png" alt="" class="img-edicion">
+      </a>
+      <a href="nuevo_servicio.html" class="btn-edicion btn p-0 me-4 mb-3">
+        <img src="/img/mas.png" alt="" class="img-edicion">
+      </a>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
