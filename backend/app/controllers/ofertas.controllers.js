@@ -47,33 +47,39 @@ export const obtenerOferta = async (req, res) => {
     const id = req.params.id;
 
     try {
-        const respuesta = await pool.query(`CALL LL_OBTENER_OFERTA('${id}');`);
-        if (respuesta.length > 0) {
-            res.json(respuesta[0][0][0]);
-        } else {
-            res.status(404).json({ mensaje: "Oferta no encontrada" });
+        const respuestaOferta = await pool.query(`CALL LL_OBTENER_OFERTA('${id}');`);
+        const oferta = respuestaOferta[0][0]; 
+
+        const respuestaProductos = await pool.query(`CALL LL_VER_PRODUCTOS();`);
+        const productos = respuestaProductos[0];
+        if (oferta && productos.length > 0) {
+            res.render("views.editar_oferta.ejs", { id, oferta, productos });
+        }  else {
+            res.status(404).json({ mensaje: "Oferta o productos no encontrados" });
         }
     } catch (error) {
         res.status(500).json(error);
     }
 };
 
-//Consulta de productos para los input select del formulario de editar oferta
-export const obtenerProductos = async (req, res) => {
-    const id = req.params.id;
-    try {
-        const oferta = await obtenerOferta(id);
-        const productos = await pool.query(`CALL LL_VER_PRODUCTOS();`);
-        if (productos.length > 0) {
-            console.log(productos[0][0][0]);
-            res.render("views.editar_oferta.ejs", { id: req.query.id, oferta, productos });
-        } else {
-            res.status(404).json({ mensaje: "Productos no encontrados" });
-        }
-    } catch (error) {
-        throw error;
-    }
-}
+// //Consulta de productos para los input select del formulario de editar oferta
+// export const obtenerProductos = async (req, res) => {
+//     const id = req.params.id;
+//     try {
+//         const resOfe = await obtenerOferta(req,res);
+//         const rowsOfe = resOfe[0][0]
+//         console.log(rowsOfe);
+//         const rowsPro = await pool.query(`CALL LL_VER_PRODUCTOS();`);
+//         console.log(rowsOfe);
+//         if (rowsPro.length > 0) {
+//             res.render("views.editar_oferta.ejs", { id, oferta : rowsOfe[0][0][0], productos : rowsPro[0] });
+//         } else {
+//             res.status(404).json({ mensaje: "Productos no encontrados" });
+//         }
+//     } catch (error) {
+//         throw error;
+//     }
+// }
 
 export const editarOferta = async (req, res) => {
     const producto1 = req.body.producto1;

@@ -8,14 +8,13 @@ const error = (req, res, statusCode, message) => {
 };
 
 export const verificarToken = async (req, res, next) => {
-    const token = req.headers["x-access-token"];
+    const token = req.headers["x-access-token"] || req.query.token;
 
     if (!token) {
         return error(req, res, 401, "No se ha proporcionado un token");
     }
 
     try {
-        // Verificación que el token está en la lista de tokens inválidos
         const invalidToken = await pool.query(`CALL LL_VER_TOKEN('${token}')`);
 
         if (invalidToken && invalidToken[0][0].length > 0) {
@@ -23,7 +22,7 @@ export const verificarToken = async (req, res, next) => {
         }
 
         const decoded = jwt.verify(token, process.env.TOKEN_PRIVATEKEY);
-        req.userId = decoded.idUsuario; // Se almacena la información decodificada en la solicitud
+        req.idUsuario = decoded.idUsuario; 
         next();
         
     } catch (err) {

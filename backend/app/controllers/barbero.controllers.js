@@ -63,8 +63,10 @@ export const verCalendario = async (req, res) => {
     const id = req.params['id']
 
     try {
-        const rows = await pool.query(`CALL LL_VER_PERFIL_BARBERO('${id}');`);
-        res.render("views.pag_barbero.ejs", { barberos: rows[0]})
+        const rowsBar = await pool.query(`CALL LL_VER_PERFIL_BARBERO('${id}');`);
+        const rowsRes = await pool.query(`CALL LL_VER_RESERVA_BARBERO('${id}');`);
+        console.log(rowsBar[0][0], rowsRes[0][0]);
+        res.render("views.pag_barbero.ejs", { barberos: rowsBar[0][0], reservas: rowsRes[0][0] })
     } catch (error) {
         res.status(500).json(error);
     }
