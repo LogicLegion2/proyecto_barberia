@@ -97,6 +97,7 @@
         <div class="col-6">
           <form id="editForm" method="POST" action="/ofertas/editar">
             <input type="hidden" id="oferta_id" name="id" value="<%= id %>">
+            <% if (productos && productos.length> 0) { %>
             <select id="producto1" name="producto1" class="text-white mt-4 text-center border-0 form-select">
               <% productos.forEach(producto=> { %>
                 <option value="<%= producto.idProducto %>" <%=producto.idProducto==oferta.producto1 ? 'selected' : '' %>
@@ -111,6 +112,7 @@
                 </option>
                 <% }) %>
             </select>
+            <% } %>
             <input type="text" id="descripcion" name="descripcion"
               class="text-white mt-4 text-center border-0 form-control">
             <input type="text" id="precio" name="precio" class="text-white mt-4 text-center border-0 form-control">
