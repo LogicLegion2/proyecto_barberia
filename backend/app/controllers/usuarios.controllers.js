@@ -2,7 +2,7 @@ import { pool } from "../config/mysql.db.js";
 import { config } from "dotenv";
 import mysql from "mysql2/promise";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
+import bcrypt, { hash } from "bcrypt";
 config();
 
 const saltRounds = 10;
@@ -77,9 +77,7 @@ export const login = async (req, res) => {
         }
 
         const usuario = respuesta[0][0][0];
-
         const password = usuario.contrasena;
-
         const match = await bcrypt.compare(contrasena, password);
         if (!match) {
             error(req, res, 401, "Clave errada");
@@ -100,49 +98,27 @@ export const login = async (req, res) => {
             { expiresIn: process.env.TOKEN_EXPIRES_IN }
         );
 
-        console.log("Token generado:", token);
-
+        let redirectUrl = '';
         switch (usuario.rol) {
             case 'barbero':
-                res.redirect('/barberos/ver/perfil');
+                redirectUrl = `/barberos/ver/perfil?id=${usuario.idUsuario}&token=${token}`;
                 break;
             case 'administrador':
-                res.redirect('/barberos/listar/admin');
+                redirectUrl = `/barberos/listar/admin?id=${usuario.idUsuario}&token=${token}`;
                 break;
             case 'usuario':
-                res.redirect('/barberos/listar');
+                redirectUrl = `/barberos/listar?id=${usuario.idUsuario}&token=${token}`;
                 break;
             default:
                 res.status(401).send('El rol ingresado no es valido');
+                return;
         }
-        res.render('views.iniciar_sesion.ejs', { payload});
+        res.redirect(redirectUrl);
     } catch (e) {
-        console.error(e); // Registro del error
+        console.error(e);
         error(req, res, 500, "Error en el servidor, por favor inténtalo de nuevo más tarde");
     }
 };
-
-export const cambiarContrasena = async (req, res) => {
-    const id = req.body.id;
-    const contrasena = req.body.contrasena;
-    const contrasenaNueva = req.body.contrasenaNueva;
-
-    try {
-        const respuesta = await pool.query(`CALL LL_VERIFICAR_CONTRASENA('${id}','${contrasena}');`);
-
-        const usuario = respuesta[0][0];
-        console.log("Datos del usuario:", usuario);
-        try {
-            const respuesta2 = await pool.query(`CALL LL_EDITAR_CONTRASENA_USUARIO('${id}','${contrasenaNueva}');`);
-            res.json(respuesta2);
-        } catch (e) {
-            res.status(500).json(e);
-        }
-
-    } catch (error) {
-        res.status(500).json(error);
-    }
-}
 
 export const cambiarNombre = async (req, res) => {
     const id = req.body.id;
@@ -179,6 +155,128 @@ export const cambiarCorreo = async (req, res) => {
         res.status(500).json(error);
     }
 }
+
+export const cambiarFoto = async (req, res) => {
+    const id = req.body.id;
+    const foto = req.body.foto;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_EDITAR_FOTO_PERFIL('${id}','${foto}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+export const cambiarContrasena = async (req, res) => {
+    const id = req.body.id;
+    const contrasena = req.body.contrasena;
+    const contrasenaNueva = req.body.contrasenaNueva;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_VER_PERFIL_CLIENTE('${id}')`);
+        const usuario = respuesta[0][0][0];
+        if (!usuario) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        const match = await bcrypt.compare(contrasena, usuario.contrasena);
+        if (!match) {
+            return res.status(401).json({ message: 'Contraseña actual incorrecta' });
+        }
+
+        const hashedPassword = await bcrypt.hash(contrasenaNueva, saltRounds);
+        await pool.query(`CALL LL_EDITAR_CONTRASENA_USUARIO('${id}','${hashedPassword}')`);
+        res.json({ message: 'Contraseña cambiada exitosamente' });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
+export const cambiarNombreBarbero = async (req, res) => {
+    const id = req.body.id;
+    const nombre = req.body.nombre;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_EDITAR_NOMBRE_BARBERO('${id}','${nombre}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+export const cambiarTelefonoBarbero = async (req, res) => {
+    const id = req.body.id;
+    const telefono = req.body.telefono;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_EDITAR_TELEFONO_BARBERO('${id}','${telefono}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+export const cambiarCorreoBarbero = async (req, res) => {
+    const id = req.body.id;
+    const correo = req.body.correo;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_EDITAR_CORREO_BARBERO('${id}','${correo}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+export const cambiarFotoBarbero = async (req, res) => {
+    const id = req.body.id;
+    const foto = req.body.foto;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_EDITAR_FOTO_PERFIL_BARBERO('${id}','${foto}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+export const cambiarDescripcionBarbero = async (req, res) => {
+    const id = req.body.id;
+    const descripcion = req.body.descripcion;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_EDITAR_DESCRIPCION_BARBERO('${id}','${descripcion}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+export const cambiarContrasenaBarbero = async (req, res) => {
+    const id = req.body.id;
+    const contrasena = req.body.contrasena;
+    const contrasenaNueva = req.body.contrasenaNueva;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_VER_PERFIL_BARBERO('${id}')`);
+        const usuario = respuesta[0][0][0];
+        if (!usuario) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        const match = await bcrypt.compare(contrasena, usuario.contrasena);
+        if (!match) {
+            return res.status(401).json({ message: 'Contraseña actual incorrecta' });
+        }
+
+        const hashedPassword = await bcrypt.hash(contrasenaNueva, saltRounds);
+        await pool.query(`CALL LL_EDITAR_CONTRASENA_BARBERO('${id}','${hashedPassword}')`);
+        res.json({ message: 'Contraseña cambiada exitosamente' });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
 
 export const verPerfil = async (req, res) => {
     const id = req.params['id']
@@ -229,7 +327,10 @@ export const menuCliente = async (req,res) => {
 }
 
 export const menuAdmin = async (req,res) => {
-    res.render("views.menu_admin.ejs");
+    const idUsuario = req.idUsuario;
+    const token = req.query.token || req.headers["x-access-token"];
+    console.log("IDUSUARIO", idUsuario, token);
+    res.render("views.menu_admin.ejs", {idUsuario, token});
 }
 
 export const validarToken = async (req, res) => {

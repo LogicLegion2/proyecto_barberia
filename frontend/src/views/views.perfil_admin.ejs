@@ -111,35 +111,40 @@
                     </div>
                     <div class="col-12 col-sm-7 mt-3">
                         <div class="grid">
-                            <div
-                                class="p-2 rounded-4 ps-3 pe-3 d-flex align-items-center justify-content-between custom-bg-dark mb-3">
-                                <b class="text-secondary">Nombre: <i class="text-light">
-                                        <%= admins[0].nombre %>
-                                    </i></b>
-                                <button type="button"
-                                    class="btn align-items-center d-flex btn-min-h btn-color text-white rounded-4">Editar</button>
+                            <!-- Edición nombre -->
+                            <div class="p-2 rounded-4 ps-3 pe-3 d-flex align-items-center justify-content-between custom-bg-dark mb-3">
+                                <b class="text-secondary">Nombre: <i class="text-light"><%= admins[0].nombre %></i></b>
+                                <button type="button" class="btn align-items-center d-flex btn-min-h btn-color text-white rounded-4" onclick="toggleEdit('nombre')">Editar</button>
                             </div>
-                            <div
-                                class="p-2 rounded-4 ps-3 pe-3 d-flex align-items-center justify-content-between custom-bg-dark mb-3">
-                                <b class="text-secondary">Telefono: <i class="text-light">
-                                        <%= admins[0].telefono %>
-                                    </i></b>
-                                <button type="button"
-                                    class="btn align-items-center d-flex btn-min-h btn-color text-white rounded-4">Editar</button>
+                            <form id="form-nombre" class="edit-form justify-content-center" style="display:none;" onsubmit="cambiarNombre(event, '<%= admins[0].id %>')">
+                                <input type="text" name="nombre" class="rounded-4 form-control" value="<%= admins[0].nombre %>" required>
+                                <button type="submit" class="btn align-items-center justify-content-center d-flex btn-color text-white rounded-4 mt-2 mb-2 w-100">Guardar</button>
+                            </form>
+                            <!-- Edición teléfono -->
+                            <div class="p-2 rounded-4 ps-3 pe-3 d-flex align-items-center justify-content-between custom-bg-dark mb-3">
+                                <b class="text-secondary">Teléfono: <i class="text-light"><%= admins[0].telefono %></i></b>
+                                <button type="button" class="btn align-items-center d-flex btn-min-h btn-color text-white rounded-4" onclick="toggleEdit('telefono')">Editar</button>
                             </div>
-                            <div
-                                class="p-2 rounded-4 ps-3 pe-3 d-flex align-items-center justify-content-between custom-bg-dark mb-2">
-                                <b class="text-secondary">Correo: <i class="text-light">
-                                        <%= admins[0].correo %>
-                                    </i></b>
-                                <button type="button"
-                                    class="btn align-items-center d-flex btn-min-h btn-color text-white rounded-4">Editar</button>
+                            <form id="form-telefono" class="edit-form justify-content-center" style="display:none;" onsubmit="cambiarTelefono(event, '<%= admins[0].id %>')">
+                                <input type="text" name="telefono" class="rounded-4 form-control" value="<%= admins[0].telefono %>" required>
+                                <button type="submit" class="btn align-items-center justify-content-center d-flex btn-color text-white rounded-4 mt-2 mb-2 w-100">Guardar</button>
+                            </form>
+                            <!-- Edición correo -->
+                            <div class="p-2 rounded-4 ps-3 pe-3 d-flex align-items-center justify-content-between custom-bg-dark mb-2">
+                                <b class="text-secondary">Correo: <i class="text-light"><%= admins[0].correo %></i></b>
+                                <button type="button" class="btn align-items-center d-flex btn-min-h btn-color text-white rounded-4" onclick="toggleEdit('correo')">Editar</button>
                             </div>
-                            <label for="formFile" class="form-label custom-text-secondary">Seleccionar foto de
-                                perfil:</label>
-                            <input type="file"
-                                class="custom-text-secondary mb-3 text-center rounded-4 border-0 form-control"
-                                id="formFile">
+                            <form id="form-correo" class="edit-form justify-content-center" style="display:none;" onsubmit="cambiarCorreo(event, '<%= admins[0].id %>')">
+                                <input type="email" name="correo" class="rounded-4 form-control" value="<%= admins[0].correo %>" required>
+                                <button type="submit" class="btn align-items-center justify-content-center d-flex btn-color text-white rounded-4 mt-2 mb-2 w-100">Guardar</button>
+                            </form>
+                            <!-- Edición foto -->
+                            <form id="form-foto" class="edit-form justify-content-center" onsubmit="cambiarFoto(event, '<%= admins[0].id %>')" enctype="multipart/form-data">
+                                <label for="formFile" class="form-label custom-text-secondary">Seleccionar foto de perfil:</label>
+                                <input type="file" name="foto" class="custom-text-secondary mb-3 text-center rounded-4 border-0 form-control" id="formFile" required>
+                                <button type="submit" class="btn align-items-center justify-content-center d-flex btn-color text-white rounded-4 mt-2 mb-3 w-100">Guardar</button>
+                            </form>
+                            <!-- Edición contraseña -->
                             <div class="d-flex justify-content-center mb-3">
                                 <button type="button" class="btn btn-color rounded-4 p-2 text-white w-100 h-100"
                                     data-bs-toggle="collapse" data-bs-target="#collapseWidthExample"
@@ -149,21 +154,18 @@
                             <div class="d-flex justify-content-center mt-4" style="min-height: 220px;">
                                 <div class="collapse collapse-horizontal" id="collapseWidthExample">
                                     <div class="card card-body custom-bg-dark rounded-4" style="width: 100%;">
-                                        <input type="password" class="form-control rounded-4"
-                                            id="exampleFormControlInput1" placeholder="Ingrese su contraseña"><br>
-                                        <input type="password" class="form-control rounded-4"
-                                            id="exampleFormControlInput1" placeholder="Ingrese su nueva contraseña"><br>
-                                        <input type="password" class="form-control rounded-4"
-                                            id="exampleFormControlInput1"
-                                            placeholder="Confirme su nueva contraseña"><br>
-                                        <button type="button" class="btn btn-color rounded-4 text-white">Cambiar
-                                            contraseña</button>
+                                        <form id="form-contrasena" onsubmit="cambiarContrasena(event, '<%= admins[0].id %>')">
+                                            <input type="password" name="contrasena" class="form-control rounded-4 mb-2" placeholder="Ingrese su contraseña" required>
+                                            <input type="password" name="contrasenaNueva" class="form-control rounded-4 mb-2" placeholder="Ingrese su nueva contraseña" required>
+                                            <input type="password" name="confirmarContrasena" class="form-control rounded-4 mb-2" placeholder="Confirme su nueva contraseña" required>
+                                            <button type="submit" class="btn btn-color rounded-4 text-white">Cambiar contraseña</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <% } %>
+                <% } %>
             </div>
         </div>
     </div>
@@ -173,6 +175,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/edicion_cuenta.js"></script>
 </body>
 
 </html>

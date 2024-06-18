@@ -4,6 +4,7 @@ import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 dotenv.config();
 const app = express();
 
@@ -13,6 +14,7 @@ const __dirname = dirname(__filename)
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use("/",ruta);
+app.use(cookieParser())
 app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, '../../frontend/src/views'));
 app.use(express.static(path.join(__dirname, '../../frontend/src/public')));
