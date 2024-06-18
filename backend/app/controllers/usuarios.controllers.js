@@ -193,6 +193,8 @@ export const cambiarContrasena = async (req, res) => {
     }
 };
 
+
+// Edición de perfiles para barberos
 export const cambiarNombreBarbero = async (req, res) => {
     const id = req.body.id;
     const nombre = req.body.nombre;
