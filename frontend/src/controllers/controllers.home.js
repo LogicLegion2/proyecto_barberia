@@ -29,6 +29,10 @@ export const paginaHistorialCompras = (req, res) => {
     res.render("views.historial_compras.ejs")
 }
 
+export const paginaAgregarPregunta = (req, res) => {
+    res.render("views.ingresar_pregunta.ejs")
+}
+
 export const paginaHistorialReservas = (req, res) => {
     res.render("views.historial_reservas.ejs")
 }
