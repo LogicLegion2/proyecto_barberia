@@ -4,6 +4,13 @@ import { verificarToken } from "../middlewares/oauth.js";
 
 const rutaUsuarios = Router();
 
+rutaUsuarios.get("/registrarp", (req, res) => {
+    res.render("views.ingresar_barbero.ejs", { id: req.query.id });
+});
+
+rutaUsuarios.get("/crear", (req, res) => {
+    res.render("views.ingresar_usuario.ejs", { id: req.query.id });
+});
 rutaUsuarios.get("/listar", listarUsuario);
 rutaUsuarios.get("/menu/cliente", menuCliente);
 rutaUsuarios.get("/menu/admin", menuAdmin);
