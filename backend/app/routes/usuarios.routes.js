@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { cambiarContrasena, cambiarContrasenaBarbero, cambiarCorreo, cambiarCorreoBarbero, cambiarDescripcionBarbero, cambiarFoto, cambiarFotoBarbero, cambiarNombre, cambiarNombreBarbero, cambiarTelefono, cambiarTelefonoBarbero, crearBarbero, crearUsuario, listarUsuario, login, logout, menuAdmin, menuCliente, mostrarLogin, registroUsuario, validarToken, verPerfil, verPerfilAdmin } from "../controllers/usuarios.controllers.js";
+import { cambiarContrasena, cambiarContrasenaBarbero, cambiarCorreo, cambiarCorreoBarbero, cambiarDescripcionBarbero, cambiarFoto, cambiarFotoBarbero, cambiarNombre, cambiarNombreBarbero, cambiarTelefono, cambiarTelefonoBarbero, crearBarbero, crearUsuario, desactivarUsuario, listarUsuario, login, logout, menuAdmin, menuCliente, mostrarLogin, registroUsuario, validarToken, verPerfil, verPerfilAdmin } from "../controllers/usuarios.controllers.js";
 import { verificarToken } from "../middlewares/oauth.js";
 
 
@@ -26,6 +26,7 @@ rutaUsuarios.post("/cambiar/correo/barbero/:id", cambiarCorreoBarbero);
 rutaUsuarios.post("/cambiar/foto/barbero/:id", cambiarFotoBarbero);
 rutaUsuarios.post("/cambiar/descripcion/barbero/:id", cambiarDescripcionBarbero);
 rutaUsuarios.post("/cambiar/contrasena/barbero/:id", cambiarContrasenaBarbero);
+rutaUsuarios.post("/desactivar", desactivarUsuario);
 rutaUsuarios.post("/logout", logout);
 
 export default rutaUsuarios;

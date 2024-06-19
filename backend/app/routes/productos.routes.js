@@ -15,7 +15,7 @@ rutaProductos.get("/editar", (req, res) => {
 });
 rutaProductos.post("/insertar/prod/venta", insertarProductoVenta);
 rutaProductos.post("/editar", editarProducto);
-rutaProductos.put("/desactivar", desactivarProducto);
+rutaProductos.post("/desactivar", desactivarProducto);
 
 
 

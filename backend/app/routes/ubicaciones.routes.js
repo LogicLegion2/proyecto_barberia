@@ -13,6 +13,6 @@ rutaUbicaciones.get("/editar", (req, res) => {
     res.render("views.editar_ubicacion.ejs", { id: req.query.id });
 });
 rutaUbicaciones.post("/editar", editarUbicacion);
-rutaUbicaciones.put("/desactivar", desactivarUbicacion);
+rutaUbicaciones.post("/desactivar", desactivarUbicacion);
 
 export default rutaUbicaciones;

@@ -1,19 +1,7 @@
-function seleccionarServicio(id) {
-    localStorage.setItem('servicioSeleccionado', id);
-}
-function redireccionarEditar() {
-    const id = localStorage.getItem('servicioSeleccionado');
+async function eliminarReserva(id) {
+    localStorage.getItem('reservaSeleccionada', id);
     if (id) {
-        window.location.href = `http://localhost:3000/servicios/editar?id=${id}`;
-    } else {
-        alert('Seleccione un servicio primero');
-    }
-}
-
-async function eliminarServicio() {
-    const id = localStorage.getItem('servicioSeleccionado');
-    if (id) {
-        const respuesta = await fetch('http://localhost:3000/servicios/desactivar', {
+        const respuesta = await fetch('http://localhost:3000/reservas/cancelar', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -24,7 +12,7 @@ async function eliminarServicio() {
         if (respuesta.ok) {
             Swal.fire({
                 icon: 'success',
-                title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Servicio eliminado exitosamente' + "</h5>",
+                title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Reserva cancelada exitosamente' + "</h5>",
                 showConfirmButton: false,
                 timer: 1500,
                 customClass: {
@@ -49,7 +37,7 @@ async function eliminarServicio() {
     } else {
         Swal.fire({
             icon: 'error',
-            title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Seleccione un producto primero' + "</h5>",
+            title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Seleccione una reserva primero' + "</h5>",
             showConfirmButton: false,
             timer: 1500,
             customClass: {

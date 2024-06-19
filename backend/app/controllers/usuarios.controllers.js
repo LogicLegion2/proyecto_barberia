@@ -193,6 +193,7 @@ export const cambiarContrasena = async (req, res) => {
     }
 };
 
+// Edición de perfiles para barberos
 export const cambiarNombreBarbero = async (req, res) => {
     const id = req.body.id;
     const nombre = req.body.nombre;
@@ -277,6 +278,17 @@ export const cambiarContrasenaBarbero = async (req, res) => {
         res.status(500).json(error);
     }
 };
+
+export const desactivarUsuario = async (req, res) => {
+    const id = req.body.id;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_DESACTIVAR_USUARIO('${id}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
 
 export const verPerfil = async (req, res) => {
     const id = req.params['id']

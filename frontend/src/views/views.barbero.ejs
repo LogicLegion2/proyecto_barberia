@@ -54,10 +54,10 @@
             <div class="cabecera mt-5 align-items-center flex-column flex-sm-row justify-content-center row me-0">
                 <h1 class="col-lg-9 col-md-8 col-sm-7 text-center titulo fs-1 text-light fw-bold">Barberos
                 </h1>
-                <form class="col-lg-3 col-md-4 col-sm-5 justify-content-center justify-content-sm-start d-flex "
+                <form action="/barberos/buscar" method="get" class="col-lg-3 col-md-4 col-sm-5 justify-content-center justify-content-sm-start d-flex "
                     role="search">
-                    <input class="form-control inp-bus rounded-4 text-white" type="search"
-                        placeholder="Buscar Barbero..." aria-label="Search">
+                    <input name="desc" class="form-control inp-bus rounded-4 text-white" type="search" placeholder="Buscar Barbero..." aria-label="Search">
+                    <input type="hidden" name="tipo" value="barbero">
                     <button class="btn btn-bus border-white rounded-4 ms-1 btn-outline-primary" type="submit"><img
                             src="/img/lupa2.png" class="lupa mb-1"></button>
                 </form>
@@ -118,10 +118,11 @@
             <div class="cabecera align-items-center pt-3 flex-column flex-sm-row justify-content-center row me-0">
                 <h1 class="col-lg-9 col-md-8  col-sm-7 text-center titulo pt-4 fs-1 text-light fw-bold">Servicios
                 </h1>
-                <form class="col-lg-3 col-md-4 col-sm-5 mt-3 d-flex justify-content-center justify-content-sm-start"
+                <form method="get" action="/barberos/buscar" class="col-lg-3 col-md-4 col-sm-5 mt-3 d-flex justify-content-center justify-content-sm-start"
                     role="search">
-                    <input class="form-control inp-bus rounded-4 text-white" type="search"
+                    <input name="desc" class="form-control inp-bus rounded-4 text-white" type="search"
                         placeholder="Buscar Servicio..." aria-label="Search">
+                    <input type="hidden" name="tipo" value="servicio">
                     <button class="btn btn-bus border-white rounded-4 ms-1 btn-outline-primary" type="submit"><img
                             src="/img/lupa2.png" class="lupa mb-1"></button>
                 </form>
@@ -179,10 +180,11 @@
             <div class="cabecera align-items-center pt-3 flex-column flex-sm-row justify-content-center row me-0">
                 <h1 class="col-lg-9 col-md-8 col-sm-7 text-center titulo pt-4 fs-1 text-light fw-bold">Productos
                 </h1>
-                <form class="col-lg-3 col-md-4 col-sm-5 mt-3 d-flex justify-content-center justify-content-sm-start"
+                <form method="get" action="/barberos/buscar" class="col-lg-3 col-md-4 col-sm-5 mt-3 d-flex justify-content-center justify-content-sm-start"
                     role="search">
-                    <input class="form-control inp-bus rounded-4 text-white" type="search"
+                    <input name="desc" class="form-control inp-bus rounded-4 text-white" type="search"
                         placeholder="Buscar Producto..." aria-label="Search">
+                    <input type="hidden" name="tipo" value="producto">
                     <button class="btn btn-bus border-white rounded-4 ms-1 btn-outline-primary" type="submit"><img
                             src="/img/lupa2.png" class="lupa mb-1"></button>
                 </form>
@@ -243,10 +245,11 @@
             <div class="cabecera align-items-center pt-3 flex-column flex-sm-row justify-content-center row me-0">
                 <h1 class="col-lg-9 col-md-8 col-sm-7 text-center titulo pt-4 fs-1 text-light fw-bold">Ofertas
                     Especiales</h1>
-                <form class="col-lg-3 col-md-4 col-sm-5 mt-3 d-flex justify-content-center justify-content-sm-start"
+                <form method="get" action="/barberos/buscar" class="col-lg-3 col-md-4 col-sm-5 mt-3 d-flex justify-content-center justify-content-sm-start"
                     role="search">
-                    <input class="form-control inp-bus rounded-4 text-white" type="search"
+                    <input name="desc" class="form-control inp-bus rounded-4 text-white" type="search"
                         placeholder="Buscar Oferta..." aria-label="Search">
+                    <input type="hidden" name="tipo" value="oferta">
                     <button class="btn btn-bus border-white rounded-4 ms-1 btn-outline-primary" type="submit"><img
                             src="/img/lupa2.png" class="lupa mb-1"></button>
                 </form>
@@ -307,10 +310,11 @@
             <div class="cabecera align-items-center pt-3 flex-column flex-sm-row justify-content-center row me-0">
                 <h1 class="col-lg-9 col-md-8 col-sm-7 text-center titulo pt-4 fs-1 text-light fw-bold">Ubicaciones
                 </h1>
-                <form class="col-lg-3 col-md-4 col-sm-5 mt-3 d-flex justify-content-center justify-content-sm-start"
+                <form method="get" action="/barberos/buscar" class="col-lg-3 col-md-4 col-sm-5 mt-3 d-flex justify-content-center justify-content-sm-start"
                     role="search">
-                    <input class="form-control inp-bus rounded-4 text-white" type="search"
+                    <input name="desc" class="form-control inp-bus rounded-4 text-white" type="search"
                         placeholder="Buscar Ubicación..." aria-label="Search">
+                    <input type="hidden" name="tipo" value="pregunta">
                     <button class="btn btn-bus border-white rounded-4 ms-1 btn-outline-primary" type="submit"><img
                             src="/img/lupa2.png" class="lupa mb-1"></button>
                 </form>

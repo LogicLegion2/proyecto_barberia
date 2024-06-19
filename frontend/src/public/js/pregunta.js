@@ -9,3 +9,52 @@ function redireccionarEditar() {
         alert('Seleccione un pregunta primero');
     }
 }
+
+async function eliminarPregunta() {
+    const id = localStorage.getItem('preguntaSeleccionada');
+    if (id) {
+        const respuesta = await fetch('http://localhost:3000/preguntas/desactivar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: id })
+        });
+
+        if (respuesta.ok) {
+            Swal.fire({
+                icon: 'success',
+                title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Pregunta eliminada exitosamente' + "</h5>",
+                showConfirmButton: false,
+                timer: 1500,
+                customClass: {
+                    popup: 'bg-alert',
+                    content: 'text-alert'
+                }
+            });
+            setTimeout(() => {
+                window.location.reload();
+            }, 1500);
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Intentalo de nuevo más tarde' + "</h5>",
+                showConfirmButton: false,
+                timer: 1500,
+                customClass: {
+                    popup: 'bg-alert',
+                }
+            });
+        }
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Seleccione una pregunta primero' + "</h5>",
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'bg-alert',
+            }
+        });
+    }
+}
