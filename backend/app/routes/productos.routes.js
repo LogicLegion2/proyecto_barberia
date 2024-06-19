@@ -4,7 +4,9 @@ import { verificarToken } from "../middlewares/oauth.js";
 
 
 const rutaProductos = Router();
-
+rutaProductos.get("/agregarp", (req, res) => {
+    res.render("views.ingresar_producto.ejs", { id: req.query.id });
+});
 rutaProductos.get("/listar", listarProducto);
 rutaProductos.get("/vendidos", listarProductosVendidos);
 rutaProductos.get("/buscar", buscarProducto);
