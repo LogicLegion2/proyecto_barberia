@@ -1,32 +1,36 @@
-document.getElementById("formAgregarProducto").addEventListener("submit", async (e) => {
+document.getElementById("formAgregarProducto").addEventListener("click", (e) => {
     e.preventDefault(); // Evita que el formulario se envíe automáticamente
 
     // Captura los valores del formulario
-    const nombre = document.getElementById("nombre").value;
-    const descripcion = document.getElementById("descripcion").value;
-    const foto = document.getElementById("foto").files[0];
-
+    const nombre = document.getElementById("agregar_nombre").value;
+    const descripcion = document.getElementById("agregar_descripcion").value;
+    const precio = document.getElementById("agregar_precio").value;
+    const cantidad = document.getElementById("agregar_cantidad").value;
+    const foto = document.getElementById("agregar_imagen").value;
     // Crear un objeto FormData para manejar la subida del archivo
     const formData = new FormData();
     formData.append("nombre", nombre);
     formData.append("descripcion", descripcion);
+    formData.append("precio", precio);
+    formData.append("cantidad", cantidad);
     formData.append("foto", foto);
 
-    // Enviar los datos al servidor
-    try {
-        const response = await fetch('http://localhost:3000/productos/agregarp', {
-            method: 'POST',
-            body: formData
-        });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        console.log("Producto agregado:", data); // Muestra en consola la respuesta del servidor
-        location.reload(); // Recarga la página después de agregar el producto (opcional)
-    } catch (error) {
-        console.error("Fetch error:", error); // Manejo de errores si falla la petición fetch
-    }
+    fetch("http://localhost:3000/productos/crear", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            nombre: nombre,
+            descripcion: descripcion,
+            precio: precio,
+            cantidad: cantidad,
+            foto: foto
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => console.log(error));
 });
