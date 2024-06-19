@@ -121,7 +121,7 @@
               <p class="user mb-0 text-light col-sm-11 col-10">
                 <%= comentario.cliente%>
               </p>
-              <button class="btn-eliminar p-1 btn col-1"><img src="/img/x.png" alt="" class="img-eliminar"></button>
+              <button class="btn-eliminar p-1 btn col-1" onclick="eliminarComentario('<%= comentario.id %>')"><img src="/img/x.png" alt="" class="img-eliminar"></button>
             </div>
             <p class="coment mb-0 fw-light text-light">
               <%= comentario.comentario %>
@@ -137,6 +137,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
     integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
     crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/js/comentario.js"></script>
 </body>
 
 </html>
