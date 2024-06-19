@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { buscarProducto, crearProducto, desactivarProducto, editarProducto, insertarProductoVenta, listarProducto, listarProductosVendidos, obtenerProducto } from "../controllers/productos.controllers.js";
-import { verificarToken } from "../middlewares/oauth.js";
 
 
 const rutaProductos = Router();
