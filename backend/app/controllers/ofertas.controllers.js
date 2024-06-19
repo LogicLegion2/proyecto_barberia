@@ -13,16 +13,13 @@ export const listarOferta = async (req, res) => {
 };
 
 export const buscarOferta = async (req, res) => {
+    const { desc } = req.query;
     try {
-        // Obtener el patrón de búsqueda de la consulta
-        const { desc } = req.query;
-        
-        // Verificar si se proporcionó un patrón de búsqueda válido
         if (!desc) {
             return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
         }
-        const [rows] = await pool.query("CALL LL_BUSCAR_OFERTA(?)", [desc]);
-        res.json(rows);
+        const [rows] = await pool.query(`CALL LL_BUSCAR_OFERTA('${desc}')`);
+        res.render('views.oferta.ejs', {ofertas: rows[0]})
     } catch (error) {
         res.status(500).json(error);
     }
@@ -61,25 +58,6 @@ export const obtenerOferta = async (req, res) => {
         res.status(500).json(error);
     }
 };
-
-// //Consulta de productos para los input select del formulario de editar oferta
-// export const obtenerProductos = async (req, res) => {
-//     const id = req.params.id;
-//     try {
-//         const resOfe = await obtenerOferta(req,res);
-//         const rowsOfe = resOfe[0][0]
-//         console.log(rowsOfe);
-//         const rowsPro = await pool.query(`CALL LL_VER_PRODUCTOS();`);
-//         console.log(rowsOfe);
-//         if (rowsPro.length > 0) {
-//             res.render("views.editar_oferta.ejs", { id, oferta : rowsOfe[0][0][0], productos : rowsPro[0] });
-//         } else {
-//             res.status(404).json({ mensaje: "Productos no encontrados" });
-//         }
-//     } catch (error) {
-//         throw error;
-//     }
-// }
 
 export const editarOferta = async (req, res) => {
     const producto1 = req.body.producto1;

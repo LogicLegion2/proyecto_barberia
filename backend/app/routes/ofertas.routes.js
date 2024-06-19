@@ -6,7 +6,7 @@ import { verificarToken } from "../middlewares/oauth.js";
 const rutaOfertas = Router();
 
 rutaOfertas.get("/listar", listarOferta);
-rutaOfertas.put("/buscar", buscarOferta);
+rutaOfertas.get("/buscar", buscarOferta);
 rutaOfertas.post("/crear", crearOferta);
 rutaOfertas.get("/obtener/:id", obtenerOferta);
 rutaOfertas.get("/editar", (req, res) => {
