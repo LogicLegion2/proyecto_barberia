@@ -79,7 +79,6 @@ export const editarProducto = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_PRODUCTO('${nombre}','${descripcion}','${precio}','${id}');`);
-        console.log(respuesta);
         res.redirect(`/productos/editar?id=${id}&success=true`);
     } catch (error) {
         res.redirect(`/productos/editar?id=${id}&error=true`);

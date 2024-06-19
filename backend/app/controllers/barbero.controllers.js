@@ -42,17 +42,127 @@ export const listarBarberoAdmin = async (req, res) => {
     }
 };
 
-export const buscarBarbero = async (req, res) => {
+export const buscar = async (req, res) => {
     try {
-        // Obtener el patrón de búsqueda de la consulta
-        const { desc } = req.query;
-        
-        // Verificar si se proporcionó un patrón de búsqueda válido
-        if (!desc) {
-            return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
+        const { desc, tipo } = req.query;
+
+        if (!desc || !tipo) {
+            return res.status(400).json({ message: "Se requiere patrón de búsqueda y tipo" });
         }
-        const [rows] = await pool.query("CALL LL_BUSCAR_BARBERO(?)", [desc]);
-        res.json(rows);
+
+        let barberos = [];
+        let servicios = [];
+        let productos = [];
+        let ofertas = [];
+        let ubicaciones = [];
+        let preguntas = [];
+
+        // Obtener todos los barberos y servicios
+        const [rowsBar] = await pool.query("CALL LL_VER_BARBERO()");
+        const [rowsSer] = await pool.query("CALL LL_VER_SERVICIOS()");
+        const [rowsPro] = await pool.query("CALL LL_VER_PRODUCTOS()");
+        const [rowsOfe] = await pool.query("CALL LL_VER_OFERTAS()");
+        const [rowsUbi] = await pool.query("CALL LL_VER_UBICACIONES()");
+        const [rowsPre] = await pool.query("CALL LL_VER_PREGUNTAS()");
+
+        // Convierte las imágenes a base64
+        rowsBar.forEach(barbero => {
+            if (barbero.foto) {
+                barbero.foto = Buffer.from(barbero.foto).toString('base64');
+            }
+        });
+        rowsSer.forEach(servicio => {
+            if (servicio.fotoServicio) {
+                servicio.fotoServicio = Buffer.from(servicio.fotoServicio).toString('base64');
+            }
+        });
+        rowsPro.forEach(producto => {
+            if (producto.Producto) {
+                producto.Producto = Buffer.from(producto.Producto).toString('base64');
+            }
+        });
+        rowsOfe.forEach(oferta => {
+            if (oferta.fotoOferta) {
+                oferta.fotoOferta = Buffer.from(oferta.fotoOferta).toString('base64');
+            }
+        });
+        rowsUbi.forEach(ubicacion => {
+            if (ubicacion.fotoUbicacion) {
+                ubicacion.fotoUbicacion = Buffer.from(ubicacion.fotoUbicacion).toString('base64');
+            }
+        });
+
+        // Realizar la búsqueda específica
+        if (tipo === "barbero") {
+            const [rows] = await pool.query(`CALL LL_BUSCAR_BARBERO('${desc}')`);
+            barberos = rows.map(barbero => {
+                if (barbero.foto) {
+                    barbero.foto = Buffer.from(barbero.foto).toString('base64');
+                }
+                return barbero;
+            });
+            servicios = rowsSer;
+            productos = rowsPro;
+            ofertas = rowsOfe;
+            ubicaciones = rowsUbi;
+            preguntas = rowsPre;
+        } else if (tipo === "servicio") {
+            const [rows] = await pool.query(`CALL LL_BUSCAR_SERVICIO('${desc}')`);
+            servicios = rows.map(servicio => {
+                if (servicio.fotoServicio) {
+                    servicio.fotoServicio = Buffer.from(servicio.fotoServicio).toString('base64');
+                }
+                return servicio;
+            });
+            barberos = rowsBar;
+            productos = rowsPro;
+            ofertas = rowsOfe;
+            ubicaciones = rowsUbi;
+            preguntas = rowsPre;
+        } else if (tipo === "producto") {
+            const [rows] = await pool.query(`CALL LL_BUSCAR_PRODUCTO('${desc}')`);
+            productos = rows.map(producto => {
+                if (producto.fotoProducto) {
+                    producto.fotoProducto = Buffer.from(producto.fotoProducto).toString('base64');
+                }
+                return producto;
+            });
+            barberos = rowsBar;
+            servicios = rowsSer;
+            ofertas = rowsOfe;
+            ubicaciones = rowsUbi;
+            preguntas = rowsPre;
+        } else if (tipo === "oferta") {
+            const [rows] = await pool.query(`CALL LL_BUSCAR_OFERTA('${desc}')`);
+            ofertas = rows.map(oferta => {
+                if (oferta.fotoOferta) {
+                    oferta.fotoOferta = Buffer.from(oferta.fotoOferta).toString('base64');
+                }
+                return oferta;
+            });
+            barberos = rowsBar;
+            productos = rowsPro;
+            servicios = rowsSer;
+            ubicaciones = rowsUbi;
+            preguntas = rowsPre;
+        } else if (tipo === "ubicacion") {
+            const [rows] = await pool.query(`CALL LL_BUSCAR_UBICACION('${desc}')`);
+            ubicaciones = rows.map(ubicacion => {
+                if (ubicacion.fotoUbicacion) {
+                    ubicacion.fotoUbicacion = Buffer.from(ubicacion.fotoUbicacion).toString('base64');
+                }
+                return ubicacion;
+            });
+            barberos = rowsBar;
+            productos = rowsPro;
+            ofertas = rowsOfe;
+            servicios = rowsSer;
+            preguntas = rowsPre;
+        } else {
+            return res.status(400).json({ message: "Tipo de búsqueda no válido" });
+        }
+
+        res.render('views.barbero.ejs', { barberos, servicios, productos, ofertas, ubicaciones, preguntas });
     } catch (error) {
         res.status(500).json(error);
     }

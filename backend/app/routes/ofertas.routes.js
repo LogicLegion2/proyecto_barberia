@@ -13,7 +13,7 @@ rutaOfertas.get("/editar", (req, res) => {
     res.render("views.editar_oferta.ejs", { id: req.query.id });
 });
 rutaOfertas.post("/editar", editarOferta);
-rutaOfertas.put("/desactivar", desactivarOferta);
+rutaOfertas.post("/desactivar", desactivarOferta);
 
 
 export default rutaOfertas;

@@ -12,7 +12,7 @@ rutaPreguntas.get("/editar", (req, res) => {
     res.render("views.editar_pregunta.ejs", { id: req.query.id });
 });
 rutaPreguntas.post("/editar", editarPregunta);
-rutaPreguntas.put("/desactivar", desactivarPregunta);
+rutaPreguntas.post("/desactivar", desactivarPregunta);
 
 
 export default rutaPreguntas;

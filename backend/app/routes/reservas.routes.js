@@ -10,7 +10,7 @@ rutaReservaAdmin.get("/listar/:id", listarReservas);
 rutaReservaAdmin.get("/historial/cita/:id", historialCita);
 rutaReservaAdmin.get("/historial/reserva", historialReserva);
 rutaReservaAdmin.post("/crear", crearReserva);
-rutaReservaAdmin.put("/cancelar", cancelarReserva);
+rutaReservaAdmin.post("/cancelar", cancelarReserva);
 rutaReservaAdmin.get("/pdf", (req, res) => {
 
     const stream = res.writeHead(200, {

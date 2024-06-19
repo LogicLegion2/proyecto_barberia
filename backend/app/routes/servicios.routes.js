@@ -13,7 +13,7 @@ rutaServicios.get("/editar", (req, res) => {
     res.render("views.editar_servicio.ejs", { id: req.query.id });
 });
 rutaServicios.post("/editar", editarServicio);
-rutaServicios.put("/desactivar", desactivarServicio);
+rutaServicios.post("/desactivar", desactivarServicio);
 
 
 export default rutaServicios;
