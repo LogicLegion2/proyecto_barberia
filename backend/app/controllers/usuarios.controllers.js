@@ -7,19 +7,10 @@ config();
 
 const saltRounds = 10;
 
-// Exportar a archivo diferente de respuestas
-const error = (req, res, statusCode, message) => {
-    res.status(statusCode).json({ error: message });
-};
-
-const success = (req, res, statusCode, data) => {
-    res.status(statusCode).json(data);
-};
-
 export const listarUsuario = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_USUARIOS()");
-        res.render("views.visualizar_registro.ejs", { usuarios: rows[0] });
+        res.status(200).json({ usuarios: rows[0] });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -32,7 +23,7 @@ export const buscarUsuario = async (req, res) => {
             return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
         }
         const [rows] = await pool.query(`CALL LL_BUSCAR_USUARIO('${desc}')`);
-        res.render('views.visualizar_registro.ejs', {usuarios: rows[0]})
+        res.status(200).json({usuarios: rows[0]})
     } catch (error) {
         res.status(500).json(error);
     }
@@ -45,9 +36,8 @@ export const crearUsuario = async (req, res) => {
 
         const resultado = await pool.query(`CALL LL_INSERTAR_USUARIO('${nombre}','${correo}','${hashedPassword}','${telefono}','${rol}','${foto}')`);
 
-        success(req, res, 201, { message: "Usuario creado con éxito", id: resultado.insertId });
+        res.status(200).json({ message: "Usuario creado con éxito", id: resultado.insertId });
     } catch (error) {
-        console.error(error);
         res.status(500).json({ error: "Error en el servidor, por favor inténtalo de nuevo más tarde" });
     }
 };
@@ -59,7 +49,7 @@ export const crearBarbero = async (req, res) => {
 
         const resultado = await pool.query(`CALL LL_INSERTAR_BARBERO('${nombre}','${correo}','${hashedPassword}','${telefono}','${descripcion}','${rol}')`);
 
-        success(req, res, 201, { message: "Usuario creado con éxito", id: resultado.insertId });
+        res.status(200).json({ message: "Usuario creado con éxito", id: resultado.insertId });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Error en el servidor, por favor inténtalo de nuevo más tarde" });
@@ -73,7 +63,7 @@ export const registroUsuario = async (req, res) => {
 
         const resultado = await pool.query(`CALL LL_REGISTRO_CLIENTE('${nombre}','${correo}','${hashedPassword}','${telefono}')`);
 
-        success(req, res, 201, { message: "Usuario creado con éxito", id: resultado.insertId });
+        res.status(200).json({ message: "Usuario creado con éxito", id: resultado.insertId });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Error en el servidor, por favor inténtalo de nuevo más tarde" });
@@ -111,25 +101,26 @@ export const login = async (req, res) => {
             { expiresIn: process.env.TOKEN_EXPIRES_IN }
         );
 
-        let redirectUrl = '';
-        switch (usuario.rol) {
-            case 'barbero':
-                redirectUrl = `/barberos/ver/perfil?id=${usuario.idUsuario}&token=${token}`;
-                break;
-            case 'administrador':
-                redirectUrl = `/barberos/listar/admin?id=${usuario.idUsuario}&token=${token}`;
-                break;
-            case 'usuario':
-                redirectUrl = `/barberos/listar?id=${usuario.idUsuario}&token=${token}`;
-                break;
-            default:
-                res.status(401).send('El rol ingresado no es valido');
-                return;
-        }
-        res.redirect(redirectUrl);
+        // let redirectUrl = '';
+        // switch (usuario.rol) {
+        //     case 'barbero':
+        //         redirectUrl = `/barberos/ver/perfil?idUser=${usuario.idUsuario}&token=${token}`;
+        //         break;
+        //     case 'administrador':
+        //         redirectUrl = `/barberos/listar/admin?idUser=${usuario.idUsuario}&token=${token}`;
+        //         break;
+        //     case 'usuario':
+        //         redirectUrl = `/barberos/listar?idUser=${usuario.idUsuario}&token=${token}`;
+        //         break;
+        //     default:
+        //         res.status(401).send('El rol ingresado no es valido');
+        //         return;
+        // }
+        // res.redirect(redirectUrl);
+
+        res.status(200).json(usuario.idUsuario, token)
     } catch (e) {
-        console.error(e);
-        error(req, res, 500, "Error en el servidor, por favor inténtalo de nuevo más tarde");
+        res.status(500).json(e);
     }
 };
 
@@ -139,7 +130,7 @@ export const cambiarNombre = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_NOMBRE_USUARIO('${id}','${nombre}');`);
-        res.json(respuesta);
+        res.status(200).json(respuesta);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -151,7 +142,7 @@ export const cambiarTelefono = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_TELEFONO_USUARIO('${id}','${telefono}');`);
-        res.json(respuesta);
+        res.status(200).json(respuesta);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -163,7 +154,7 @@ export const cambiarCorreo = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_CORREO_USUARIO('${id}','${correo}');`);
-        res.json(respuesta);
+        res.status(200).json(respuesta);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -175,7 +166,7 @@ export const cambiarFoto = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_FOTO_PERFIL('${id}','${foto}');`);
-        res.json(respuesta);
+        res.status(200).json(respuesta);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -199,8 +190,8 @@ export const cambiarContrasena = async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(contrasenaNueva, saltRounds);
-        await pool.query(`CALL LL_EDITAR_CONTRASENA_USUARIO('${id}','${hashedPassword}')`);
-        res.json({ message: 'Contraseña cambiada exitosamente' });
+        const respuestaFinal = await pool.query(`CALL LL_EDITAR_CONTRASENA_USUARIO('${id}','${hashedPassword}')`);
+        res.status(200).json({ respuestaFinal });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -213,7 +204,7 @@ export const cambiarNombreBarbero = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_NOMBRE_BARBERO('${id}','${nombre}');`);
-        res.json(respuesta);
+        res.status(200).json(respuesta);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -225,7 +216,7 @@ export const cambiarTelefonoBarbero = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_TELEFONO_BARBERO('${id}','${telefono}');`);
-        res.json(respuesta);
+        res.status(200).json(respuesta);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -237,7 +228,7 @@ export const cambiarCorreoBarbero = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_CORREO_BARBERO('${id}','${correo}');`);
-        res.json(respuesta);
+        res.status(200).json(respuesta);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -249,7 +240,7 @@ export const cambiarFotoBarbero = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_FOTO_PERFIL_BARBERO('${id}','${foto}');`);
-        res.json(respuesta);
+        res.status(200).json(respuesta);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -261,7 +252,7 @@ export const cambiarDescripcionBarbero = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_DESCRIPCION_BARBERO('${id}','${descripcion}');`);
-        res.json(respuesta);
+        res.status(200).json(respuesta);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -285,8 +276,8 @@ export const cambiarContrasenaBarbero = async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(contrasenaNueva, saltRounds);
-        await pool.query(`CALL LL_EDITAR_CONTRASENA_BARBERO('${id}','${hashedPassword}')`);
-        res.json({ message: 'Contraseña cambiada exitosamente' });
+        const respuestaFinal = await pool.query(`CALL LL_EDITAR_CONTRASENA_BARBERO('${id}','${hashedPassword}')`);
+        res.status(200).json({ respuestaFinal });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -297,7 +288,7 @@ export const desactivarUsuario = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_DESACTIVAR_USUARIO('${id}');`);
-        res.json(respuesta);
+        res.status(200).json(respuesta);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -308,18 +299,18 @@ export const verPerfil = async (req, res) => {
 
     try {
         const rows = await pool.query(`CALL LL_VER_PERFIL_CLIENTE('${id}');`);
-        res.render("views.perfil_cliente.ejs", { clientes: rows[0][0]})
+        res.status(200).json({ clientes: rows[0][0]})
     } catch (error) {
         res.status(500).json(error);
     }
 }
 
 export const verPerfilAdmin = async (req, res) => {
-    const id = req.params['id']
+    const id = req.params['idUser']
 
     try {
         const rows = await pool.query(`CALL LL_VER_PERFIL_CLIENTE('${id}');`);
-        res.render("views.perfil_admin.ejs", { admins: rows[0][0]})
+        res.status(200).json({ admins: rows[0][0]})
     } catch (error) {
         res.status(500).json(error);
     }
@@ -329,35 +320,16 @@ export const logout = async (req, res) => {
     const token = req.headers["x-access-token"];
 
     if (!token) {
-        return error(req, res, 401, "El token no ha sido porporcionado");
+        return res.json("No se ha proporcionado un token");
     }
 
     try {
         const decoded = jwt.verify(token, process.env.TOKEN_PRIVATEKEY);
-        // Almacenar el token inválido en la base de datos
-        await pool.query('INSERT INTO tokensinvalidos (token, expiracion) VALUES (?, ?)', [token, new Date()]);
+        // Almacena el token inválido en la base de datos
+        const respuesta = await pool.query('INSERT INTO tokensinvalidos (token, expiracion) VALUES (?, ?)', [token, new Date()]);
 
-        success(req, res, 200, { message: "Finalizó sesión exitosamente" });
+        res.status(200).json({ respuesta });
     } catch (err) {
-        error(req, res, 500, "Fallo el cerrar sesión");
+        res.status(500).json(err);
     }
 };
-
-export const mostrarLogin = async (req,res) => {
-    res.render("views.iniciar_sesion.ejs");
-}
-
-export const menuCliente = async (req,res) => {
-    res.render("views.menu_cliente.ejs");
-}
-
-export const menuAdmin = async (req,res) => {
-    const idUsuario = req.idUsuario;
-    const token = req.query.token || req.headers["x-access-token"];
-    console.log("IDUSUARIO", idUsuario, token);
-    res.render("views.menu_admin.ejs", {idUsuario, token});
-}
-
-export const validarToken = async (req, res) => {
-    success(req, res, 200, {"token":"El token es valido"}); 
-}

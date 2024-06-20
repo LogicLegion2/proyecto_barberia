@@ -4,11 +4,11 @@ import { verificarToken } from "../middlewares/oauth.js";
 
 const rutaBarberos = Router();
 
-rutaBarberos.get("/listar", listarBarbero);
-rutaBarberos.get("/listar/admin", listarBarberoAdmin);
-rutaBarberos.get("/ver/perfil/:id", verCalendario);
-rutaBarberos.get("/ver/barbero/:id", verPerfilBarbero);
-rutaBarberos.get("/ver/admin/:id", verPerfilBarberoAdmin);
+rutaBarberos.get("/", listarBarbero);
+rutaBarberos.get("/admin", listarBarberoAdmin);
+rutaBarberos.get("/calendario/:id", verCalendario);
+rutaBarberos.get("/:id", verPerfilBarbero);
+rutaBarberos.get("/admin/:id", verPerfilBarberoAdmin);
 rutaBarberos.get("/perfil/:id", perfilBarbero);
 rutaBarberos.get("/buscar", buscar);
 

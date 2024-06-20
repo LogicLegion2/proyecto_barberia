@@ -1,15 +1,16 @@
 import { Router } from "express";
-import { crearPago, crearReembolso, historialCompra, verCarroCompras, verEntregas, verEntregasAdmin, verReservasProductos } from "../controllers/ventas.controllers.js";
+import { buscarProductoVendido, crearPago, crearReembolso, historialCompra, verCarroCompras, verEntregas, verEntregasAdmin, verReservasProductos } from "../controllers/ventas.controllers.js";
 import { verificarToken } from "../middlewares/oauth.js";
 
 const rutaVentas = Router();
 
-rutaVentas.post("/crear", crearPago);
-rutaVentas.post("/crear/reembolso", crearReembolso);
-rutaVentas.get("/historial/compra/:id", historialCompra);
-rutaVentas.get("/ver/entregas/admin", verEntregasAdmin);
-rutaVentas.get("/ver/entregas", verEntregas);
-rutaVentas.get("/reservas/productos", verReservasProductos);
-rutaVentas.get("/ver/carrito/:id", verCarroCompras);
+rutaVentas.post("/", crearPago);
+rutaVentas.post("/reembolso", crearReembolso);
+rutaVentas.get("/historial/:id", historialCompra);
+rutaVentas.get("/buscar", buscarProductoVendido);
+rutaVentas.get("/entregas/admin", verificarToken, verEntregasAdmin);
+rutaVentas.get("/entregas", verEntregas);
+rutaVentas.get("/productos", verificarToken,verReservasProductos);
+rutaVentas.get("/carrito/:id", verCarroCompras);
 
 export default rutaVentas; 

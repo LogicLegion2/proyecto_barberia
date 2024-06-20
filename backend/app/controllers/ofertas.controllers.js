@@ -6,7 +6,7 @@ config();
 export const listarOferta = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_OFERTAS()");
-        res.render("views.oferta.ejs", { ofertas: rows[0] });
+        res.status(200).json({ ofertas: rows[0] });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -19,12 +19,11 @@ export const buscarOferta = async (req, res) => {
             return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
         }
         const [rows] = await pool.query(`CALL LL_BUSCAR_OFERTA('${desc}')`);
-        res.render('views.oferta.ejs', { ofertas: rows[0] })
+        res.status(200).json({ ofertas: rows[0] })
     } catch (error) {
         res.status(500).json(error);
     }
 };
-
 
 export const crearOferta = async (req, res) => {
     const producto1 = req.body.producto1;
@@ -34,7 +33,7 @@ export const crearOferta = async (req, res) => {
     const foto = req.body.foto;
     try {
         const [respuesta] = await pool.query(`CALL LL_INSERTAR_OFERTA('${producto1}','${producto2}','${descripcion}','${precio}','${foto}');`);
-        res.json(respuesta);
+        res.status(200).json(respuesta);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -51,7 +50,7 @@ export const obtenerOferta = async (req, res) => {
         const productos = respuestaProductos[0][0];
         console.log(productos);
         if (oferta && productos.length > 0) {
-            res.render("views.editar_oferta.ejs", { id, oferta, productos });
+            res.status(200).json({ id, oferta, productos });
         } else {
             res.status(404).json({ mensaje: "Oferta o productos no encontrados" });
         }
@@ -69,9 +68,9 @@ export const editarOferta = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_OFERTA('${producto1}','${producto2}','${descripcion}','${precio}','${id}');`);
-        res.redirect(`/ofertas/editar?id=${id}&success=true`);
+        res.status(200).json({respuesta});
     } catch (error) {
-        res.redirect(`/ofertas/editar?id=${id}&error=true`);
+        res.status(500).json({respuesta});
     }
 }
 

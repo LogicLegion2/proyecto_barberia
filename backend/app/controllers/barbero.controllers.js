@@ -5,24 +5,27 @@ config();
 
 export const listarBarbero = async (req, res) => {
     try {
-        const [rowsBar] = await pool.query("CALL LL_VER_BARBERO()");
-        const [rowsSer] = await pool.query("CALL LL_VER_SERVICIOS()");
-        const [rowsPro] = await pool.query("CALL LL_VER_PRODUCTOS()"); 
-        const [rowsOfe] = await pool.query("CALL LL_VER_OFERTAS()");
-        const [rowsUbi] = await pool.query("CALL LL_VER_UBICACIONES()");
-        const [rowsPre] = await pool.query("CALL LL_VER_PREGUNTAS()");
-        rowsBar.forEach(barbero => {
-            if (barbero.foto) {
-                barbero.foto = Buffer.from(barbero.foto).toString('base64');
-            }
-        });
-        rowsSer.forEach(servicio => {
-            if (servicio.fotoServicio) {
-                servicio.fotoServicio = Buffer.from(servicio.fotoServicio).toString('base64');
-            }
-        });
-        res.render("views.barbero.ejs", { barberos: rowsBar, servicios: rowsSer, productos: rowsPro, ofertas: rowsOfe, ubicaciones: rowsUbi, preguntas: rowsPre });
-        res.render("views.pag_admin.ejs", { barberos: rowsBar})
+        const [
+            [rowsBar], [rowsSer], [rowsPro], [rowsOfe], [rowsUbi], [rowsPre]
+        ] = await Promise.all([
+            pool.query("CALL LL_VER_BARBERO()"),
+            pool.query("CALL LL_VER_SERVICIOS()"),
+            pool.query("CALL LL_VER_PRODUCTOS()"),
+            pool.query("CALL LL_VER_OFERTAS()"),
+            pool.query("CALL LL_VER_UBICACIONES()"),
+            pool.query("CALL LL_VER_PREGUNTAS()")
+        ]);
+        // rowsBar.forEach(barbero => {
+        //     if (barbero.foto) {
+        //         barbero.foto = Buffer.from(barbero.foto).toString('base64');
+        //     }
+        // });
+        // rowsSer.forEach(servicio => {
+        //     if (servicio.fotoServicio) {
+        //         servicio.fotoServicio = Buffer.from(servicio.fotoServicio).toString('base64');
+        //     }
+        // });
+        res.status(200).json({ barberos: rowsBar, servicios: rowsSer, productos: rowsPro, ofertas: rowsOfe, ubicaciones: rowsUbi, preguntas: rowsPre });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -31,12 +34,12 @@ export const listarBarbero = async (req, res) => {
 export const listarBarberoAdmin = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_BARBERO()");
-        rows.forEach(barbero => {
-            if (barbero.foto) {
-                barbero.foto = Buffer.from(barbero.foto).toString('base64');
-            }
-        });
-        res.render("views.pag_admin.ejs", { barberos: rows[0]})
+        // rows.forEach(barbero => {
+        //     if (barbero.foto) {
+        //         barbero.foto = Buffer.from(barbero.foto).toString('base64');
+        //     }
+        // });
+        res.status(200).json({ barberos: rows[0] })
     } catch (error) {
         res.status(500).json(error);
     }
@@ -50,121 +53,74 @@ export const buscar = async (req, res) => {
             return res.status(400).json({ message: "Se requiere patrón de búsqueda y tipo" });
         }
 
-        let barberos = [];
-        let servicios = [];
-        let productos = [];
-        let ofertas = [];
-        let ubicaciones = [];
-        let preguntas = [];
+        // Definir variables para los resultados
+        let resultados = {
+            barberos: [],
+            servicios: [],
+            productos: [],
+            ofertas: [],
+            ubicaciones: [],
+            preguntas: []
+        };
 
-        // Obtener todos los barberos y servicios
-        const [rowsBar] = await pool.query("CALL LL_VER_BARBERO()");
-        const [rowsSer] = await pool.query("CALL LL_VER_SERVICIOS()");
-        const [rowsPro] = await pool.query("CALL LL_VER_PRODUCTOS()");
-        const [rowsOfe] = await pool.query("CALL LL_VER_OFERTAS()");
-        const [rowsUbi] = await pool.query("CALL LL_VER_UBICACIONES()");
-        const [rowsPre] = await pool.query("CALL LL_VER_PREGUNTAS()");
+        // Función para convertir imágenes a base64
+        const convertirImagenesABase64 = (rows, campoImagen) => {
+            return rows.map(row => {
+                if (row[campoImagen]) {
+                    row[campoImagen] = Buffer.from(row[campoImagen]).toString('base64');
+                }
+                return row;
+            });
+        };
 
-        // Convierte las imágenes a base64
-        rowsBar.forEach(barbero => {
-            if (barbero.foto) {
-                barbero.foto = Buffer.from(barbero.foto).toString('base64');
-            }
-        });
-        rowsSer.forEach(servicio => {
-            if (servicio.fotoServicio) {
-                servicio.fotoServicio = Buffer.from(servicio.fotoServicio).toString('base64');
-            }
-        });
-        rowsPro.forEach(producto => {
-            if (producto.Producto) {
-                producto.Producto = Buffer.from(producto.Producto).toString('base64');
-            }
-        });
-        rowsOfe.forEach(oferta => {
-            if (oferta.fotoOferta) {
-                oferta.fotoOferta = Buffer.from(oferta.fotoOferta).toString('base64');
-            }
-        });
-        rowsUbi.forEach(ubicacion => {
-            if (ubicacion.fotoUbicacion) {
-                ubicacion.fotoUbicacion = Buffer.from(ubicacion.fotoUbicacion).toString('base64');
-            }
-        });
+        // Obtener todos los datos iniciales
+        const [
+            [rowsBar], [rowsSer], [rowsPro], [rowsOfe], [rowsUbi], [rowsPre]
+        ] = await Promise.all([
+            pool.query("CALL LL_VER_BARBERO()"),
+            pool.query("CALL LL_VER_SERVICIOS()"),
+            pool.query("CALL LL_VER_PRODUCTOS()"),
+            pool.query("CALL LL_VER_OFERTAS()"),
+            pool.query("CALL LL_VER_UBICACIONES()"),
+            pool.query("CALL LL_VER_PREGUNTAS()")
+        ]);
+
+        // Convertir imágenes a base64
+        resultados.barberos = convertirImagenesABase64(rowsBar, 'foto');
+        resultados.servicios = convertirImagenesABase64(rowsSer, 'fotoServicio');
+        resultados.productos = convertirImagenesABase64(rowsPro, 'Producto');
+        resultados.ofertas = convertirImagenesABase64(rowsOfe, 'fotoOferta');
+        resultados.ubicaciones = convertirImagenesABase64(rowsUbi, 'fotoUbicacion');
+        resultados.preguntas = rowsPre;
 
         // Realizar la búsqueda específica
-        if (tipo === "barbero") {
-            const [rows] = await pool.query(`CALL LL_BUSCAR_BARBERO('${desc}')`);
-            barberos = rows.map(barbero => {
-                if (barbero.foto) {
-                    barbero.foto = Buffer.from(barbero.foto).toString('base64');
-                }
-                return barbero;
-            });
-            servicios = rowsSer;
-            productos = rowsPro;
-            ofertas = rowsOfe;
-            ubicaciones = rowsUbi;
-            preguntas = rowsPre;
-        } else if (tipo === "servicio") {
-            const [rows] = await pool.query(`CALL LL_BUSCAR_SERVICIO('${desc}')`);
-            servicios = rows.map(servicio => {
-                if (servicio.fotoServicio) {
-                    servicio.fotoServicio = Buffer.from(servicio.fotoServicio).toString('base64');
-                }
-                return servicio;
-            });
-            barberos = rowsBar;
-            productos = rowsPro;
-            ofertas = rowsOfe;
-            ubicaciones = rowsUbi;
-            preguntas = rowsPre;
-        } else if (tipo === "producto") {
-            const [rows] = await pool.query(`CALL LL_BUSCAR_PRODUCTO('${desc}')`);
-            productos = rows.map(producto => {
-                if (producto.fotoProducto) {
-                    producto.fotoProducto = Buffer.from(producto.fotoProducto).toString('base64');
-                }
-                return producto;
-            });
-            barberos = rowsBar;
-            servicios = rowsSer;
-            ofertas = rowsOfe;
-            ubicaciones = rowsUbi;
-            preguntas = rowsPre;
-        } else if (tipo === "oferta") {
-            const [rows] = await pool.query(`CALL LL_BUSCAR_OFERTA('${desc}')`);
-            ofertas = rows.map(oferta => {
-                if (oferta.fotoOferta) {
-                    oferta.fotoOferta = Buffer.from(oferta.fotoOferta).toString('base64');
-                }
-                return oferta;
-            });
-            barberos = rowsBar;
-            productos = rowsPro;
-            servicios = rowsSer;
-            ubicaciones = rowsUbi;
-            preguntas = rowsPre;
-        } else if (tipo === "ubicacion") {
-            const [rows] = await pool.query(`CALL LL_BUSCAR_UBICACION('${desc}')`);
-            ubicaciones = rows.map(ubicacion => {
-                if (ubicacion.fotoUbicacion) {
-                    ubicacion.fotoUbicacion = Buffer.from(ubicacion.fotoUbicacion).toString('base64');
-                }
-                return ubicacion;
-            });
-            barberos = rowsBar;
-            productos = rowsPro;
-            ofertas = rowsOfe;
-            servicios = rowsSer;
-            preguntas = rowsPre;
-        } else {
-            return res.status(400).json({ message: "Tipo de búsqueda no válido" });
+        let query = '';
+        switch (tipo) {
+            case "barbero":
+                query = `CALL LL_BUSCAR_BARBERO('${desc}')`;
+                break;
+            case "servicio":
+                query = `CALL LL_BUSCAR_SERVICIO('${desc}')`;
+                break;
+            case "producto":
+                query = `CALL LL_BUSCAR_PRODUCTO('${desc}')`;
+                break;
+            case "oferta":
+                query = `CALL LL_BUSCAR_OFERTA('${desc}')`;
+                break;
+            case "ubicacion":
+                query = `CALL LL_BUSCAR_UBICACION('${desc}')`;
+                break;
+            default:
+                return res.status(400).json({ message: "Tipo de búsqueda no válido" });
         }
 
-        res.render('views.barbero.ejs', { barberos, servicios, productos, ofertas, ubicaciones, preguntas });
+        // const [rows] = await pool.query(query);
+        // resultados[tipo + 's'] = convertirImagenesABase64(rows, tipo === 'barbero' ? 'foto' : `foto${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`);
+
+        res.json(resultados);
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json({ message: error.message });
     }
 };
 
@@ -173,10 +129,14 @@ export const verCalendario = async (req, res) => {
     const id = req.params['id']
 
     try {
-        const rowsBar = await pool.query(`CALL LL_VER_PERFIL_BARBERO('${id}');`);
-        const rowsRes = await pool.query(`CALL LL_VER_RESERVA_BARBERO('${id}');`);
-        console.log(rowsBar[0][0], rowsRes[0][0]);
-        res.render("views.pag_barbero.ejs", { barberos: rowsBar[0][0], reservas: rowsRes[0][0] })
+        const [
+            [rowsBar], [rowsRes]
+        ] = await Promise.all([
+            pool.query(`CALL LL_VER_PERFIL_BARBERO('${id}');`),
+            pool.query(`CALL LL_VER_RESERVA_BARBERO('${id}');`)
+        ])
+
+        res.json( { barberos: rowsBar[0][0], reservas: rowsRes[0][0] })
     } catch (error) {
         res.status(500).json(error);
     }
@@ -188,7 +148,7 @@ export const perfilBarbero = async (req, res) => {
 
     try {
         const rows = await pool.query(`CALL LL_VER_PERFIL_BARBERO('${id}');`);
-        res.render("views.perfil_barbero_editar.ejs", { barberos: rows[0][0]})
+        res.status(200).json({ barberos: rows[0][0]})
     } catch (error) {
         res.status(500).json(error);
     }
@@ -197,12 +157,14 @@ export const perfilBarbero = async (req, res) => {
 //Perfil del barbero desde la vista de clientes 
 export const verPerfilBarbero = async (req, res) => {
     const id = req.params['id']
-
     try {
-        const rowsBar = await pool.query(`CALL LL_VER_PERFIL_BARBERO('${id}');`);
-        const rowsCom = await pool.query(`CALL LL_VER_COMENTARIO_BARBERO('${id}');`);
-        res.render("views.perfil_barbero.ejs", { barberos: rowsBar[0][0], comentarios:rowsCom[0]})
-        console.log(rowsBar[0][0]);
+        const [
+            [rowsBar], [rowsCom]
+        ] = await Promise.all[
+            pool.query(`CALL LL_VER_PERFIL_BARBERO('${id}');`),
+            pool.query(`CALL LL_VER_COMENTARIO_BARBERO('${id}');`)
+        ]
+        res.status(200).json({ barberos: rowsBar[0][0], comentarios:rowsCom[0]})
     } catch (error) {
         res.status(500).json(error);
     }
@@ -213,10 +175,13 @@ export const verPerfilBarberoAdmin = async (req, res) => {
     const id = req.params['id']
 
     try {
-        const rowsBar = await pool.query(`CALL LL_VER_PERFIL_BARBERO('${id}');`);
-        const rowsCom = await pool.query(`CALL LL_VER_COMENTARIO_BARBERO('${id}');`);
-        res.render("views.eliminar_coment.ejs", { barberos: rowsBar[0][0], comentarios:rowsCom[0]})
-        console.log(rowsBar[0][0]);
+        const [
+            [rowsBar], [rowsCom]
+        ] = await Promise.all [
+            pool.query(`CALL LL_VER_PERFIL_BARBERO('${id}');`),
+            pool.query(`CALL LL_VER_COMENTARIO_BARBERO('${id}');`)
+        ]
+        res.status(200).json({ barberos: rowsBar[0][0], comentarios:rowsCom[0]})
     } catch (error) {
         res.status(500).json(error);
     }

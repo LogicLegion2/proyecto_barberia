@@ -6,7 +6,7 @@ config();
 export const listarPregunta = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_PREGUNTAS()");
-        res.render("views.pregunta.ejs", { preguntas: rows[0]})
+        res.status(200).json({ preguntas: rows[0]})
     } catch (error) {
         res.status(500).json(error);
     }
@@ -19,7 +19,7 @@ export const buscarPregunta = async (req, res) => {
             return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
         }
         const [rows] = await pool.query(`CALL LL_BUSCAR_PREGUNTA('${desc}')`);
-        res.render('views.pregunta.ejs', {preguntas: rows[0]})
+        res.status(200).json({preguntas: rows[0]})
     } catch (error) {
         res.status(500).json(error);
     }
@@ -31,7 +31,7 @@ export const crearPregunta = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_INSERTAR_PREGUNTA('${pregunta}','${resp}');`);
-        res.json(respuesta);
+        res.status(200).json(respuesta);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -43,7 +43,7 @@ export const obtenerPregunta = async (req, res) => {
     try {
         const respuesta = await pool.query(`CALL LL_OBTENER_PREGUNTA('${id}');`);
         if (respuesta.length > 0) {
-            res.json(respuesta[0][0][0]);
+            res.status(200).json(respuesta[0][0][0]);
         } else {
             res.status(404).json({ mensaje: "Preguntada no encontrada" });
         }
@@ -59,9 +59,9 @@ export const editarPregunta = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_PREGUNTA('${pregunta}','${resp}','${id}');`);
-        res.redirect(`/preguntas/editar?id=${id}&success=true`);
+        res.status(200).json({respuesta});
     } catch (error) {
-        res.redirect(`/preguntas/editar?id=${id}&error=true`);
+        res.status(400).json({respuesta});
     }
 }
 
