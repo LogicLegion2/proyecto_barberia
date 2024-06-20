@@ -100,16 +100,12 @@
             <% if (productos && productos.length> 0) { %>
             <select id="producto1" name="producto1" class="text-white mt-4 text-center border-0 form-select">
               <% productos.forEach(producto=> { %>
-                <option value="<%= producto.idProducto %>" <%=producto.idProducto==oferta.producto1 ? 'selected' : '' %>
-                  ><%= producto.nombre %>
-                </option>
+                <option value="<%= producto.idProducto %>" <%=producto.idProducto==oferta.producto1 ? 'selected' : '' %>><%= producto.nombre %></option>
                 <% }) %>
             </select>
             <select id="producto2" name="producto2" class="text-white mt-4 text-center border-0 form-select">
               <% productos.forEach(producto=> { %>
-                <option value="<%= producto.idProducto %>" <%=producto.idProducto==oferta.producto2 ? 'selected' : '' %>
-                  ><%= producto.nombre %>
-                </option>
+                <option value="<%= producto.idProducto %>" <%=producto.idProducto==oferta.producto2 ? 'selected' : '' %>><%= producto.nombre %></option>
                 <% }) %>
             </select>
             <% } %>

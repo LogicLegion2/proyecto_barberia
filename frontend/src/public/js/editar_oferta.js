@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             const response = await fetch(`/ofertas/obtener/${id}`);
             const data = await response.json();
+            console.log(data);
             document.getElementById('oferta_id').value = id;
             document.getElementById('producto1').value = data.producto1;
             document.getElementById('producto2').value = data.producto2;
