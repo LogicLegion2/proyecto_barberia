@@ -1,38 +1,33 @@
-document.getElementById("agregarUbicacion").addEventListener("click", (e) => {
+document.getElementById("formAgregarUbicacion").addEventListener("click", (e) => {
     e.preventDefault(); // Evita que el formulario se envíe automáticamente
 
     // Captura los valores del formulario
-    const nombre = document.getElementById("nombre").value;
-    const direccion = document.getElementById("direccion").value;
-    const archivo = document.getElementById("archivo").files[0];
-
-    // Crear un objeto FormData para enviar los datos, incluyendo el archivo
+    const titulo = document.getElementById("agregar_titulo").value;
+    const ubicacion = document.getElementById("agregar_ubicacion").value;
+    const descripcion = document.getElementById("agregar_descripcion").value;
+    const foto = document.getElementById("agregar_imagen").value;
+    // Crear un objeto FormData para manejar la subida del archivo
     const formData = new FormData();
-    formData.append("nombre", nombre);
-    formData.append("direccion", direccion);
-    formData.append("archivo", archivo);
+    formData.append("titulo", titulo);
+    formData.append("ubicacion", ubicacion);
+    formData.append("descripcion", descripcion);
+    formData.append("foto", foto);
 
-    // Enviar los datos al servidor
-    fetch('http://localhost:3000/ubicaciones/crearu', {
-        method: 'POST',
-        body: formData
+    fetch("http://localhost:3000/ubicaciones/crear", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            titulo: titulo,
+            ubicacion: ubicacion,
+            descripcion: descripcion,
+            foto: foto
+        })
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json(); // Parsea la respuesta a JSON
-    })
+    .then(res => res.json())
     .then(data => {
-        // Verifica si la respuesta está vacía antes de intentar analizarla como JSON
-        if (data) {
-            console.log("Ubicación agregada:", data); // Muestra en consola la respuesta del servidor
-            location.reload(); // Recarga la página después de agregar la ubicación (opcional)
-        } else {
-            console.error("Fetch error: Respuesta vacía o no válida");
-        }
+        console.log(data);
     })
-    .catch(error => {
-        console.error("Fetch error:", error); // Manejo de errores si falla la petición fetch
-    });
+    .catch(error => console.log(error));
 });
