@@ -10,6 +10,6 @@ rutaVentas.get("/historial/compra/:id", historialCompra);
 rutaVentas.get("/ver/entregas/admin", verEntregasAdmin);
 rutaVentas.get("/ver/entregas", verEntregas);
 rutaVentas.get("/reservas/productos", verReservasProductos);
-rutaVentas.post("/ver/carroCompras", verCarroCompras);
+rutaVentas.get("/ver/carrito/:id", verCarroCompras);
 
 export default rutaVentas; 
