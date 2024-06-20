@@ -12,6 +12,19 @@ export const listarPregunta = async (req, res) => {
     }
 };
 
+export const buscarPregunta = async (req, res) => {
+    const { desc } = req.query;
+    try {
+        if (!desc) {
+            return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
+        }
+        const [rows] = await pool.query(`CALL LL_BUSCAR_PREGUNTA('${desc}')`);
+        res.render('views.pregunta.ejs', {preguntas: rows[0]})
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
 export const crearPregunta = async (req, res) => {
     const { pregunta, respuesta } = req.body;
 

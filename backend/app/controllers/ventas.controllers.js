@@ -60,11 +60,13 @@ export const historialCompra= async (req, res) => {
 
 
 export const verCarroCompras = async (req, res) => {
-    const id = req.body.id;
+    const id = req.params['id']
 
     try {
         const respuesta = await pool.query(`CALL LL_VER_CARRITO_COMPRAS('${id}');`);
-        res.json(respuesta);
+        const productos = respuesta[0][0]
+        console.log(productos);
+        res.render('views.carrito.ejs', {productos});
     } catch (error) {
         res.status(500).json(error);
      }

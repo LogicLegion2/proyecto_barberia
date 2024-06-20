@@ -6,23 +6,20 @@ config();
 export const listarOferta = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_OFERTAS()");
-        res.render("views.oferta.ejs", { ofertas: rows[0]});
+        res.render("views.oferta.ejs", { ofertas: rows[0] });
     } catch (error) {
         res.status(500).json(error);
     }
 };
 
 export const buscarOferta = async (req, res) => {
+    const { desc } = req.query;
     try {
-        // Obtener el patrón de búsqueda de la consulta
-        const { desc } = req.query;
-        
-        // Verificar si se proporcionó un patrón de búsqueda válido
         if (!desc) {
             return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
         }
-        const [rows] = await pool.query("CALL LL_BUSCAR_OFERTA(?)", [desc]);
-        res.json(rows);
+        const [rows] = await pool.query(`CALL LL_BUSCAR_OFERTA('${desc}')`);
+        res.render('views.oferta.ejs', { ofertas: rows[0] })
     } catch (error) {
         res.status(500).json(error);
     }
@@ -48,38 +45,20 @@ export const obtenerOferta = async (req, res) => {
 
     try {
         const respuestaOferta = await pool.query(`CALL LL_OBTENER_OFERTA('${id}');`);
-        const oferta = respuestaOferta[0][0]; 
-
+        const oferta = respuestaOferta[0][0];
+        console.log(oferta);
         const respuestaProductos = await pool.query(`CALL LL_VER_PRODUCTOS();`);
-        const productos = respuestaProductos[0];
+        const productos = respuestaProductos[0][0];
+        console.log(productos);
         if (oferta && productos.length > 0) {
             res.render("views.editar_oferta.ejs", { id, oferta, productos });
-        }  else {
+        } else {
             res.status(404).json({ mensaje: "Oferta o productos no encontrados" });
         }
     } catch (error) {
         res.status(500).json(error);
     }
 };
-
-// //Consulta de productos para los input select del formulario de editar oferta
-// export const obtenerProductos = async (req, res) => {
-//     const id = req.params.id;
-//     try {
-//         const resOfe = await obtenerOferta(req,res);
-//         const rowsOfe = resOfe[0][0]
-//         console.log(rowsOfe);
-//         const rowsPro = await pool.query(`CALL LL_VER_PRODUCTOS();`);
-//         console.log(rowsOfe);
-//         if (rowsPro.length > 0) {
-//             res.render("views.editar_oferta.ejs", { id, oferta : rowsOfe[0][0][0], productos : rowsPro[0] });
-//         } else {
-//             res.status(404).json({ mensaje: "Productos no encontrados" });
-//         }
-//     } catch (error) {
-//         throw error;
-//     }
-// }
 
 export const editarOferta = async (req, res) => {
     const producto1 = req.body.producto1;

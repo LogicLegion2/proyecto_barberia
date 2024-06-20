@@ -7,8 +7,8 @@
     <title>The Barber's Brothers</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/global-style.css">
-    <link rel="stylesheet" href="./css/style_principal.css">
+    <link rel="stylesheet" href="/css/global-style.css">
+    <link rel="stylesheet" href="/css/style_principal.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -20,7 +20,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-0 p-0">
-                <nav class="navbar navbar-dark">
+                <nav class="navbar z-2 custom-bg-color fixed-top navbar-dark">
                     <div class="container-fluid d-flex flex-row-reverse">
                         <a class="navbar-brand me-auto ms-auto fs-1 fw-bold" href="#">Carrito de Compras</a>
                         <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
@@ -92,165 +92,71 @@
                         </div>
                     </div>
                 </nav>
-                <div class="bottom-max d-grid gap-3 m-3 cont-perf">
-                    <div class="d-flex rounded-3 custom-bg-dark flex-sm-row flex-column">
-                        <div class="m-2 flex-shrink-0 d-flex justify-content-center">
-                            <img src="https://cdn1.totalcommerce.cloud/mercacentro/product-zoom/es/shampoo-h%26s-suave-manejable-2-en-1-700-ml-2.webp"
-                                alt="..." class="mg-thumbnail img-car rounded-3 mt-1 ms-2">
-                        </div>
-                        <div class="w-100 d-flex m-1 p-1 align-items-center">
-                            <div class="cont-controles p-2">
-                                <i class="text-light txt-car">Shampoo</i><br>
-                                <i class="text-light txt-car">$23.900</i><br>
-                            </div>
-                            <div class="input-group h-25 p-2 d-flex flex-column justify-content-center">
-                                <div class="border-opacity-25 border rounded w-input-group d-flex">
-                                    <span class="input-group-btn">
-                                        <button type="button"
-                                            class="border-end border-0 custom-bg-color rounded-0 w-car-btn rounded-start h-100 btn btn-primary"
-                                            onclick="disminuirValor()">-</button>
-                                    </span>
-                                    <input type="number" class="w-input-btn form-control border-0 text-center"
-                                        id="unidades" value="2" min="1" style="background-color: #0D0B22;">
-                                    <span class="input-group-btn">
-                                        <button type="button"
-                                            class="border-start border-0 custom-bg-color rounded-0 w-car-btn rounded-end h-100 btn btn-primary"
-                                            onclick="aumentarValor()">+</button>
-                                    </span>
-                                </div>
-                                <div class="w-50 input-group p-sm-2 p-0 d-flex justify-content-center">
-                                    <input type="number"
-                                        class="txt-car form-car border-0 text-white fw-bold text-white text-center"
-                                        id="total" placeholder="$23.900" readonly>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex rounded-3 custom-bg-dark flex-sm-row flex-column">
-                        <div class="m-2 flex-shrink-0 d-flex justify-content-center">
-                            <img src="https://kppel.com/9521-home_default/vasso-styling-wax-baller-cera-modelaje-efecto-mojado.jpg"
-                                alt="..." class="mg-thumbnail img-car rounded-3 mt-1 ms-2" style="max-width: 150px;">
-                        </div>
-                        <div class="w-100 d-flex m-1 p-1 align-items-center">
-                            <div class="cont-controles p-2">
-                                <i class="text-light txt-car">Cera para peinar</i><br>
-                                <i class="text-light txt-car">$23.900</i><br>
-                            </div>
-                            <div class="input-group h-25 p-2 d-flex flex-column justify-content-center">
-                                <div class="border-opacity-25 border rounded w-input-group d-flex">
-                                    <span class="input-group-btn">
-                                        <button type="button"
-                                            class="border-end border-0 custom-bg-color rounded-0 w-car-btn rounded-start h-100 btn btn-primary"
-                                            onclick="disminuirValor()">-</button>
-                                    </span>
-                                    <input type="number" class="w-input-btn form-control border-0 text-center"
-                                        id="unidades" value="2" min="1" style="background-color: #0D0B22;">
-                                    <span class="input-group-btn">
-                                        <button type="button"
-                                            class="border-start border-0 custom-bg-color rounded-0 w-car-btn rounded-end h-100 btn btn-primary"
-                                            onclick="aumentarValor()">+</button>
-                                    </span>
-                                </div>
-                                <div class="w-50 input-group p-sm-2 p-0 d-flex justify-content-center">
-                                    <input type="number"
-                                        class="txt-car form-car border-0 text-white fw-bold text-center"
-                                        placeholder="$23.900" id="total" readonly>
+                <div class="mt-5 mb-5 pt-5 pb-5">
+                    <% if (productos && productos.length> 0) { %>
+                        <% productos.forEach(producto=> { %>
+                            <div class="d-grid gap-3 m-3 cont-perf">
+                                <div id="carrito" class="d-flex rounded-3 custom-bg-dark flex-sm-row flex-column">
+                                    <div class="m-2 flex-shrink-0 d-flex justify-content-center">
+                                        <img src="<%= producto.fotoProducto %>" alt="..."
+                                            class="mg-thumbnail img-car rounded-3 mt-1 ms-2">
+                                    </div>
+                                    <div class="w-100 d-flex m-1 p-1 align-items-center">
+                                        <div class="cont-controles p-2">
+                                            <i class="text-light txt-car">
+                                                <%= producto.producto %>
+                                            </i><br>
+                                            <i class="text-light txt-car" id="precioUnidad-<%= producto.idProducto %>">
+                                                $ <%= producto.precio %></i><br>
+                                        </div>
+                                        <div class="input-group h-25 p-2 d-flex flex-column justify-content-center">
+                                            <div class="border-opacity-25 border rounded w-input-group d-flex">
+                                                <span class="input-group-btn">
+                                                    <button type="button"
+                                                        class="border-end border-0 custom-bg-color rounded-0 w-car-btn rounded-start h-100 btn btn-primary"
+                                                        onclick="disminuirValor(<%= producto.idProducto %>)">-</button>
+                                                </span>
+                                                <input type="number"
+                                                    class="w-input-btn form-control border-0 text-center"
+                                                    id="unidades-<%= producto.idProducto %>" value="1" min="1"
+                                                    style="background-color: #0D0B22;"
+                                                    onchange="actualizarTotal(<%= producto.idProducto %>)">
+                                                <span class="input-group-btn">
+                                                    <button type="button"
+                                                        class="border-start border-0 custom-bg-color rounded-0 w-car-btn rounded-end h-100 btn btn-primary"
+                                                        onclick="aumentarValor(<%= producto.idProducto %>)">+</button>
+                                                </span>
+                                            </div>
+                                            <div class="w-50 input-group p-sm-2 p-0 d-flex justify-content-center">
+                                                <input type="number"
+                                                    class="txt-car form-car border-0 text-white fw-bold text-white text-center"
+                                                    id="total-<%= producto.idProducto %>" value="<%= producto.precio %>"
+                                                    readonly>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="d-flex rounded-3 custom-bg-dark flex-sm-row flex-column">
-                        <div class="m-2 flex-shrink-0 d-flex justify-content-center">
-                            <img src="https://cdn1.totalcommerce.cloud/mercacentro/product-zoom/es/shampoo-h%26s-suave-manejable-2-en-1-700-ml-2.webp"
-                                alt="..." class="mg-thumbnail img-car rounded-3 mt-1 ms-2" style="max-width: 150px;">
-                        </div>
-                        <div class="w-100 d-flex m-1 p-1 align-items-center">
-                            <div class="cont-controles p-2">
-                                <i class="text-light txt-car">Shampoo</i><br>
-                                <i class="text-light txt-car">$23.900</i><br>
-                            </div>
-                            <div class="input-group h-25 p-2 d-flex flex-column justify-content-center">
-                                <div class="border-opacity-25 border rounded w-input-group d-flex">
-                                    <span class="input-group-btn">
-                                        <button type="button"
-                                            class="border-end border-0 custom-bg-color rounded-0 w-car-btn rounded-start h-100 btn btn-primary"
-                                            onclick="disminuirValor()">-</button>
-                                    </span>
-                                    <input type="number" class="w-input-btn form-control border-0 text-center"
-                                        id="unidades" value="2" min="1" style="background-color: #0D0B22;">
-                                    <span class="input-group-btn">
-                                        <button type="button"
-                                            class="border-start border-0 custom-bg-color rounded-0 w-car-btn rounded-end h-100 btn btn-primary"
-                                            onclick="aumentarValor()">+</button>
-                                    </span>
-                                </div>
-                                <div class="w-50 input-group p-sm-2 p-0 d-flex justify-content-center">
-                                    <input type="number"
-                                        class="txt-car form-car border-0 text-white fw-bold text-white text-center"
-                                        id="total" placeholder="$23.900" readonly>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex rounded-3 custom-bg-dark flex-sm-row flex-column">
-                        <div class="m-2 flex-shrink-0 d-flex justify-content-center">
-                            <img src="https://kppel.com/9521-home_default/vasso-styling-wax-baller-cera-modelaje-efecto-mojado.jpg"
-                                alt="..." class="mg-thumbnail img-car rounded-3 mt-1 ms-2" style="max-width: 150px;">
-                        </div>
-                        <div class="w-100 d-flex m-1 p-1 align-items-center">
-                            <div class="cont-controles p-2">
-                                <i class="text-light txt-car">Cera para peinar</i><br>
-                                <i class="text-light txt-car">$23.900</i><br>
-                            </div>
-                            <div class="input-group h-25 p-2 d-flex flex-column justify-content-center">
-                                <div class="border-opacity-25 border rounded w-input-group d-flex">
-                                    <span class="input-group-btn">
-                                        <button type="button"
-                                            class="border-end border-0 custom-bg-color rounded-0 w-car-btn rounded-start h-100 btn btn-primary"
-                                            onclick="disminuirValor()">-</button>
-                                    </span>
-                                    <input type="number" class="w-input-btn form-control border-0 text-center"
-                                        id="unidades" value="2" min="1" style="background-color: #0D0B22;">
-                                    <span class="input-group-btn">
-                                        <button type="button"
-                                            class="border-start border-0 custom-bg-color rounded-0 w-car-btn rounded-end h-100 btn btn-primary"
-                                            onclick="aumentarValor()">+</button>
-                                    </span>
-                                </div>
-                                <div class="w-50 input-group p-sm-2 p-0 d-flex justify-content-center">
-                                    <input type="number"
-                                        class="txt-car form-car border-0 text-white fw-bold text-center"
-                                        placeholder="$23.900" id="total" readonly>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                            <% }) %>
+                        <% } else { %>
+                        <p class="w-100 text-center text-white fs-5 mt-5 pt-5">No hay productos en el carrito.</p>
+                    <% } %>
                 </div>
             </div>
         </div>
     </div>
 
     <div
-        class="navbar menu-top fixed-bottom mt-3 p-sm-4 p-3 cont-car d-flex align-items-center w-100 justify-content-between">
+        class="navbar z-1 menu-top fixed-bottom mt-3 p-sm-4 p-3 cont-car d-flex align-items-center w-100 justify-content-between">
         <div>
             <a href="comprar_producto.html" class="btn btn-color text-white fw-bold rounded-4 txt-car">Realizar
                 Compra</a>
         </div>
         <div>
-            <input type="number" class="txt-car txt-car-inp fw-bold form-car text-center text-white border-0" id="total"
-                placeholder="$45.550" readonly>
+            <input type="text" class="txt-car txt-car-inp fw-bold form-car text-center text-white border-0"
+                id="totalGlobal" value="$0.00" readonly>
         </div>
     </div>
-
-    <!-- <div class="container row mt-5 w-100 custom-bg-secondary">
-        <div class="col-12">
-            <div class="col-md-6 offset-md-3">
-                <div class="col-12">
-                    <input type="number" class="form-control text-center" id="total" readonly>
-                </div>
-            </div>
-        </div>
-    </div> -->
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -259,27 +165,37 @@
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
     <script>
-        function aumentarValor() {
-            let unidades = parseInt(document.getElementById('unidades').value);
+        function aumentarValor(idProducto) {
+            let unidades = parseInt(document.getElementById(`unidades-${idProducto}`).value);
             unidades++;
-            document.getElementById('unidades').value = unidades;
+            document.getElementById(`unidades-${idProducto}`).value = unidades;
+            actualizarTotal(idProducto);
         }
 
-        function disminuirValor() {
-            let unidades = parseInt(document.getElementById('unidades').value);
+        function disminuirValor(idProducto) {
+            let unidades = parseInt(document.getElementById(`unidades-${idProducto}`).value);
             if (unidades > 1) {
                 unidades--;
-                document.getElementById('unidades').value = unidades;
+                document.getElementById(`unidades-${idProducto}`).value = unidades;
+                actualizarTotal(idProducto);
             }
         }
 
-        function actualizarTotal() {
-            let unidades = parseInt(document.getElementById('unidades').value);
-            let precioUnidad = parseFloat(document.getElementById('precioUnidad').value);
+        function actualizarTotal(idProducto) {
+            let unidades = parseInt(document.getElementById(`unidades-${idProducto}`).value);
+            let precioUnidad = parseFloat(document.getElementById(`precioUnidad-${idProducto}`).innerText.replace('$', ''));
             let total = unidades * precioUnidad;
-            document.getElementById('total').value = total.toFixed(2);
+            document.getElementById(`total-${idProducto}`).value = total;
+            actualizarTotalGlobal();
         }
 
+        function actualizarTotalGlobal() {
+            let totalGlobal = 0;
+            document.querySelectorAll('input[id^="total-"]').forEach(input => {
+                totalGlobal += parseFloat(input.value);
+            });
+            document.getElementById('totalGlobal').value = `$${totalGlobal}`;
+        }
     </script>
 </body>
 

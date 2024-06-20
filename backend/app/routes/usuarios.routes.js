@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { cambiarContrasena, cambiarContrasenaBarbero, cambiarCorreo, cambiarCorreoBarbero, cambiarDescripcionBarbero, cambiarFoto, cambiarFotoBarbero, cambiarNombre, cambiarNombreBarbero, cambiarTelefono, cambiarTelefonoBarbero, crearBarbero, crearUsuario, desactivarUsuario, listarUsuario, login, logout, menuAdmin, menuCliente, mostrarLogin, registroUsuario, validarToken, verPerfil, verPerfilAdmin } from "../controllers/usuarios.controllers.js";
+import { buscarUsuario, cambiarContrasena, cambiarContrasenaBarbero, cambiarCorreo, cambiarCorreoBarbero, cambiarDescripcionBarbero, cambiarFoto, cambiarFotoBarbero, cambiarNombre, cambiarNombreBarbero, cambiarTelefono, cambiarTelefonoBarbero, crearBarbero, crearUsuario, desactivarUsuario, listarUsuario, login, logout, menuAdmin, menuCliente, mostrarLogin, registroUsuario, validarToken, verPerfil, verPerfilAdmin } from "../controllers/usuarios.controllers.js";
 import { verificarToken } from "../middlewares/oauth.js";
 
 
@@ -13,6 +13,7 @@ rutaUsuarios.get("/crear", (req, res) => {
     res.render("views.ingresar_usuario.ejs", { id: req.query.id });
 });
 rutaUsuarios.get("/listar", listarUsuario);
+rutaUsuarios.get("/buscar", buscarUsuario);
 rutaUsuarios.get("/menu/cliente", menuCliente);
 rutaUsuarios.get("/menu/admin", verificarToken, menuAdmin);
 rutaUsuarios.get("/ver/perfil/admin/:id", verPerfilAdmin);

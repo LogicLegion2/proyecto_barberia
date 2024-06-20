@@ -25,6 +25,19 @@ export const listarUsuario = async (req, res) => {
     }
 };
 
+export const buscarUsuario = async (req, res) => {
+    const { desc } = req.query;
+    try {
+        if (!desc) {
+            return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
+        }
+        const [rows] = await pool.query(`CALL LL_BUSCAR_USUARIO('${desc}')`);
+        res.render('views.visualizar_registro.ejs', {usuarios: rows[0]})
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
 export const crearUsuario = async (req, res) => {
     const { nombre, correo, contrasena, telefono, rol, foto } = req.body;
     try {
