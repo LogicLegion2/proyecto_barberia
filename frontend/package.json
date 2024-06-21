@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "build": "babel src --out-dir dist",
+    "build": "babel src --out-dir dist && copyfiles -u 1 src/**/* dist",
     "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -27,6 +27,7 @@
     "@babel/core": "^7.24.7",
     "@babel/node": "^7.24.7",
     "@babel/preset-env": "^7.24.7",
+    "copyfiles": "^2.4.1",
     "ejs-lint": "^0.1.1",
     "nodemon": "^3.1.3"
   }

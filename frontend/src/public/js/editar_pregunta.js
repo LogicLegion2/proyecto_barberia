@@ -31,6 +31,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 content: 'text-alert'
             }
         });
+        setTimeout(() => {
+            window.location.href = '/preguntas/listar';
+        }, 1500);
     }
     if (error == 'true') {
         Swal.fire({
