@@ -5,17 +5,13 @@ import { verificarToken } from "../middlewares/oauth.js";
 
 const rutaUbicaciones = Router();
 
+rutaUbicaciones.get("/", verificarToken, listarUbicacion);
 rutaUbicaciones.get("/crearu", (req, res) => {
     res.render("views.ingresar_ubicacion.ejs", { id: req.query.id });
 });
-
-rutaUbicaciones.get("/listar", listarUbicacion);
 rutaUbicaciones.get("/buscar", buscarUbicacion);
 rutaUbicaciones.post("/crear", crearUbicacion);
-rutaUbicaciones.get("/obtener/:id", obtenerUbicacion);
-rutaUbicaciones.get("/editar", (req, res) => {
-    res.render("views.editar_ubicacion.ejs", { id: req.query.id });
-});
+rutaUbicaciones.get("/:id", obtenerUbicacion);
 rutaUbicaciones.post("/editar", editarUbicacion);
 rutaUbicaciones.post("/desactivar", desactivarUbicacion);
 

@@ -1,15 +1,42 @@
+// Toma el id del producto para redireccionarlo a editar o eliinar
 function seleccionarProducto(id) {
     localStorage.setItem('productoSeleccionado', id);
 }
+
+// Redirecciona el producto seleccionado al formulario para la edición
 function redireccionarEditar() {
+    // Recibe parámetros de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const idUsuario = urlParams.get('idUser');
+    const token = urlParams.get('token');
+
+    if (idUsuario && token) {
+        localStorage.setItem('idUsuario', idUsuario);
+        localStorage.setItem('token', token);
+    }
+
+    const storedIdUsuario = localStorage.getItem('idUsuario');
+    const storedToken = localStorage.getItem('token');
+    
     const id = localStorage.getItem('productoSeleccionado');
+
     if (id) {
-        window.location.href = `http://localhost:3000/productos/editar?id=${id}`;
+        window.location.href = `http://localhost:3000/productos/editar?id=${id}&idUser=${storedIdUsuario}&token=${storedToken}`;
     } else {
-        alert('Seleccione un producto primero');
+        Swal.fire({
+            icon: 'warning',
+            title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Seleccione un producto primero' + "</h5>",
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'bg-alert',
+                content: 'text-alert'
+            }
+        });
     }
 }
 
+// Redirecciona el producto seleccionado para su eliminación
 async function eliminarProducto() {
     const id = localStorage.getItem('productoSeleccionado');
     Swal.fire({

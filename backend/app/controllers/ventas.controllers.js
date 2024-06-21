@@ -19,7 +19,7 @@ export const crearPago = async (req, res) => {
     }
     try {
         const [respuesta] = await pool.query(`CALL LL_INSERTAR_VENTA('${id}','${metodoPago}','${precio}','${metodoEntrega}','${direccion}');`);
-        res.json(respuesta);
+        res.status(200).json(respuesta);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -31,7 +31,20 @@ export const crearReembolso = async (req, res) => {
 
     try {
         const [respuesta] = await pool.query(`CALL LL_INSERTAR_REEMBOLSO('${idUsuario}','${idVenta}');`);
-        res.json(respuesta);
+        res.status(200).json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
+export const buscarProductoVendido = async (req, res) => {
+    const { desc } = req.query;
+    try {
+        if (!desc) {
+            return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
+        }
+        const [rows] = await pool.query(`CALL LL_BUSCAR_VENDIDO('${desc}')`);
+        res.status(200).json({productos: rows[0]})
     } catch (error) {
         res.status(500).json(error);
     }
@@ -52,12 +65,11 @@ export const historialCompra= async (req, res) => {
                 fecha
             };
         });
-        res.render("views.historial_compras.ejs", { compras });
+        res.status(200).json({ compras });
     } catch (error) {
         res.status(500).json(error);
     }
 };
-
 
 export const verCarroCompras = async (req, res) => {
     const id = req.params['id']
@@ -66,7 +78,7 @@ export const verCarroCompras = async (req, res) => {
         const respuesta = await pool.query(`CALL LL_VER_CARRITO_COMPRAS('${id}');`);
         const productos = respuesta[0][0]
         console.log(productos);
-        res.render('views.carrito.ejs', {productos});
+        res.status(200).json({productos});
     } catch (error) {
         res.status(500).json(error);
      }
@@ -75,8 +87,7 @@ export const verCarroCompras = async (req, res) => {
 export const verEntregasAdmin = async (req, res) => {
     try {
         const rows = await pool.query(`CALL LL_VER_ENTREGAS_ADMIN()`);
-        res.render("views.entrega_producto.ejs", { entregas: rows[0] });
-        // res.json(respuesta);
+        res.status(200).json({ entregas: rows[0] });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -97,7 +108,7 @@ export const verEntregas = async (req, res) => {
                 fecha
             };
         });
-        res.render("views.reservas_productos.ejs", { entregas });
+        res.status(200).json({ entregas });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -106,7 +117,7 @@ export const verEntregas = async (req, res) => {
 export const verReservasProductos = async (req, res) => {
     try {
         const [rows] = await pool.query(`CALL LL_VER_RESERVAS_PRODUCTOS()`);
-        res.render("views.reservas_productos.ejs", { productos:rows[0] });
+        res.status(200).json({ productos:rows[0] });
     } catch (error) {
         res.status(500).json(error);
     }

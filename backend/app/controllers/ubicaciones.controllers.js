@@ -6,7 +6,7 @@ config();
 export const listarUbicacion = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_UBICACIONES()");
-        res.render("views.ubicacion.ejs", { ubicaciones: rows[0] });
+        res.status(200).json({ ubicaciones: rows[0] });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -19,7 +19,7 @@ export const buscarUbicacion = async (req, res) => {
             return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
         }
         const [rows] = await pool.query(`CALL LL_BUSCAR_UBICACION('${desc}')`);
-        res.render('views.ubicacion.ejs', {ubicaciones: rows[0]})
+        res.status(200).json({ubicaciones: rows[0]})
     } catch (error) {
         res.status(500).json(error);
     }
@@ -35,8 +35,8 @@ export const crearUbicacion = async (req, res) => {
     } = input
 
     try {
-        const respuesta = await pool.query(`CALL LL_INSERTAR_UBICACION(?,?,?,?);`, [titulo, ubicacion, descripcion,foto]);
-        res.json(respuesta);
+        const respuesta = await pool.query(`CALL LL_INSERTAR_UBICACION('${titulo}','${ubicacion}','${descripcion}','${foto}');`);
+        res.status(200).json(respuesta);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -48,7 +48,7 @@ export const obtenerUbicacion = async (req, res) => {
     try {
         const respuesta = await pool.query(`CALL LL_OBTENER_UBICACION('${id}');`);
         if (respuesta.length > 0) {
-            res.json(respuesta[0][0][0]);
+            res.status(200).json(respuesta[0][0][0]);
         } else {
             res.status(404).json({ mensaje: "Ubicación no encontrada" });
         }
@@ -56,7 +56,6 @@ export const obtenerUbicacion = async (req, res) => {
         res.status(500).json(error);
     }
 };
-
 
 export const editarUbicacion = async (req, res) => {
     const titulo = req.body.titulo;
@@ -66,9 +65,9 @@ export const editarUbicacion = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_UBICACION('${titulo}','${ubicacion}','${descripcion}','${id}');`);
-        res.redirect(`/ubicaciones/editar?id=${id}&success=true`);
+        res.status(200).json(respuesta);
     } catch (error) {
-        res.redirect(`/ubicaciones/editar?id=${id}&error=true`);
+        res.status(200).json(respuesta);
     }
 } 
 

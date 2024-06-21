@@ -28,51 +28,105 @@
                 </nav>
                 <div class="row col-12 justify-content-center grid mt-3 text-center ">
                     <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" href="/reservas/listar/admin">Reservas</a>
+                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" id="adminReserva">Reservas</a>
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" href="/productos/listar">Productos</a>
+                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" id="adminProducto" >Productos</a>
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" href="/servicios/listar">Servicios</a>
+                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" id="adminServicio" >Servicios</a>
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" href="/ofertas/listar">Ofertas</a>
-                    </div>
-                </div>
-                <div class="row col-12 justify-content-center grid mt-3 text-center ">
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" href="/usuarios/listar">Usuarios</a>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" href="/ubicaciones/listar">Ubicaciones</a>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" href="/preguntas/listar">Preguntas</a>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" href="/usuarios/ver/perfil/admin/<%= idUsuario %>?token=<%= token %>">Mi Cuenta</a>
+                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" id="adminOferta" >Ofertas</a>
                     </div>
                 </div>
                 <div class="row col-12 justify-content-center grid mt-3 text-center ">
                     <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" href="/productos/vendidos">Productos vendidos</a>
+                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" id="adminUsuario" >Usuarios</a>
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" href="/reservas/historial/reserva">Historial de Reservas</a>
+                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" id="adminUbicacion" >Ubicaciones</a>
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" href="/ventas/reservas/productos">Reservas de productos</a>
+                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" id="adminPregunta" >Preguntas</a>
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" href="/ventas/ver/entregas/admin">Entregas de productos</a>
+                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" id="adminCuenta">Mi Cuenta</a>
+                    </div>
+                </div>
+                <div class="row col-12 justify-content-center grid mt-3 text-center ">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" id="adminVendido" >Productos vendidos</a>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" id="adminHistorialRes" >Historial de Reservas</a>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" id="adminReservaProd" >Reservas de productos</a>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                        <a class="btn d-flex align-items-center justify-content-center text-white rounded-3 btn-custom" id="adminEntregas" >Entregas de productos</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script>
+        // Recibe parámetros de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const idUsuario = urlParams.get('idUser');
+        const token = urlParams.get('token');
+    
+        // Guarda en localStorage
+        if (idUsuario && token) {
+            localStorage.setItem('idUsuario', idUsuario);
+            localStorage.setItem('token', token);
+        }
+
+        // Configura la URL con los datos
+        document.addEventListener('DOMContentLoaded', () => {
+            const storedIdUsuario = localStorage.getItem('idUsuario');
+            const storedToken = localStorage.getItem('token');
+            if (storedIdUsuario && storedToken) {
+                const adminCuenta = document.getElementById('adminCuenta');
+                adminCuenta.href = `/usuarios/ver/perfil/admin/${storedIdUsuario}?token=${storedToken}`;
+
+                const adminReserva = document.getElementById('adminReserva');
+                adminReserva.href = `/reservas/listar/admin?idUser=${storedIdUsuario}&token=${storedToken}`;
+
+                const adminProducto = document.getElementById('adminProducto');
+                adminProducto.href = `/productos/listar?idUser=${storedIdUsuario}&token=${storedToken}`;
+
+                const adminServicio = document.getElementById('adminServicio');
+                adminServicio.href = `/servicios/listar?idUser=${storedIdUsuario}&token=${storedToken}`;
+
+                const adminOferta = document.getElementById('adminOferta');
+                adminOferta.href = `/ofertas/listar?idUser=${storedIdUsuario}&token=${storedToken}`;
+
+                const adminUsuario = document.getElementById('adminUsuario');
+                adminUsuario.href = `/usuarios/listar?idUser=${storedIdUsuario}&token=${storedToken}`;
+
+                const adminUbicacion = document.getElementById('adminUbicacion');
+                adminUbicacion.href = `/ubicaciones/listar?idUser=${storedIdUsuario}&token=${storedToken}`;
+
+                const adminPregunta = document.getElementById('adminPregunta');
+                adminPregunta.href = `/preguntas/listar?idUser=${storedIdUsuario}&token=${storedToken}`;
+
+                const adminVendido = document.getElementById('adminVendido');
+                adminVendido.href = `/productos/vendidos?idUser=${storedIdUsuario}&token=${storedToken}`;
+
+                const adminHistorialRes = document.getElementById('adminHistorialRes');
+                adminHistorialRes.href = `/reservas/historial/reserva?idUser=${storedIdUsuario}&token=${storedToken}`;
+
+                const adminReservaProd = document.getElementById('adminReservaProd');
+                adminReservaProd.href = `/ventas/reservas/productos?idUser=${storedIdUsuario}&token=${storedToken}`;
+
+                const adminEntregas = document.getElementById('adminEntregas');
+                adminEntregas.href = `/ventas/ver/entregas/admin?idUser=${storedIdUsuario}&token=${storedToken}`;
+            }
+        });
+    </script>
 </body>
 </html>

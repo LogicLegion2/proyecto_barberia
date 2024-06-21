@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
+
     if (id) {
         try {
             const response = await fetch(`/productos/obtener/${id}`);
@@ -33,6 +34,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 content: 'text-alert'
             }
         });
+        setTimeout(() => {
+            window.location.href = `/productos/listar?id=${storedIdUsuario}&token=${storedToken}`;
+        }, 1500);
     }
     if (error == 'true') {
         Swal.fire({

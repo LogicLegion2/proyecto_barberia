@@ -16,14 +16,14 @@ export const listarReservasAdmin = async (req, res) => {
                 month: '2-digit',
                 day: '2-digit'
             });
-            const hora = reserva.hora ? reserva.hora.substring(0, 8) : '';
+            const hora = reserva.hora ? reserva.hora.substring(0, 5) : '';
             return {
                 ...reserva,
                 fecha,
                 hora
             };
         })
-        res.render("views.reservas.ejs", { reservas });
+        res.status(200).json({ reservas });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -39,14 +39,14 @@ export const listarReservas = async (req, res) => {
                 month: '2-digit',
                 day: '2-digit'
             });
-            const hora = reserva.hora ? reserva.hora.substring(0, 8) : '';
+            const hora = reserva.hora ? reserva.hora.substring(0, 5) : '';
             return {
                 ...reserva,
                 fecha,
                 hora
             };
         });
-        res.render("views.reservas_cliente.ejs", { reservas });
+        res.status(200).json({ reservas });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -62,7 +62,7 @@ export const crearReserva = async (req, res) => {
     const fecha = req.body.fecha;
     try {
         const [respuesta] = await pool.query(`CALL LL_INSERTAR_RESERVA('${id}','${barbero}','${servicio}','${ubicacion}','${hora}','${comentario}','${fecha}')`);
-        res.json(respuesta);
+        res.status(200).json(respuesta);
     } catch (error) {
         res.status(500).json(error, "La reserva con estos valores ya fue tomada");
     }
@@ -79,14 +79,14 @@ export const historialCita = async (req, res) => {
                 month: '2-digit',
                 day: '2-digit'
             });
-            const hora = reserva.hora ? reserva.hora.substring(0, 8) : '';
+            const hora = reserva.hora ? reserva.hora.substring(0, 5) : '';
             return {
                 ...reserva,
                 fecha,
                 hora
             };
         });
-        res.render("views.historial_citas.ejs", { reservas });
+        res.status(200).json({ reservas });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -96,7 +96,7 @@ export const cancelarReserva = async (req, res) => {
     const id = req.body.id;
     try {
         const respuesta = await pool.query(`CALL LL_CANCELAR_CITA('${id}');`);
-        res.json(respuesta);
+        res.status(200).json(respuesta);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -111,14 +111,14 @@ export const historialReserva = async (req, res) => {
                 month: '2-digit',
                 day: '2-digit'
             });
-            const hora = reserva.hora ? reserva.hora.substring(0, 8) : '';
+            const hora = reserva.hora ? reserva.hora.substring(0, 5) : '';
             return {
                 ...reserva,
                 fecha,
                 hora
             };
         });
-        res.render("views.historial_reservas.ejs", { reservas });
+        res.status(200).json({ reservas });
     } catch (error) {
         res.status(500).json(error);
     }

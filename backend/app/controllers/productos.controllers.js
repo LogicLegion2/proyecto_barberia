@@ -7,7 +7,7 @@ config();
 export const listarProducto = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_PRODUCTOS()"); 
-        res.render("views.productos.ejs", { productos: rows[0]});
+        res.status(200).json({ productos: rows[0]});
     } catch (error) {
         res.status(500).json(error);
     }
@@ -16,7 +16,7 @@ export const listarProducto = async (req, res) => {
 export const listarProductosVendidos = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_PRODUCTOS_VENDIDOS()");
-        res.render("views.prod_vendido.ejs", { productos: rows[0] });
+        res.status(200).json({ productos: rows[0] });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -29,14 +29,11 @@ export const buscarProducto = async (req, res) => {
             return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
         }
         const [rows] = await pool.query(`CALL LL_BUSCAR_PRODUCTO('${desc}')`);
-        res.render('views.productos.ejs', {productos: rows[0]})
+        res.status(200).json({productos: rows[0]})
     } catch (error) {
         res.status(500).json(error);
     }
 };
-
-
-
 
 export const crearProducto = async (req, res) => {
     const input = req.body;
@@ -62,7 +59,7 @@ export const obtenerProducto = async (req, res) => {
     try {
         const respuesta = await pool.query(`CALL LL_OBTENER_PRODUCTO('${id}');`);
         if (respuesta.length > 0) {
-            res.json(respuesta[0][0][0]);
+            res.status(200).json(respuesta[0][0][0]);
         } else {
             res.status(404).json({ mensaje: "Producto no encontrado" });
         }
@@ -70,7 +67,6 @@ export const obtenerProducto = async (req, res) => {
         res.status(500).json(error);
     }
 };
-
 
 export const editarProducto = async (req, res) => {
     const nombre = req.body.nombre;
@@ -80,9 +76,9 @@ export const editarProducto = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_PRODUCTO('${nombre}','${descripcion}','${precio}','${id}');`);
-        res.redirect(`/productos/editar?id=${id}&success=true`);
+        res.status(200).json(respuesta);
     } catch (error) {
-        res.redirect(`/productos/editar?id=${id}&error=true`);
+        res.status(500).json(respuesta);
     }
 }
 

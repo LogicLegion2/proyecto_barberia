@@ -6,7 +6,7 @@ config();
 export const listarServicio = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_SERVICIOS()");
-        res.render("views.servicio.ejs", { servicios: rows[0] });
+        res.status(200).json({ servicios: rows[0]});
     } catch (error) {
         res.status(500).json(error);
     }
@@ -19,7 +19,7 @@ export const buscarServicio = async (req, res) => {
             return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
         }
         const [rows] = await pool.query(`CALL LL_BUSCAR_SERVICIO('${desc}')`);
-        res.render('views.servicio.ejs', {servicios: rows[0]})
+        res.status(200).json({servicios: rows[0]})
     } catch (error) {
         res.status(500).json(error);
     }
@@ -33,7 +33,7 @@ export const crearServicio = async (req, res) => {
     const foto = req.body.foto;
     try {
         const [respuesta] = await pool.query(`CALL LL_INSERTAR_SERVICIO('${nombre}','${descripcion}','${precio}','${foto}');`);
-        res.json(respuesta);
+        res.status(200).json(respuesta);
     } catch (error) {
         res.status(500).json(error, "La reserva con estos valores ya fue tomada");
     }
@@ -45,7 +45,7 @@ export const obtenerServicio = async (req, res) => {
     try {
         const respuesta = await pool.query(`CALL LL_OBTENER_SERVICIO('${id}');`);
         if (respuesta.length > 0) {
-            res.json(respuesta[0][0][0]);
+            res.status(200).json(respuesta[0][0][0]);
         } else {
             res.status(404).json({ mensaje: "servicio no encontrado" });
         }
@@ -62,16 +62,13 @@ export const editarServicio = async (req, res) => {
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_SERVICIO('${tipoServicio}','${descripcion}','${precio}','${id}');`);
-        res.redirect(`/servicios/editar?id=${id}&success=true`);
+        res.status(200).json(respuesta);
     } catch (error) {
-        res.redirect(`/servicios/editar?id=${id}&error=true`);
+        res.status(500).json(respuesta);
     }
 }
 
 export const desactivarServicio = async (req, res) => {
-    const tipoServicio = req.body.tipoServicio;
-    const descripcion = req.body.descripcion;
-    const precio = req.body.precio;
     const id = req.body.id;
 
     try {

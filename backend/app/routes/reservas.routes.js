@@ -5,10 +5,10 @@ import { generarPDF } from "../libs/pdfKit.js";
 
 const rutaReservaAdmin = Router();
 
-rutaReservaAdmin.get("/listar/admin", listarReservasAdmin);
-rutaReservaAdmin.get("/listar/:id", listarReservas);
-rutaReservaAdmin.get("/historial/cita/:id", historialCita);
-rutaReservaAdmin.get("/historial/reserva", historialReserva);
+rutaReservaAdmin.get("/admin", listarReservasAdmin);
+rutaReservaAdmin.get("/:id", listarReservas);
+rutaReservaAdmin.get("/historial/:id", historialCita);
+rutaReservaAdmin.get("/historial/", verificarToken, historialReserva);
 rutaReservaAdmin.post("/crear", crearReserva);
 rutaReservaAdmin.post("/cancelar", cancelarReserva);
 rutaReservaAdmin.get("/pdf", (req, res) => {

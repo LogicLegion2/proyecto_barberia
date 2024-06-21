@@ -1,39 +1,35 @@
 import { Router } from "express";
-import { buscarUsuario, cambiarContrasena, cambiarContrasenaBarbero, cambiarCorreo, cambiarCorreoBarbero, cambiarDescripcionBarbero, cambiarFoto, cambiarFotoBarbero, cambiarNombre, cambiarNombreBarbero, cambiarTelefono, cambiarTelefonoBarbero, crearBarbero, crearUsuario, desactivarUsuario, listarUsuario, login, logout, menuAdmin, menuCliente, mostrarLogin, registroUsuario, validarToken, verPerfil, verPerfilAdmin } from "../controllers/usuarios.controllers.js";
+import { buscarUsuario, cambiarContrasena, cambiarContrasenaBarbero, cambiarCorreo, cambiarCorreoBarbero, cambiarDescripcionBarbero, cambiarFoto, cambiarFotoBarbero, cambiarNombre, cambiarNombreBarbero, cambiarTelefono, cambiarTelefonoBarbero, crearBarbero, crearUsuario, desactivarUsuario, listarUsuario, login, logout, registroUsuario, verPerfil, verPerfilAdmin } from "../controllers/usuarios.controllers.js";
 import { verificarToken } from "../middlewares/oauth.js";
 
 
 const rutaUsuarios = Router();
 
+rutaUsuarios.get("/", verificarToken, listarUsuario);
 rutaUsuarios.get("/registrarp", (req, res) => {
     res.render("views.ingresar_barbero.ejs", { id: req.query.id });
 });
-
 rutaUsuarios.get("/crear", (req, res) => {
     res.render("views.ingresar_usuario.ejs", { id: req.query.id });
 });
-rutaUsuarios.get("/listar", listarUsuario);
 rutaUsuarios.get("/buscar", buscarUsuario);
-rutaUsuarios.get("/menu/cliente", menuCliente);
-rutaUsuarios.get("/menu/admin", verificarToken, menuAdmin);
-rutaUsuarios.get("/ver/perfil/admin/:id", verPerfilAdmin);
-rutaUsuarios.get("/ver/perfil/cliente/:id", verPerfil);
-rutaUsuarios.get("/ver/login", mostrarLogin);
+rutaUsuarios.get("/perfil/admin/:id", verificarToken, verPerfilAdmin);
+rutaUsuarios.get("/perfil/cliente/:id", verPerfil);
 rutaUsuarios.post("/login", login);
 rutaUsuarios.post("/registro", registroUsuario);
 rutaUsuarios.post("/registrar", crearUsuario);
-rutaUsuarios.post("/registrar/barbero", crearBarbero);
-rutaUsuarios.post("/cambiar/nombre/:id", cambiarNombre);
-rutaUsuarios.post("/cambiar/telefono/:id", cambiarTelefono);
-rutaUsuarios.post("/cambiar/correo/:id", cambiarCorreo);
-rutaUsuarios.post("/cambiar/foto/:id", cambiarFoto);
-rutaUsuarios.post("/cambiar/contrasena/:id", cambiarContrasena);
-rutaUsuarios.post("/cambiar/nombre/barbero/:id", cambiarNombreBarbero);
-rutaUsuarios.post("/cambiar/telefono/barbero/:id", cambiarTelefonoBarbero);
-rutaUsuarios.post("/cambiar/correo/barbero/:id", cambiarCorreoBarbero);
-rutaUsuarios.post("/cambiar/foto/barbero/:id", cambiarFotoBarbero);
-rutaUsuarios.post("/cambiar/descripcion/barbero/:id", cambiarDescripcionBarbero);
-rutaUsuarios.post("/cambiar/contrasena/barbero/:id", cambiarContrasenaBarbero);
+rutaUsuarios.post("/barbero", crearBarbero);
+rutaUsuarios.post("/nombre/:id", verificarToken, cambiarNombre);
+rutaUsuarios.post("/telefono/:id", cambiarTelefono);
+rutaUsuarios.post("/correo/:id", cambiarCorreo);
+rutaUsuarios.post("/foto/:id", cambiarFoto);
+rutaUsuarios.post("/contrasena/:id", cambiarContrasena);
+rutaUsuarios.post("/nombre/barbero/:id", cambiarNombreBarbero);
+rutaUsuarios.post("/telefono/barbero/:id", cambiarTelefonoBarbero);
+rutaUsuarios.post("/correo/barbero/:id", cambiarCorreoBarbero);
+rutaUsuarios.post("/foto/barbero/:id", cambiarFotoBarbero);
+rutaUsuarios.post("/descripcion/:id", cambiarDescripcionBarbero);
+rutaUsuarios.post("/contrasena/barbero/:id", cambiarContrasenaBarbero);
 rutaUsuarios.post("/desactivar", desactivarUsuario);
 rutaUsuarios.post("/logout", logout);
 
