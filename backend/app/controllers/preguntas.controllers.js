@@ -26,8 +26,7 @@ export const buscarPregunta = async (req, res) => {
 };
 
 export const crearPregunta = async (req, res) => {
-    const pregunta = req.body.pregunta;
-    const resp = req.body.resp;
+    const { pregunta, respuesta } = req.body;
 
     try {
         const respuesta = await pool.query(`CALL LL_INSERTAR_PREGUNTA('${pregunta}','${resp}');`);
@@ -35,7 +34,7 @@ export const crearPregunta = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
 export const obtenerPregunta = async (req, res) => {
     const id = req.params.id;
@@ -45,7 +44,7 @@ export const obtenerPregunta = async (req, res) => {
         if (respuesta.length > 0) {
             res.status(200).json(respuesta[0][0][0]);
         } else {
-            res.status(404).json({ mensaje: "Preguntada no encontrada" });
+            res.status(404).json({ mensaje: "Pregunta no encontrada" });
         }
     } catch (error) {
         res.status(500).json(error);
@@ -53,9 +52,7 @@ export const obtenerPregunta = async (req, res) => {
 };
 
 export const editarPregunta = async (req, res) => {
-    const pregunta = req.body.pregunta;
-    const resp = req.body.respuesta;
-    const id = req.body.id;
+    const { pregunta, respuesta, id } = req.body;
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_PREGUNTA('${pregunta}','${resp}','${id}');`);
@@ -63,15 +60,15 @@ export const editarPregunta = async (req, res) => {
     } catch (error) {
         res.status(400).json({respuesta});
     }
-}
+};
 
 export const desactivarPregunta = async (req, res) => {
-    const id = req.body.id;
+    const { id } = req.body;
 
     try {
-        const respuesta = await pool.query(`CALL LL_DESACTIVAR_PREGUNTAS('${id}');`);
+        const [respuesta] = await pool.query("CALL LL_DESACTIVAR_PREGUNTAS(?);", [id]);
         res.json(respuesta);
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
