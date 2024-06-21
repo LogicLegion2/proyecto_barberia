@@ -39,18 +39,21 @@ export const buscarProducto = async (req, res) => {
 
 
 export const crearProducto = async (req, res) => {
-    const nombre = req.body.nombre;
-    const descripcion = req.body.descripcion;
-    const precio = req.body.precio;
-    const cantidad = req.body.cantidad;
-    const foto = req.body.foto;
+    const input = req.body;
+    const {
+        nombre,
+        descripcion,
+        precio,
+        cantidad,
+        foto
+    } = input
 
     try {
-        const respuesta = await pool.query(`CALL LL_INSERTAR_PRODUCTO('${nombre}','${descripcion}','${precio}','${cantidad}','${foto}');`);
+        const respuesta = await pool.query("CALL LL_INSERTAR_PRODUCTO(?,?,?,?,?);", [nombre, descripcion, precio, cantidad, foto]);
         res.json(respuesta);
     } catch (error) {
         res.status(500).json(error);
-    }
+    }
 }
 
 export const obtenerProducto = async (req, res) => {
