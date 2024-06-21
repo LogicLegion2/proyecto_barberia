@@ -71,7 +71,6 @@ export const historialCompra= async (req, res) => {
     }
 };
 
-
 export const verCarroCompras = async (req, res) => {
     const id = req.params['id']
 

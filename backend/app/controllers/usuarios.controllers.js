@@ -75,16 +75,14 @@ export const login = async (req, res) => {
     try {
         const respuesta = await pool.query(`CALL LL_LOGIN('${correo}')`);
         if (respuesta[0].length === 0) {
-            error(req, res, 404, "Usuario no existe");
-            return;
+            return res.json("Usuario no existe");
         }
 
         const usuario = respuesta[0][0][0];
         const password = usuario.contrasena;
         const match = await bcrypt.compare(contrasena, password);
         if (!match) {
-            error(req, res, 401, "Clave errada");
-            return;
+            return res.json("Clave errada");
         }
 
         const payload = {
@@ -118,7 +116,7 @@ export const login = async (req, res) => {
         // }
         // res.redirect(redirectUrl);
 
-        res.status(200).json(usuario.idUsuario, token)
+        res.status(200).json({error:false, token})
     } catch (e) {
         res.status(500).json(e);
     }
