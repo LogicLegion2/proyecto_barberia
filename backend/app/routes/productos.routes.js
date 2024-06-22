@@ -4,7 +4,7 @@ import { buscarProducto, crearProducto, desactivarProducto, editarProducto, inse
 
 const rutaProductos = Router();
 
-rutaProductos.get("/", verificarToken, listarProducto);
+rutaProductos.get("/", listarProducto);
 rutaProductos.get("/agregarp", (req, res) => {
     res.render("views.ingresar_producto.ejs", { id: req.query.id });
 });

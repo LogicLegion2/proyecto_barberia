@@ -15,16 +15,6 @@ export const listarBarbero = async (req, res) => {
             pool.query("CALL LL_VER_UBICACIONES()"),
             pool.query("CALL LL_VER_PREGUNTAS()")
         ]);
-        // rowsBar.forEach(barbero => {
-        //     if (barbero.foto) {
-        //         barbero.foto = Buffer.from(barbero.foto).toString('base64');
-        //     }
-        // });
-        // rowsSer.forEach(servicio => {
-        //     if (servicio.fotoServicio) {
-        //         servicio.fotoServicio = Buffer.from(servicio.fotoServicio).toString('base64');
-        //     }
-        // });
         res.status(200).json({ barberos: rowsBar, servicios: rowsSer, productos: rowsPro, ofertas: rowsOfe, ubicaciones: rowsUbi, preguntas: rowsPre });
     } catch (error) {
         res.status(500).json(error);
