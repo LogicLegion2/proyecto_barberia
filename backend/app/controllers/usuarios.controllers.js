@@ -72,17 +72,22 @@ export const registroUsuario = async (req, res) => {
 
 export const login = async (req, res) => {
     const { correo, contrasena } = req.body;
+
+    if (!correo || !contrasena) {
+        return res.status(400).json({ error: true, message: "El correo y la contraseña son requeridos" });
+    }
+
     try {
         const respuesta = await pool.query(`CALL LL_LOGIN('${correo}')`);
-        if (respuesta[0].length === 0) {
-            return res.json("Usuario no existe");
+        if (respuesta[0][0].length === 0) {
+            return res.status(400).json({ error: true, message: "El usuario ingresado no existe" });
         }
 
         const usuario = respuesta[0][0][0];
         const password = usuario.contrasena;
         const match = await bcrypt.compare(contrasena, password);
         if (!match) {
-            return res.json("Clave errada");
+            return res.status(400).json({ error: true, message: "Contraseña incorrecta" });
         }
 
         const payload = {
@@ -98,27 +103,10 @@ export const login = async (req, res) => {
             process.env.TOKEN_PRIVATEKEY,
             { expiresIn: process.env.TOKEN_EXPIRES_IN }
         );
-
-        // let redirectUrl = '';
-        // switch (usuario.rol) {
-        //     case 'barbero':
-        //         redirectUrl = `/barberos/ver/perfil?idUser=${usuario.idUsuario}&token=${token}`;
-        //         break;
-        //     case 'administrador':
-        //         redirectUrl = `/barberos/listar/admin?idUser=${usuario.idUsuario}&token=${token}`;
-        //         break;
-        //     case 'usuario':
-        //         redirectUrl = `/barberos/listar?idUser=${usuario.idUsuario}&token=${token}`;
-        //         break;
-        //     default:
-        //         res.status(401).send('El rol ingresado no es valido');
-        //         return;
-        // }
-        // res.redirect(redirectUrl);
-
-        res.status(200).json({error:false, token})
+        console.log({"TOKEN":token});
+        res.status(200).json({ error: false, token });
     } catch (e) {
-        res.status(500).json(e);
+        res.status(500).json({ error: true, message: "Error interno del servidor" });
     }
 };
 
