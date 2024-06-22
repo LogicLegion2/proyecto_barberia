@@ -1,5 +1,4 @@
-const loguear = async() =>{
-    
+const loguear = async () => {
     const correo = document.getElementById("correo").value;
     const contrasena = document.getElementById("contrasena").value;
     const url = document.getElementById("url").value;
@@ -8,28 +7,45 @@ const loguear = async() =>{
     const urlLogic = sessionStorage.getItem("urlLogic") + "/usuarios/login";
     const options = {
         method: "POST",
-        headers:{
-            "content-type": "application/json"
+        headers: {
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            "correo": correo,
-            "contrasena": contrasena
+            correo: correo,
+            contrasena: contrasena
         })
-    }
+    };
 
-    await fetch(urlLogic, options)
-    .then(res => res.json())
-    .then(data =>{
-        if(data.error == true){
-            alertify.error('Clave errada');
-        }else{
-            //BOTON PARA INGRESAR CON EL TOKEN VERIFICADO:
-            sessionStorage.setItem("token", data.body.token);
-            window.location.href="/cliente/home";
-            console.log(data);
+    try {
+        const response = await fetch(urlLogic, options);
+        const data = await response.json();
+        
+        if (data.error) {
+            Swal.fire({
+                icon: 'warning',
+                title: `<h5 style='color:white; font-family: "Aleo", serif;'>${data.message}</h5>`,
+                showConfirmButton: false,
+                timer: 1500,
+                customClass: {
+                    popup: 'bg-alert',
+                    content: 'text-alert'
+                }
+            });
+        } else {
+            sessionStorage.setItem("token", data.token);
+            window.location.href = "/cliente/home";
         }
-    })
-    .catch(err=>{
+    } catch (err) {
         console.log("Tenemos un problema", err);
-    })
-}
+        Swal.fire({
+            icon: 'error',
+            title: `<h5 style='color:white; font-family: "Aleo", serif;'>Error en la conexión</h5>`,
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'bg-alert',
+                content: 'text-alert'
+            }
+        });
+    }
+};
