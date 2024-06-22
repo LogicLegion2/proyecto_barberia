@@ -36,7 +36,6 @@ const loguear = async () => {
             window.location.href = "/cliente/home";
         }
     } catch (err) {
-        console.log("Tenemos un problema", err);
         Swal.fire({
             icon: 'error',
             title: `<h5 style='color:white; font-family: "Aleo", serif;'>Error en la conexión</h5>`,

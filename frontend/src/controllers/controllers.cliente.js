@@ -1,8 +1,44 @@
 import { config } from "dotenv";
 config();
 
-export const paginaPrincipalCliente = (req, res) => {
-    res.render("views.barbero.ejs")
+const url = process.env.BACKEND_URL
+
+const blobToBase64 = (blob) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(new Blob([blob]));
+    });
+};
+
+export const paginaPrincipalCliente = async (req, res) => {
+    try {
+        const recurso = url + "/barberos";
+        const response = await fetch(recurso);
+        const data = await response.json();
+
+        const barberosConImagenes = await Promise.all(data.barberos.map(async barbero => {
+            if (barbero.foto) {
+                const base64String = await blobToBase64(barbero.foto);
+                console.log(base64String);
+                barbero.foto = `data:image/jpeg;base64,${base64String}`;
+            }
+            return barbero;
+        }));
+
+        res.render("views.barbero.ejs", {
+            barberos: barberosConImagenes,
+            servicios: data.servicios,
+            productos: data.productos,
+            ofertas: data.ofertas,
+            ubicaciones: data.ubicaciones,
+            preguntas: data.preguntas
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error);
+    }
 };
 
 export const menuCliente = (req, res) => {

@@ -82,7 +82,7 @@
                                             <a href="/favoritos/crear/barbero/<% %>" class="btn-fav btn align-self-start position-absolute p-0">
                                                 <img src="/img/amor.png" alt="" class="icon-fav mt-menor">
                                             </a>
-                                            <img src="data:image/jpeg;base64,<%= barbero.foto %>" alt="" class="foto rounded-4 mb-2">
+                                            <img src="<%= barbero.foto %>" alt="" class="foto rounded-4 mb-2">
                                             <p
                                                 class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
                                                 <%= barbero.barbero %>
@@ -145,7 +145,7 @@
                                     <button class="btn-fav btn align-self-start position-absolute p-0">
                                         <img src="/img/amor.png" alt="" class="icon-fav mt-menor-max">
                                     </button>
-                                    <img src="data:image/jpeg;base64,<%= servicio.fotoServicio %>" alt="" class="foto rounded-4 mb-2">
+                                    <img src="<%= servicio.fotoServicio %>" alt="" class="foto rounded-4 mb-2">
                                     <p
                                         class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
                                         <%= servicio.tipoServicio %></p>
