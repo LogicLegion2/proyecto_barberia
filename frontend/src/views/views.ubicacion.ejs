@@ -89,7 +89,7 @@
           <% ubicaciones.forEach(ubicacion=> { %>
             <li class="opc" onclick="seleccionarUbicacion('<%= ubicacion.idUbicacion %>')">
               <div class="tarjeta tarjeta-sma justify-content-around card d-flex align-items-center mb-5 p-2 rounded-4">
-                <img src="<%= ubicacion.foto %>" alt="" class="foto rounded-4 mb-2">
+                <img src="<%= ubicacion.fotoUbicacion %>" alt="" class="foto rounded-4 mb-2">
                 <p
                   class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
                   <%= ubicacion.titulo %>
@@ -117,7 +117,7 @@
       <a class="btn-edicion btn p-0 me-4 mb-3" onclick="redireccionarEditar()">
         <img src="/img/editar.png" alt="" class="img-edicion">
       </a>
-      <a class="btn-edicion btn p-0 me-4 mb-3">
+      <a  href="/ubicaciones/crearu"class="btn-edicion btn p-0 me-4 mb-3">
         <img src="/img/mas.png" alt="" class="img-edicion">
       </a>
     </div>

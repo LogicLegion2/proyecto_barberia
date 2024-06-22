@@ -21,7 +21,7 @@
     <div class="row">
       <nav class="navbar navbar-dark">
         <div class="container-fluid d-flex flex-row-reverse">
-          <a class="navbar-brand me-auto ms-auto fs-1 fw-bold" href="#">Nueva Ubicación</a>
+          <a class="navbar-brand me-auto ms-auto fs-1 fw-bold" href="">Nueva Ubicación</a>
           <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -96,16 +96,16 @@
       <div class="justify-content-center pt-4 d-flex">
         <div class="col-lg-6 col-10">
           <form>
-            <input type="text" id="numero_tarjeta" class="text-white mt-4 text-center border-0 form-control"
-              placeholder="Ingrese el titulo">
-            <input type="text" id="numero_tarjeta" class="text-white mt-4 text-center border-0 form-control"
-              placeholder="Ingrese la dirección">
-            <input type="text" id="numero_tarjeta" class="text-white mt-4 text-center border-0 form-control"
-              placeholder="Ingrese la descripción">
-            <label for="formFile" class="form-label mt-4 custom-text-secondary">Seleccione una imagen:</label>
-            <input type="file" class="custom-text-secondary text-center border-0 form-control" id="formFile">
-            <button type="submit"
-              class="mt-5 form-container fw-bold btn fs-5 w-100 btn-form text-white btn-color">Agregar</button>
+            <input type="text" id="agregar_titulo" class="text-white mt-4 text-center border-0 form-control"
+            placeholder="Ingresa el titulo">
+          <input type="text" id="agregar_ubicacion" class="text-white mt-4 text-center border-0 form-control"
+            placeholder="Ingresa la descripción">
+          <input type="text" id="agregar_descripcion" class="text-white mt-4 text-center border-0 form-control"
+          placeholder="Ingresa la descripción">
+          <input type="text" id="agregar_imagen" class="text-white mt-4 text-center border-0 form-control"
+          placeholder="Ingresa URL de la imagen">
+          <button type="submit"
+            class="mt-5 form-container fw-bold btn fs-5 w-100 btn-form text-white btn-color" id="formAgregarUbicacion">Agregar</button>
           </form>
         </div>
       </div>
@@ -117,6 +117,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
     integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
     crossorigin="anonymous"></script>
+    <script src="/js/agregar_ubicacion.js"></script>
 </body>
 
 </html>
