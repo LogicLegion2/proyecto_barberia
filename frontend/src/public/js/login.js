@@ -33,6 +33,8 @@ const loguear = async () => {
             });
         } else {
             sessionStorage.setItem("token", data.token);
+            sessionStorage.setItem("id", data.id);
+            document.cookie = `id=${data.id}; path=/`;
             window.location.href = "/cliente/home";
         }
     } catch (err) {

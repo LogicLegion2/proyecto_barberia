@@ -13,22 +13,31 @@ const blobToBase64 = (blob) => {
 };
 
 export const paginaPrincipalCliente = async (req, res) => {
+    const { desc, tipo} = req.query
+    let recurso;
+
+    recurso = url + `/barberos`;
+
+    if (desc && tipo) {
+        recurso = url + `/barberos/buscar?desc=${desc}&tipo=${tipo}`;
+    }
+
     try {
-        const recurso = url + "/barberos";
         const response = await fetch(recurso);
         const data = await response.json();
 
-        const barberosConImagenes = await Promise.all(data.barberos.map(async barbero => {
-            if (barbero.foto) {
-                const base64String = await blobToBase64(barbero.foto);
-                console.log(base64String);
-                barbero.foto = `data:image/jpeg;base64,${base64String}`;
-            }
-            return barbero;
-        }));
+        // const barberosConImagenes = await Promise.all(data.barberos.map(async barbero => {
+        //     if (barbero.foto) {
+        //         const base64String = await blobToBase64(barbero.foto);
+        //         console.log(base64String);
+        //         barbero.foto = `data:image/jpeg;base64,${base64String}`;
+        //     }
+        //     return barbero;
+        // }));
 
+        console.log(data.ubicaciones);
         res.render("views.barbero.ejs", {
-            barberos: barberosConImagenes,
+            barberos: data.barberos,
             servicios: data.servicios,
             productos: data.productos,
             ofertas: data.ofertas,
@@ -53,36 +62,162 @@ export const mostrarPerfilBarbero = (req, res) => {
     res.render("views.perfil_barbero.ejs")
 };
 
-export const mostrarListaFavoritos = (req, res) => {
-    res.render("views.lista_fav.ejs")
+export const mostrarListaFavoritos = async (req, res) => {
+    const id = req.cookies.id;
+
+    try {
+        const recurso = url + `/favoritos/${id}`;
+        const response = await fetch(recurso);
+        const data = await response.json();
+        console.log(data.favoritos);
+        res.render("views.lista_fav.ejs", {
+            favoritos: data.favoritos
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error);
+    }
 };
 
-export const mostrarReserva = (req, res) => {
-    res.render("views.reservas_cliente.ejs")
+export const mostrarReserva = async (req, res) => {
+    const id = req.cookies.id;
+
+    if (!id) {
+        Swal.fire({
+            icon: 'error',
+            title: `<h5 style='color:white; font-family: "Aleo", serif;'>El id del usuario no ha sido proporcionado</h5>`,
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'bg-alert',
+                content: 'text-alert'
+            }
+        });
+    }
+    try {
+        const recurso = url + `/reservas/${id}`;
+        const response = await fetch(recurso);
+        const data = await response.json();
+
+        res.render("views.reservas_cliente.ejs", {
+            reservas: data.reservas,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error);
+    }
 };
 
-export const mostrarEntregas = (req, res) => {
-    res.render("views.entrega_productos_cliente.ejs")
+export const mostrarEntregas = async (req, res) => {
+    const id = req.cookies.id;
+
+    try {
+        const recurso = url + `/ventas/entregas/${id}`;
+        const response = await fetch(recurso);
+        const data = await response.json();
+
+        res.render("views.entrega_productos_cliente.ejs", {
+            entregas: data.entregas
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error);
+    }
 };
 
 export const realizarReembolso = (req, res) => {
     res.render("views.reembolso.ejs")
 };
 
-export const mostrarHistorialCitas = (req, res) => {
-    res.render("views.historial_citas.ejs")
+export const mostrarHistorialCitas = async (req, res) => {
+    const id = req.cookies.id;
+
+    if (!id) {
+        Swal.fire({
+            icon: 'error',
+            title: `<h5 style='color:white; font-family: "Aleo", serif;'>El id del usuario no ha sido proporcionado</h5>`,
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'bg-alert',
+                content: 'text-alert'
+            }
+        });
+    }
+    try {
+        const recurso = url + `/reservas/historial/${id}`;
+        const response = await fetch(recurso);
+        const data = await response.json();
+
+        res.render("views.historial_citas.ejs", {
+            reservas: data.reservas,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error);
+    }
 };
 
-export const mostrarHistorialCompras = (req, res) => {
-    res.render("views.historial_compras.ejs")
+export const mostrarHistorialCompras = async (req, res) => {
+    const id = req.cookies.id;
+
+    if (!id) {
+        Swal.fire({
+            icon: 'error',
+            title: `<h5 style='color:white; font-family: "Aleo", serif;'>El id del usuario no ha sido proporcionado</h5>`,
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'bg-alert',
+                content: 'text-alert'
+            }
+        });
+    }
+    try {
+        const recurso = url + `/ventas/historial/${id}`;
+        const response = await fetch(recurso);
+        const data = await response.json();
+
+        res.render("views.historial_compras.ejs", {
+            compras: data.compras,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error);
+    }
 };
 
-export const mostrarCarritoCompras = (req, res) => {
-    res.render("views.carrito.ejs")
+export const mostrarCarritoCompras = async (req, res) => {
+    const id = req.cookies.id;
+
+    try {
+        const recurso = url + `/ventas/carrito/${id}`;
+        const response = await fetch(recurso);
+        const data = await response.json();
+
+        res.render("views.carrito.ejs", {
+            productos: data.productos
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error);
+    }
 };
 
-export const perfilCliente = (req, res) => {
-    res.render("views.perfil_cliente.ejs")
+export const perfilCliente = async (req, res) => {
+    const id = req.cookies.id;
+
+    try {
+        const recurso = url + `/usuarios/cliente/${id}`;
+        const response = await fetch(recurso);
+        const data = await response.json();
+        res.render("views.perfil_cliente.ejs", {
+            clientes: data.clientes
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error);
+    }
 };
 
 export const realizarCompra = (req, res) => {

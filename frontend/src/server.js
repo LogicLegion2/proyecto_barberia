@@ -6,6 +6,7 @@ import path from "path";
 import morgan from "morgan";
 import cors from "cors";
 import { fileURLToPath } from 'url';
+import cookieParser from "cookie-parser";
 config();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -15,6 +16,7 @@ const server = express();
 
 server.use(morgan("dev"));
 server.use(cors());
+server.use(cookieParser());
 server.set("view engine", "ejs");
 server.set("views", path.join(__dirname + "/views"))
 server.set("port", process.env.PORT || 3000);

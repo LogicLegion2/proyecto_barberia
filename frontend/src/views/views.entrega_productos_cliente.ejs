@@ -93,15 +93,17 @@
                         </div>
                     </div>
                 </nav>
-                <% if (entregas[0] && entregas[0].length> 0) { %>
+                <% if (entregas && entregas.length> 0) { %>
                     <div class="d-grid gap-3 m-3 ">
-                        <% entregas[0].forEach(entrega=> { %>
+                        <% entregas.forEach(entrega=> { %>
                             <div class="p-2 ps-3 custom-bg-dark rounded-4">
                                 <b class="text-secondary">Productos: </b><i class="text-light"><%= entrega.productos %></i><br>
                                 <b class="text-secondary">Valor a Pagar: </b><i class="text-light">$<%= entrega.precio %></i><br>
                             </div>
                         <% }); %>
                     </div>
+                    <% } else { %>
+                        <p class="w-100 text-center text-white fs-5 mt-5 pt-5">No exiten entregas.</p>
                 <% } %>
             </div>
         </div>

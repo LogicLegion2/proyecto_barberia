@@ -432,6 +432,10 @@ a {
     background-color: #261E71;
 }
 
+.cursor-pointer{
+    cursor: pointer;
+}
+
 @media screen and (max-width: 600px) {
     .main-title{
         font-size: 60px;
