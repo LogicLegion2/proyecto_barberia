@@ -15,16 +15,6 @@ export const listarBarbero = async (req, res) => {
             pool.query("CALL LL_VER_UBICACIONES()"),
             pool.query("CALL LL_VER_PREGUNTAS()")
         ]);
-        // rowsBar.forEach(barbero => {
-        //     if (barbero.foto) {
-        //         barbero.foto = Buffer.from(barbero.foto).toString('base64');
-        //     }
-        // });
-        // rowsSer.forEach(servicio => {
-        //     if (servicio.fotoServicio) {
-        //         servicio.fotoServicio = Buffer.from(servicio.fotoServicio).toString('base64');
-        //     }
-        // });
         res.status(200).json({ barberos: rowsBar, servicios: rowsSer, productos: rowsPro, ofertas: rowsOfe, ubicaciones: rowsUbi, preguntas: rowsPre });
     } catch (error) {
         res.status(500).json(error);
@@ -63,16 +53,6 @@ export const buscar = async (req, res) => {
             preguntas: []
         };
 
-        // Función para convertir imágenes a base64
-        const convertirImagenesABase64 = (rows, campoImagen) => {
-            return rows.map(row => {
-                if (row[campoImagen]) {
-                    row[campoImagen] = Buffer.from(row[campoImagen]).toString('base64');
-                }
-                return row;
-            });
-        };
-
         // Obtener todos los datos iniciales
         const [
             [rowsBar], [rowsSer], [rowsPro], [rowsOfe], [rowsUbi], [rowsPre]
@@ -86,11 +66,11 @@ export const buscar = async (req, res) => {
         ]);
 
         // Convertir imágenes a base64
-        resultados.barberos = convertirImagenesABase64(rowsBar, 'foto');
-        resultados.servicios = convertirImagenesABase64(rowsSer, 'fotoServicio');
-        resultados.productos = convertirImagenesABase64(rowsPro, 'Producto');
-        resultados.ofertas = convertirImagenesABase64(rowsOfe, 'fotoOferta');
-        resultados.ubicaciones = convertirImagenesABase64(rowsUbi, 'fotoUbicacion');
+        resultados.barberos = rowsBar;
+        resultados.servicios = rowsSer;
+        resultados.productos = rowsPro;
+        resultados.ofertas = rowsOfe;
+        resultados.ubicaciones = rowsUbi;
         resultados.preguntas = rowsPre;
 
         // Realizar la búsqueda específica
@@ -108,15 +88,15 @@ export const buscar = async (req, res) => {
             case "oferta":
                 query = `CALL LL_BUSCAR_OFERTA('${desc}')`;
                 break;
-            case "ubicacion":
+            case "ubicacione":
                 query = `CALL LL_BUSCAR_UBICACION('${desc}')`;
                 break;
             default:
                 return res.status(400).json({ message: "Tipo de búsqueda no válido" });
         }
 
-        // const [rows] = await pool.query(query);
-        // resultados[tipo + 's'] = convertirImagenesABase64(rows, tipo === 'barbero' ? 'foto' : `foto${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`);
+        const [searchResults] = await pool.query(query);
+        resultados[tipo + 's'] = searchResults;
 
         res.json(resultados);
     } catch (error) {
@@ -157,6 +137,7 @@ export const perfilBarbero = async (req, res) => {
 //Perfil del barbero desde la vista de clientes 
 export const verPerfilBarbero = async (req, res) => {
     const id = req.params['id']
+    console.log({'ID DE PERFIL':id});
     try {
         const [
             [rowsBar], [rowsCom]

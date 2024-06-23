@@ -97,6 +97,7 @@ export const verEntregas = async (req, res) => {
     const id = req.params['id']
     try {
         const [rows] = await pool.query(`CALL LL_VER_ENTREGAS('${id}')`);
+        console.log(rows[0][0]);
         const entregas = rows[0].map(entrega => {
             const fecha = new Date(entrega.fecha).toLocaleDateString('es-ES', {
                 year: 'numeric',

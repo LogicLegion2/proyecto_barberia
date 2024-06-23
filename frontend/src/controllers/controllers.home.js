@@ -2,7 +2,11 @@ import { config } from "dotenv";
 config();
 
 export const login = (req, res) => {
-    res.render("views.iniciar_sesion.ejs")
+    const url = process.env.BACKEND_URL;
+    const options ={
+        url: url
+    };
+    res.render("views.iniciar_sesion.ejs",options)
 };
 
 export const registro = (req, res) => {
