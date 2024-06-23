@@ -103,8 +103,10 @@ export const login = async (req, res) => {
             process.env.TOKEN_PRIVATEKEY,
             { expiresIn: process.env.TOKEN_EXPIRES_IN }
         );
-        console.log({"TOKEN":token});
-        res.status(200).json({ error: false, token });
+        
+        const id = usuario.idUsuario
+        console.log(id);
+        res.status(200).json({ error: false, token, id });
     } catch (e) {
         res.status(500).json({ error: true, message: "Error interno del servidor" });
     }

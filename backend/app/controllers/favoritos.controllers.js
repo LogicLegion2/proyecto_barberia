@@ -5,17 +5,16 @@ config();
 
 export const listarFavoritos = async (req, res) => {
     const id = req.params['id']
-
     try {
 
         const [
             [rowsBar],[rowsPro],[rowsOfe],[rowsSer]
-        ] = await Promise.all[
-            await pool.query(`CALL LL_VER_BARBERO_FAVORITO('${id}')`),
-            await pool.query(`CALL LL_VER_PRODUCTO_FAVORITO('${id}')`),
-            await pool.query(`CALL LL_VER_OFERTA_FAVORITO('${id}')`),
-            await pool.query(`CALL LL_VER_SERVICIO_FAVORITO('${id}')`)
-        ]
+        ] = await Promise.all([
+            await pool.query(`CALL LL_VER_BARBERO_FAVORITO('${id}');`),
+            await pool.query(`CALL LL_VER_PRODUCTO_FAVORITO('${id}');`),
+            await pool.query(`CALL LL_VER_OFERTA_FAVORITO('${id}');`),
+            await pool.query(`CALL LL_VER_SERVICIO_FAVORITO('${id}');`)
+        ])
         // Se adecua favoritos para que no muestre error si no encuentra informacion en alguna consulta
         const favoritos = {
             barbero: rowsBar[0] || [],
@@ -23,7 +22,7 @@ export const listarFavoritos = async (req, res) => {
             oferta: rowsOfe[0] || [],
             servicio: rowsSer[0] || []
         };
-
+        console.log(favoritos);
         res.status(200).json({ favoritos });
     } catch (error) {
         res.status(500).json(error);
