@@ -115,9 +115,15 @@ export const verCalendario = async (req, res) => {
             pool.query(`CALL LL_VER_PERFIL_BARBERO('${id}');`),
             pool.query(`CALL LL_VER_RESERVA_BARBERO('${id}');`)
         ])
+        const reservasFormateadas = rowsRes[0].map(reserva => ({
+            ...reserva,
+            fecha: reserva.fecha.toISOString().split('T')[0], // Formato YYYY-MM-DD
+            hora: reserva.hora.split('.')[0] // Formato HH:mm:ss
+        }));
 
-        res.json( { barberos: rowsBar[0][0], reservas: rowsRes[0][0] })
+        res.json({ barberos: rowsBar[0], reservas: reservasFormateadas });
     } catch (error) {
+        console.error(error);
         res.status(500).json(error);
     }
 }
