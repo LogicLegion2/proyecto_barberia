@@ -4,9 +4,18 @@ function seleccionarServicio(id) {
 function redireccionarEditar() {
     const id = localStorage.getItem('servicioSeleccionado');
     if (id) {
-        window.location.href = `http://localhost:3000/servicios/editar?id=${id}`;
+        window.location.href = `/admin/servicio/editar?id=${id}`;
     } else {
-        alert('Seleccione un servicio primero');
+        Swal.fire({
+            icon: 'warning',
+            title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Seleccione un servicio primero' + "</h5>",
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'bg-alert',
+                content: 'text-alert'
+            }
+        });
     }
 }
 
@@ -26,8 +35,9 @@ async function eliminarServicio() {
         }
     }).then(async (result) => {
         if (result.isConfirmed) {
+            const urlLogic = sessionStorage.getItem("urlLogic") + "/servicios/desactivar";
             if (id) {
-                const respuesta = await fetch('http://localhost:3000/servicios/desactivar', {
+                const respuesta = await fetch(urlLogic, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

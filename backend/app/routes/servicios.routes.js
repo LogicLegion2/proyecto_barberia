@@ -5,10 +5,10 @@ import { verificarToken } from "../middlewares/oauth.js";
 
 const rutaServicios = Router();
 
-rutaServicios.get("/", verificarToken, listarServicio);
+rutaServicios.get("/", listarServicio);
 rutaServicios.get("/buscar", buscarServicio);
 rutaServicios.post("/crear", crearServicio);
-rutaServicios.get("/:id", obtenerServicio);
+rutaServicios.get("/obtener/:id", obtenerServicio);
 rutaServicios.post("/editar", editarServicio);
 rutaServicios.post("/desactivar", desactivarServicio);
 

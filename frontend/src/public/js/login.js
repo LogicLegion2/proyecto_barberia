@@ -19,7 +19,7 @@ const loguear = async () => {
     try {
         const response = await fetch(urlLogic, options);
         const data = await response.json();
-        
+
         if (data.error) {
             Swal.fire({
                 icon: 'warning',
@@ -34,8 +34,22 @@ const loguear = async () => {
         } else {
             sessionStorage.setItem("token", data.token);
             sessionStorage.setItem("id", data.id);
+            sessionStorage.setItem("rol", data.rol);
             document.cookie = `id=${data.id}; path=/`;
-            window.location.href = "/cliente/home";
+
+            switch (data.rol) {
+                case 'administrador':
+                    window.location.href = "/admin/home";
+                    break;
+                case 'usuario':
+                    window.location.href = "/cliente/home";
+                    break;
+                case 'barbero':
+                    window.location.href = "/barbero/home";
+                    break;
+                default:
+                    window.location.href = "/home/login";
+            }
         }
     } catch (err) {
         Swal.fire({
@@ -48,5 +62,44 @@ const loguear = async () => {
                 content: 'text-alert'
             }
         });
+    }
+};
+
+const cerrarSesion = async () => {
+    const token = sessionStorage.getItem("token");
+
+    if (!token) {
+        console.log("No hay token almacenado");
+        return;
+    }
+
+    const urlLogout = sessionStorage.getItem("urlLogic") + "/usuarios/logout";
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "x-access-token": token  // Incluir el token en los headers
+        }
+    };
+
+    try {
+        const response = await fetch(urlLogout, options);
+        const data = await response.json();
+
+        if (response.status === 200) {
+            // Limpiar datos de sesión
+            sessionStorage.removeItem("token");
+            sessionStorage.removeItem("id");
+            sessionStorage.removeItem("rol");
+            document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+            // Redireccionar al login
+            window.location.href = "/home/login";
+        } else {
+            // Manejar errores
+            console.error("Error al cerrar sesión:", data.message);
+        }
+    } catch (err) {
+        console.error("Error de red:", err);
     }
 };

@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('id');
+    const id = localStorage.getItem('ofertaSeleccionada');
+
     if (id) {
+        const urlLogic = sessionStorage.getItem("urlLogic") + `/ofertas/obtener/${id}`;
+
         try {
-            const response = await fetch(`/ofertas/obtener/${id}`);
+            const response = await fetch(urlLogic);
             const data = await response.json();
             console.log(data);
             document.getElementById('oferta_id').value = id;
@@ -21,31 +23,60 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error('Error fetching location data:', error);
         }
     }
+    document.getElementById('editForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = {
+            id: document.getElementById('oferta_id').value,
+            producto1: document.getElementById('producto1').value,
+            producto2: document.getElementById('producto2').value,
+            descripcion: document.getElementById('descripcion').value,
+            precio: document.getElementById('precio').value
+        };
 
-    // Alerta si la edición fue exitosa o hubo algún error
-    const success = params.get('success');
-    const error = params.get('error');
-    if (success === 'true') {
-        Swal.fire({
-            icon: 'success',
-            title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Oferta editada exitosamente' + "</h5>",
-            showConfirmButton: false,
-            timer: 1500,
-            customClass: {
-                popup: 'bg-alert',
-                content: 'text-alert'
+        try {
+            const response = await fetch(sessionStorage.getItem("urlLogic") + '/productos/editar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Oferta editada exitosamente' + "</h5>",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    customClass: {
+                        popup: 'bg-alert',
+                        content: 'text-alert'
+                    }
+                });
+                setTimeout(() => {
+                    window.location.href = `/admin/oferta`;
+                }, 1500);
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Intentalo de nuevo más tarde' + "</h5>",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    customClass: {
+                        popup: 'bg-alert',
+                    }
+                });
             }
-        });
-    }
-    if (error == 'true') {
-        Swal.fire({
-            icon: 'error',
-            title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Intentalo de nuevo más tarde' + "</h5>",
-            showConfirmButton: false,
-            timer: 1500,
-            customClass: {
-                popup: 'bg-alert',
-            }
-        });
-    }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Error al editar la oferta' + "</h5>",
+                showConfirmButton: false,
+                timer: 1500,
+                customClass: {
+                    popup: 'bg-alert',
+                }
+            });
+        }
+    });
 });

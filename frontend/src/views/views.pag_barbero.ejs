@@ -22,12 +22,14 @@
         <div class="row vh-100">
             <div class="d-flex col-lg-4 col-sm-12 flex-column align-items-center mt-5 p-0 ps-lg-5 ps-sm-0 cont-perf">
                 <% if (barberos && barberos.length> 0) { %>
+                    <% barberos.forEach(barbero=> { %>
                     <div class="col-sm-4 d-flex justify-content-center">
-                        <img src="<%= barberos.foto %>" class="border-0 rounded-4 img-perfil" alt="...">
+                        <img src="<%= barbero.fotoPerfil %>" class="border-0 rounded-4 img-perfil" alt="...">
                     </div>
-                    <a href="perfil_barbero_editar" class="btn btn-color text-white mt-5 rounded-4 p-2 w-50">Mi
+                    <a href="/barbero/perfil" class="btn btn-color text-white mt-5 rounded-4 p-2 w-50">Mi
                         Cuenta</a>
-                    <a href="/reservas/pdf" class="btn btn-color text-white mt-5 rounded-4 p-2 w-50">Exportar pdf</a>
+                    <a href="<%= url + '/reservas/pdf/barbero/' + barbero.idBarbero  %>" class="btn btn-color text-white mt-5 rounded-4 p-2 w-50">Exportar pdf</a>
+                    <% }); %>
                 <% } %>
             </div>
             <div class="col-lg-8 col-sm-12 justify-content-center d-flex">
@@ -39,11 +41,11 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
                 <script>
                     $(document).ready(function () {
-                        const eventos = <%-   JSON.stringify(reservas) %>;
+                        const eventos = <%- JSON.stringify(reservas) %>;
 
                         // Formatear eventos de FullCalendar para poner los de la api
                         const eventosFormateados = eventos.map(evento => ({
-                            title: `${evento.cliente} - ${evento.ubicacion}`,
+                            title: evento.ubicacion,
                             start: `${evento.fecha}T${evento.hora}`,
                         }));
 
@@ -53,7 +55,7 @@
                                 center: 'title',
                                 right: 'month,agendaWeek,agendaDay'
                             },
-                            defaultDate: '2024-06-17',
+                            defaultDate: moment().format('YYYY-MM-DD'),
                             navLinks: true,
                             editable: true,
                             eventLimit: true,

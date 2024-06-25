@@ -5,7 +5,7 @@ import { verificarToken } from "../middlewares/oauth.js";
 
 const rutaUsuarios = Router();
 
-rutaUsuarios.get("/", verificarToken, listarUsuario);
+rutaUsuarios.get("/", listarUsuario);
 rutaUsuarios.get("/registrarp", (req, res) => {
     res.render("views.ingresar_barbero.ejs", { id: req.query.id });
 });
@@ -19,7 +19,7 @@ rutaUsuarios.post("/login", login);
 rutaUsuarios.post("/registro", registroUsuario);
 rutaUsuarios.post("/registrar", crearUsuario);
 rutaUsuarios.post("/barbero", crearBarbero);
-rutaUsuarios.post("/nombre/:id", verificarToken, cambiarNombre);
+rutaUsuarios.post("/nombre/:id", cambiarNombre);
 rutaUsuarios.post("/telefono/:id", cambiarTelefono);
 rutaUsuarios.post("/correo/:id", cambiarCorreo);
 rutaUsuarios.post("/foto/:id", cambiarFoto);

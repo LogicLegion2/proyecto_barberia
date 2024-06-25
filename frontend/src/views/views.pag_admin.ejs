@@ -21,7 +21,7 @@
                     <a class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
                         aria-label="Toggle navigation">
-                        <a class="ms-5" id="adminMenu" ><img class="icon-menu btn-home" src="/img/menu.png" alt=""></a>
+                        <a class="ms-5" href="/admin/menu" ><img class="icon-menu btn-home" src="/img/menu.png" alt=""></a>
                     </a>
                 </div>
             </nav>
@@ -49,29 +49,7 @@
         </section>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    <script>
-        // Recibe parámetros de la URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const idUsuario = urlParams.get('idUser');
-        const token = urlParams.get('token');
-    
-        // Guarda en localStorage
-        if (idUsuario && token) {
-            localStorage.setItem('idUsuario', idUsuario);
-            localStorage.setItem('token', token);
-        }
-
-        // Configura la URL con los datos
-        document.addEventListener('DOMContentLoaded', () => {
-            const storedIdUsuario = localStorage.getItem('idUsuario');
-            const storedToken = localStorage.getItem('token');
-            if (storedIdUsuario && storedToken) {
-                const adminMenu = document.getElementById('adminMenu');
-                adminMenu.href = `/usuarios/menu/admin?idUser=${storedIdUsuario}&token=${storedToken}`;
-            }
-        });
-    </script>    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>   
 </body>
 
 </html>

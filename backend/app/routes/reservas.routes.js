@@ -1,14 +1,14 @@
 import { Router } from "express";
 import { cancelarReserva, crearReserva, historialCita, historialReserva, listarReservas, listarReservasAdmin } from "../controllers/reservas.controllers.js";
 import { verificarToken } from "../middlewares/oauth.js";
-import { generarPDF } from "../libs/pdfKit.js";
+import { generarPDF, generarPDFBarbero } from "../libs/pdfKit.js";
 
 const rutaReservaAdmin = Router();
 
 rutaReservaAdmin.get("/admin", listarReservasAdmin);
-rutaReservaAdmin.get("/:id", listarReservas);
+rutaReservaAdmin.get("/listar/:id", listarReservas);
 rutaReservaAdmin.get("/historial/:id", historialCita);
-rutaReservaAdmin.get("/historial/", verificarToken, historialReserva);
+rutaReservaAdmin.get("/historial/", historialReserva);
 rutaReservaAdmin.post("/crear", crearReserva);
 rutaReservaAdmin.post("/cancelar", cancelarReserva);
 rutaReservaAdmin.get("/pdf", (req, res) => {
@@ -23,15 +23,15 @@ rutaReservaAdmin.get("/pdf", (req, res) => {
         () => stream.end()
     );
 })
-// rutaReservaAdmin.get("/pdf/barbero", (req, res) => {
-//     const id = req.query.id;
-//     res.setHeader("Content-Type", "application/pdf");
-//     res.setHeader("Content-Disposition", "attachment; filename=Reservas.pdf");
-//     generarPDFBarbero({id}, (chunk) => {
-//         res.write(chunk, 'binary');
-//     }, () => { 
-//       res.end();
-//     });
-// })
+rutaReservaAdmin.get("/pdf/barbero/:id", (req, res) => {
+    const id = req.params['id'];
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", "attachment; filename=Reservas.pdf");
+    generarPDFBarbero({id}, (chunk) => {
+        res.write(chunk, 'binary');
+    }, () => { 
+      res.end();
+    });
+})
 
 export default rutaReservaAdmin;
