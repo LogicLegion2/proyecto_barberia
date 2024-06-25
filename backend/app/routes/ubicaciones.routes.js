@@ -6,9 +6,6 @@ import { verificarToken } from "../middlewares/oauth.js";
 const rutaUbicaciones = Router();
 
 rutaUbicaciones.get("/", verificarToken, listarUbicacion);
-rutaUbicaciones.get("/crearu", (req, res) => {
-    res.render("views.ingresar_ubicacion.ejs", { id: req.query.id });
-});
 rutaUbicaciones.get("/buscar", buscarUbicacion);
 rutaUbicaciones.post("/crear", crearUbicacion);
 rutaUbicaciones.get("/:id", obtenerUbicacion);
