@@ -5,9 +5,6 @@ import { verificarToken } from "../middlewares/oauth.js";
 const rutaPreguntas = Router();
 
 rutaPreguntas.get("/", listarPregunta);
-rutaPreguntas.get("/traer", (req, res) => {
-    res.render("views.ingresar_pregunta.ejs", { id: req.query.id });
-});
 rutaPreguntas.get("/buscar", buscarPregunta);
 rutaPreguntas.post("/crear", crearPregunta);
 rutaPreguntas.get("/:id", obtenerPregunta);

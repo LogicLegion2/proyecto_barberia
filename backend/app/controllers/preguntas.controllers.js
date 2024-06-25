@@ -29,8 +29,8 @@ export const crearPregunta = async (req, res) => {
     const { pregunta, respuesta } = req.body;
 
     try {
-        const respuesta = await pool.query(`CALL LL_INSERTAR_PREGUNTA('${pregunta}','${resp}');`);
-        res.status(200).json(respuesta);
+        const dbrespuesta = await pool.query(`CALL LL_INSERTAR_PREGUNTA('${pregunta}','${respuesta}');`);
+        res.status(200).json(dbrespuesta);
     } catch (error) {
         res.status(500).json(error);
     }

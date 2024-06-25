@@ -29,7 +29,7 @@ document.getElementById("crearPregunta").addEventListener("click", (e) => {
         // Verifica si la respuesta está vacía antes de intentar analizarla como JSON
         if (data) {
             console.log("Pregunta agregada:", data); // Muestra en consola la respuesta del servidor
-            location.reload(); // Recarga la página después de agregar la pregunta (opcional)
+            //  location.reload(); Recarga la página después de agregar la pregunta (opcional)
         } else {
             console.error("Fetch error: Respuesta vacía o no válida");
         }

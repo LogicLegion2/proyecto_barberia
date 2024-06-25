@@ -25,6 +25,7 @@ export const crearProducto = (req, res) => {
     res.render("views.ingresar_producto.ejs")
 };
 
+
 export const mostrarServicio = (req, res) => {
     res.render("views.servicio.ejs")
 };
