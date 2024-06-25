@@ -18,8 +18,9 @@ async function eliminarUsuario() {
         }
     }).then(async (result) => {
         if (result.isConfirmed) {
+            const urlLogic = sessionStorage.getItem("urlLogic") + "/usuarios/desactivar";
             if (id) {
-                const respuesta = await fetch('http://localhost:3000/usuarios/desactivar', {
+                const respuesta = await fetch(urlLogic, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

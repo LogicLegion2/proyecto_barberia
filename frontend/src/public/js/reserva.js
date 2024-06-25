@@ -14,8 +14,9 @@ async function eliminarReserva(id) {
         }
     }).then(async (result) => {
         if (result.isConfirmed) {
+            const urlLogic = sessionStorage.getItem("urlLogic") + "/reservas/cancelar";
             if (id) {
-                const respuesta = await fetch('http://localhost:3000/reservas/cancelar', {
+                const respuesta = await fetch(urlLogic, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

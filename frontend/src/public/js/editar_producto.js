@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('id');
+    const id = localStorage.getItem('productoSeleccionado');
 
     if (id) {
+        const urlLogic = sessionStorage.getItem("urlLogic") + `/productos/obtener/${id}`;
+
         try {
-            const response = await fetch(`/productos/obtener/${id}`);
+            const response = await fetch(urlLogic);
             const data = await response.json();
             document.getElementById('producto_id').value = id;
             document.getElementById('nombre').value = data.nombre;
@@ -19,34 +20,59 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error('Error fetching location data:', error);
         }
     }
+    document.getElementById('editForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = {
+            id: document.getElementById('producto_id').value,
+            nombre: document.getElementById('nombre').value,
+            descripcion: document.getElementById('descripcion').value,
+            precio: document.getElementById('precio').value
+        };
 
-    // Alertas si la edición fue exitosa o hubo algún error
-    const success = params.get('success');
-    const error = params.get('error');
-    if (success === 'true') {
-        Swal.fire({
-            icon: 'success',
-            title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Producto editado exitosamente' + "</h5>",
-            showConfirmButton: false,
-            timer: 1500,
-            customClass: {
-                popup: 'bg-alert',
-                content: 'text-alert'
+        try {
+            const response = await fetch(sessionStorage.getItem("urlLogic") + '/productos/editar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Producto editado exitosamente' + "</h5>",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    customClass: {
+                        popup: 'bg-alert',
+                        content: 'text-alert'
+                    }
+                });
+                setTimeout(() => {
+                    window.location.href = `/admin/producto`;
+                }, 1500);
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Intentalo de nuevo más tarde' + "</h5>",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    customClass: {
+                        popup: 'bg-alert',
+                    }
+                });
             }
-        });
-        setTimeout(() => {
-            window.location.href = `/productos/listar?id=${storedIdUsuario}&token=${storedToken}`;
-        }, 1500);
-    }
-    if (error == 'true') {
-        Swal.fire({
-            icon: 'error',
-            title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Intentalo de nuevo más tarde' + "</h5>",
-            showConfirmButton: false,
-            timer: 1500,
-            customClass: {
-                popup: 'bg-alert',
-            }
-        });
-    }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Error al editar el producto' + "</h5>",
+                showConfirmButton: false,
+                timer: 1500,
+                customClass: {
+                    popup: 'bg-alert',
+                }
+            });
+        }
+    });
 });

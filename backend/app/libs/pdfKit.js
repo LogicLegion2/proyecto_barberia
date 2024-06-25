@@ -56,50 +56,50 @@ export async function generarPDF( dataLlamada, endLlamada) {
     }
 }
 
-// export async function generarPDFBarbero(params, dataLlamada, endLlamada) {
-//     const id = params['id'];
-//     console.log(`Id received: ${id}`);
-//     try {
-//         // Consulta a la base de datos
-//         const [rows] = await pool.query(`CALL LL_VER_RESERVA_BARBERO(${id})`);
+export async function generarPDFBarbero(params, dataLlamada, endLlamada) {
+    const id = params['id'];
+    console.log(`Id received: ${id}`);
+    try {
+        // Consulta a la base de datos
+        const [rows] = await pool.query(`CALL LL_VER_RESERVA_BARBERO(${id})`);
 
-//         // Darle formato diferente a la fecha y hora
-//         const reservas = rows[0].map(reserva => {
-//             const fecha = new Date(reserva.fecha).toLocaleDateString('es-ES', {
-//                 year: 'numeric',
-//                 month: '2-digit',
-//                 day: '2-digit'
-//             });
-//             const hora = reserva.hora ? reserva.hora.substring(0, 8) : '';
-//             return [
-//                 reserva.ubicacion,
-//                 fecha,
-//                 hora,
-//                 reserva.cliente,
-//             ];
-//         });
+        // Darle formato diferente a la fecha y hora
+        const reservas = rows[0].map(reserva => {
+            const fecha = new Date(reserva.fecha).toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+            const hora = reserva.hora ? reserva.hora.substring(0, 8) : '';
+            return [
+                reserva.ubicacion,
+                fecha,
+                hora,
+                reserva.cliente,
+            ];
+        });
 
-//         // Crea documento PDF
-//         const doc = new PDFDocument();
+        // Crea documento PDF
+        const doc = new PDFDocument();
 
-//         doc.on("data", dataLlamada);
-//         doc.on("end", endLlamada);
+        doc.on("data", dataLlamada);
+        doc.on("end", endLlamada);
 
-//         // Define el encabezado de la tabla
-//         const tableArray = {
-//             headers: ["Ubicación", "Fecha", "Hora", "Cliente"],
-//             rows: reservas
-//         }; 
+        // Define el encabezado y contenido de la tabla
+        const tableArray = {
+            headers: ["Ubicación", "Fecha", "Hora", "Cliente"],
+            rows: reservas
+        }; 
 
-//         // Título del documento
-//         doc.fontSize(30).text('Reservas Clientes', { align: 'center' });
-//         doc.moveDown();
-//         // Agrega tabla al documento
-//         doc.table(tableArray, { columnsSize: [155, 90, 90, 155] });
+        // Título del documento
+        doc.fontSize(30).text('Reservas Clientes', { align: 'center' });
+        doc.moveDown();
+        // Agrega tabla al documento
+        doc.table(tableArray, { columnsSize: [155, 90, 90, 155] });
 
-//         // Finaliza el doc
-//         doc.end();
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
+        // Finaliza el doc
+        doc.end();
+    } catch (error) {
+        console.error(error);
+    }
+}

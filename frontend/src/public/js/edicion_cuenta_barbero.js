@@ -5,9 +5,10 @@ function toggleEdit(field) {
 
 async function cambiarNombre(event, id) {
     event.preventDefault();
+    const urlLogic = sessionStorage.getItem("urlLogic") + `/usuarios/nombre/barbero/${id}`;
     const nombre = event.target.nombre.value;
     try {
-        const response = await fetch(`/usuarios/cambiar/nombre/barbero/${id}`, {
+        const response = await fetch(urlLogic, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -57,9 +58,10 @@ async function cambiarNombre(event, id) {
 
 async function cambiarTelefono(event, id) {
     event.preventDefault();
+    const urlLogic = sessionStorage.getItem("urlLogic") + `/usuarios/telefono/barbero/${id}`;
     const telefono = event.target.telefono.value;
     try {
-        const response = await fetch(`/usuarios/cambiar/telefono/barbero/${id}`, {
+        const response = await fetch(urlLogic, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -109,9 +111,10 @@ async function cambiarTelefono(event, id) {
 
 async function cambiarCorreo(event, id) {
     event.preventDefault();
+    const urlLogic = sessionStorage.getItem("urlLogic") + `/usuarios/correo/barbero/${id}`;
     const correo = event.target.correo.value;
     try {
-        const response = await fetch(`/usuarios/cambiar/correo/barbero/${id}`, {
+        const response = await fetch(urlLogic, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -161,12 +164,13 @@ async function cambiarCorreo(event, id) {
 
 async function cambiarFoto(event, id) {
     event.preventDefault();
+    const urlLogic = sessionStorage.getItem("urlLogic") + `/usuarios/foto/barbero/${id}`;
     const formData = new FormData();
     const foto = event.target.foto.files[0];
     formData.append('id', id);
     formData.append('foto', foto);
     try {
-        const response = await fetch(`/usuarios/cambiar/foto/barbero/${id}`, {
+        const response = await fetch(urlLogic, {
             method: 'POST',
             body: formData
         });
@@ -213,6 +217,7 @@ async function cambiarFoto(event, id) {
 
 async function cambiarContrasena(event, id) {
     event.preventDefault();
+    const urlLogic = sessionStorage.getItem("urlLogic") + `/usuarios/contrasena/barbero/${id}`;
     const form = event.target;
     const contrasena = form.contrasena.value;
     const contrasenaNueva = form.contrasenaNueva.value;
@@ -232,7 +237,7 @@ async function cambiarContrasena(event, id) {
     }
 
     try {
-        const response = await fetch(`/usuarios/cambiar/contrasena/barbero/${id}`, {
+        const response = await fetch(urlLogic, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -283,9 +288,10 @@ async function cambiarContrasena(event, id) {
 
 async function cambiarDescripcion(event, id) {
     event.preventDefault();
+    const urlLogic = sessionStorage.getItem("urlLogic") + `/usuarios/descripcion/${id}`;
     const descripcion = event.target.descripcion.value;
     try {
-        const response = await fetch(`/usuarios/cambiar/descripcion/barbero/${id}`, {
+        const response = await fetch(urlLogic, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

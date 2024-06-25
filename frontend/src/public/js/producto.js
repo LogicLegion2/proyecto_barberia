@@ -5,23 +5,9 @@ function seleccionarProducto(id) {
 
 // Redirecciona el producto seleccionado al formulario para la edición
 function redireccionarEditar() {
-    // Recibe parámetros de la URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const idUsuario = urlParams.get('idUser');
-    const token = urlParams.get('token');
-
-    if (idUsuario && token) {
-        localStorage.setItem('idUsuario', idUsuario);
-        localStorage.setItem('token', token);
-    }
-
-    const storedIdUsuario = localStorage.getItem('idUsuario');
-    const storedToken = localStorage.getItem('token');
-    
     const id = localStorage.getItem('productoSeleccionado');
-
     if (id) {
-        window.location.href = `http://localhost:3000/productos/editar?id=${id}&idUser=${storedIdUsuario}&token=${storedToken}`;
+        window.location.href = `/admin/producto/editar?id=${id}`;
     } else {
         Swal.fire({
             icon: 'warning',
@@ -43,17 +29,19 @@ async function eliminarProducto() {
         title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + '¿Estás seguro de eliminarlo?' + "</h5>",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#318331",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonText: "Si, eliminar",
+        cancelButtonText: "Cancelar",
         customClass: {
             popup: 'bg-alert',
             content: 'text-alert'
         }
     }).then(async (result) => {
         if (result.isConfirmed) {
+            const urlLogic = sessionStorage.getItem("urlLogic") + "/productos/desactivar";
             if (id) {
-                const respuesta = await fetch('http://localhost:3000/productos/desactivar', {
+                const respuesta = await fetch(urlLogic, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

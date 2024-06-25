@@ -4,9 +4,18 @@ function seleccionarPregunta(id) {
 function redireccionarEditar() {
     const id = localStorage.getItem('preguntaSeleccionada');
     if (id) {
-        window.location.href = `http://localhost:3000/preguntas/editar?id=${id}`;
+        window.location.href = `/admin/pregunta/editar?id=${id}`;
     } else {
-        alert('Seleccione un pregunta primero');
+        Swal.fire({
+            icon: 'warning',
+            title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Seleccione una pregunta primero' + "</h5>",
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'bg-alert',
+                content: 'text-alert'
+            }
+        });
     }
 }
 
@@ -16,7 +25,7 @@ async function eliminarPregunta() {
         title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + '¿Estás seguro de eliminarlo?' + "</h5>",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#318331",
         cancelButtonColor: "#d33",
         confirmButtonText: "Si, eliminar",
         cancelButtonText: "Cancelar",
@@ -26,8 +35,9 @@ async function eliminarPregunta() {
         }
     }).then(async (result) => {
         if (result.isConfirmed) {
+            const urlLogic = sessionStorage.getItem("urlLogic") + "/preguntas/desactivar";
             if (id) {
-                const respuesta = await fetch('http://localhost:3000/preguntas/desactivar', {
+                const respuesta = await fetch(urlLogic, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

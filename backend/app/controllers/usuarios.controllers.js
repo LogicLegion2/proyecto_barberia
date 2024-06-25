@@ -103,10 +103,11 @@ export const login = async (req, res) => {
             process.env.TOKEN_PRIVATEKEY,
             { expiresIn: process.env.TOKEN_EXPIRES_IN }
         );
-        
+        const rol = usuario.rol
+        console.log(rol);
         const id = usuario.idUsuario
         console.log(id);
-        res.status(200).json({ error: false, token, id });
+        res.status(200).json({ error: false, token, id, rol });
     } catch (e) {
         res.status(500).json({ error: true, message: "Error interno del servidor" });
     }
@@ -294,7 +295,7 @@ export const verPerfil = async (req, res) => {
 }
 
 export const verPerfilAdmin = async (req, res) => {
-    const id = req.params['idUser']
+    const id = req.params['id']
 
     try {
         const rows = await pool.query(`CALL LL_VER_PERFIL_CLIENTE('${id}');`);
@@ -316,7 +317,7 @@ export const logout = async (req, res) => {
         // Almacena el token inválido en la base de datos
         const respuesta = await pool.query('INSERT INTO tokensinvalidos (token, expiracion) VALUES (?, ?)', [token, new Date()]);
 
-        res.status(200).json({ respuesta });
+        res.status(200).json( { respuesta });
     } catch (err) {
         res.status(500).json(err);
     }

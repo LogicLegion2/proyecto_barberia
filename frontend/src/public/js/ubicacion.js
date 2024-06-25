@@ -1,12 +1,22 @@
 function seleccionarUbicacion(id) {
     localStorage.setItem('ubicacionSeleccionada', id);
 }
+
 function redireccionarEditar() {
     const id = localStorage.getItem('ubicacionSeleccionada');
     if (id) {
-        window.location.href = `http://localhost:3000/ubicaciones/editar?id=${id}`;
+        window.location.href = `/admin/ubicacion/editar?id=${id}`;
     } else {
-        alert('Seleccione una ubicación primero');
+        Swal.fire({
+            icon: 'warning',
+            title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Seleccione una ubicación primero' + "</h5>",
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'bg-alert',
+                content: 'text-alert'
+            }
+        });
     }
 }
 
@@ -26,8 +36,9 @@ async function eliminarUbicacion() {
         }
     }).then(async (result) => {
         if (result.isConfirmed) {
+            const urlLogic = sessionStorage.getItem("urlLogic") + "/ubicaciones/desactivar";
             if (id) {
-                const respuesta = await fetch('http://localhost:3000/ubicaciones/desactivar', {
+                const respuesta = await fetch(urlLogic, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

@@ -7,7 +7,7 @@ const rutaPreguntas = Router();
 rutaPreguntas.get("/", listarPregunta);
 rutaPreguntas.get("/buscar", buscarPregunta);
 rutaPreguntas.post("/crear", crearPregunta);
-rutaPreguntas.get("/:id", obtenerPregunta);
+rutaPreguntas.get("/obtener/:id", obtenerPregunta);
 rutaPreguntas.post("/editar", editarPregunta);
 rutaPreguntas.post("/desactivar", desactivarPregunta);
 

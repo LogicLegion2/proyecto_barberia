@@ -1,5 +1,5 @@
 document.getElementById("formAgregarProducto").addEventListener("click", (e) => {
-    e.preventDefault(); // Evita que el formulario se envíe automáticamente
+    e.preventDefault(); 
 
     // Captura los valores del formulario
     const nombre = document.getElementById("agregar_nombre").value;
@@ -7,7 +7,7 @@ document.getElementById("formAgregarProducto").addEventListener("click", (e) => 
     const precio = document.getElementById("agregar_precio").value;
     const cantidad = document.getElementById("agregar_cantidad").value;
     const foto = document.getElementById("agregar_imagen").value;
-    // Crear un objeto FormData para manejar la subida del archivo
+    // Crea un objeto FormData para manejar la subida del archivo
     const formData = new FormData();
     formData.append("nombre", nombre);
     formData.append("descripcion", descripcion);
