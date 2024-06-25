@@ -4,9 +4,18 @@ function seleccionarOferta(id) {
 function redireccionarEditar() {
     const id = localStorage.getItem('ofertaSeleccionada');
     if (id) {
-        window.location.href = `http://localhost:3000/ofertas/editar?id=${id}`;
+        window.location.href = `/admin/oferta/editar?id=${id}`;
     } else {
-        alert('Seleccione una oferta primero');
+        Swal.fire({
+            icon: 'warning',
+            title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Seleccione una oferta primero' + "</h5>",
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'bg-alert',
+                content: 'text-alert'
+            }
+        });
     }
 }
 
@@ -26,8 +35,9 @@ async function eliminarOferta() {
         }
     }).then(async (result) => {
         if (result.isConfirmed) {
+            const urlLogic = sessionStorage.getItem("urlLogic") + "/ofertas/desactivar";
             if (id) {
-                const respuesta = await fetch('http://localhost:3000/ofertas/desactivar', {
+                const respuesta = await fetch(urlLogic, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

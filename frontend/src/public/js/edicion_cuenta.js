@@ -5,9 +5,10 @@ function toggleEdit(field) {
 
 async function cambiarNombre(event, id) {
     event.preventDefault();
+    const urlLogic = sessionStorage.getItem("urlLogic") + `/usuarios/nombre/${id}`;
     const nombre = event.target.nombre.value;
     try {
-        const response = await fetch(`/usuarios/cambiar/nombre/${id}`, {
+        const response = await fetch(urlLogic, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -24,7 +25,7 @@ async function cambiarNombre(event, id) {
                     popup: 'bg-alert',
                     content: 'text-alert'
                 }
-            }); 
+            });
             setTimeout(() => {
                 window.location.reload();
             }, 1500);
@@ -43,23 +44,24 @@ async function cambiarNombre(event, id) {
     } catch (error) {
         console.error('Error:', error);
         Swal.fire({
-                icon: 'error',
-                title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + `Error al cambiar el nombre` + "</h5>",
-                showConfirmButton: false,
-                timer: 1500,
-                customClass: {
-                    popup: 'bg-alert',
-                    content: 'text-alert'
-                }
-            });
+            icon: 'error',
+            title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + `Error al cambiar el nombre` + "</h5>",
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'bg-alert',
+                content: 'text-alert'
+            }
+        });
     }
 }
 
 async function cambiarTelefono(event, id) {
     event.preventDefault();
+    const urlLogic = sessionStorage.getItem("urlLogic") + `/usuarios/telefono/${id}`;
     const telefono = event.target.telefono.value;
     try {
-        const response = await fetch(`/usuarios/cambiar/telefono/${id}`, {
+        const response = await fetch(urlLogic, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -76,7 +78,7 @@ async function cambiarTelefono(event, id) {
                     popup: 'bg-alert',
                     content: 'text-alert'
                 }
-            }); 
+            });
             setTimeout(() => {
                 window.location.reload();
             }, 1500);
@@ -95,23 +97,24 @@ async function cambiarTelefono(event, id) {
     } catch (error) {
         console.error('Error:', error);
         Swal.fire({
-                icon: 'error',
-                title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + `Error al cambiar el télefono` + "</h5>",
-                showConfirmButton: false,
-                timer: 1500,
-                customClass: {
-                    popup: 'bg-alert',
-                    content: 'text-alert'
-                }
-            });
+            icon: 'error',
+            title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + `Error al cambiar el télefono` + "</h5>",
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'bg-alert',
+                content: 'text-alert'
+            }
+        });
     }
 }
 
 async function cambiarCorreo(event, id) {
     event.preventDefault();
+    const urlLogic = sessionStorage.getItem("urlLogic") + `/usuarios/correo/${id}`;
     const correo = event.target.correo.value;
     try {
-        const response = await fetch(`/usuarios/cambiar/correo/${id}`, {
+        const response = await fetch(urlLogic, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -128,7 +131,7 @@ async function cambiarCorreo(event, id) {
                     popup: 'bg-alert',
                     content: 'text-alert'
                 }
-            }); 
+            });
             setTimeout(() => {
                 window.location.reload();
             }, 1500);
@@ -147,26 +150,27 @@ async function cambiarCorreo(event, id) {
     } catch (error) {
         console.error('Error:', error);
         Swal.fire({
-                icon: 'error',
-                title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + `Error al cambiar el correo` + "</h5>",
-                showConfirmButton: false,
-                timer: 1500,
-                customClass: {
-                    popup: 'bg-alert',
-                    content: 'text-alert'
-                }
-            });
+            icon: 'error',
+            title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + `Error al cambiar el correo` + "</h5>",
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'bg-alert',
+                content: 'text-alert'
+            }
+        });
     }
 }
 
 async function cambiarFoto(event, id) {
     event.preventDefault();
+    const urlLogic = sessionStorage.getItem("urlLogic") + `/usuarios/foto/${id}`;
     const formData = new FormData();
     const foto = event.target.foto.files[0];
     formData.append('id', id);
     formData.append('foto', foto);
     try {
-        const response = await fetch(`/usuarios/cambiar/foto/${id}`, {
+        const response = await fetch(urlLogic, {
             method: 'POST',
             body: formData
         });
@@ -213,6 +217,7 @@ async function cambiarFoto(event, id) {
 
 async function cambiarContrasena(event, id) {
     event.preventDefault();
+    const urlLogic = sessionStorage.getItem("urlLogic") + `/usuarios/contrasena/${id}`;
     const form = event.target;
     const contrasena = form.contrasena.value;
     const contrasenaNueva = form.contrasenaNueva.value;
@@ -232,7 +237,7 @@ async function cambiarContrasena(event, id) {
     }
 
     try {
-        const response = await fetch(`/usuarios/cambiar/contrasena/${id}`, {
+        const response = await fetch(urlLogic, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -250,7 +255,7 @@ async function cambiarContrasena(event, id) {
                     popup: 'bg-alert',
                     content: 'text-alert'
                 }
-            }); 
+            });
             setTimeout(() => {
                 window.location.reload();
             }, 1500);

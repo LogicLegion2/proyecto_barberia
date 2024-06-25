@@ -35,7 +35,6 @@ export const paginaPrincipalCliente = async (req, res) => {
         //     return barbero;
         // }));
 
-        console.log(data.ubicaciones);
         res.render("views.barbero.ejs", {
             barberos: data.barberos,
             servicios: data.servicios,
@@ -69,7 +68,6 @@ export const mostrarListaFavoritos = async (req, res) => {
         const recurso = url + `/favoritos/${id}`;
         const response = await fetch(recurso);
         const data = await response.json();
-        console.log(data.favoritos);
         res.render("views.lista_fav.ejs", {
             favoritos: data.favoritos
         });
@@ -95,13 +93,14 @@ export const mostrarReserva = async (req, res) => {
         });
     }
     try {
-        const recurso = url + `/reservas/${id}`;
+        const recurso = url + `/reservas/listar/${id}`;
         const response = await fetch(recurso);
         const data = await response.json();
 
         res.render("views.reservas_cliente.ejs", {
             reservas: data.reservas,
         });
+        
     } catch (error) {
         console.error(error);
         res.status(500).send(error);
