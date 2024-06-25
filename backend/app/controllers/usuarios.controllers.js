@@ -43,11 +43,11 @@ export const crearUsuario = async (req, res) => {
 };
 
 export const crearBarbero = async (req, res) => {
-    const { nombre, correo, contrasena, telefono, descripcion, rol } = req.body;
+    const { nombre, correo, contrasena, telefono, descripcion, fotoPerfil } = req.body;
     try {
         const hashedPassword = await bcrypt.hash(contrasena, saltRounds);
 
-        const resultado = await pool.query(`CALL LL_INSERTAR_BARBERO('${nombre}','${correo}','${hashedPassword}','${telefono}','${descripcion}','${rol}')`);
+        const resultado = await pool.query(`CALL LL_INSERTAR_BARBERO('${nombre}','${correo}','${hashedPassword}','${telefono}','${descripcion}','${fotoPerfil}')`);
 
         res.status(200).json({ message: "Usuario creado con éxito", id: resultado.insertId });
     } catch (error) {

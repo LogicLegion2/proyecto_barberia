@@ -6,12 +6,6 @@ import { verificarToken } from "../middlewares/oauth.js";
 const rutaUsuarios = Router();
 
 rutaUsuarios.get("/", verificarToken, listarUsuario);
-rutaUsuarios.get("/registrarp", (req, res) => {
-    res.render("views.ingresar_barbero.ejs", { id: req.query.id });
-});
-rutaUsuarios.get("/crear", (req, res) => {
-    res.render("views.ingresar_usuario.ejs", { id: req.query.id });
-});
 rutaUsuarios.get("/buscar", buscarUsuario);
 rutaUsuarios.get("/admin/:id", verPerfilAdmin);
 rutaUsuarios.get("/cliente/:id", verPerfil);

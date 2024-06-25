@@ -7,18 +7,21 @@ document.getElementById("registrarBarbero").addEventListener("click", (e) => {
     const correo = document.getElementById("correo").value;
     const contrasena = document.getElementById("contrasena").value;
     const descripcion = document.getElementById("descripcion").value;
+    const fotoPerfil = document.getElementById("fotoPerfil").value;
+
 
     // Objeto con los datos del barbero
     const datosBarbero = {
         nombre: nombre,
-        telefono: telefono,
         correo: correo,
         contrasena: contrasena,
-        descripcion: descripcion
+        telefono: telefono,
+        descripcion: descripcion,
+        fotoPerfil: fotoPerfil
     };
 
     // Enviar los datos al servidor
-    fetch('http://localhost:3000/barberos/registrarp', {
+    fetch('http://localhost:3000/usuarios/barbero', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -35,7 +38,7 @@ document.getElementById("registrarBarbero").addEventListener("click", (e) => {
         // Verifica si la respuesta está vacía antes de intentar analizarla como JSON
         if (data) {
             console.log("Barbero agregado:", data); // Muestra en consola la respuesta del servidor
-            location.reload(); // Recarga la página después de agregar el barbero (opcional)
+            // location.reload(); // Recarga la página después de agregar el barbero (opcional)
         } else {
             console.error("Fetch error: Respuesta vacía o no válida");
         }
