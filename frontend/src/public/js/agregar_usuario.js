@@ -18,7 +18,7 @@ document.getElementById("registrarUsuario").addEventListener("click", (e) => {
     };
 
     // Enviar los datos al servidor
-    fetch('http://localhost:3000/usuarios/crear', {
+    fetch('http://localhost:3000/usuarios/registrar', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
