@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         e.preventDefault();
         const formData = {
             id: document.getElementById('servicio_id').value,
-            tioServicio: document.getElementById('tioServicio').value,
+            tipoServicio: document.getElementById('tipoServicio').value,
             descripcion: document.getElementById('descripcion').value,
             precio: document.getElementById('precio').value
         };
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 },
                 body: JSON.stringify(formData)
             });
-
+            console.log(response);
             if (response.ok) {
                 Swal.fire({
                     icon: 'success',

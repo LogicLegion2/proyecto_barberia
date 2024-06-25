@@ -6,7 +6,6 @@ function seleccionarProducto(id) {
 // Redirecciona el producto seleccionado al formulario para la edición
 function redireccionarEditar() {
     const id = localStorage.getItem('productoSeleccionado');
-
     if (id) {
         window.location.href = `/admin/producto/editar?id=${id}`;
     } else {

@@ -6,24 +6,29 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         try {
             const response = await fetch(urlLogic);
-            const data = await response.json();
-            document.getElementById('pregunta_id').value = id;
-            document.getElementById('pregunta').value = data.pregunta;
-            document.getElementById('respuesta').value = data.respuesta;
+            if (response.ok) {
+                const data = await response.json();
+                document.getElementById('pregunta_id').value = id;
+                document.getElementById('pregunta').value = data.pregunta;
+                document.getElementById('respuesta').value = data.respuesta;
 
-            // Valores en los placeholders
-            document.getElementById('pregunta').setAttribute('placeholder', data.pregunta);
-            document.getElementById('respuesta').setAttribute('placeholder', data.respuesta);
+                // Valores en los placeholders
+                document.getElementById('pregunta').setAttribute('placeholder', data.pregunta);
+                document.getElementById('respuesta').setAttribute('placeholder', data.respuesta);
+            } else {
+                console.error('Error fetching question data:', response.statusText);
+            }
         } catch (error) {
-            console.error('Error fetching location data:', error);
+            console.error('Error fetching question data:', error);
         }
     }
+
     document.getElementById('editForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = {
             id: document.getElementById('pregunta_id').value,
             pregunta: document.getElementById('pregunta').value,
-            respuesta: document.getElementById('respuesta').value
+            resp: document.getElementById('respuesta').value
         };
 
         try {
@@ -34,7 +39,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 },
                 body: JSON.stringify(formData)
             });
-
             if (response.ok) {
                 Swal.fire({
                     icon: 'success',
@@ -52,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             } else {
                 Swal.fire({
                     icon: 'error',
-                    title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Intentalo de nuevo más tarde' + "</h5>",
+                    title: "<h5 style='color:white; font-family: 'Aleo', serif;'>" + 'Inténtelo de nuevo más tarde' + "</h5>",
                     showConfirmButton: false,
                     timer: 1500,
                     customClass: {

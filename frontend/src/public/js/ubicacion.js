@@ -5,7 +5,7 @@ function seleccionarUbicacion(id) {
 function redireccionarEditar() {
     const id = localStorage.getItem('ubicacionSeleccionada');
     if (id) {
-        window.location.href = `/admin/oferta/editar?id=${id}`;
+        window.location.href = `/admin/ubicacion/editar?id=${id}`;
     } else {
         Swal.fire({
             icon: 'warning',
