@@ -8,7 +8,6 @@ const rutaServicios = Router();
 rutaServicios.get("/", listarServicio);
 rutaServicios.get("/buscar", buscarServicio);
 rutaServicios.post("/crear", crearServicio);
-rutaServicios.get("/:id", obtenerServicio);
 rutaServicios.get("/obtener/:id", obtenerServicio);
 rutaServicios.post("/editar", editarServicio);
 rutaServicios.post("/desactivar", desactivarServicio);

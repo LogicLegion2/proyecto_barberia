@@ -11,7 +11,6 @@ rutaUbicaciones.get("/crearu", (req, res) => {
 });
 rutaUbicaciones.get("/buscar", buscarUbicacion);
 rutaUbicaciones.post("/crear", crearUbicacion);
-rutaUbicaciones.get("/:id", obtenerUbicacion);
 rutaUbicaciones.get("/obtener/:id", obtenerUbicacion);
 rutaUbicaciones.post("/editar", editarUbicacion);
 rutaUbicaciones.post("/desactivar", desactivarUbicacion);
