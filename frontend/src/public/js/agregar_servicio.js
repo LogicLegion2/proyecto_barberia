@@ -1,27 +1,23 @@
-document.getElementById("registrarBarbero").addEventListener("click", (e) => {
+document.getElementById("agregarServicio").addEventListener("click", (e) => {
     e.preventDefault(); // Evita que el formulario se envíe automáticamente
 
     // Captura los valores del formulario
-    const nombre = document.getElementById("nombre").value;
-    const telefono = document.getElementById("telefono").value;
-    const correo = document.getElementById("correo").value;
-    const contrasena = document.getElementById("contrasena").value;
+    const tipoServicio = document.getElementById("tiposervicio").value;
     const descripcion = document.getElementById("descripcion").value;
-    const fotoPerfil = document.getElementById("fotoPerfil").value;
+    const precio = document.getElementById("precio").value;
+    const fotoServicio = document.getElementById("fotoservicio").value;
 
 
     // Objeto con los datos del barbero
     const datosBarbero = {
-        nombre: nombre,
-        correo: correo,
-        contrasena: contrasena,
-        telefono: telefono,
+        tipoServicio: tipoServicio,
         descripcion: descripcion,
-        fotoPerfil: fotoPerfil
+        precio: precio,
+        fotoServicio: fotoServicio
     };
 
     // Enviar los datos al servidor
-    fetch('http://localhost:3000/usuarios/barbero', {
+    fetch('http://localhost:3000/servicios/crear', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -37,7 +33,7 @@ document.getElementById("registrarBarbero").addEventListener("click", (e) => {
     .then(data => {
         // Verifica si la respuesta está vacía antes de intentar analizarla como JSON
         if (data) {
-            console.log("Barbero agregado:", data); // Muestra en consola la respuesta del servidor
+            console.log("Servicio agregado:", data); // Muestra en consola la respuesta del servidor
             // location.reload(); // Recarga la página después de agregar el barbero (opcional)
         } else {
             console.error("Fetch error: Respuesta vacía o no válida");
