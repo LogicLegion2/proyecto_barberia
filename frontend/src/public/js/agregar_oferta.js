@@ -1,7 +1,8 @@
 document.getElementById("agregarOferta").addEventListener("click", async (e) => {
     e.preventDefault(); // Evita que el formulario se envíe automáticamente
 
-    // Obtener la URL de la oferta y productos desde sessionStorage
+    // Obtener la URL de la oferta y productos desde sessionStorage 
+// dafdsfdsdfsg
 
         const urlProductos = sessionStorage.getItem("urlLogic") + `/productos`;
 
