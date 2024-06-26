@@ -12,4 +12,4 @@ rutaBarberos.get("/admin/:id", verPerfilBarberoAdmin);
 rutaBarberos.get("/perfil/:id", perfilBarbero);
 rutaBarberos.get("/buscar", buscar);
 
-export default rutaBarberos;
+export default rutaBarberos; 

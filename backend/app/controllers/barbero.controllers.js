@@ -143,15 +143,15 @@ export const perfilBarbero = async (req, res) => {
 //Perfil del barbero desde la vista de clientes 
 export const verPerfilBarbero = async (req, res) => {
     const id = req.params['id']
-    console.log({'ID DE PERFIL':id});
     try {
         const [
             [rowsBar], [rowsCom]
-        ] = await Promise.all[
+        ] = await Promise.all([
             pool.query(`CALL LL_VER_PERFIL_BARBERO('${id}');`),
             pool.query(`CALL LL_VER_COMENTARIO_BARBERO('${id}');`)
-        ]
-        res.status(200).json({ barberos: rowsBar[0][0], comentarios:rowsCom[0]})
+        ])
+        console.log(rowsBar[0][0]);
+        res.status(200).json({ barberos: rowsBar[0], comentarios:rowsCom[0]})
     } catch (error) {
         res.status(500).json(error);
     }
