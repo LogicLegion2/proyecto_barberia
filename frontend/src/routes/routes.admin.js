@@ -5,7 +5,7 @@ const rutaAdmin = Router();
 
 rutaAdmin.get("/home", paginaPrincipalAdmin);
 rutaAdmin.get("/menu", menuAdmin);
-rutaAdmin.get("/barbero", mostrarPerfilBarbero);
+rutaAdmin.get("/barbero/:id", mostrarPerfilBarbero);
 rutaAdmin.get("/producto", mostrarProducto);
 rutaAdmin.get("/producto/editar", editarProducto);
 rutaAdmin.get("/producto/crear", crearProducto);

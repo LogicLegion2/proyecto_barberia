@@ -93,29 +93,31 @@
         </nav>
       </div>
       <!-- seccion con la informacion, nombre e imagen del barbero -->
+      <% if (barberos && barberos.length> 0) { %>
       <section
         class="perfil d-flex flex-column align-items-center text-center text-md-start flex-md-row pt-sm-4 ps-sm-5">
-        <% if (barberos && barberos.length> 0) { %>
+          <% barberos.forEach(barbero=> { %>
           <div
             class="imagen mb-3 mb-md-0 col-sm-3 col-12 ms-4 rounded-4 d-flex justify-content-center align-items-center">
-            <img class="foto rounded-4" src="<%= barberos[0].foto %>" alt="">
+            <img class="foto rounded-4" src="<%= barbero.foto %>" alt="">
           </div>
           <div class="info d-flex flex-column justify-content-center col-sm-9 col-12 ms-3">
             <h2 class="nombre fw-bold text-light">
-              <%= barberos[0].nombre %>
+              <%= barbero.nombre %>
             </h2>
             <p class="desc fw-light fs-6 text-light">
-              <%= barberos[0].descripcion %>
+              <%= barbero.descripcion %>
             </p>
           </div>
-          <% } %>
+          <% }); %>
       </section>
+      <% } %>
     </div>
     <!-- sección con los comentarios del barbero -->
     <% if (comentarios && comentarios.length> 0) { %>
       <section class="cont-comentarios pt-4 pb-4 w-100 d-flex flex-column align-items-center">
         <h2 class="titulo-comentario text-center mb-4 w-75 text-light fw-bold">Comentarios</h2>
-        <% comentarios[0].forEach(comentario=> { %>
+        <% comentarios.forEach(comentario=> { %>
           <div class="comentarios w-75 rounded-4 p-2 ps-3 mb-3">
             <div class="cont-user-x row">
               <p class="user mb-0 text-light col-sm-11 col-10">
