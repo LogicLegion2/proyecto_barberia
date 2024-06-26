@@ -3,6 +3,10 @@ import { Router } from "express";
 import { buscarServicio, crearServicio, desactivarServicio, editarServicio, listarServicio, obtenerServicio } from "../controllers/servicios.controllers.js";
 import { verificarToken } from "../middlewares/oauth.js";
 
+/**
+ * Estas son las rutas del backend de servicios en mi proyecto
+ * @type {object}
+ */
 const rutaServicios = Router();
 
 rutaServicios.get("/", listarServicio);

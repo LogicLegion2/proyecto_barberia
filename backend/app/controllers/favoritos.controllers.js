@@ -55,7 +55,7 @@ config();
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
 /**
  * Esta funcion sirve para crear producto favorito
@@ -72,7 +72,7 @@ config();
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
 /**
  * Esta funcion sirve para crear oferta favorito
@@ -89,7 +89,7 @@ config();
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
 /**
  * Esta funcion sirve para crear servicio favorito
@@ -106,6 +106,6 @@ config();
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
 export {listarFavoritos, crearBarberoFavorito, crearProductoFavorito, crearOfertaFavorito, crearServicioFavorito }

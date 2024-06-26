@@ -1,3 +1,7 @@
+/**
+ * Este es el generador de pdfs
+ * @module libs-pdfkit
+ */
 import PDFDocument from "pdfkit-table"
 import { pool } from "../config/mysql.db.js";
 import { config } from "dotenv";
@@ -6,9 +10,15 @@ import 'dayjs/locale/es.js';
 import mysql from "mysql2/promise";
 config();
 
-dayjs.locale('es');
+dayjs.locale('es'); // Establece el idioma a español
 
-export async function generarPDF( dataLlamada, endLlamada) {
+/**
+ * Genera un documento PDF basado en los datos de reservas de clientes.
+ * 
+ * @param {Function} dataLlamada - Función para cuando se ejecute se genera un fragmento de datos del PDF.
+ * @param {Function} endLlamada - Función de para que se ejecute cuando se finaliza la generación del PDF.
+ */
+ async function generarPDF( dataLlamada, endLlamada) {
     try {
         // Consulta a la base de datos
         const [rows] = await pool.query("CALL LL_VER_RESERVA_ADMIN_PDF()");
@@ -54,9 +64,16 @@ export async function generarPDF( dataLlamada, endLlamada) {
         console.error(error);
         endLlamada(error)
     }
-}
+};
 
-export async function generarPDFBarbero(params, dataLlamada, endLlamada) {
+/**
+ * Genera un documento PDF basado en las reservas de un barbero específico.
+ * 
+ * @param {Object} params - Parámetros para la consulta, incluyendo el ID del barbero.
+ * @param {Function} dataLlamada - Función para cuando se ejecute se genera un fragmento de datos del PDF.
+ * @param {Function} endLlamada - Función de para que se ejecute cuando se finaliza la generación del PDF.
+ */
+ async function generarPDFBarbero(params, dataLlamada, endLlamada) {
     const id = params['id'];
     console.log(`Id received: ${id}`);
     try {
@@ -102,4 +119,6 @@ export async function generarPDFBarbero(params, dataLlamada, endLlamada) {
     } catch (error) {
         console.error(error);
     }
-}
+};
+
+export {generarPDF, generarPDFBarbero}

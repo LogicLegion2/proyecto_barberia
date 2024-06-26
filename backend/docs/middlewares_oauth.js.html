@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: middlewares/oauth.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: middlewares/oauth.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { config } from "dotenv";
+import jwt from "jsonwebtoken";
+import { pool } from "../config/mysql.db.js";
+config();
+
+/**
+ * Función de utilidad para enviar respuestas de error al cliente.
+ * 
+ * @param {object} req - Objeto de solicitud HTTP.
+ * @param {object} res - Objeto de respuesta HTTP.
+ * @param {number} statusCode - Código de estado HTTP para la respuesta.
+ * @param {string} message - Mensaje de error a enviar.
+ */
+const error = (req, res, statusCode, message) => {
+    res.status(statusCode).json({ error: message });
+};
+
+/**
+ * Middleware para verificar la validez de un token JWT en las solicitudes entrantes.
+ * Si el token es válido, añade el ID de usuario decodificado (`idUsuario`) al objeto de solicitud (`req`).
+ * 
+ * @param {object} req - Objeto de solicitud HTTP.
+ * @param {object} res - Objeto de respuesta HTTP.
+ * @param {function} next - Función de callback para pasar el control al siguiente middleware.
+ */
+export const verificarToken = async (req, res, next) => {
+    // Obtiene el token del encabezado 'x-access-token' o de la consulta de la URL
+    const token = req.headers["x-access-token"] || req.query.token;
+
+    // Si no se proporciona un token, devuelve un error de falta de autorización
+    if (!token) {
+        return error(req, res, 401, "No se ha proporcionado un token");
+    }
+
+    try {
+        // Consulta a la base de datos para verificar si el token está en la lista negra de tokens inválidos
+        const invalidToken = await pool.query(`CALL LL_VER_TOKEN('${token}')`);
+
+        // Si se encuentra en la lista negra, devuelve un error de token inválido
+        if (invalidToken &amp;&amp; invalidToken[0].length > 0) {
+            return error(req, res, 401, "Token inválido");
+        }
+
+        // Verifica y decodifica el token utilizando la clave privada del entorno
+        const decoded = jwt.verify(token, process.env.TOKEN_PRIVATEKEY);
+
+        // Añade el ID de usuario decodificado a la solicitud para usarlo en rutas posteriores
+        req.idUsuario = decoded.idUsuario;
+
+        // Continúa con el siguiente middleware o controlador
+        next();
+        
+    } catch (err) {
+        // Maneja diferentes tipos de errores JWT:
+        // - TokenExpiredError: Si el token ha expirado
+        // - JsonWebTokenError: Si el token es inválido por alguna razón
+        // - Otros errores: Se manejan como errores internos del servidor (HTTP 500)
+        if (err.name === 'TokenExpiredError') {
+            error(req, res, 401, "Token expirado");
+        } else if (err.name === 'JsonWebTokenError') {
+            error(req, res, 401, "Token inválido");
+        } else {
+            error(req, res, 500, "Ha fallado el proceso de autenticación");
+        }
+    }
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-ctr-barbero.html">ctr-barbero</a></li><li><a href="module-ctr-comentarios.html">ctr-comentarios</a></li><li><a href="module-ctr-favoritos.html">ctr-favoritos</a></li><li><a href="module-ctr-ofertas.html">ctr-ofertas</a></li><li><a href="module-ctr-payment.html">ctr-payment</a></li><li><a href="module-ctr-preguntas.html">ctr-preguntas</a></li><li><a href="module-ctr-productos.html">ctr-productos</a></li><li><a href="module-ctr-reservas.html">ctr-reservas</a></li><li><a href="module-ctr-servicios.html">ctr-servicios</a></li><li><a href="module-ctr-ubicaciones.html">ctr-ubicaciones</a></li><li><a href="module-ctr-usuarios.html">ctr-usuarios</a></li><li><a href="module-ctr-ventas.html">ctr-ventas</a></li><li><a href="module-libs-pdfkit.html">libs-pdfkit</a></li></ul><h3>Global</h3><ul><li><a href="global.html#error">error</a></li><li><a href="global.html#pool">pool</a></li><li><a href="global.html#router">router</a></li><li><a href="global.html#ruta">ruta</a></li><li><a href="global.html#rutaBarberos">rutaBarberos</a></li><li><a href="global.html#rutaComentarios">rutaComentarios</a></li><li><a href="global.html#rutaFavoritos">rutaFavoritos</a></li><li><a href="global.html#rutaOfertas">rutaOfertas</a></li><li><a href="global.html#rutaPreguntas">rutaPreguntas</a></li><li><a href="global.html#rutaProductos">rutaProductos</a></li><li><a href="global.html#rutaReservaAdmin">rutaReservaAdmin</a></li><li><a href="global.html#rutaServicios">rutaServicios</a></li><li><a href="global.html#rutaUbicaciones">rutaUbicaciones</a></li><li><a href="global.html#rutaUsuarios">rutaUsuarios</a></li><li><a href="global.html#rutaVentas">rutaVentas</a></li><li><a href="global.html#verificarToken">verificarToken</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Jun 26 2024 18:55:50 GMT-0500 (hora estándar de Colombia)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

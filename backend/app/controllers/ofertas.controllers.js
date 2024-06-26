@@ -1,9 +1,20 @@
+/**
+ * Este es el controlador de ofertas
+ * @module ctr-ofertas
+ */
+
 import { pool } from "../config/mysql.db.js";
 import { config } from "dotenv";
 import mysql from "mysql2/promise";
 config();
 
-export const listarOferta = async (req, res) => {
+
+/**
+ * Esta funcion sirve para mostrar todos las ofertas
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const listarOferta = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_OFERTAS()");
         res.status(200).json({ ofertas: rows[0] });
@@ -12,7 +23,12 @@ export const listarOferta = async (req, res) => {
     }
 };
 
-export const buscarOferta = async (req, res) => {
+/**
+ * Esta funcion sirve para buscar las ofertas
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const buscarOferta = async (req, res) => {
     const { desc } = req.query;
     try {
         if (!desc) {
@@ -25,7 +41,12 @@ export const buscarOferta = async (req, res) => {
     }
 };
 
-export const crearOferta = async (req, res) => {
+/**
+ * Esta funcion sirve para crear las ofertas
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const crearOferta = async (req, res) => {
     const producto1 = req.body.producto1;
     const producto2 = req.body.producto2;
     const descripcion = req.body.descripcion;
@@ -39,7 +60,12 @@ export const crearOferta = async (req, res) => {
     }
 };
 
-export const obtenerOferta = async (req, res) => {
+/**
+ * Esta funcion sirve para obtener las ofertas
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const obtenerOferta = async (req, res) => {
     const id = req.params.id;
 
     try {
@@ -55,7 +81,12 @@ export const obtenerOferta = async (req, res) => {
     }
 };
 
-export const editarOferta = async (req, res) => {
+/**
+ * Esta funcion sirve para editar las ofertas
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const editarOferta = async (req, res) => {
     const { producto1, producto2, descripcion, precio, id } = req.body;
 
     try {
@@ -66,7 +97,12 @@ export const editarOferta = async (req, res) => {
     }
 };
 
-export const desactivarOferta = async (req, res) => {
+/**
+ * Esta funcion sirve para desactivar las ofertas
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const desactivarOferta = async (req, res) => {
     const id = req.body.id;
 
     try {
@@ -75,4 +111,6 @@ export const desactivarOferta = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
+
+export {listarOferta, buscarOferta, crearOferta, obtenerOferta, editarOferta, desactivarOferta}

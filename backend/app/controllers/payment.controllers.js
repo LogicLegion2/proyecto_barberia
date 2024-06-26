@@ -1,8 +1,18 @@
+/**
+ * Este es el controlador de payment
+ * @module ctr-payment
+ */
+
 import { application } from "express";
 import { HOST, PAYPAL_API, PAYPAL_API_CLIENT, PAYPAL_API_SECRET } from "../config/enviroment/config.js";
 import axios from "axios";
 
-export const createOrder = async (req, res) => {
+/**
+ * Crea una nueva orden de compra con la API de PayPal
+ * @param {object} req - Objeto de solicitud HTTP, que contiene la información de la petición.
+ * @param {object} res - Objeto de respuesta HTTP, que se utiliza para enviar una respuesta al cliente.
+ */
+ const createOrder = async (req, res) => {
     const order = {
         intent: "CAPTURE",
         purchase_units: [{
@@ -40,7 +50,13 @@ export const createOrder = async (req, res) => {
     return res.json(response.data)
 };
 
-export const captureOrder = async (req, res) => {
+/**
+ * Captura una nueva orden de compra con la API de PayPal
+ * @param {object} req - Objeto de solicitud HTTP, que contiene la información de la petición.
+ * @param {object} res - Objeto de respuesta HTTP, que se utiliza para enviar una respuesta al cliente.
+ */
+
+ const captureOrder = async (req, res) => {
     const token = req.query.token;
 
     const response = await axios.post(
@@ -54,4 +70,13 @@ export const captureOrder = async (req, res) => {
     );
     console.log(response.data);
 };
-export const cancelOrder = (req, res) => res.send("Orden cancelada");
+
+/**
+ * Cancela una nueva orden de compra con la API de PayPal
+ * @param {object} req - Objeto de solicitud HTTP, que contiene la información de la petición.
+ * @param {object} res - Objeto de respuesta HTTP, que se utiliza para enviar una respuesta al cliente.
+ */
+ const cancelOrder = (req, res) => res.send("Orden cancelada");
+
+
+ export {createOrder, captureOrder, cancelOrder}

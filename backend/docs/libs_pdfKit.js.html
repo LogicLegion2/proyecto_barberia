@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: libs/pdfKit.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: libs/pdfKit.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Este es el generador de pdfs
+ * @module libs-pdfkit
+ */
+import PDFDocument from "pdfkit-table"
+import { pool } from "../config/mysql.db.js";
+import { config } from "dotenv";
+import dayjs from 'dayjs';
+import 'dayjs/locale/es.js';
+import mysql from "mysql2/promise";
+config();
+
+dayjs.locale('es'); // Establece el idioma a español
+
+/**
+ * Genera un documento PDF basado en los datos de reservas de clientes.
+ * 
+ * @param {Function} dataLlamada - Función para cuando se ejecute se genera un fragmento de datos del PDF.
+ * @param {Function} endLlamada - Función de para que se ejecute cuando se finaliza la generación del PDF.
+ */
+ async function generarPDF( dataLlamada, endLlamada) {
+    try {
+        // Consulta a la base de datos
+        const [rows] = await pool.query("CALL LL_VER_RESERVA_ADMIN_PDF()");
+
+        // Darle formato diferente a la fecha y hora
+        const reservas = rows[0].map(reserva => {
+            const fecha = new Date(reserva.fecha).toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+            const hora = reserva.hora ? reserva.hora.substring(0, 8) : '';
+            return [
+                reserva.ubicacion,
+                fecha,
+                hora,
+                reserva.cliente,
+                reserva.barbero
+            ];
+        });
+
+        // Crea documento PDF
+        const doc = new PDFDocument();
+
+        doc.on("data", dataLlamada);
+        doc.on("end", endLlamada);
+
+        // Define el encabezado de la tabla
+        const tableArray = {
+            headers: ["Ubicación", "Fecha", "Hora", "Cliente", "Barbero"],
+            rows: reservas
+        }; 
+
+        // Título del documento
+        doc.fontSize(30).text('Reservas Clientes', { align: 'center' });
+        doc.moveDown();
+        // Agrega tabla al documento
+        doc.table(tableArray, { columnsSize: [130, 60, 60, 110, 110] });
+
+        // Finaliza el doc
+        doc.end();
+    } catch (error) {
+        console.error(error);
+        endLlamada(error)
+    }
+};
+
+/**
+ * Genera un documento PDF basado en las reservas de un barbero específico.
+ * 
+ * @param {Object} params - Parámetros para la consulta, incluyendo el ID del barbero.
+ * @param {Function} dataLlamada - Función para cuando se ejecute se genera un fragmento de datos del PDF.
+ * @param {Function} endLlamada - Función de para que se ejecute cuando se finaliza la generación del PDF.
+ */
+ async function generarPDFBarbero(params, dataLlamada, endLlamada) {
+    const id = params['id'];
+    console.log(`Id received: ${id}`);
+    try {
+        // Consulta a la base de datos
+        const [rows] = await pool.query(`CALL LL_VER_RESERVA_BARBERO(${id})`);
+
+        // Darle formato diferente a la fecha y hora
+        const reservas = rows[0].map(reserva => {
+            const fecha = new Date(reserva.fecha).toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+            const hora = reserva.hora ? reserva.hora.substring(0, 8) : '';
+            return [
+                reserva.ubicacion,
+                fecha,
+                hora,
+                reserva.cliente,
+            ];
+        });
+
+        // Crea documento PDF
+        const doc = new PDFDocument();
+
+        doc.on("data", dataLlamada);
+        doc.on("end", endLlamada);
+
+        // Define el encabezado y contenido de la tabla
+        const tableArray = {
+            headers: ["Ubicación", "Fecha", "Hora", "Cliente"],
+            rows: reservas
+        }; 
+
+        // Título del documento
+        doc.fontSize(30).text('Reservas Clientes', { align: 'center' });
+        doc.moveDown();
+        // Agrega tabla al documento
+        doc.table(tableArray, { columnsSize: [155, 90, 90, 155] });
+
+        // Finaliza el doc
+        doc.end();
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export {generarPDF, generarPDFBarbero}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-ctr-barbero.html">ctr-barbero</a></li><li><a href="module-ctr-comentarios.html">ctr-comentarios</a></li><li><a href="module-ctr-favoritos.html">ctr-favoritos</a></li><li><a href="module-ctr-ofertas.html">ctr-ofertas</a></li><li><a href="module-ctr-payment.html">ctr-payment</a></li><li><a href="module-ctr-preguntas.html">ctr-preguntas</a></li><li><a href="module-ctr-productos.html">ctr-productos</a></li><li><a href="module-ctr-reservas.html">ctr-reservas</a></li><li><a href="module-ctr-servicios.html">ctr-servicios</a></li><li><a href="module-ctr-ubicaciones.html">ctr-ubicaciones</a></li><li><a href="module-ctr-usuarios.html">ctr-usuarios</a></li><li><a href="module-ctr-ventas.html">ctr-ventas</a></li><li><a href="module-libs-pdfkit.html">libs-pdfkit</a></li></ul><h3>Global</h3><ul><li><a href="global.html#error">error</a></li><li><a href="global.html#pool">pool</a></li><li><a href="global.html#router">router</a></li><li><a href="global.html#ruta">ruta</a></li><li><a href="global.html#rutaBarberos">rutaBarberos</a></li><li><a href="global.html#rutaComentarios">rutaComentarios</a></li><li><a href="global.html#rutaFavoritos">rutaFavoritos</a></li><li><a href="global.html#rutaOfertas">rutaOfertas</a></li><li><a href="global.html#rutaPreguntas">rutaPreguntas</a></li><li><a href="global.html#rutaProductos">rutaProductos</a></li><li><a href="global.html#rutaReservaAdmin">rutaReservaAdmin</a></li><li><a href="global.html#rutaServicios">rutaServicios</a></li><li><a href="global.html#rutaUbicaciones">rutaUbicaciones</a></li><li><a href="global.html#rutaUsuarios">rutaUsuarios</a></li><li><a href="global.html#rutaVentas">rutaVentas</a></li><li><a href="global.html#verificarToken">verificarToken</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Jun 26 2024 18:55:50 GMT-0500 (hora estándar de Colombia)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

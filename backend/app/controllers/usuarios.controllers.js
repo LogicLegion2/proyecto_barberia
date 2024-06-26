@@ -1,3 +1,8 @@
+/**
+ * Este es el controlador de usuarios
+ * @module ctr-usuarios
+ */
+
 import { pool } from "../config/mysql.db.js";
 import { config } from "dotenv";
 import mysql from "mysql2/promise";
@@ -5,9 +10,14 @@ import jwt from "jsonwebtoken";
 import bcrypt, { hash } from "bcrypt";
 config();
 
-const saltRounds = 10;
+const saltRounds = 10; // Define el número de rondas de salt para el hash
 
-export const listarUsuario = async (req, res) => {
+/**
+ * Esta funcion sirve para mostrar todos los usuarios
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const listarUsuario = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_USUARIOS()");
         res.status(200).json({ usuarios: rows[0] });
@@ -16,7 +26,12 @@ export const listarUsuario = async (req, res) => {
     }
 };
 
-export const buscarUsuario = async (req, res) => {
+/**
+ * Esta funcion sirve para buscar los usuarios
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const buscarUsuario = async (req, res) => {
     const { desc } = req.query;
     try {
         if (!desc) {
@@ -29,7 +44,12 @@ export const buscarUsuario = async (req, res) => {
     }
 };
 
-export const crearUsuario = async (req, res) => {
+/**
+ * Esta funcion sirve para crear los usuarios
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const crearUsuario = async (req, res) => {
     const { nombre, correo, contrasena, telefono, rol, foto } = req.body;
     try {
         const hashedPassword = await bcrypt.hash(contrasena, saltRounds);
@@ -42,7 +62,12 @@ export const crearUsuario = async (req, res) => {
     }
 };
 
-export const crearBarbero = async (req, res) => {
+/**
+ * Esta funcion sirve para crear los barberos
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const crearBarbero = async (req, res) => {
     const { nombre, correo, contrasena, telefono, descripcion, fotoPerfil } = req.body;
     try {
         const hashedPassword = await bcrypt.hash(contrasena, saltRounds);
@@ -56,7 +81,12 @@ export const crearBarbero = async (req, res) => {
     }
 };
 
-export const registroUsuario = async (req, res) => {
+/**
+ * Esta funcion sirve para registrar los usuarios
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const registroUsuario = async (req, res) => {
     const { nombre, correo, contrasena, telefono } = req.body;
     try {
         const hashedPassword = await bcrypt.hash(contrasena, saltRounds);
@@ -70,7 +100,12 @@ export const registroUsuario = async (req, res) => {
     }
 };
 
-export const login = async (req, res) => {
+/**
+ * Esta funcion sirve para loguearse
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const login = async (req, res) => {
     const { correo, contrasena } = req.body;
 
     if (!correo || !contrasena) {
@@ -132,7 +167,12 @@ export const login = async (req, res) => {
     }
 };
 
-export const cambiarNombre = async (req, res) => {
+/**
+ * Esta funcion sirve para cambiar el nombre del usuario
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const cambiarNombre = async (req, res) => {
     const id = req.body.id;
     const nombre = req.body.nombre;
 
@@ -142,9 +182,14 @@ export const cambiarNombre = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
-export const cambiarTelefono = async (req, res) => {
+/**
+ * Esta funcion sirve para cambiar el telefono del usuario
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const cambiarTelefono = async (req, res) => {
     const id = req.body.id;
     const telefono = req.body.telefono;
 
@@ -156,7 +201,12 @@ export const cambiarTelefono = async (req, res) => {
     }
 }
 
-export const cambiarCorreo = async (req, res) => {
+/**
+ * Esta funcion sirve para cambiar el correo del usuario
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const cambiarCorreo = async (req, res) => {
     const id = req.body.id;
     const correo = req.body.correo;
 
@@ -166,9 +216,14 @@ export const cambiarCorreo = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
-export const cambiarFoto = async (req, res) => {
+/**
+ * Esta funcion sirve para cambiar la foto de perfil
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const cambiarFoto = async (req, res) => {
     const id = req.body.id;
     const foto = req.body.foto;
 
@@ -178,9 +233,14 @@ export const cambiarFoto = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
-export const cambiarContrasena = async (req, res) => {
+/**
+ * Esta funcion sirve para cambiar la contraseña del cliente
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const cambiarContrasena = async (req, res) => {
     const id = req.body.id;
     const contrasena = req.body.contrasena;
     const contrasenaNueva = req.body.contrasenaNueva;
@@ -205,8 +265,12 @@ export const cambiarContrasena = async (req, res) => {
     }
 };
 
-// Edición de perfiles para barberos
-export const cambiarNombreBarbero = async (req, res) => {
+/**
+ * Esta funcion sirve para cambiar el nombre de los barberos
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const cambiarNombreBarbero = async (req, res) => { // Edición de perfiles para barberos
     const id = req.body.id;
     const nombre = req.body.nombre;
 
@@ -216,9 +280,14 @@ export const cambiarNombreBarbero = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
-export const cambiarTelefonoBarbero = async (req, res) => {
+/**
+ * Esta funcion sirve para cambiar el telefono de los barberos
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const cambiarTelefonoBarbero = async (req, res) => {
     const id = req.body.id;
     const telefono = req.body.telefono;
 
@@ -228,9 +297,14 @@ export const cambiarTelefonoBarbero = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
-export const cambiarCorreoBarbero = async (req, res) => {
+/**
+ * Esta funcion sirve para cambiar el correo de los barberos
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const cambiarCorreoBarbero = async (req, res) => {
     const id = req.body.id;
     const correo = req.body.correo;
 
@@ -240,9 +314,14 @@ export const cambiarCorreoBarbero = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
-export const cambiarFotoBarbero = async (req, res) => {
+/**
+ * Esta funcion sirve para cambiar la foto de los barberos
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const cambiarFotoBarbero = async (req, res) => {
     const id = req.body.id;
     const foto = req.body.foto;
 
@@ -252,9 +331,14 @@ export const cambiarFotoBarbero = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
-export const cambiarDescripcionBarbero = async (req, res) => {
+/**
+ * Esta funcion sirve para cambiar la descripcion de los barberos
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const cambiarDescripcionBarbero = async (req, res) => {
     const id = req.body.id;
     const descripcion = req.body.descripcion;
 
@@ -264,9 +348,14 @@ export const cambiarDescripcionBarbero = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
-export const cambiarContrasenaBarbero = async (req, res) => {
+/**
+ * Esta funcion sirve para cambiar la contraseña de los barberos
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const cambiarContrasenaBarbero = async (req, res) => {
     const id = req.body.id;
     const contrasena = req.body.contrasena;
     const contrasenaNueva = req.body.contrasenaNueva;
@@ -291,7 +380,12 @@ export const cambiarContrasenaBarbero = async (req, res) => {
     }
 };
 
-export const desactivarUsuario = async (req, res) => {
+/**
+ * Esta funcion sirve para desactivar los usuarios
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const desactivarUsuario = async (req, res) => {
     const id = req.body.id;
 
     try {
@@ -300,9 +394,14 @@ export const desactivarUsuario = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
-export const verPerfil = async (req, res) => {
+/**
+ * Esta funcion sirve para ver el perfil del cliente
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const verPerfil = async (req, res) => {
     const id = req.params['id']
 
     try {
@@ -311,9 +410,14 @@ export const verPerfil = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
-export const verPerfilAdmin = async (req, res) => {
+/**
+ * Esta funcion sirve para ver el perfil del admin
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const verPerfilAdmin = async (req, res) => {
     const id = req.params['id']
 
     try {
@@ -322,9 +426,14 @@ export const verPerfilAdmin = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
-export const logout = async (req, res) => {
+/**
+ * Esta funcion sirve para obtener un token de acceso
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const logout = async (req, res) => {
     const token = req.headers["x-access-token"];
 
     if (!token) {
@@ -341,3 +450,5 @@ export const logout = async (req, res) => {
         res.status(500).json(err);
     }
 };
+
+export {listarUsuario, buscarUsuario, crearUsuario, crearBarbero, registroUsuario, login, cambiarNombre, cambiarTelefono, cambiarCorreo, cambiarFoto, cambiarContrasena, cambiarNombreBarbero, cambiarTelefonoBarbero, cambiarCorreoBarbero, cambiarFotoBarbero, cambiarDescripcionBarbero, cambiarContrasenaBarbero, desactivarUsuario, verPerfil, verPerfilAdmin, logout}

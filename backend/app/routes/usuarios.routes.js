@@ -2,7 +2,10 @@ import { Router } from "express";
 import { buscarUsuario, cambiarContrasena, cambiarContrasenaBarbero, cambiarCorreo, cambiarCorreoBarbero, cambiarDescripcionBarbero, cambiarFoto, cambiarFotoBarbero, cambiarNombre, cambiarNombreBarbero, cambiarTelefono, cambiarTelefonoBarbero, crearBarbero, crearUsuario, desactivarUsuario, listarUsuario, login, logout, registroUsuario, verPerfil, verPerfilAdmin } from "../controllers/usuarios.controllers.js";
 import { verificarToken } from "../middlewares/oauth.js";
 
-
+/**
+ * Estas son las rutas del backend de usuarios en mi proyecto
+ * @type {object}
+ */
 const rutaUsuarios = Router();
 
 rutaUsuarios.get("/", listarUsuario);

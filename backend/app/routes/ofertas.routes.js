@@ -3,6 +3,10 @@ import { buscarOferta, crearOferta, desactivarOferta, editarOferta, listarOferta
 import { verificarToken } from "../middlewares/oauth.js";
 
 
+/**
+ * Estas son las rutas del backend de ofertas en mi proyecto 
+ * @type {object}
+ */
 const rutaOfertas = Router();
 
 rutaOfertas.get("/", listarOferta);
