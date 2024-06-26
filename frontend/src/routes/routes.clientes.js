@@ -5,7 +5,7 @@ const rutaCliente = Router();
 
 rutaCliente.get("/home", paginaPrincipalCliente);
 rutaCliente.get("/menu", menuCliente);
-rutaCliente.get("/barbero", mostrarPerfilBarbero);
+rutaCliente.get("/barbero/:id", mostrarPerfilBarbero);
 rutaCliente.get("/reservar", realizarReserva);
 rutaCliente.get("/favorito", mostrarListaFavoritos);
 rutaCliente.get("/reserva", mostrarReserva);

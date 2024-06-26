@@ -21,8 +21,21 @@ export const menuAdmin = (req, res) => {
     res.render("views.menu_admin.ejs")
 };
 
-export const mostrarPerfilBarbero = (req, res) => {
-    res.render("views.eliminar_coment.ejs")
+export const mostrarPerfilBarbero = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const recurso = url + `/barberos/barbero/${id}`;
+        const response = await fetch(recurso);
+        const data = await response.json();
+        res.render("views.eliminar_coment.ejs", {
+            barberos: data.barberos,
+            comentarios: data.comentarios
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error);
+    }
 };
 
 export const mostrarProducto = async (req, res) => {
