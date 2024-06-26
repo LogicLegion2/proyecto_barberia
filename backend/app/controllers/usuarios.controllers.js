@@ -23,7 +23,7 @@ export const buscarUsuario = async (req, res) => {
             return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
         }
         const [rows] = await pool.query(`CALL LL_BUSCAR_USUARIO('${desc}')`);
-        res.status(200).json({usuarios: rows[0]})
+        res.status(200).json({ usuarios: rows[0] })
     } catch (error) {
         res.status(500).json(error);
     }
@@ -89,6 +89,18 @@ export const login = async (req, res) => {
         if (!match) {
             return res.status(400).json({ error: true, message: "Contraseña incorrecta" });
         }
+        
+        let idUsuario = usuario.idUsuario;
+        const rol = usuario.rol;
+
+        if (rol === "barbero") {
+            const respuestaBar = await pool.query(`CALL LL_OBTENER_BARBERO('${idUsuario}')`);
+            if (respuestaBar[0][0].length === 0) {
+                return res.status(400).json({ error: true, message: "El barbero no existe" });
+            }
+            const barbero = respuestaBar[0][0][0];
+            idUsuario = barbero.id; 
+        }
 
         const payload = {
             idUsuario: usuario.idUsuario,
@@ -103,11 +115,18 @@ export const login = async (req, res) => {
             process.env.TOKEN_PRIVATEKEY,
             { expiresIn: process.env.TOKEN_EXPIRES_IN }
         );
-        const rol = usuario.rol
-        console.log(rol);
-        const id = usuario.idUsuario
-        console.log(id);
-        res.status(200).json({ error: false, token, id, rol });
+
+        // const rol = usuario.rol
+        // const id = usuario.idUsuario
+
+        // if (usuario.rol === "barbero") {
+        //     const respuestaBar = await pool.query(`CALL LL_OBTENER_BARBERO('${id}')`);
+        //     const barbero = respuestaBar[0][0][0];
+        //     id = barbero.id;
+        //     console.log(id);
+        // }
+
+        res.status(200).json({ error: false, token, id: idUsuario, rol });
     } catch (e) {
         res.status(500).json({ error: true, message: "Error interno del servidor" });
     }
@@ -288,7 +307,7 @@ export const verPerfil = async (req, res) => {
 
     try {
         const rows = await pool.query(`CALL LL_VER_PERFIL_CLIENTE('${id}');`);
-        res.status(200).json({ clientes: rows[0][0]})
+        res.status(200).json({ clientes: rows[0][0] })
     } catch (error) {
         res.status(500).json(error);
     }
@@ -299,7 +318,7 @@ export const verPerfilAdmin = async (req, res) => {
 
     try {
         const rows = await pool.query(`CALL LL_VER_PERFIL_CLIENTE('${id}');`);
-        res.status(200).json({ admins: rows[0][0]})
+        res.status(200).json({ admins: rows[0][0] })
     } catch (error) {
         res.status(500).json(error);
     }
@@ -317,7 +336,7 @@ export const logout = async (req, res) => {
         // Almacena el token inválido en la base de datos
         const respuesta = await pool.query('INSERT INTO tokensinvalidos (token, expiracion) VALUES (?, ?)', [token, new Date()]);
 
-        res.status(200).json( { respuesta });
+        res.status(200).json({ respuesta });
     } catch (err) {
         res.status(500).json(err);
     }
