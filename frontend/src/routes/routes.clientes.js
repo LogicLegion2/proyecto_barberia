@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { menuCliente, mostrarCarritoCompras, mostrarEntregas, mostrarHistorialCitas, mostrarHistorialCompras, mostrarListaFavoritos, mostrarPerfilBarbero, mostrarReserva, paginaPrincipalCliente, perfilCliente, realizarCompra, realizarReembolso, realizarReserva } from "../controllers/controllers.cliente.js";
+import { menuCliente, mostrarCarritoCompras, mostrarDocs, mostrarEntregas, mostrarHistorialCitas, mostrarHistorialCompras, mostrarListaFavoritos, mostrarPerfilBarbero, mostrarReserva, paginaPrincipalCliente, perfilCliente, realizarCompra, realizarReembolso, realizarReserva } from "../controllers/controllers.cliente.js";
 
 const rutaCliente = Router();
 
@@ -16,5 +16,6 @@ rutaCliente.get("/compra", mostrarHistorialCompras);
 rutaCliente.get("/carrito", mostrarCarritoCompras);
 rutaCliente.get("/perfil", perfilCliente);
 rutaCliente.get("/comprar", realizarCompra);
+rutaCliente.get("/docs", mostrarDocs);
 
 export default rutaCliente;
