@@ -2,6 +2,7 @@ import { Router } from "express";
 import { listarBarbero, buscar, listarBarberoAdmin, perfilBarbero, verCalendario, verPerfilBarbero, verPerfilBarberoAdmin } from "../controllers/barbero.controllers.js";
 import { verificarToken } from "../middlewares/oauth.js";
 
+
 const rutaBarberos = Router();
 
 rutaBarberos.get("/", listarBarbero);

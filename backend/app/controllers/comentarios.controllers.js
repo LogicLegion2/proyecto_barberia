@@ -1,9 +1,19 @@
+/**
+ * Este es el controlador de barbero
+ * @module ctr-comentarios
+ */
+
 import { pool } from "../config/mysql.db.js";
 import { config } from "dotenv";
 import mysql from "mysql2/promise";
 config();
 
-export const crearComentario = async (req, res) => {
+/**
+ * Esta funcion sirve para crear comentarios
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const crearComentario = async (req, res) => {
     const idUsuario = req.body.idUsuario;
     const idBarbero = req.body.idBarbero;
     const comentario = req.body.comentario;
@@ -16,7 +26,12 @@ export const crearComentario = async (req, res) => {
     }
 }
 
-export const eliminarComentario = async (req, res) => {
+/**
+ * Esta funcion sirve para eliminar comentarios
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const eliminarComentario = async (req, res) => {
     const id = req.body.id;
 
     try {
@@ -26,3 +41,5 @@ export const eliminarComentario = async (req, res) => {
         res.status(500).json(error);
     }
 }
+
+export { crearComentario, eliminarComentario}

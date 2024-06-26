@@ -1,9 +1,20 @@
+/**
+ * Este es el controlador de favoritos
+ * @module ctr-favoritos
+ */
+
 import { pool } from "../config/mysql.db.js";
 import { config } from "dotenv";
 import mysql from "mysql2/promise";
 config();
 
-export const listarFavoritos = async (req, res) => {
+
+/**
+ * Esta funcion sirve para mostrar todos los favoritos
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const listarFavoritos = async (req, res) => {
     const id = req.params['id']
     try {
 
@@ -29,7 +40,12 @@ export const listarFavoritos = async (req, res) => {
     }
 };
 
-export const crearBarberoFavorito = async (req, res) => {
+/**
+ * Esta funcion sirve para crear barbero favorito
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const crearBarberoFavorito = async (req, res) => {
     const barbero = req.body.barbero;
     const id = req.params['id']
 
@@ -41,7 +57,12 @@ export const crearBarberoFavorito = async (req, res) => {
     }
 }
 
-export const crearProductoFavorito = async (req, res) => {
+/**
+ * Esta funcion sirve para crear producto favorito
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const crearProductoFavorito = async (req, res) => {
     const producto = req.body.producto;
     const id = req.params['id']
 
@@ -53,7 +74,12 @@ export const crearProductoFavorito = async (req, res) => {
     }
 }
 
-export const crearOfertaFavorito = async (req, res) => {
+/**
+ * Esta funcion sirve para crear oferta favorito
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const crearOfertaFavorito = async (req, res) => {
     const oferta = req.body.oferta;
     const id = req.params['id']
 
@@ -65,7 +91,12 @@ export const crearOfertaFavorito = async (req, res) => {
     }
 }
 
-export const crearServicioFavorito = async (req, res) => {
+/**
+ * Esta funcion sirve para crear servicio favorito
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const crearServicioFavorito = async (req, res) => {
     const servicio = req.body.servicio;
     const id = req.params['id']
 
@@ -76,3 +107,5 @@ export const crearServicioFavorito = async (req, res) => {
         res.status(500).json(error);
     }
 }
+
+export {listarFavoritos, crearBarberoFavorito, crearProductoFavorito, crearOfertaFavorito, crearServicioFavorito }
