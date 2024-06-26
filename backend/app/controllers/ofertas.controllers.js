@@ -44,35 +44,27 @@ export const obtenerOferta = async (req, res) => {
 
     try {
         const respuestaOferta = await pool.query(`CALL LL_OBTENER_OFERTA('${id}');`);
-        const oferta = respuestaOferta[0][0];
-        console.log(oferta);
-        const respuestaProductos = await pool.query(`CALL LL_VER_PRODUCTOS();`);
-        const productos = respuestaProductos[0][0];
-        console.log(productos);
-        if (oferta && productos.length > 0) {
-            res.status(200).json({ id, oferta, productos });
+        const oferta = respuestaOferta[0][0][0];
+        if (oferta) {
+            res.status(200).json(oferta);
         } else {
-            res.status(404).json({ mensaje: "Oferta o productos no encontrados" });
+            res.status(404).json({ mensaje: "Oferta no encontrada" });
         }
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json({ error: 'Error al obtener la oferta' });
     }
 };
 
 export const editarOferta = async (req, res) => {
-    const producto1 = req.body.producto1;
-    const producto2 = req.body.producto2;
-    const descripcion = req.body.descripcion;
-    const precio = req.body.precio;
-    const id = req.params.id;
+    const { producto1, producto2, descripcion, precio, id } = req.body;
 
     try {
         const respuesta = await pool.query(`CALL LL_EDITAR_OFERTA('${producto1}','${producto2}','${descripcion}','${precio}','${id}');`);
-        res.status(200).json({respuesta});
+        res.status(200).json({ respuesta });
     } catch (error) {
-        res.status(500).json({respuesta});
+        res.status(500).json({ error });
     }
-}
+};
 
 export const desactivarOferta = async (req, res) => {
     const id = req.body.id;

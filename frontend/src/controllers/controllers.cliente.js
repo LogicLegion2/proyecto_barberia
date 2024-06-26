@@ -3,14 +3,14 @@ config();
 
 const url = process.env.BACKEND_URL
 
-const blobToBase64 = (blob) => {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result.split(',')[1]);
-        reader.onerror = reject;
-        reader.readAsDataURL(new Blob([blob]));
-    });
-};
+// const blobToBase64 = (blob) => {
+//     return new Promise((resolve, reject) => {
+//         const reader = new FileReader();
+//         reader.onloadend = () => resolve(reader.result.split(',')[1]);
+//         reader.onerror = reject;
+//         reader.readAsDataURL(new Blob([blob]));
+//     });
+// };
 
 export const paginaPrincipalCliente = async (req, res) => {
     const { desc, tipo} = req.query
@@ -22,8 +22,16 @@ export const paginaPrincipalCliente = async (req, res) => {
         recurso = url + `/barberos/buscar?desc=${desc}&tipo=${tipo}`;
     }
 
+    const token = req.headers["x-access-token"] || req.query.token;
+
+    const options = {
+        headers: {
+            "x-access-token": token
+        }
+    };
+
     try {
-        const response = await fetch(recurso);
+        const response = await fetch(recurso, options);
         const data = await response.json();
 
         // const barberosConImagenes = await Promise.all(data.barberos.map(async barbero => {
@@ -221,4 +229,8 @@ export const perfilCliente = async (req, res) => {
 
 export const realizarCompra = (req, res) => {
     res.render("views.comprar_producto.ejs")
+};
+
+export const mostrarDocs = (req, res) => {
+    res.render("views.docs.ejs")
 };

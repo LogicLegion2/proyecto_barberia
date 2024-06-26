@@ -17,7 +17,7 @@ export const verificarToken = async (req, res, next) => {
     try {
         const invalidToken = await pool.query(`CALL LL_VER_TOKEN('${token}')`);
 
-        if (invalidToken && invalidToken[0][0].length > 0) {
+        if (invalidToken && invalidToken[0].length > 0) {
             return error(req, res, 401, "Token invalido");
         }
 
