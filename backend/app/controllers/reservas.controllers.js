@@ -32,6 +32,7 @@ dayjs.locale('es'); // Establece el idioma a español
                 hora
             };
         })
+        console.log(reservas);
         res.status(200).json({ reservas });
     } catch (error) {
         res.status(500).json(error);

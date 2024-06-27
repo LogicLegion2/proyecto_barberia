@@ -14,29 +14,78 @@ config();
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const listarFavoritos = async (req, res) => {
-    const id = req.params['id']
+const listarFavoritos = async (req, res) => {
+    const id = req.params['id'];
     try {
-
         const [
-            [rowsBar],[rowsPro],[rowsOfe],[rowsSer]
+            [rowsBar], [rowsPro], [rowsOfe], [rowsSer]
         ] = await Promise.all([
-            await pool.query(`CALL LL_VER_BARBERO_FAVORITO('${id}');`),
-            await pool.query(`CALL LL_VER_PRODUCTO_FAVORITO('${id}');`),
-            await pool.query(`CALL LL_VER_OFERTA_FAVORITO('${id}');`),
-            await pool.query(`CALL LL_VER_SERVICIO_FAVORITO('${id}');`)
-        ])
-        // Se adecua favoritos para que no muestre error si no encuentra informacion en alguna consulta
+            pool.query(`CALL LL_VER_BARBERO_FAVORITO('${id}');`),
+            pool.query(`CALL LL_VER_PRODUCTO_FAVORITO('${id}');`),
+            pool.query(`CALL LL_VER_OFERTA_FAVORITO('${id}');`),
+            pool.query(`CALL LL_VER_SERVICIO_FAVORITO('${id}');`)
+        ]);
+
+        const barberos = rowsBar[0] || [];
+        const servicios = rowsSer[0] || [];
+        const productos = rowsPro[0] || [];
+        const ofertas = rowsOfe[0] || [];
+
+        console.log(barberos);
+        barberos.forEach(barbero => {
+            barbero.img64 = null;
+            if (barbero.foto) {
+                try {
+                    barbero.img64 = Buffer.from(barbero.foto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                }
+            }
+        });
+
+        servicios.forEach(servicio => {
+            servicio.img64 = null;
+            if (servicio.foto) {
+                try {
+                    servicio.img64 = Buffer.from(servicio.foto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                }
+            }
+        });
+
+        productos.forEach(producto => {
+            producto.img64 = null;
+            if (producto.foto) {
+                try {
+                    producto.img64 = Buffer.from(producto.foto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                }
+            }
+        });
+
+        ofertas.forEach(oferta => {
+            oferta.img64 = null;
+            if (oferta.foto) {
+                try {
+                    oferta.img64 = Buffer.from(oferta.foto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                }
+            }
+        });
+
         const favoritos = {
-            barbero: rowsBar[0] || [],
-            producto: rowsPro[0] || [],
-            oferta: rowsOfe[0] || [],
-            servicio: rowsSer[0] || []
+            barbero: barberos,
+            producto: productos,
+            oferta: ofertas,
+            servicio: servicios
         };
-        console.log(favoritos);
         res.status(200).json({ favoritos });
     } catch (error) {
-        res.status(500).json(error);
+        console.error('Error en listarFavoritos:', error);
+        res.status(500).json({ error: 'Error al listar favoritos' });
     }
 };
 

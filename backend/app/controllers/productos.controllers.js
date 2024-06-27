@@ -14,10 +14,24 @@ config();
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const listarProducto = async (req, res) => {
+const listarProducto = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_PRODUCTOS()"); 
-        res.status(200).json({ productos: rows[0]});
+        const productos = rows[0];
+
+        productos.forEach(producto => {
+            if (producto.foto) {
+                try {
+                    producto.img64 = Buffer.from(producto.foto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                    producto.img64 = null;
+                }
+            } else {
+                producto.img64 = null;
+            }
+        });
+        res.status(200).json({ productos: productos});
     } catch (error) {
         res.status(500).json(error);
     }
@@ -28,28 +42,57 @@ config();
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const listarProductosVendidos = async (req, res) => {
+const listarProductosVendidos = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_PRODUCTOS_VENDIDOS()");
-        res.status(200).json({ productos: rows[0] });
+        const productos = rows[0];
+
+        productos.forEach(producto => {
+            if (producto.foto) {
+                try {
+                    producto.img64 = Buffer.from(producto.foto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                    producto.img64 = null;
+                }
+            } else {
+                producto.img64 = null;
+            }
+        });
+        res.status(200).json({ productos: productos });
     } catch (error) {
         res.status(500).json(error);
     }
 };
+
 
 /**
  * Esta funcion sirve para buscar los productos
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const buscarProducto = async (req, res) => {
+const buscarProducto = async (req, res) => {
     const { desc } = req.query;
     try {
         if (!desc) {
             return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
         }
-        const [rows] = await pool.query(`CALL LL_BUSCAR_PRODUCTO('${desc}')`);
-        res.status(200).json({productos: rows[0]})
+        const [rows] = await pool.query(`CALL LL_BUSCAR_PRODUCTO('${desc}')`)
+        const productos = rows[0];
+
+        productos.forEach(producto => {
+            if (producto.foto) {
+                try {
+                    producto.img64 = Buffer.from(producto.foto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                    producto.img64 = null;
+                }
+            } else {
+                producto.img64 = null;
+            }
+        });;
+        res.status(200).json({productos: productos})
     } catch (error) {
         res.status(500).json(error);
     }

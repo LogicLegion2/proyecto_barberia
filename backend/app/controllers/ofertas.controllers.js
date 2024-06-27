@@ -14,28 +14,57 @@ config();
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const listarOferta = async (req, res) => {
+const listarOferta = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_OFERTAS()");
-        res.status(200).json({ ofertas: rows[0] });
+        const productos = rows[0];
+
+        productos.forEach(producto => {
+            if (producto.foto) {
+                try {
+                    producto.img64 = Buffer.from(producto.foto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                    producto.img64 = null;
+                }
+            } else {
+                producto.img64 = null;
+            }
+        });
+        res.status(200).json({ ofertas: productos });
     } catch (error) {
         res.status(500).json(error);
     }
 };
+
 
 /**
  * Esta funcion sirve para buscar las ofertas
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const buscarOferta = async (req, res) => {
+const buscarOferta = async (req, res) => {
     const { desc } = req.query;
     try {
         if (!desc) {
             return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
         }
         const [rows] = await pool.query(`CALL LL_BUSCAR_OFERTA('${desc}')`);
-        res.status(200).json({ ofertas: rows[0] })
+        const ofertas = rows[0];
+
+        ofertas.forEach(oferta => {
+            if (oferta.foto) {
+                try {
+                    oferta.img64 = Buffer.from(oferta.foto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                    oferta.img64 = null;
+                }
+            } else {
+                oferta.img64 = null;
+            }
+        });
+        res.status(200).json({ ofertas: ofertas })
     } catch (error) {
         res.status(500).json(error);
     }
