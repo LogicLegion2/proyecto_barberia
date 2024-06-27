@@ -2,7 +2,10 @@ import { Router } from "express";
 import { listarBarbero, buscar, listarBarberoAdmin, perfilBarbero, verCalendario, verPerfilBarbero, verPerfilBarberoAdmin } from "../controllers/barbero.controllers.js";
 import { verificarToken } from "../middlewares/oauth.js";
 
-
+/**
+ * Estas son las rutas del backend de barberos en mi proyecto 
+ * @type {object}
+ */
 const rutaBarberos = Router();
 
 rutaBarberos.get("/", listarBarbero);

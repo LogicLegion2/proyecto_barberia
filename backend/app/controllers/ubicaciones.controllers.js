@@ -1,9 +1,18 @@
+/**
+ * Este es el controlador de ubicaciones
+ * @module ctr-ubicaciones
+ */
 import { pool } from "../config/mysql.db.js";
 import { config } from "dotenv";
 import mysql from "mysql2/promise";
 config();
 
-export const listarUbicacion = async (req, res) => {
+/**
+ * Esta funcion sirve para mostrar todas las ubicaciones
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const listarUbicacion = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_UBICACIONES()");
         res.status(200).json({ ubicaciones: rows[0] });
@@ -12,7 +21,12 @@ export const listarUbicacion = async (req, res) => {
     }
 };
 
-export const buscarUbicacion = async (req, res) => {
+/**
+ * Esta funcion sirve para buscar las ubicaciones
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const buscarUbicacion = async (req, res) => {
     const { desc } = req.query;
     try {
         if (!desc) {
@@ -25,7 +39,12 @@ export const buscarUbicacion = async (req, res) => {
     }
 };
 
-export const crearUbicacion = async (req, res) => {
+/**
+ * Esta funcion sirve para crear las ubicaciones
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const crearUbicacion = async (req, res) => {
     const input = req.body;
     const {
         titulo,
@@ -40,9 +59,14 @@ export const crearUbicacion = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
- 
-export const obtenerUbicacion = async (req, res) => {
+};
+
+/**
+ * Esta funcion sirve para obtener las ubicaciones
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const obtenerUbicacion = async (req, res) => {
     const id = req.params.id;
 
     try {
@@ -57,7 +81,12 @@ export const obtenerUbicacion = async (req, res) => {
     }
 };
 
-export const editarUbicacion = async (req, res) => {
+/**
+ * Esta funcion sirve para editar las ubicaciones
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const editarUbicacion = async (req, res) => {
     const titulo = req.body.titulo;
     const ubicacion = req.body.ubicacion;
     const descripcion = req.body.descripcion;
@@ -69,9 +98,14 @@ export const editarUbicacion = async (req, res) => {
     } catch (error) {
         res.status(200).json(respuesta);
     }
-} 
+};
 
-export const desactivarUbicacion = async (req, res) => {
+/**
+ * Esta funcion sirve para desactivar las ubicaciones
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const desactivarUbicacion = async (req, res) => {
     const id = req.body.id;
 
     try {
@@ -80,4 +114,6 @@ export const desactivarUbicacion = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
+
+export {listarUbicacion, buscarUbicacion, crearUbicacion, obtenerUbicacion, editarUbicacion, desactivarUbicacion}

@@ -1,9 +1,18 @@
+/**
+ * Este es el controlador de servicios
+ * @module ctr-servicios
+ */
 import { pool } from "../config/mysql.db.js";
 import { config } from "dotenv";
 import mysql from "mysql2/promise";
 config();
 
-export const listarServicio = async (req, res) => {
+/**
+ * Esta funcion sirve para mostrar todos los servicios
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const listarServicio = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_SERVICIOS()");
         res.status(200).json({ servicios: rows[0]});
@@ -12,7 +21,12 @@ export const listarServicio = async (req, res) => {
     }
 };
 
-export const buscarServicio = async (req, res) => {
+/**
+ * Esta funcion sirve para buscar los servicios
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const buscarServicio = async (req, res) => {
     const { desc } = req.query;
     try {
         if (!desc) {
@@ -25,8 +39,12 @@ export const buscarServicio = async (req, res) => {
     }
 };
 
-
-export const crearServicio = async (req, res) => {
+/**
+ * Esta funcion sirve para crear los servicios
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const crearServicio = async (req, res) => {
     const tipoServicio = req.body.tipoServicio;
     const descripcion = req.body.descripcion;
     const precio = req.body.precio;
@@ -39,7 +57,12 @@ export const crearServicio = async (req, res) => {
     }
 };
 
-export const obtenerServicio = async (req, res) => {
+/**
+ * Esta funcion sirve para obtener los servicios
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const obtenerServicio = async (req, res) => {
     const id = req.params.id;
 
     try {
@@ -54,7 +77,12 @@ export const obtenerServicio = async (req, res) => {
     }
 };
 
-export const editarServicio = async (req, res) => {
+/**
+ * Esta funcion sirve para editar los servicios
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const editarServicio = async (req, res) => {
     const tipoServicio = req.body.tipoServicio;
     const descripcion = req.body.descripcion;
     const precio = req.body.precio;
@@ -66,9 +94,14 @@ export const editarServicio = async (req, res) => {
     } catch (error) {
         res.status(500).json(respuesta);
     }
-}
+};
 
-export const desactivarServicio = async (req, res) => {
+/**
+ * Esta funcion sirve para desactivar los servicios
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const desactivarServicio = async (req, res) => {
     const id = req.body.id;
 
     try {
@@ -77,4 +110,6 @@ export const desactivarServicio = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
+
+export {listarServicio, buscarServicio, crearServicio, obtenerServicio, editarServicio, desactivarServicio}

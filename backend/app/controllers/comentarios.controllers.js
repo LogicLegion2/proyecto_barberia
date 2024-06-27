@@ -24,7 +24,7 @@ config();
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
 /**
  * Esta funcion sirve para eliminar comentarios
@@ -40,6 +40,6 @@ config();
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
 export { crearComentario, eliminarComentario}

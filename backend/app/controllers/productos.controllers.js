@@ -1,10 +1,20 @@
+/**
+ * Este es el controlador de productos
+ * @module ctr-productos
+ */
+
 import { pool } from "../config/mysql.db.js";
 import mysql from "mysql2/promise.js"; 
 import {config} from "dotenv";
 import jwt from "jsonwebtoken";
 config(); 
 
-export const listarProducto = async (req, res) => {
+/**
+ * Esta funcion sirve para mostrar todos los productos
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const listarProducto = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_PRODUCTOS()"); 
         res.status(200).json({ productos: rows[0]});
@@ -13,7 +23,12 @@ export const listarProducto = async (req, res) => {
     }
 };
 
-export const listarProductosVendidos = async (req, res) => {
+/**
+ * Esta funcion sirve para mostrar todos los productos vendidos
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const listarProductosVendidos = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_PRODUCTOS_VENDIDOS()");
         res.status(200).json({ productos: rows[0] });
@@ -22,7 +37,12 @@ export const listarProductosVendidos = async (req, res) => {
     }
 };
 
-export const buscarProducto = async (req, res) => {
+/**
+ * Esta funcion sirve para buscar los productos
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const buscarProducto = async (req, res) => {
     const { desc } = req.query;
     try {
         if (!desc) {
@@ -35,7 +55,12 @@ export const buscarProducto = async (req, res) => {
     }
 };
 
-export const crearProducto = async (req, res) => {
+/**
+ * Esta funcion sirve para crear los productos
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const crearProducto = async (req, res) => {
     const input = req.body;
     const {
         nombre,
@@ -51,9 +76,14 @@ export const crearProducto = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
-export const obtenerProducto = async (req, res) => {
+/**
+ * Esta funcion sirve para obtener los productos
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const obtenerProducto = async (req, res) => {
     const id = req.params.id;
 
     try {
@@ -68,7 +98,12 @@ export const obtenerProducto = async (req, res) => {
     }
 };
 
-export const editarProducto = async (req, res) => {
+/**
+ * Esta funcion sirve para editar los productos
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const editarProducto = async (req, res) => {
     const nombre = req.body.nombre;
     const descripcion = req.body.descripcion;
     const precio = req.body.precio;
@@ -80,9 +115,14 @@ export const editarProducto = async (req, res) => {
     } catch (error) {
         res.status(500).json(respuesta);
     }
-}
+};
 
-export const desactivarProducto = async (req, res) => {
+/**
+ * Esta funcion sirve para desactivar los productos
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const desactivarProducto = async (req, res) => {
     const id = req.body.id;
 
     try {
@@ -91,9 +131,14 @@ export const desactivarProducto = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
-export const insertarProductoVenta = async (req, res) => {
+/**
+ * Esta funcion sirve para insertar los productos a la venta
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const insertarProductoVenta = async (req, res) => {
     const idProducto = req.body.idProducto;
     const idVenta = req.body.idVenta;
     const cantidad = req.body.cantidad;
@@ -104,4 +149,6 @@ export const insertarProductoVenta = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
+
+export {listarProducto, listarProductosVendidos, buscarProducto, crearProducto, obtenerProducto, editarProducto, desactivarProducto, insertarProductoVenta}

@@ -1,9 +1,19 @@
+/**
+ * Este es el controlador de preguntas
+ * @module ctr-preguntas
+ */
+
 import { pool } from "../config/mysql.db.js";
 import { config } from "dotenv";
 import mysql from "mysql2/promise";
 config();
 
-export const listarPregunta = async (req, res) => {
+/**
+ * Esta funcion sirve para mostrar todas las preguntas
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const listarPregunta = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_PREGUNTAS()");
         res.status(200).json({ preguntas: rows[0]})
@@ -12,7 +22,12 @@ export const listarPregunta = async (req, res) => {
     }
 };
 
-export const buscarPregunta = async (req, res) => {
+/**
+ * Esta funcion sirve para buscar las preguntas
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const buscarPregunta = async (req, res) => {
     const { desc } = req.query;
     try {
         if (!desc) {
@@ -25,7 +40,12 @@ export const buscarPregunta = async (req, res) => {
     }
 };
 
-export const crearPregunta = async (req, res) => {
+/**
+ * Esta funcion sirve para crear las preguntas
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const crearPregunta = async (req, res) => {
     const { pregunta, resp } = req.body;
 
     try {
@@ -36,7 +56,12 @@ export const crearPregunta = async (req, res) => {
     }
 };
 
-export const obtenerPregunta = async (req, res) => {
+/**
+ * Esta funcion sirve para obtener las preguntas
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const obtenerPregunta = async (req, res) => {
     const id = req.params.id;
 
     try {
@@ -52,7 +77,12 @@ export const obtenerPregunta = async (req, res) => {
     }
 };
 
-export const editarPregunta = async (req, res) => {
+/**
+ * Esta funcion sirve para editar las preguntas
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const editarPregunta = async (req, res) => {
     const { pregunta, resp, id } = req.body;
 
     try {
@@ -64,7 +94,12 @@ export const editarPregunta = async (req, res) => {
     }
 };
 
-export const desactivarPregunta = async (req, res) => {
+/**
+ * Esta funcion sirve para desactivar las preguntas
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+ const desactivarPregunta = async (req, res) => {
     const id = req.body.id;
 
     try {
@@ -74,3 +109,5 @@ export const desactivarPregunta = async (req, res) => {
         res.status(500).json(error);
     }
 };
+
+export {listarPregunta, buscarPregunta, crearPregunta, obtenerPregunta, editarPregunta, desactivarPregunta}

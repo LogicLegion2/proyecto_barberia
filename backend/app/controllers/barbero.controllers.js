@@ -152,7 +152,7 @@ config();
         console.error(error);
         res.status(500).json(error);
     }
-}
+};
 
 /**
  * Esta funcion sirve para ver el perfil del barbero
@@ -169,7 +169,7 @@ config();
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
 /**
  * Esta funcion sirve para ver los barberos desde la vista del cliente
@@ -191,7 +191,7 @@ config();
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
 /**
  * Esta funcion sirve para ver los barberos desde la vista del admin
@@ -213,7 +213,7 @@ config();
     } catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
 export {listarBarbero, listarBarberoAdmin, buscar, verCalendario, perfilBarbero, verPerfilBarbero, verPerfilBarberoAdmin}
 
