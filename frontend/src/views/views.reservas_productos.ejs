@@ -38,55 +38,53 @@
                 <div class="d-grid gap-3">
                   <li
                     class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                    <a class="nav-link " href="/productos/listar">Productos</a><i class="bi bi-chevron-right"></i>
+                    <a class="nav-link " href="/admin/producto">Productos</a><i class="bi bi-chevron-right"></i>
                   </li>
                   <li
                     class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                    <a class="nav-link " href="/servicios/listar">Servicios</a><i class="bi bi-chevron-right"></i>
+                    <a class="nav-link " href="/admin/servicio">Servicios</a><i class="bi bi-chevron-right"></i>
                   </li>
                   <li
                     class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                    <a class="nav-link " href="/ofertas/listar">Ofertas</a><i class="bi bi-chevron-right"></i>
+                    <a class="nav-link " href="/admin/oferta">Ofertas</a><i class="bi bi-chevron-right"></i>
                   </li>
                   <li
                     class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                    <a class="nav-link " href="/usuarios/listar">Usuarios</a><i class="bi bi-chevron-right"></i>
+                    <a class="nav-link " href="/admin/usuario">Usuarios</a><i class="bi bi-chevron-right"></i>
                   </li>
                   <li
                     class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                    <a class="nav-link " href="/ubicaciones/listar">Ubicaciones</a><i class="bi bi-chevron-right"></i>
+                    <a class="nav-link " href="/admin/ubicacion">Ubicaciones</a><i class="bi bi-chevron-right"></i>
                   </li>
                   <li
                     class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                    <a class="nav-link " href="/preguntas/listar">Preguntas</a><i class="bi bi-chevron-right"></i>
+                    <a class="nav-link " href="/admin/pregunta">Preguntas</a><i class="bi bi-chevron-right"></i>
                   </li>
                   <li
                     class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                    <a class="nav-link " href="/ventas/ver/entregas/admin">Entregas</a><i
+                    <a class="nav-link " href="/admin/entrega">Entregas</a><i class="bi bi-chevron-right"></i>
+                  </li>
+                  <li
+                    class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                    <a class="nav-link " href="/admin/vendido">Productos Vendidos</a><i class="bi bi-chevron-right"></i>
+                  </li>
+                  <li
+                    class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                    <a class="nav-link " href="/admin/reserva">Reservas</a><i class="bi bi-chevron-right"></i>
+                  </li>
+                  <li
+                    class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                    <a class="nav-link " href="/admin/historial">Historial de Reservas</a><i
                       class="bi bi-chevron-right"></i>
                   </li>
                   <li
                     class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                    <a class="nav-link " href="/productos/vendidos">Productos Vendidos</a><i
+                    <a class="nav-link " href="/admin/reserva/producto">Reservas Productos</a><i
                       class="bi bi-chevron-right"></i>
                   </li>
                   <li
                     class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                    <a class="nav-link " href="/reservas/listar/admin">Reservas</a><i class="bi bi-chevron-right"></i>
-                  </li>
-                  <li
-                    class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                    <a class="nav-link " href="/reservas/historial/reserva">Historial de Reservas</a><i
-                      class="bi bi-chevron-right"></i>
-                  </li>
-                  <li
-                    class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                    <a class="nav-link " href="/ventas/reservas/productos">Reservas Productos</a><i
-                      class="bi bi-chevron-right"></i>
-                  </li>
-                  <li
-                    class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                    <a class="nav-link " href="perfil_admin.html">Mi cuenta</a><i class="bi bi-chevron-right"></i>
+                    <a class="nav-link " href="/admin/perfil">Mi cuenta</a><i class="bi bi-chevron-right"></i>
                   </li>
                 </div>
               </div>
@@ -98,7 +96,7 @@
             <% productos.forEach(producto=> { %>
               <div class="flex-sm-row flex-column d-flex rounded-4 custom-bg-dark ps-2">
                 <div class="m-2 flex-shrink-0 justify-content-center justify-content-sm-start d-flex">
-                  <img src="<%= producto.foto %>" alt="..." class="mg-thumbnail rounded-4 me-2"
+                  <img src="data:image/jpeg;base64,<%= producto.img64 %>" alt="" class="mg-thumbnail rounded-4 me-2"
                     style="max-width: 150px;">
                 </div>
                 <div class="flex-grow-1 m-1 p-1 text-center text-sm-start">
@@ -118,7 +116,7 @@
           </div>
           <% } else { %>
             <p class="w-100 text-center text-white fs-5 mt-5 pt-5">No existen reservas de productos.</p>
-          <% } %>
+            <% } %>
       </div>
     </div>
   </div>
@@ -128,6 +126,11 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
     integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
     crossorigin="anonymous"></script>
+  <script>
+    const img64 = `data:image/jpeg;base64,${document.getElementById('perimagen').value}`;
+    const fotomostrar = document.getElementById('fotomostrar');
+    fotomostrar.src = img64;
+  </script>
 </body>
 
 </html>

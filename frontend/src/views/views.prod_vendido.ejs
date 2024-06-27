@@ -19,7 +19,8 @@
     <div class="fondo container-fluid">
         <nav class="navbar navbar-dark">
             <div class="container-fluid d-flex flex-row-reverse">
-                <form method="get" class="col-lg-3 col-md-4 col-sm-5 col-6 mt-3 justify-content-end d-flex " role="search">
+                <form method="get" class="col-lg-3 col-md-4 col-sm-5 col-6 mt-3 justify-content-end d-flex "
+                    role="search">
                     <input name="desc" class="form-control inp-bus rounded-4 text-white" type="search"
                         placeholder="Buscar Vendido..." aria-label="Search">
                     <button class="btn btn-bus border-white rounded-4 ms-1 btn-outline-primary" type="submit"><img
@@ -42,62 +43,61 @@
                         <div class="d-grid gap-3">
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="/productos/listar">Productos</a><i
+                                <a class="nav-link " href="/admin/producto">Productos</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="/servicios/listar">Servicios</a><i
+                                <a class="nav-link " href="/admin/servicio">Servicios</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="/ofertas/listar">Ofertas</a><i
+                                <a class="nav-link " href="/admin/oferta">Ofertas</a><i class="bi bi-chevron-right"></i>
+                            </li>
+                            <li
+                                class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                                <a class="nav-link " href="/admin/usuario">Usuarios</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="/usuarios/listar">Usuarios</a><i
+                                <a class="nav-link " href="/admin/ubicacion">Ubicaciones</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="/ubicaciones/listar">Ubicaciones</a><i
+                                <a class="nav-link " href="/admin/pregunta">Preguntas</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="/preguntas/listar">Preguntas</a><i
+                                <a class="nav-link " href="/admin/entrega">Entregas</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="/ventas/ver/entregas/admin">Entregas</a><i
+                                <a class="nav-link " href="/admin/vendido">Productos Vendidos</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="/productos/vendidos">Productos Vendidos</a><i
+                                <a class="nav-link " href="/admin/reserva">Reservas</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="/reservas/listar/admin">Reservas</a><i
+                                <a class="nav-link " href="/admin/historial">Historial de Reservas</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="/reservas/historial/reserva">Historial de Reservas</a><i
+                                <a class="nav-link " href="/admin/reserva/producto">Reservas Productos</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                             <li
                                 class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="/ventas/reservas/productos">Reservas Productos</a><i
-                                    class="bi bi-chevron-right"></i>
-                            </li>
-                            <li
-                                class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                <a class="nav-link " href="perfil_admin.html">Mi cuenta</a><i
+                                <a class="nav-link " href="/admin/perfil">Mi cuenta</a><i
                                     class="bi bi-chevron-right"></i>
                             </li>
                         </div>
@@ -112,7 +112,8 @@
                     <% productos.forEach(producto=> { %>
                         <li class="opc">
                             <div class="tarjeta card d-flex align-items-center mb-5 p-2 rounded-4">
-                                <img src="<%= producto.foto %>" alt="" class="foto rounded-4 mb-2">
+                                <img src="data:image/jpeg;base64,<%= producto.img64 %>" alt=""
+                                    class="foto rounded-4 mb-2">
                                 <p
                                     class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
                                     <%= producto.producto %>
@@ -129,8 +130,9 @@
                         <% }); %>
                 </ul>
                 <% } else { %>
-                    <p class="w-100 text-center text-white fs-5 mt-5 pt-5">No existen registros de productos vendidos.</p>
-                <% } %>
+                    <p class="w-100 text-center text-white fs-5 mt-5 pt-5">No existen registros de productos vendidos.
+                    </p>
+                    <% } %>
         </section>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

@@ -62,8 +62,18 @@ body {
 }
 
 .foto {
-    width: 130px;
+    width: 140px;
     height: 160px;
+}
+
+.foto-h {
+    width: 80px;
+    height: 110px;
+}
+
+.foto-p {
+    width: 130px;
+    height: 150px;
 }
 
 .desc {

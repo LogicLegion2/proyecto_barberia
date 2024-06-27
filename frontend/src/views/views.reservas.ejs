@@ -22,7 +22,8 @@
             <div class="col p-0 ">
                 <nav class="navbar navbar-dark">
                     <div class="container-fluid d-flex flex-row-reverse">
-                        <a class="btn btn-color text-white me-3 rounded-4 p-2" href="<%= url + '/reservas/pdf'%>">Exportar pdf</a>
+                        <a class="btn btn-color text-white me-3 rounded-4 p-2"
+                            href="<%= url + '/reservas/pdf'%>">Exportar pdf</a>
                         <a class="navbar-brand me-auto ms-auto fs-1 fw-bold" href="#">Reservas</a>
                         <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
                             data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
@@ -40,62 +41,52 @@
                                 <div class="d-grid gap-3">
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="/productos/listar">Productos</a><i
+                                        <a class="nav-link " href="/cliente/reservar">Reservar</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="/servicios/listar">Servicios</a><i
+                                        <a class="nav-link " href="/cliente/favorito">Lista Favoritos</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="/ofertas/listar">Ofertas</a><i
+                                        <a class="nav-link " href="/cliente/home">Página Principal</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="/usuarios/listar">Usuarios</a><i
+                                        <a class="nav-link " href="/cliente/reserva">Reservas</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="/ubicaciones/listar">Ubicaciones</a><i
+                                        <a class="nav-link " href="/cliente/entrega">Entregas</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="/preguntas/listar">Preguntas</a><i
+                                        <a class="nav-link " href="/cliente/reembolso">Reembolsos</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="/ventas/ver/entregas/admin">Entregas</a><i
+                                        <a class="nav-link " href="/cliente/cita">Historial de Reseras</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="/productos/vendidos">Productos Vendidos</a><i
+                                        <a class="nav-link " href="/cliente/compra">Historial de Compras</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="/reservas/listar/admin">Reservas</a><i
+                                        <a class="nav-link " href="/cliente/carrito">Carrito de Compras</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="/reservas/historial/reserva">Historial de
-                                            Reservas</a><i class="bi bi-chevron-right"></i>
-                                    </li>
-                                    <li
-                                        class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="/ventas/reservas/productos">Reservas Productos</a><i
-                                            class="bi bi-chevron-right"></i>
-                                    </li>
-                                    <li
-                                        class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="perfil_admin.html">Mi cuenta</a><i
+                                        <a class="nav-link " href="/cliente/perfil">Mi cuenta</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                 </div>
@@ -126,7 +117,7 @@
                     </div>
                     <% } else { %>
                         <p class="w-100 text-center text-white fs-5 mt-5 pt-5">No existen reservas.</p>
-                    <% } %>
+                        <% } %>
             </div>
         </div>
     </div>
