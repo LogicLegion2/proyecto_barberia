@@ -7,10 +7,10 @@ document.getElementById("registrarCliente").addEventListener("click", (e) => {
     const password = document.getElementById("password").value;
 
     const datosUsuario = {
-        nombre: name, // Asegúrate que coincida con el nombre esperado en tu backend (nombre en lugar de name)
+        nombre: name,
         telefono: telefono,
-        email: email,
-        contrasena: password, // Asegúrate que coincida con el nombre esperado en tu backend (contrasena en lugar de password)
+        correo: email,
+        contrasena: password,
     };
 
     fetch(`http://localhost:3000/usuarios/registro`, {
@@ -41,7 +41,7 @@ document.getElementById("registrarCliente").addEventListener("click", (e) => {
         });
         // Opcional: Redireccionar después de un tiempo
         setTimeout(() => {
-            window.location.href = '/ruta-donde-quieres-redireccionar'; // Cambia por la ruta deseada
+            window.location.href = 'http://localhost:3800/cliente/home'; // Cambia por la ruta deseada
         }, 1500);
     })
     .catch(error => {
