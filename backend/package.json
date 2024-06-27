@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon app/index.js",
-    "build": "babel app --out-dir dist",
+    "build": "babel app --out-dir dist && copyfiles -u 1 app/**/* dist",
     "start": "node app/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "doc": "jsdoc -c jsdoc.json"
