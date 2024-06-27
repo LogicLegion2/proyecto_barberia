@@ -65,10 +65,10 @@
             <!-- Carrusel barberos -->
             <div id="carousel1" class="carousel slide">
                 <div class="carousel-inner pt-5 pb-5">
-                    <% if (barberos[0] && barberos[0].length > 0) { 
+                    <% if (barberos && barberos.length > 0) { 
                         let barberoChunks = [];
-                        for (let i = 0; i < barberos[0].length; i += 5) {
-                            barberoChunks.push(barberos[0].slice(i, i + 5));
+                        for (let i = 0; i < barberos.length; i += 5) {
+                            barberoChunks.push(barberos.slice(i, i + 5));
                         }
                     %>
                     <% barberoChunks.forEach((chunk, chunkIndex) => { %>
@@ -82,7 +82,7 @@
                                             <a class="btn-fav btn align-self-start position-absolute p-0">
                                                 <img src="/img/amor.png" alt="" class="icon-fav mt-menor">
                                             </a>
-                                            <img src="<%= barbero.foto %>" alt="" class="foto rounded-4 mb-2">
+                                            <img src="data:image/jpeg;base64,<%= barbero.img64 %>" alt="" class="foto rounded-4 mb-2">
                                             <a href="/cliente/barbero/<%= barbero.id %>"
                                                 class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
                                                 <%= barbero.barbero %>
@@ -130,10 +130,10 @@
             <!-- Carrusel servicios -->
             <div id="carousel2" class="carousel slide">
                 <div class="carousel-inner pt-5 pb-5">
-                    <% if (servicios[0] && servicios[0].length > 0) { 
+                    <% if (servicios && servicios.length > 0) { 
                         let servicioChunks = [];
-                        for (let i = 0; i < servicios[0].length; i += 5) {
-                            servicioChunks.push(servicios[0].slice(i, i + 5));
+                        for (let i = 0; i < servicios.length; i += 5) {
+                            servicioChunks.push(servicios.slice(i, i + 5));
                         }
                     %>
                     <% servicioChunks.forEach((chunk, chunkIndex) => { %>
@@ -145,7 +145,7 @@
                                     <button class="btn-fav btn align-self-start position-absolute p-0">
                                         <img src="/img/amor.png" alt="" class="icon-fav mt-menor-max">
                                     </button>
-                                    <img src="<%= servicio.fotoServicio %>" alt="" class="foto rounded-4 mb-2">
+                                    <img src="data:image/jpeg;base64,<%= servicio.img64 %>" alt="" class="foto rounded-4 mb-2">
                                     <p
                                         class="nombre z-1 w-100 text-center text-light fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
                                         <%= servicio.tipoServicio %></p>
@@ -192,10 +192,10 @@
             <!-- Carrusel productos -->
             <div id="carousel3" class="carousel slide">
                 <div class="carousel-inner pt-5 pb-5">
-                    <% if (productos[0] && productos[0].length > 0) { 
+                    <% if (productos && productos.length > 0) { 
                         let productoChunks = [];
-                        for (let i = 0; i < productos[0].length; i += 5) {
-                            productoChunks.push(productos[0].slice(i, i + 5));
+                        for (let i = 0; i < productos.length; i += 5) {
+                            productoChunks.push(productos.slice(i, i + 5));
                         }
                     %>
                     <% productoChunks.forEach((chunk, chunkIndex) => { %>
@@ -204,7 +204,7 @@
                             <% chunk.forEach(producto => { %>
                             <div class="opc d-block ms-3 me-4">
                                 <div class="tarjeta tarjeta-med card d-flex align-items-center  justify-content-around p-2 rounded-4 z-0">
-                                    <img src="<%= producto.fotoProducto %>" alt="" class="foto rounded-4 mb-2">
+                                    <img src="data:image/jpeg;base64,<%= producto.img64 %>" alt="" class="foto rounded-4 mb-2">
                                     <p
                                         class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
                                         <%= producto.producto %></p>
@@ -257,10 +257,10 @@
             <!-- Carrusel ofertas -->
             <div id="carousel5" class="carousel slide">
                 <div class="carousel-inner pt-5 pb-5">
-                    <% if (ofertas[0] && ofertas[0].length > 0) { 
+                    <% if (ofertas && ofertas.length > 0) { 
                         let ofertaChunks = [];
-                        for (let i = 0; i < ofertas[0].length; i += 5) {
-                            ofertaChunks.push(ofertas[0].slice(i, i + 5));
+                        for (let i = 0; i < ofertas.length; i += 5) {
+                            ofertaChunks.push(ofertas.slice(i, i + 5));
                         }
                     %>
                     <% ofertaChunks.forEach((chunk, chunkIndex) => { %>
@@ -269,7 +269,7 @@
                             <% chunk.forEach(oferta => { %>
                             <div class="opc d-block ms-3 me-4">
                                 <div class="tarjeta tarjeta-big card d-flex align-items-center justify-content-around p-2 rounded-4 z-0">
-                                    <img src="<%= oferta.fotoOferta %>" alt="" class="foto rounded-4 mb-2">
+                                    <img src="data:image/jpeg;base64,<%= oferta.img64 %>" alt="" class="foto rounded-4 mb-2">
                                     <p
                                         class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
                                         <%= oferta.productos %></p>
@@ -322,10 +322,10 @@
             <!-- Carrusel ubicaciones -->
             <div id="carousel4" class="carousel slide">
                 <div class="carousel-inner pt-5 pb-5">
-                    <% if (ubicaciones[0] && ubicaciones[0].length > 0) { 
+                    <% if (ubicaciones && ubicaciones.length > 0) { 
                         let ubicacionChunks = [];
-                        for (let i = 0; i < ubicaciones[0].length; i += 5) {
-                            ubicacionChunks.push(ubicaciones[0].slice(i, i + 5));
+                        for (let i = 0; i < ubicaciones.length; i += 5) {
+                            ubicacionChunks.push(ubicaciones.slice(i, i + 5));
                         }
                     %>
                     <% ubicacionChunks.forEach((chunk, chunkIndex) => { %>
@@ -334,7 +334,7 @@
                             <% chunk.forEach(ubicacion => { %>
                             <div class="opc d-block ms-3 me-4">
                                 <div class="tarjeta tarjeta-sma card d-flex align-items-center justify-content-around p-2 rounded-4 z-0">
-                                    <img src="<%= ubicacion.fotoUbicacion %>" alt="" class="foto rounded-4 mb-2">
+                                    <img src="data:image/jpeg;base64,<%= ubicacion.img64 %>" alt="" class="foto rounded-4 mb-2">
                                     <p
                                         class="nombre text-light w-100 text-center fs-5 fw-bold mb-2 pb-2 border-bottom border-2 border-light">
                                         <%= ubicacion.titulo %></p>

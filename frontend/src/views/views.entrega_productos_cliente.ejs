@@ -40,52 +40,52 @@
                                 <div class="d-grid gap-3">
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="reservar.html">Reservar</a><i
+                                        <a class="nav-link " href="/cliente/reservar">Reservar</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="lista_fav.html">Lista Favoritos</a><i
+                                        <a class="nav-link " href="/cliente/favorito">Lista Favoritos</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="barberos.html">Página Principal</a><i
+                                        <a class="nav-link " href="/cliente/home">Página Principal</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="reservas_cliente.html">Reservas</a><i
+                                        <a class="nav-link " href="/cliente/reserva">Reservas</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="entrega_productos_cliente.html">Entregas</a><i
+                                        <a class="nav-link " href="/cliente/entrega">Entregas</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="reembolso.html">Reembolsos</a><i
+                                        <a class="nav-link " href="/cliente/reembolso">Reembolsos</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="historial_citas.html">Historial de Reservas</a><i
+                                        <a class="nav-link " href="/cliente/cita">Historial de Reseras</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="historial_compras.html">Historial de Compras</a><i
+                                        <a class="nav-link " href="/cliente/compra">Historial de Compras</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="carrito.html">Carrito de Compras</a><i
+                                        <a class="nav-link " href="/cliente/carrito">Carrito de Compras</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="perfil_cliente.html">Mi cuenta</a><i
+                                        <a class="nav-link " href="/cliente/perfil">Mi cuenta</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                 </div>
@@ -97,14 +97,17 @@
                     <div class="d-grid gap-3 m-3 ">
                         <% entregas.forEach(entrega=> { %>
                             <div class="p-2 ps-3 custom-bg-dark rounded-4">
-                                <b class="text-secondary">Productos: </b><i class="text-light"><%= entrega.productos %></i><br>
-                                <b class="text-secondary">Valor a Pagar: </b><i class="text-light">$<%= entrega.precio %></i><br>
+                                <b class="text-secondary">Productos: </b><i class="text-light">
+                                    <%= entrega.productos %>
+                                </i><br>
+                                <b class="text-secondary">Valor a Pagar: </b><i class="text-light">$<%= entrega.precio
+                                        %></i><br>
                             </div>
-                        <% }); %>
+                            <% }); %>
                     </div>
                     <% } else { %>
                         <p class="w-100 text-center text-white fs-5 mt-5 pt-5">No exiten entregas.</p>
-                <% } %>
+                        <% } %>
             </div>
         </div>
     </div>

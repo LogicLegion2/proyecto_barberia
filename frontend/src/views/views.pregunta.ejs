@@ -20,8 +20,8 @@
     <nav class="navbar navbar-dark">
       <div class="container-fluid d-flex flex-row-reverse">
         <form method="get" class="mt-3 justify-content-end d-flex " role="search">
-          <input name="desc" class="form-control inp-bus rounded-4 text-white" type="search" placeholder="Buscar Pregunta..."
-            aria-label="Search">
+          <input name="desc" class="form-control inp-bus rounded-4 text-white" type="search"
+            placeholder="Buscar Pregunta..." aria-label="Search">
           <button class="btn btn-bus border-white rounded-4 ms-1 btn-outline-primary" type="submit"><img
               src="/img/lupa2.png" class="lupa mb-1"></button>
         </form>
@@ -39,43 +39,42 @@
           <div class="offcanvas-body pt-0 pb-0 menu-top">
             <div class="d-grid gap-3">
               <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                <a class="nav-link " href="/productos/listar">Productos</a><i class="bi bi-chevron-right"></i>
+                <a class="nav-link " href="/admin/producto">Productos</a><i class="bi bi-chevron-right"></i>
               </li>
               <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                <a class="nav-link " href="/servicios/listar">Servicios</a><i class="bi bi-chevron-right"></i>
+                <a class="nav-link " href="/admin/servicio">Servicios</a><i class="bi bi-chevron-right"></i>
               </li>
               <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                <a class="nav-link " href="/ofertas/listar">Ofertas</a><i class="bi bi-chevron-right"></i>
+                <a class="nav-link " href="/admin/oferta">Ofertas</a><i class="bi bi-chevron-right"></i>
               </li>
               <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                <a class="nav-link " href="/usuarios/listar">Usuarios</a><i class="bi bi-chevron-right"></i>
+                <a class="nav-link " href="/admin/usuario">Usuarios</a><i class="bi bi-chevron-right"></i>
               </li>
               <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                <a class="nav-link " href="/ubicaciones/listar">Ubicaciones</a><i class="bi bi-chevron-right"></i>
+                <a class="nav-link " href="/admin/ubicacion">Ubicaciones</a><i class="bi bi-chevron-right"></i>
               </li>
               <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                <a class="nav-link " href="/preguntas/listar">Preguntas</a><i class="bi bi-chevron-right"></i>
+                <a class="nav-link " href="/admin/pregunta">Preguntas</a><i class="bi bi-chevron-right"></i>
               </li>
               <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                <a class="nav-link " href="/ventas/ver/entregas/admin">Entregas</a><i class="bi bi-chevron-right"></i>
+                <a class="nav-link " href="/admin/entrega">Entregas</a><i class="bi bi-chevron-right"></i>
               </li>
               <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                <a class="nav-link " href="/productos/vendidos">Productos Vendidos</a><i
+                <a class="nav-link " href="/admin/vendido">Productos Vendidos</a><i class="bi bi-chevron-right"></i>
+              </li>
+              <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                <a class="nav-link " href="/admin/reserva">Reservas</a><i class="bi bi-chevron-right"></i>
+              </li>
+              <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                <a class="nav-link " href="/admin/historial">Historial de Reservas</a><i
                   class="bi bi-chevron-right"></i>
               </li>
               <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                <a class="nav-link " href="/reservas/listar/admin">Reservas</a><i class="bi bi-chevron-right"></i>
-              </li>
-              <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                <a class="nav-link " href="/reservas/historial/reserva">Historial de Reservas</a><i
+                <a class="nav-link " href="/admin/reserva/producto">Reservas Productos</a><i
                   class="bi bi-chevron-right"></i>
               </li>
               <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                <a class="nav-link " href="/ventas/reservas/productos">Reservas Productos</a><i
-                  class="bi bi-chevron-right"></i>
-              </li>
-              <li class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                <a class="nav-link " href="perfil_admin.html">Mi cuenta</a><i class="bi bi-chevron-right"></i>
+                <a class="nav-link " href="/admin/perfil">Mi cuenta</a><i class="bi bi-chevron-right"></i>
               </li>
             </div>
           </div>
@@ -97,20 +96,20 @@
           <% }); %>
       </section>
       <% } else { %>
-          <p class="w-100 text-center text-white fs-5 mt-5 pt-5">No existen registros de preguntas.</p>
-      <% } %>
-        <div
-          class="navbar footer-h custom-bg-color fixed-bottom cont-car d-flex flex-column align-items-end w-100 justify-content-end">
-          <a class="btn-edicion btn p-0 me-4 mb-3" onclick="eliminarPregunta()">
-            <img src="/img/menos.png" alt="" class="img-edicion">
-          </a>
-          <a class="btn-edicion btn p-0 me-4 mb-3" onclick="redireccionarEditar()">
-            <img src="/img/editar.png" alt="" class="img-edicion">
-          </a>
-          <a href="ingresar_pregunta.html" class="btn-edicion btn p-0 me-4 mb-3">
-            <img src="/img/mas.png" alt="" class="img-edicion">
-          </a>
-        </div>
+        <p class="w-100 text-center text-white fs-5 mt-5 pt-5">No existen registros de preguntas.</p>
+        <% } %>
+          <div
+            class="navbar footer-h custom-bg-color fixed-bottom cont-car d-flex flex-column align-items-end w-100 justify-content-end">
+            <a class="btn-edicion btn p-0 me-4 mb-3" onclick="eliminarPregunta()">
+              <img src="/img/menos.png" alt="" class="img-edicion">
+            </a>
+            <a class="btn-edicion btn p-0 me-4 mb-3" onclick="redireccionarEditar()">
+              <img src="/img/editar.png" alt="" class="img-edicion">
+            </a>
+            <a href="/admin/pregunta/crear" class="btn-edicion btn p-0 me-4 mb-3">
+              <img src="/img/mas.png" alt="" class="img-edicion">
+            </a>
+          </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

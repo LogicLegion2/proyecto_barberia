@@ -17,7 +17,7 @@ dayjs.locale('es'); // Establece el idioma a español
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const crearPago = async (req, res) => {
+const crearPago = async (req, res) => {
     const id = req.body.id;
     const metodoPago = req.body.metodoPago;
     const precio = req.body.precio;
@@ -40,7 +40,7 @@ dayjs.locale('es'); // Establece el idioma a español
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const crearReembolso = async (req, res) => {
+const crearReembolso = async (req, res) => {
     const idUsuario = req.body.idUsuario;
     const idVenta = req.body.idVenta;
 
@@ -57,14 +57,14 @@ dayjs.locale('es'); // Establece el idioma a español
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const buscarProductoVendido = async (req, res) => {
+const buscarProductoVendido = async (req, res) => {
     const { desc } = req.query;
     try {
         if (!desc) {
             return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
         }
         const [rows] = await pool.query(`CALL LL_BUSCAR_VENDIDO('${desc}')`);
-        res.status(200).json({productos: rows[0]})
+        res.status(200).json({ productos: rows[0] })
     } catch (error) {
         res.status(500).json(error);
     }
@@ -75,7 +75,7 @@ dayjs.locale('es'); // Establece el idioma a español
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const historialCompra= async (req, res) => {
+const historialCompra = async (req, res) => {
     const id = req.params['id']
     try {
         const [rows] = await pool.query(`CALL LL_VER_HISTORIAL_COMPRAS('${id}')`);
@@ -90,6 +90,18 @@ dayjs.locale('es'); // Establece el idioma a español
                 fecha
             };
         });
+        compras.forEach(compra => {
+            if (compra.foto) {
+                try {
+                    compra.img64 = Buffer.from(compra.foto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                    compra.img64 = null;
+                }
+            } else {
+                compra.img64 = null; // O algún valor predeterminado si la imagen no existe
+            }
+        });
         res.status(200).json({ compras });
     } catch (error) {
         res.status(500).json(error);
@@ -101,25 +113,38 @@ dayjs.locale('es'); // Establece el idioma a español
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const verCarroCompras = async (req, res) => {
+const verCarroCompras = async (req, res) => {
     const id = req.params['id']
 
     try {
         const respuesta = await pool.query(`CALL LL_VER_CARRITO_COMPRAS('${id}');`);
         const productos = respuesta[0][0]
         console.log(productos);
-        res.status(200).json({productos});
+        productos.forEach(producto => {
+            if (producto.fotoProducto) {
+                try {
+                    producto.img64 = Buffer.from(producto.fotoProducto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                    producto.img64 = null;
+                }
+            } else {
+                producto.img64 = null;
+            }
+        });
+        console.log(productos);
+        res.status(200).json({ productos });
     } catch (error) {
         res.status(500).json(error);
-     }
-};
+    }
+}
 
 /**
  * Esta funcion sirve para que el admin ver las entregas
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const verEntregasAdmin = async (req, res) => {
+const verEntregasAdmin = async (req, res) => {
     try {
         const rows = await pool.query(`CALL LL_VER_ENTREGAS_ADMIN()`);
         res.status(200).json({ entregas: rows[0] });
@@ -133,7 +158,7 @@ dayjs.locale('es'); // Establece el idioma a español
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const verEntregas = async (req, res) => {
+const verEntregas = async (req, res) => {
     const id = req.params['id']
     try {
         const [rows] = await pool.query(`CALL LL_VER_ENTREGAS('${id}')`);
@@ -152,7 +177,7 @@ dayjs.locale('es'); // Establece el idioma a español
         res.status(200).json({ entregas });
     } catch (error) {
         res.status(500).json(error);
-    }
+    }
 };
 
 /**
@@ -160,13 +185,27 @@ dayjs.locale('es'); // Establece el idioma a español
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const verReservasProductos = async (req, res) => {
+const verReservasProductos = async (req, res) => {
     try {
         const [rows] = await pool.query(`CALL LL_VER_RESERVAS_PRODUCTOS()`);
-        res.status(200).json({ productos:rows[0] });
+        const productos = rows[0];
+
+        productos.forEach(producto => {
+            if (producto.foto) {
+                try {
+                    producto.img64 = Buffer.from(producto.foto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                    producto.img64 = null;
+                }
+            } else {
+                producto.img64 = null;
+            }
+        });
+        res.status(200).json({ productos: productos });
     } catch (error) {
         res.status(500).json(error);
-    }
+    }
 };
 
-export {crearPago, crearReembolso,buscarProductoVendido,historialCompra, verCarroCompras, verEntregasAdmin, verEntregas, verReservasProductos}
+export { crearPago, crearReembolso, buscarProductoVendido, historialCompra, verCarroCompras, verEntregasAdmin, verEntregas, verReservasProductos }
