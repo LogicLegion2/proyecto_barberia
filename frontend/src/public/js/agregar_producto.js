@@ -7,6 +7,19 @@ document.getElementById("formAgregarProducto").addEventListener("click", (e) => 
     const precio = document.getElementById("agregar_precio").value;
     const cantidad = document.getElementById("agregar_cantidad").value;
     const foto = document.getElementById("agregar_imagen").value;
+      // Verifica si todos los campos están llenos
+      if (!nombre || !descripcion || !precio || !cantidad) {
+        Swal.fire({
+            icon: 'error',
+            title: "<h5 style='color:white; font-family: \"Aleo\", serif;'>Todos los campos son obligatorios</h5>",
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'bg-alert',
+            }
+        });
+        return; // Sale de la función si hay algún campo vacío
+    }
     // Crea un objeto FormData para manejar la subida del archivo
     const formData = new FormData();
     formData.append("nombre", nombre);

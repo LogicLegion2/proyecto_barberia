@@ -46,7 +46,7 @@ config();
  * @param {object} res envia peticiones en HTML
  */
  const crearPregunta = async (req, res) => {
-    const { pregunta, resp } = req.body;
+    const { pregunta, respuesta } = req.body;
 
     try {
         const dbrespuesta = await pool.query(`CALL LL_INSERTAR_PREGUNTA('${pregunta}','${respuesta}');`);
