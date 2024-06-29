@@ -37,54 +37,53 @@
               <div class="d-grid gap-3">
                 <li
                   class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                  <a class="nav-link " href="/productos/listar">Productos</a><i class="bi bi-chevron-right"></i>
+                  <a class="nav-link " href="/admin/producto">Productos</a><i class="bi bi-chevron-right"></i>
                 </li>
                 <li
                   class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                  <a class="nav-link " href="/servicios/listar">Servicios</a><i class="bi bi-chevron-right"></i>
+                  <a class="nav-link " href="/admin/servicio">Servicios</a><i class="bi bi-chevron-right"></i>
                 </li>
                 <li
                   class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                  <a class="nav-link " href="/ofertas/listar">Ofertas</a><i class="bi bi-chevron-right"></i>
+                  <a class="nav-link " href="/admin/oferta">Ofertas</a><i class="bi bi-chevron-right"></i>
                 </li>
                 <li
                   class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                  <a class="nav-link " href="/usuarios/listar">Usuarios</a><i class="bi bi-chevron-right"></i>
+                  <a class="nav-link " href="/admin/usuario">Usuarios</a><i class="bi bi-chevron-right"></i>
                 </li>
                 <li
                   class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                  <a class="nav-link " href="/ubicaciones/listar">Ubicaciones</a><i class="bi bi-chevron-right"></i>
+                  <a class="nav-link " href="/admin/ubicacion">Ubicaciones</a><i class="bi bi-chevron-right"></i>
                 </li>
                 <li
                   class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                  <a class="nav-link " href="/preguntas/listar">Preguntas</a><i class="bi bi-chevron-right"></i>
+                  <a class="nav-link " href="/admin/pregunta">Preguntas</a><i class="bi bi-chevron-right"></i>
                 </li>
                 <li
                   class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                  <a class="nav-link " href="/ventas/ver/entregas/admin">Entregas</a><i class="bi bi-chevron-right"></i>
+                  <a class="nav-link " href="/admin/entrega">Entregas</a><i class="bi bi-chevron-right"></i>
                 </li>
                 <li
                   class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                  <a class="nav-link " href="/productos/vendidos">Productos Vendidos</a><i
+                  <a class="nav-link " href="/admin/vendido">Productos Vendidos</a><i class="bi bi-chevron-right"></i>
+                </li>
+                <li
+                  class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                  <a class="nav-link " href="/admin/reserva">Reservas</a><i class="bi bi-chevron-right"></i>
+                </li>
+                <li
+                  class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
+                  <a class="nav-link " href="/admin/historial">Historial de Reservas</a><i
                     class="bi bi-chevron-right"></i>
                 </li>
                 <li
                   class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                  <a class="nav-link " href="/reservas/listar/admin">Reservas</a><i class="bi bi-chevron-right"></i>
-                </li>
-                <li
-                  class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                  <a class="nav-link " href="/reservas/historial/reserva">Historial de Reservas</a><i
+                  <a class="nav-link " href="/admin/reserva/producto">Reservas Productos</a><i
                     class="bi bi-chevron-right"></i>
                 </li>
                 <li
                   class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                  <a class="nav-link " href="/ventas/reservas/productos">Reservas Productos</a><i
-                    class="bi bi-chevron-right"></i>
-                </li>
-                <li
-                  class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                  <a class="nav-link " href="perfil_admin.html">Mi cuenta</a><i class="bi bi-chevron-right"></i>
+                  <a class="nav-link " href="/admin/perfil">Mi cuenta</a><i class="bi bi-chevron-right"></i>
                 </li>
               </div>
             </div>
@@ -95,18 +94,18 @@
     <div class="col-11 container">
       <div class="justify-content-center pt-4 d-flex">
         <div class="col-lg-6 col-10">
-          <form>
+          <form >
             <input type="text" id="agregar_titulo" class="text-white mt-4 text-center border-0 form-control"
-            placeholder="Ingresa el titulo">
-          <input type="text" id="agregar_ubicacion" class="text-white mt-4 text-center border-0 form-control"
-            placeholder="Ingresa la descripción">
-          <input type="text" id="agregar_descripcion" class="text-white mt-4 text-center border-0 form-control"
-          placeholder="Ingresa la descripción">
-          <input type="text" id="agregar_imagen" class="text-white mt-4 text-center border-0 form-control"
-          placeholder="Ingresa URL de la imagen">
-          <button type="submit"
-            class="mt-5 form-container fw-bold btn fs-5 w-100 btn-form text-white btn-color" id="formAgregarUbicacion">Agregar</button>
-          </form>
+                placeholder="Ingresa el título" required>
+            <input type="text" id="agregar_ubicacion" class="text-white mt-4 text-center border-0 form-control"
+                placeholder="Ingresa la ubicación" required>
+            <input type="text" id="agregar_descripcion" class="text-white mt-4 text-center border-0 form-control"
+                placeholder="Ingresa la descripción" required>
+           <input type="file" id="agregar_imagen" class="text-white mt-4 text-center border-0 form-control">
+            <button type="submit" id="formAgregarUbicacion"
+                class="mt-5 form-container fw-bold btn fs-5 w-100 btn-form text-white btn-color">Agregar</button>
+        </form>
+        
         </div>
       </div>
     </div>
@@ -118,7 +117,7 @@
     integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
     crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/js/agregar_ubicacion.js"></script>
+  <script src="/js/agregar_ubicacion.js"></script>
 </body>
 
 </html>

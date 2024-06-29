@@ -17,7 +17,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const listarUsuario = async (req, res) => {
+const listarUsuario = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_USUARIOS()");
         res.status(200).json({ usuarios: rows[0] });
@@ -31,7 +31,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const buscarUsuario = async (req, res) => {
+const buscarUsuario = async (req, res) => {
     const { desc } = req.query;
     try {
         if (!desc) {
@@ -49,7 +49,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const crearUsuario = async (req, res) => {
+const crearUsuario = async (req, res) => {
     const { nombre, correo, contrasena, telefono, rol, foto } = req.body;
     try {
         const hashedPassword = await bcrypt.hash(contrasena, saltRounds);
@@ -67,7 +67,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const crearBarbero = async (req, res) => {
+const crearBarbero = async (req, res) => {
     const { nombre, correo, contrasena, telefono, descripcion, fotoPerfil } = req.body;
     try {
         const hashedPassword = await bcrypt.hash(contrasena, saltRounds);
@@ -86,7 +86,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const registroUsuario = async (req, res) => {
+const registroUsuario = async (req, res) => {
     const { nombre, correo, contrasena, telefono } = req.body;
     try {
         const hashedPassword = await bcrypt.hash(contrasena, saltRounds);
@@ -105,7 +105,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const login = async (req, res) => {
+const login = async (req, res) => {
     const { correo, contrasena } = req.body;
 
     if (!correo || !contrasena) {
@@ -124,7 +124,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
         if (!match) {
             return res.status(400).json({ error: true, message: "Contraseña incorrecta" });
         }
-        
+
         let idUsuario = usuario.idUsuario;
         const rol = usuario.rol;
 
@@ -134,7 +134,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
                 return res.status(400).json({ error: true, message: "El barbero no existe" });
             }
             const barbero = respuestaBar[0][0][0];
-            idUsuario = barbero.id; 
+            idUsuario = barbero.id;
         }
 
         const payload = {
@@ -172,7 +172,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const cambiarNombre = async (req, res) => {
+const cambiarNombre = async (req, res) => {
     const id = req.body.id;
     const nombre = req.body.nombre;
 
@@ -189,7 +189,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const cambiarTelefono = async (req, res) => {
+const cambiarTelefono = async (req, res) => {
     const id = req.body.id;
     const telefono = req.body.telefono;
 
@@ -206,7 +206,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const cambiarCorreo = async (req, res) => {
+const cambiarCorreo = async (req, res) => {
     const id = req.body.id;
     const correo = req.body.correo;
 
@@ -223,7 +223,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const cambiarFoto = async (req, res) => {
+const cambiarFoto = async (req, res) => {
     const id = req.body.id;
     const foto = req.body.foto;
 
@@ -240,7 +240,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const cambiarContrasena = async (req, res) => {
+const cambiarContrasena = async (req, res) => {
     const id = req.body.id;
     const contrasena = req.body.contrasena;
     const contrasenaNueva = req.body.contrasenaNueva;
@@ -270,7 +270,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const cambiarNombreBarbero = async (req, res) => { // Edición de perfiles para barberos
+const cambiarNombreBarbero = async (req, res) => { // Edición de perfiles para barberos
     const id = req.body.id;
     const nombre = req.body.nombre;
 
@@ -287,7 +287,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const cambiarTelefonoBarbero = async (req, res) => {
+const cambiarTelefonoBarbero = async (req, res) => {
     const id = req.body.id;
     const telefono = req.body.telefono;
 
@@ -304,7 +304,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const cambiarCorreoBarbero = async (req, res) => {
+const cambiarCorreoBarbero = async (req, res) => {
     const id = req.body.id;
     const correo = req.body.correo;
 
@@ -321,7 +321,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const cambiarFotoBarbero = async (req, res) => {
+const cambiarFotoBarbero = async (req, res) => {
     const id = req.body.id;
     const foto = req.body.foto;
 
@@ -338,7 +338,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const cambiarDescripcionBarbero = async (req, res) => {
+const cambiarDescripcionBarbero = async (req, res) => {
     const id = req.body.id;
     const descripcion = req.body.descripcion;
 
@@ -355,7 +355,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const cambiarContrasenaBarbero = async (req, res) => {
+const cambiarContrasenaBarbero = async (req, res) => {
     const id = req.body.id;
     const contrasena = req.body.contrasena;
     const contrasenaNueva = req.body.contrasenaNueva;
@@ -385,7 +385,7 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const desactivarUsuario = async (req, res) => {
+const desactivarUsuario = async (req, res) => {
     const id = req.body.id;
 
     try {
@@ -401,39 +401,67 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const verPerfil = async (req, res) => {
+const verPerfil = async (req, res) => {
     const id = req.params['id']
 
     try {
         const rows = await pool.query(`CALL LL_VER_PERFIL_CLIENTE('${id}');`);
-        res.status(200).json({ clientes: rows[0][0] })
+        const clientes = rows[0][0];
+
+        clientes.forEach(cliente => {
+            if (cliente.foto) {
+                try {
+                    cliente.img64 = Buffer.from(cliente.foto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                    cliente.img64 = null;
+                }
+            } else {
+                cliente.img64 = null;
+            }
+        });
+        res.status(200).json({ clientes: clientes })
     } catch (error) {
         res.status(500).json(error);
     }
-};
+}
 
 /**
  * Esta funcion sirve para ver el perfil del admin
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const verPerfilAdmin = async (req, res) => {
+const verPerfilAdmin = async (req, res) => {
     const id = req.params['id']
 
     try {
         const rows = await pool.query(`CALL LL_VER_PERFIL_CLIENTE('${id}');`);
-        res.status(200).json({ admins: rows[0][0] })
+        const admins = rows[0][0];
+
+        admins.forEach(admin => {
+            if (admin.foto) {
+                try {
+                    admin.img64 = Buffer.from(admin.foto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                    admin.img64 = null;
+                }
+            } else {
+                admin.img64 = null;
+            }
+        });
+        res.status(200).json({ admins: admins })
     } catch (error) {
         res.status(500).json(error);
     }
-};
+}
 
 /**
  * Esta funcion sirve para obtener un token de acceso
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const logout = async (req, res) => {
+const logout = async (req, res) => {
     const token = req.headers["x-access-token"];
 
     if (!token) {
@@ -451,4 +479,4 @@ const saltRounds = 10; // Define el número de rondas de salt para el hash
     }
 };
 
-export {listarUsuario, buscarUsuario, crearUsuario, crearBarbero, registroUsuario, login, cambiarNombre, cambiarTelefono, cambiarCorreo, cambiarFoto, cambiarContrasena, cambiarNombreBarbero, cambiarTelefonoBarbero, cambiarCorreoBarbero, cambiarFotoBarbero, cambiarDescripcionBarbero, cambiarContrasenaBarbero, desactivarUsuario, verPerfil, verPerfilAdmin, logout}
+export { listarUsuario, buscarUsuario, crearUsuario, crearBarbero, registroUsuario, login, cambiarNombre, cambiarTelefono, cambiarCorreo, cambiarFoto, cambiarContrasena, cambiarNombreBarbero, cambiarTelefonoBarbero, cambiarCorreoBarbero, cambiarFotoBarbero, cambiarDescripcionBarbero, cambiarContrasenaBarbero, desactivarUsuario, verPerfil, verPerfilAdmin, logout }

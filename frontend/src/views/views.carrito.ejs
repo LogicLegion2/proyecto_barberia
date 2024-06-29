@@ -39,52 +39,52 @@
                                 <div class="d-grid gap-3">
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="reservar.html">Reservar</a><i
+                                        <a class="nav-link " href="/cliente/reservar">Reservar</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="lista_fav.html">Lista Favoritos</a><i
+                                        <a class="nav-link " href="/cliente/favorito">Lista Favoritos</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="barberos.html">Página Principal</a><i
+                                        <a class="nav-link " href="/cliente/home">Página Principal</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="reservas_cliente.html">Reservas</a><i
+                                        <a class="nav-link " href="/cliente/reserva">Reservas</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="entrega_productos_cliente.html">Entregas</a><i
+                                        <a class="nav-link " href="/cliente/entrega">Entregas</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="reembolso.html">Reembolsos</a><i
+                                        <a class="nav-link " href="/cliente/reembolso">Reembolsos</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="historial_citas.html">Historial de Reseras</a><i
+                                        <a class="nav-link " href="/cliente/cita">Historial de Reseras</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="historial_compras.html">Historial de Compras</a><i
+                                        <a class="nav-link " href="/cliente/compra">Historial de Compras</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="carrito.html">Carrito de Compras</a><i
+                                        <a class="nav-link " href="/cliente/carrito">Carrito de Compras</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="perfil_cliente.html">Mi cuenta</a><i
+                                        <a class="nav-link " href="/cliente/perfil">Mi cuenta</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                 </div>
@@ -98,7 +98,7 @@
                             <div class="d-grid gap-3 m-3 cont-perf">
                                 <div id="carrito" class="d-flex rounded-3 custom-bg-dark flex-sm-row flex-column">
                                     <div class="m-2 flex-shrink-0 d-flex justify-content-center">
-                                        <img src="<%= producto.fotoProducto %>" alt="..."
+                                        <img src="data:image/jpeg;base64,<%= producto.img64 %>" id="fotomostrar" alt="..."
                                             class="mg-thumbnail img-car rounded-3 mt-1 ms-2">
                                     </div>
                                     <div class="w-100 d-flex m-1 p-1 align-items-center">
@@ -165,6 +165,10 @@
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
     <script>
+        const img64 = `data:image/jpeg;base64,${document.getElementById('perimagen').value}`;
+        const fotomostrar = document.getElementById('fotomostrar');
+        fotomostrar.src = img64;
+
         function aumentarValor(idProducto) {
             let unidades = parseInt(document.getElementById(`unidades-${idProducto}`).value);
             unidades++;

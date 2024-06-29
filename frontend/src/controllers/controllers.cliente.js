@@ -65,8 +65,21 @@ export const realizarReserva = (req, res) => {
     res.render("views.reservar.ejs")
 };
 
-export const mostrarPerfilBarbero = (req, res) => {
-    res.render("views.perfil_barbero.ejs")
+export const mostrarPerfilBarbero = async (req, res) => {
+    const { id } = req.params
+
+    try {
+        const recurso = url + `/barberos/barbero/${id}`;
+        const response = await fetch(recurso);
+        const data = await response.json();
+        res.render("views.perfil_barbero.ejs", {
+            barberos: data.barberos,
+            comentarios: data.comentarios
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error);
+    }
 };
 
 export const mostrarListaFavoritos = async (req, res) => {

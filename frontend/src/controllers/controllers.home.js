@@ -12,3 +12,7 @@ export const login = (req, res) => {
 export const registro = (req, res) => {
     res.render("views.registrarse.ejs")
 };
+
+export const contrasena = (req, res) => {
+    res.render("views.reinstaurar_contrasena.ejs")
+};

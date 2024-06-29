@@ -15,7 +15,21 @@ config();
  const listarServicio = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_SERVICIOS()");
-        res.status(200).json({ servicios: rows[0]});
+        const servicios = rows[0];
+
+        servicios.forEach(servicio => {
+            if (servicio.fotoServicio) {
+                try {
+                    servicio.img64 = Buffer.from(servicio.fotoServicio).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                    servicio.img64 = null;
+                }
+            } else {
+                servicio.img64 = null;
+            }
+        });
+        res.status(200).json({ servicios: servicios });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -26,14 +40,28 @@ config();
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const buscarServicio = async (req, res) => {
+const buscarServicio = async (req, res) => {
     const { desc } = req.query;
     try {
         if (!desc) {
             return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
         }
         const [rows] = await pool.query(`CALL LL_BUSCAR_SERVICIO('${desc}')`);
-        res.status(200).json({servicios: rows[0]})
+        const servicios = rows[0];
+
+        servicios.forEach(servicio => {
+            if (servicio.fotoServicio) {
+                try {
+                    servicio.img64 = Buffer.from(servicio.fotoServicio).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                    servicio.img64 = null;
+                }
+            } else {
+                servicio.img64 = null;
+            }
+        });
+        res.status(200).json({servicios: servicios})
     } catch (error) {
         res.status(500).json(error);
     }
@@ -44,7 +72,7 @@ config();
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const crearServicio = async (req, res) => {
+const crearServicio = async (req, res) => {
     const tipoServicio = req.body.tipoServicio;
     const descripcion = req.body.descripcion;
     const precio = req.body.precio;
@@ -62,7 +90,7 @@ config();
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const obtenerServicio = async (req, res) => {
+const obtenerServicio = async (req, res) => {
     const id = req.params.id;
 
     try {
@@ -82,7 +110,7 @@ config();
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const editarServicio = async (req, res) => {
+const editarServicio = async (req, res) => {
     const tipoServicio = req.body.tipoServicio;
     const descripcion = req.body.descripcion;
     const precio = req.body.precio;
@@ -101,7 +129,7 @@ config();
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const desactivarServicio = async (req, res) => {
+const desactivarServicio = async (req, res) => {
     const id = req.body.id;
 
     try {
@@ -112,4 +140,4 @@ config();
     }
 };
 
-export {listarServicio, buscarServicio, crearServicio, obtenerServicio, editarServicio, desactivarServicio}
+export { listarServicio, buscarServicio, crearServicio, obtenerServicio, editarServicio, desactivarServicio }

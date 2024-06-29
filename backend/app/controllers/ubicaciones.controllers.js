@@ -12,10 +12,24 @@ config();
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const listarUbicacion = async (req, res) => {
+const listarUbicacion = async (req, res) => {
     try {
         const [rows] = await pool.query("CALL LL_VER_UBICACIONES()");
-        res.status(200).json({ ubicaciones: rows[0] });
+        const ubicaciones = rows[0];
+
+        ubicaciones.forEach(ubicacion => {
+            if (ubicacion.fotoUbicacion) {
+                try {
+                    ubicacion.img64 = Buffer.from(ubicacion.fotoUbicacion).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                    ubicacion.img64 = null;
+                }
+            } else {
+                ubicacion.img64 = null;
+            }
+        });
+        res.status(200).json({ ubicaciones: ubicaciones });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -26,14 +40,28 @@ config();
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const buscarUbicacion = async (req, res) => {
+const buscarUbicacion = async (req, res) => {
     const { desc } = req.query;
     try {
         if (!desc) {
             return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
         }
         const [rows] = await pool.query(`CALL LL_BUSCAR_UBICACION('${desc}')`);
-        res.status(200).json({ubicaciones: rows[0]})
+        const ubicaciones = rows[0];
+
+        ubicaciones.forEach(ubicacion => {
+            if (ubicacion.foto) {
+                try {
+                    ubicacion.img64 = Buffer.from(ubicacion.foto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                    ubicacion.img64 = null;
+                }
+            } else {
+                ubicacion.img64 = null;
+            }
+        });
+        res.status(200).json({ ubicaciones: ubicaciones })
     } catch (error) {
         res.status(500).json(error);
     }
@@ -44,7 +72,7 @@ config();
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const crearUbicacion = async (req, res) => {
+const crearUbicacion = async (req, res) => {
     const input = req.body;
     const {
         titulo,
@@ -66,7 +94,7 @@ config();
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const obtenerUbicacion = async (req, res) => {
+const obtenerUbicacion = async (req, res) => {
     const id = req.params.id;
 
     try {
@@ -86,7 +114,7 @@ config();
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const editarUbicacion = async (req, res) => {
+const editarUbicacion = async (req, res) => {
     const titulo = req.body.titulo;
     const ubicacion = req.body.ubicacion;
     const descripcion = req.body.descripcion;
@@ -105,7 +133,7 @@ config();
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const desactivarUbicacion = async (req, res) => {
+const desactivarUbicacion = async (req, res) => {
     const id = req.body.id;
 
     try {
@@ -116,4 +144,4 @@ config();
     }
 };
 
-export {listarUbicacion, buscarUbicacion, crearUbicacion, obtenerUbicacion, editarUbicacion, desactivarUbicacion}
+export { listarUbicacion, buscarUbicacion, crearUbicacion, obtenerUbicacion, editarUbicacion, desactivarUbicacion }

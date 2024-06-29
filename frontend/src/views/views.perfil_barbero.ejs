@@ -38,52 +38,52 @@
                                 <div class="d-grid gap-3">
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="reservar.html">Reservar</a><i
+                                        <a class="nav-link " href="/cliente/reservar">Reservar</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="lista_fav.html">Lista Favoritos</a><i
+                                        <a class="nav-link " href="/cliente/favorito">Lista Favoritos</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="barberos.html">Página Principal</a><i
+                                        <a class="nav-link " href="/cliente/home">Página Principal</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="reservas_cliente.html">Reservas</a><i
+                                        <a class="nav-link " href="/cliente/reserva">Reservas</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="entrega_productos_cliente.html">Entregas</a><i
+                                        <a class="nav-link " href="/cliente/entrega">Entregas</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="reembolso.html">Reembolsos</a><i
+                                        <a class="nav-link " href="/cliente/reembolso">Reembolsos</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="historial_citas.html">Historial de Reseras</a><i
+                                        <a class="nav-link " href="/cliente/cita">Historial de Reseras</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="historial_compras.html">Historial de Compras</a><i
+                                        <a class="nav-link " href="/cliente/compra">Historial de Compras</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="carrito.html">Carrito de Compras</a><i
+                                        <a class="nav-link " href="/cliente/carrito">Carrito de Compras</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                     <li
                                         class="nav-item border-bottom pb-2 border-opacity-75 border-secondary d-flex justify-content-between">
-                                        <a class="nav-link " href="perfil_cliente.html">Mi cuenta</a><i
+                                        <a class="nav-link " href="/cliente/perfil">Mi cuenta</a><i
                                             class="bi bi-chevron-right"></i>
                                     </li>
                                 </div>
@@ -93,40 +93,51 @@
                 </nav>
             </div>
             <!-- seccion con la informacion, nombre e imagen del barbero -->
-            <section
-                class="perfil d-flex flex-column align-items-center text-center text-md-start flex-md-row pt-sm-4 ps-sm-5">
             <% if (barberos && barberos.length> 0) { %>
-                <div class="imagen mb-3 mb-md-0 col-3 ms-4 rounded-4 d-flex justify-content-center align-items-center">
-                    <img class="foto rounded-4" src="<%= barberos[0].foto %>" alt="">
-                </div>
-                <div class="info d-flex flex-column justify-content-center col-sm-9 col-12 ms-3">
-                    <h2 class="nombre fw-bold text-light"><%= barberos[0].nombre %></h2>
-                    <p class="desc fw-light fs-6 text-light"><%= barberos[0].descripcion %></p>
-                </div>
-            <% } %>
-            </section>
+                <section
+                    class="perfil d-flex flex-column align-items-center text-center text-md-start flex-md-row pt-sm-4 ps-sm-5">
+                    <% barberos.forEach(barbero=> { %>
+                        <div
+                            class="imagen mb-3 mb-md-0 col-3 ms-4 rounded-4 d-flex justify-content-center align-items-center">
+                            <img class="foto-p rounded-4" src="data:image/jpeg;base64,<%= barbero.img64 %>" alt="" >
+                        </div>
+                        <div class="info d-flex flex-column justify-content-center col-sm-9 col-12 ms-3">
+                            <h2 class="nombre fw-bold text-light">
+                                <%= barbero.nombre %>
+                            </h2>
+                            <p class="desc fw-light fs-6 text-light">
+                                <%= barbero.descripcion %>
+                            </p>
+                        </div>
+                        <% }); %>
+                </section>
+                <% } %>
         </div>
         <!-- sección con los comentarios del barbero -->
         <% if (comentarios && comentarios.length> 0) { %>
-        <section class="cont-comentarios pt-4 pb-4 w-100 d-flex flex-column align-items-center">
-            <h2 class="titulo-comentario text-center mb-4 w-75 text-light fw-bold">Comentarios</h2>
-            <% comentarios[0].forEach(comentario=> { %>
-            <div class="comentarios w-75 rounded-4 p-2 ps-3 mb-2">
-                <p class="user mb-0 text-light"><%= comentario.cliente%></p>
-                <p class="coment mb-0 fw-light text-light"><%= comentario.comentario%></p>
-            </div>
-            <% }); %>
-        </section>
-        <% } %>
-        <!-- sección para realizar comentarios -->
-        <div class="cont-coment fixed-bottom row custom-bg-color">
-            <section class="r-comentario d-flex align-items-center justify-content-center col-12 p-1 pt-3 mb-3">
-                <input type="text" class="comentar ms-3 h-100 ps-2 me-2 text-light border-0 rounded-2"
-                    placeholder="Ingresar comentario...">
-                <button class="btn-send h-100 me-3 btn" type="submit"><img src="/img/flecha.png" class="icon-send"
-                        alt=""></button>
+            <section class="cont-comentarios pt-4 pb-5 mb-5 w-100 d-flex flex-column align-items-center">
+                <h2 class="titulo-comentario text-center mb-4 w-75 text-light fw-bold">Comentarios</h2>
+                <% comentarios.forEach(comentario=> { %>
+                    <div class="comentarios w-75 rounded-4 p-2 ps-3 mb-2">
+                        <p class="user mb-0 text-light">
+                            <%= comentario.cliente%>
+                        </p>
+                        <p class="coment mb-0 fw-light text-light">
+                            <%= comentario.comentario%>
+                        </p>
+                    </div>
+                    <% }); %>
             </section>
-        </div>
+            <% } %>
+                <!-- sección para realizar comentarios -->
+                <div class="cont-coment fixed-bottom row custom-bg-color">
+                    <section class="r-comentario d-flex align-items-center justify-content-center col-12 p-1 pt-3 mb-3">
+                        <input type="text" class="comentar ms-3 h-100 ps-2 me-2 text-light border-0 rounded-2"
+                            placeholder="Ingresar comentario...">
+                        <button class="btn-send h-100 me-3 btn" type="submit"><img src="/img/flecha.png"
+                                class="icon-send" alt=""></button>
+                    </section>
+                </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
