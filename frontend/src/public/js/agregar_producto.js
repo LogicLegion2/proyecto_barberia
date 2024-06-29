@@ -41,9 +41,33 @@ document.getElementById("formAgregarProducto").addEventListener("click", (e) => 
             foto: foto
         })
     })
-    .then(res => res.json())
     .then(data => {
-        console.log(data);
+        console.log("Pregunta agregada:", data); // Muestra en consola la respuesta del servidor
+        Swal.fire({
+            icon: 'success',
+            title: "<h5 style='color:white; font-family: \"Aleo\", serif;'>Pregunta agregada exitosamente</h5>",
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'bg-alert',
+                content: 'text-alert'
+            }
+        });
+        // Recargar la página después de agregar la pregunta (opcional)
+        setTimeout(() => {
+            location.reload();
+        }, 1500);
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+        console.error("Fetch error:", error);
+        Swal.fire({
+            icon: 'error',
+            title: "<h5 style='color:white; font-family: \"Aleo\", serif;'>Error al agregar pregunta</h5>",
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'bg-alert',
+            }
+        });
+    });
 });
