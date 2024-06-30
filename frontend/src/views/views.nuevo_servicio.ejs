@@ -94,18 +94,16 @@
     <div class="col-11 container">
       <div class="justify-content-center pt-4 d-flex">
         <div class="col-6">
-          <form>
-            <input type="text" id="numero_tarjeta" class="mt-4 border-0 text-center form-control"
-              placeholder="Ingresa el nombre">
-            <input type="text" id="numero_tarjeta" class="mt-4 border-0 text-center form-control"
-              placeholder="Ingresa la descripción">
-            <input type="text" id="numero_tarjeta" class="mt-4 border-0 text-center form-control"
-              placeholder="Ingresa el precio">
+          <form id="crearServicio">
+            <input type="text" id="tiposervicio" class="mt-4 border-0 text-center form-control text-white" placeholder="Ingresa el nombre del servicio" required>
+            <input type="text" id="descripcion" class="mt-4 border-0 text-center form-control text-white" placeholder="Ingresa la descripción" required>
+            <input type="text" id="precio" class="mt-4 border-0 text-center form-control text-white" placeholder="Ingresa el precio" required>
             <label for="formFile" class="form-label mt-4 custom-text-secondary">Seleccione una imagen:</label>
             <input type="file" class="custom-text-secondary text-center border-0 form-control" id="formFile">
-            <button type="submit"
-              class="mt-5 form-container fw-bold btn fs-5 w-100 btn-form text-white btn-color">Agregar</button>
-          </form>
+            <button type="submit" class="mt-5 form-container fw-bold btn fs-5 w-100 btn-form text-white btn-color">Agregar</button>
+        </form>
+        
+        
         </div>
       </div>
     </div>
@@ -116,6 +114,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
     integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
     crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/agregar_servicio.js"></script>
 </body>
 
 </html>

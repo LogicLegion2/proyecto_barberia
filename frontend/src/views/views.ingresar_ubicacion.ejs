@@ -94,18 +94,18 @@
     <div class="col-11 container">
       <div class="justify-content-center pt-4 d-flex">
         <div class="col-lg-6 col-10">
-          <form>
+          <form >
             <input type="text" id="agregar_titulo" class="text-white mt-4 text-center border-0 form-control"
-              placeholder="Ingresa el titulo">
+                placeholder="Ingresa el título" required>
             <input type="text" id="agregar_ubicacion" class="text-white mt-4 text-center border-0 form-control"
-              placeholder="Ingresa la descripción">
+                placeholder="Ingresa la ubicación" required>
             <input type="text" id="agregar_descripcion" class="text-white mt-4 text-center border-0 form-control"
-              placeholder="Ingresa la descripción">
-            <input type="text" id="agregar_imagen" class="text-white mt-4 text-center border-0 form-control"
-              placeholder="Ingresa URL de la imagen">
-            <button type="submit" class="mt-5 form-container fw-bold btn fs-5 w-100 btn-form text-white btn-color"
-              id="formAgregarUbicacion">Agregar</button>
-          </form>
+                placeholder="Ingresa la descripción" required>
+           <input type="file" id="agregar_imagen" class="text-white mt-4 text-center border-0 form-control">
+            <button type="submit" id="formAgregarUbicacion"
+                class="mt-5 form-container fw-bold btn fs-5 w-100 btn-form text-white btn-color">Agregar</button>
+        </form>
+        
         </div>
       </div>
     </div>
@@ -116,6 +116,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
     integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
     crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="/js/agregar_ubicacion.js"></script>
 </body>
 
